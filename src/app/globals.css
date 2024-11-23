@@ -21,3 +21,7 @@ body {
     'Helvetica Neue', Helvetica, sans-serif;
   padding: 1rem;
 }
+
+a {
+  @apply text-blue-500 hover:underline;
+}
