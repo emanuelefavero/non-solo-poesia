@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-const SECRET_KEY = 'secret'
+const SECRET_KEY = process.env.SECRET_KEY
 
 export function middleware(request: NextRequest) {
   // Protect the /create-post route with a secret key in the URL parameter
