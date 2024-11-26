@@ -48,7 +48,7 @@ npm run dev
 ## Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
-- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [React Documentation](https://react.dev/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TipTap Documentation](https://www.tiptap.dev/)
