@@ -13,7 +13,7 @@ export default function Component({ editor }: ToolbarProps) {
   // TODO: Add icons
 
   return (
-    <div className='tiptap-toolbar mb-4 flex gap-2'>
+    <div className='tiptap-toolbar mb-4 flex flex-wrap gap-2'>
       {/* Bold */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
