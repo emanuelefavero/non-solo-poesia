@@ -9,10 +9,12 @@ export default function Component({ editor }: ToolbarProps) {
     return null
   }
 
-  // TODO: Move the toolbar buttons to separate component to prevent duplication
+  // TODO: Group the buttons into sections
+  // TODO: Add icons
 
   return (
     <div className='tiptap-toolbar mb-4 flex gap-2'>
+      {/* Bold */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={`rounded border px-2 py-1 ${
@@ -21,6 +23,8 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-bold'>B</span>
       </button>
+
+      {/* Italic */}
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`rounded border px-2 py-1 ${
@@ -29,6 +33,8 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-serif italic'>I</span>
       </button>
+
+      {/* H1 */}
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
         className={`rounded border px-2 py-1 ${
@@ -39,6 +45,8 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-bold'>H1</span>
       </button>
+
+      {/* H2 */}
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
         className={`rounded border px-2 py-1 ${
@@ -49,6 +57,8 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-semibold'>H2</span>
       </button>
+
+      {/* H3 */}
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
         className={`rounded border px-2 py-1 ${
@@ -59,6 +69,8 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-medium'>H3</span>
       </button>
+
+      {/* Image */}
       <button
         onClick={() => {
           const url = prompt('Enter the image URL:')
@@ -68,8 +80,10 @@ export default function Component({ editor }: ToolbarProps) {
         }}
         className='rounded border px-2 py-1'
       >
-        Image
+        Img
       </button>
+
+      {/* Link */}
       <button
         onClick={() => {
           const url = prompt('Enter the link URL:')
@@ -80,6 +94,36 @@ export default function Component({ editor }: ToolbarProps) {
         className='rounded border px-2 py-1'
       >
         Link
+      </button>
+
+      {/* List */}
+      <button
+        onClick={() => editor.chain().focus().toggleBulletList().run()}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('bulletList') ? 'bg-blue-500 text-white' : ''
+        }`}
+      >
+        <span className='font-bold'>•</span>
+      </button>
+
+      {/* Ordered List */}
+      <button
+        onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('orderedList') ? 'bg-blue-500 text-white' : ''
+        }`}
+      >
+        <span className='font-bold'>1.</span>
+      </button>
+
+      {/* Blockquote */}
+      <button
+        onClick={() => editor.chain().focus().toggleBlockquote().run()}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('blockquote') ? 'bg-blue-500 text-white' : ''
+        }`}
+      >
+        <span className='font-bold'>{'”'}</span>
       </button>
     </div>
   )
