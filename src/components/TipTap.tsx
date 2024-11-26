@@ -10,10 +10,17 @@ import StarterKit from '@tiptap/starter-kit'
 import { useState } from 'react'
 import { TipTapToolbar } from './TipTapToolbar'
 
+type Message = {
+  type: 'success' | 'error'
+  text: string
+}
+
 export default function TipTap() {
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const [messageType, setMessageType] = useState<'success' | 'error'>('success')
+  const [message, setMessage] = useState<Message>({
+    type: 'success',
+    text: '',
+  })
   const [isFocused, setIsFocused] = useState(false)
   const [newPostTitle, setNewPostTitle] = useState('')
 
@@ -45,8 +52,10 @@ export default function TipTap() {
 
   const handlePublish = async () => {
     if (!newPostTitle) {
-      setMessageType('error')
-      setMessage('Please enter a title')
+      setMessage({
+        type: 'error',
+        text: 'Please enter a title',
+      })
       return
     }
 
@@ -54,13 +63,18 @@ export default function TipTap() {
     const htmlContent = editor.getHTML()
 
     if (!htmlContent.length || htmlContent === '<p></p>') {
-      setMessageType('error')
-      setMessage('Please enter some content')
+      setMessage({
+        type: 'error',
+        text: 'Please enter some content',
+      })
       return
     }
 
     setLoading(true)
-    setMessage('')
+    setMessage({
+      type: 'success',
+      text: '',
+    })
 
     try {
       const response = await fetch('/api/publish-post', {
@@ -78,13 +92,17 @@ export default function TipTap() {
         throw new Error('Failed to publish post')
       }
 
-      setMessageType('success')
-      setMessage('Post published successfully!')
+      setMessage({
+        type: 'success',
+        text: 'Post published successfully!',
+      })
       editor.commands.clearContent()
     } catch (error) {
       if (error instanceof Error) {
-        setMessageType('error')
-        setMessage(`Error: ${error.message}`)
+        setMessage({
+          type: 'error',
+          text: `Error: ${error.message}`,
+        })
       }
     } finally {
       setLoading(false)
@@ -117,12 +135,12 @@ export default function TipTap() {
       {message && (
         <p
           className={`mt-4 font-medium ${
-            messageType === 'success'
-              ? 'text-green-600 dark:text-green-500'
-              : 'text-rose-600 dark:text-rose-500'
+            message.type === 'error'
+              ? 'text-rose-600 dark:text-rose-500'
+              : 'text-green-600 dark:text-green-500'
           }`}
         >
-          {message}
+          {message.text}
         </p>
       )}
     </div>
