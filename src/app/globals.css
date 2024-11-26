@@ -25,3 +25,74 @@ body {
 a {
   @apply text-blue-500 hover:underline;
 }
+
+h1,
+h2,
+h3 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-5xl;
+}
+
+h2 {
+  @apply text-3xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+h4 {
+  @apply text-lg;
+}
+
+h5 {
+  @apply text-base;
+}
+
+h6 {
+  @apply text-sm;
+}
+
+p {
+  @apply text-base;
+}
+
+ul {
+  @apply list-disc pl-4;
+}
+
+ol {
+  @apply list-decimal pl-4;
+}
+
+code {
+  @apply rounded bg-gray-800 px-1 text-white;
+}
+
+pre {
+  @apply rounded bg-gray-800 p-4 text-white;
+}
+
+blockquote {
+  @apply border-l-4 border-gray-800 pl-4 italic;
+}
+
+table {
+  @apply w-full border-collapse;
+}
+
+th,
+td {
+  @apply border border-gray-800 p-2;
+}
+
+th {
+  @apply bg-gray-800 text-white;
+}
+
+/* img {
+  @apply mx-auto;
+} */
