@@ -8,7 +8,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 export default function TipTap() {
   const editor = useEditor({
     extensions: [Document, Paragraph, Text],
-    content: '<p>Hello World</p>',
+    content: '<p>Edit me!</p>',
     immediatelyRender: false,
     // autofocus: true,
     // injectCSS: false,
