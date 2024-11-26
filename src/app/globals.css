@@ -26,6 +26,10 @@ a {
   @apply text-blue-500 hover:underline;
 }
 
+input {
+  @apply rounded border border-gray-300 p-2 dark:bg-neutral-950;
+}
+
 h1,
 h2,
 h3 {

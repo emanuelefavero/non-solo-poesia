@@ -14,6 +14,7 @@ export default function TipTap() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [isFocused, setIsFocused] = useState(false)
+  const [newPostTitle, setNewPostTitle] = useState('')
 
   const editor = useEditor({
     extensions: [
@@ -35,7 +36,7 @@ export default function TipTap() {
     content: '',
     editorProps: {
       attributes: {
-        class: 'border border-gray-300 p-4 rounded-md',
+        class: 'min-h-40 border border-gray-300 p-2 rounded-md',
       },
     },
     immediatelyRender: false,
@@ -48,13 +49,22 @@ export default function TipTap() {
     setLoading(true)
     setMessage('')
 
+    if (!newPostTitle) {
+      setMessage('Please enter a title')
+      setLoading(false)
+      return
+    }
+
     try {
       const response = await fetch('/api/publish-post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: htmlContent }),
+        body: JSON.stringify({
+          title: newPostTitle,
+          content: htmlContent,
+        }),
       })
 
       if (!response.ok) {
@@ -74,6 +84,13 @@ export default function TipTap() {
 
   return (
     <div className='max-w-3xl'>
+      <input
+        type='text'
+        placeholder='Title'
+        value={newPostTitle}
+        onChange={(e) => setNewPostTitle(e.target.value)}
+        className='mb-4 w-full'
+      />
       <TipTapToolbar editor={editor} />
       <EditorContent
         editor={editor}

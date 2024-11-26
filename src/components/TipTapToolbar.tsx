@@ -48,6 +48,16 @@ export function TipTapToolbar({ editor }: ToolbarProps) {
         H2
       </button>
       <button
+        onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('heading', { level: 3 })
+            ? 'bg-blue-500 text-white'
+            : ''
+        }`}
+      >
+        H3
+      </button>
+      <button
         onClick={() => {
           const url = prompt('Enter the image URL:')
           if (url) {
