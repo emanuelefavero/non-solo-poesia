@@ -8,14 +8,14 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useState } from 'react'
-import { TipTapToolbar } from './TipTapToolbar'
+import TipTapToolbar from './TipTapToolbar'
 
 type Message = {
   type: 'success' | 'error'
   text: string
 }
 
-export default function TipTap() {
+export default function Component() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({
     type: 'success',

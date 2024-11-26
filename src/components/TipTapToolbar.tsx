@@ -4,7 +4,7 @@ type ToolbarProps = {
   editor: ReturnType<typeof useEditor>
 }
 
-export function TipTapToolbar({ editor }: ToolbarProps) {
+export default function Component({ editor }: ToolbarProps) {
   if (!editor) {
     return null
   }
