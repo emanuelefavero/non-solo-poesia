@@ -1,6 +1,10 @@
 # Rich Text Blog
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A blog application built with Next.js and TipTap that allows users to create, edit, and delete blog posts.
+
+The application uses a rich text editor to allow users to format their blog posts. The admin dashboard is protected with a secret key that the author of the blog will need to provide to access the dashboard (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
+
+> Note: This project is still in development and is not yet ready for production
 
 ## Getting Started
 
@@ -13,7 +17,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 SECRET_KEY= # Choose a secret key to share with the Blog author
 ```
 
-> NOTE: `SECRET_KEY` is used to access the admin dashboard. The author of the blog will need to provide this key as a query parameter to access the dashboard. (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
+> NOTE: `SECRET_KEY` is used to access the admin dashboard. The author of the blog will need to provide this key as a query parameter. (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
 > TIP: You can share the full link with the author and ask them to replace `SECRET_KEY` with the actual key.
 
 - Run the development server:
@@ -48,3 +52,7 @@ npm run dev
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TipTap Documentation](https://www.tiptap.dev/)
+
+## License
+
+- [MIT](LICENSE.md)
