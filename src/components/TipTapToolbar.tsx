@@ -9,6 +9,8 @@ export default function Component({ editor }: ToolbarProps) {
     return null
   }
 
+  // TODO: Move the toolbar buttons to separate component to prevent duplication
+
   return (
     <div className='tiptap-toolbar mb-4 flex gap-2'>
       <button
@@ -66,7 +68,18 @@ export default function Component({ editor }: ToolbarProps) {
         }}
         className='rounded border px-2 py-1'
       >
-        Add Image
+        Image
+      </button>
+      <button
+        onClick={() => {
+          const url = prompt('Enter the link URL:')
+          if (url) {
+            editor.chain().focus().toggleLink({ href: url }).run()
+          }
+        }}
+        className='rounded border px-2 py-1'
+      >
+        Link
       </button>
     </div>
   )

@@ -4,6 +4,7 @@ import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
 import Italic from '@tiptap/extension-italic'
+import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -30,6 +31,7 @@ export default function Component() {
       Bold,
       Italic,
       Image,
+      Link,
       Heading.configure({
         levels: [1, 2, 3],
       }),
@@ -133,6 +135,7 @@ export default function Component() {
         {loading ? 'Publishing...' : 'Publish'}
       </button>
       {message && (
+        // TODO: Hide the message after a few seconds
         <p
           className={`mt-4 font-medium ${
             message.type === 'error'
