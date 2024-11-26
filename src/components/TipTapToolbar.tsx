@@ -78,7 +78,12 @@ export default function Component({ editor }: ToolbarProps) {
             editor.chain().focus().setImage({ src: url }).run()
           }
         }}
-        className='rounded border px-2 py-1'
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('image')
+            ? 'bg-blue-500 text-white'
+            : 'active:bg-blue-500 active:text-white'
+        }`}
+        // className='rounded border px-2 py-1 active:bg-blue-500 active:text-white'
       >
         Img
       </button>
@@ -91,7 +96,11 @@ export default function Component({ editor }: ToolbarProps) {
             editor.chain().focus().toggleLink({ href: url }).run()
           }
         }}
-        className='rounded border px-2 py-1'
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('link')
+            ? 'bg-blue-500 text-white'
+            : 'active:bg-blue-500 active:text-white'
+        }`}
       >
         Link
       </button>
