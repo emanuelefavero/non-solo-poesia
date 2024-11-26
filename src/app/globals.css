@@ -96,3 +96,14 @@ th {
 /* img {
   @apply mx-auto;
 } */
+
+/* Style the TipTap edit placeholder */
+.tiptap-editor .ProseMirror p.is-empty::before {
+  @apply italic text-gray-500;
+  content: attr(data-placeholder);
+}
+
+/* Hide placeholder when editor is focused */
+.tiptap-editor.focused .ProseMirror p.is-empty::before {
+  content: none;
+}
