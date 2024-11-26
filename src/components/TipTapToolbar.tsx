@@ -144,6 +144,23 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-bold'>~</span>
       </button>
+
+      {/* You Tube */}
+      <button
+        onClick={() => {
+          const url = prompt('Enter the YouTube URL:')
+          if (url) {
+            editor.commands.setYoutubeVideo({ src: url })
+          }
+        }}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('youtube')
+            ? 'bg-blue-500 text-white'
+            : 'active:bg-blue-500 active:text-white'
+        }`}
+      >
+        YT
+      </button>
     </div>
   )
 }

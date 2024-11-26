@@ -6,6 +6,7 @@ import Image from '@tiptap/extension-image'
 import Italic from '@tiptap/extension-italic'
 import Link from '@tiptap/extension-link'
 import Placeholder from '@tiptap/extension-placeholder'
+import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useState } from 'react'
@@ -37,6 +38,13 @@ export default function Component() {
       }),
       Placeholder.configure({
         placeholder: 'Write something...',
+      }),
+      Youtube.configure({
+        controls: false,
+        nocookie: true,
+        modestBranding: true,
+        width: 320,
+        height: 180,
       }),
     ],
     onFocus: () => setIsFocused(true),
