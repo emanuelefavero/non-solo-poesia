@@ -61,9 +61,32 @@ export default function Component() {
       return
     }
 
+    // Validate title: remove leading and trailing spaces
+    setNewPostTitle(newPostTitle.trim())
+
+    // Validate title: accept only alphanumeric characters, spaces, and dashes
+    // TODO: Let the title have question marks, exclamation marks, and periods but remember to remove those when creating the file name from the title
+    if (!/^[a-zA-Z0-9\s-]+$/.test(newPostTitle)) {
+      setMessage({
+        type: 'error',
+        text: 'Title can only contain alphanumeric characters, spaces, and dashes',
+      })
+      return
+    }
+
+    // Validate title: limit the title to 100 characters
+    if (newPostTitle.length > 100) {
+      setMessage({
+        type: 'error',
+        text: 'Title must not exceed 100 characters',
+      })
+      return
+    }
+
     if (!editor) return
     const htmlContent = editor.getHTML()
 
+    // Validate content: check if the editor is empty
     if (!htmlContent.length || htmlContent === '<p></p>') {
       setMessage({
         type: 'error',
