@@ -13,6 +13,7 @@ import { TipTapToolbar } from './TipTapToolbar'
 export default function TipTap() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [messageType, setMessageType] = useState<'success' | 'error'>('success')
   const [isFocused, setIsFocused] = useState(false)
   const [newPostTitle, setNewPostTitle] = useState('')
 
@@ -43,17 +44,23 @@ export default function TipTap() {
   })
 
   const handlePublish = async () => {
+    if (!newPostTitle) {
+      setMessageType('error')
+      setMessage('Please enter a title')
+      return
+    }
+
     if (!editor) return
     const htmlContent = editor.getHTML()
 
-    setLoading(true)
-    setMessage('')
-
-    if (!newPostTitle) {
-      setMessage('Please enter a title')
-      setLoading(false)
+    if (!htmlContent.length || htmlContent === '<p></p>') {
+      setMessageType('error')
+      setMessage('Please enter some content')
       return
     }
+
+    setLoading(true)
+    setMessage('')
 
     try {
       const response = await fetch('/api/publish-post', {
@@ -71,10 +78,12 @@ export default function TipTap() {
         throw new Error('Failed to publish post')
       }
 
+      setMessageType('success')
       setMessage('Post published successfully!')
       editor.commands.clearContent()
     } catch (error) {
       if (error instanceof Error) {
+        setMessageType('error')
         setMessage(`Error: ${error.message}`)
       }
     } finally {
@@ -86,7 +95,7 @@ export default function TipTap() {
     <div className='max-w-3xl'>
       <input
         type='text'
-        placeholder='Title'
+        placeholder='Title...'
         value={newPostTitle}
         onChange={(e) => setNewPostTitle(e.target.value)}
         className='mb-4 w-full'
@@ -105,7 +114,17 @@ export default function TipTap() {
       >
         {loading ? 'Publishing...' : 'Publish'}
       </button>
-      {message && <p className='mt-4 text-green-600'>{message}</p>}
+      {message && (
+        <p
+          className={`mt-4 font-medium ${
+            messageType === 'success'
+              ? 'text-green-600 dark:text-green-500'
+              : 'text-rose-600 dark:text-rose-500'
+          }`}
+        >
+          {message}
+        </p>
+      )}
     </div>
   )
 }
