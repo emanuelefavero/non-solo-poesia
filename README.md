@@ -1,6 +1,6 @@
 # Rich Text Blog
 
-A blog application built with Next.js and TipTap that allows users to create, edit, and delete blog posts.
+A blog application built with Next.js and TipTap that allows users to create blog posts with rich text formatting.
 
 The application uses a rich text editor to allow users to format their blog posts. The admin dashboard is protected with a secret key that the author of the blog will need to provide to access the dashboard (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
 
