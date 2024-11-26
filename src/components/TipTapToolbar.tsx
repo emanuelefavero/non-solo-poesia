@@ -125,6 +125,16 @@ export default function Component({ editor }: ToolbarProps) {
       >
         <span className='font-bold'>{'”'}</span>
       </button>
+
+      {/* Strike through */}
+      <button
+        onClick={() => editor.chain().focus().toggleStrike().run()}
+        className={`rounded border px-2 py-1 ${
+          editor.isActive('strike') ? 'bg-blue-500 text-white' : ''
+        }`}
+      >
+        <span className='font-bold'>~</span>
+      </button>
     </div>
   )
 }
