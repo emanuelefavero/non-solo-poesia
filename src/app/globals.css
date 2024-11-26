@@ -30,22 +30,16 @@ input {
   @apply rounded border border-gray-300 p-2 dark:bg-neutral-950;
 }
 
-h1,
-h2,
-h3 {
-  @apply font-bold;
-}
-
 h1 {
-  @apply text-5xl;
+  @apply text-5xl font-bold;
 }
 
 h2 {
-  @apply text-3xl;
+  @apply text-3xl font-semibold;
 }
 
 h3 {
-  @apply text-xl;
+  @apply text-xl font-medium;
 }
 
 h4 {

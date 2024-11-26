@@ -19,7 +19,7 @@ export default function Component({ editor }: ToolbarProps) {
           editor.isActive('bold') ? 'bg-blue-500 text-white' : ''
         }`}
       >
-        Bold
+        <span className='font-bold'>B</span>
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -27,7 +27,7 @@ export default function Component({ editor }: ToolbarProps) {
           editor.isActive('italic') ? 'bg-blue-500 text-white' : ''
         }`}
       >
-        Italic
+        <span className='font-serif italic'>I</span>
       </button>
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
@@ -37,7 +37,7 @@ export default function Component({ editor }: ToolbarProps) {
             : ''
         }`}
       >
-        H1
+        <span className='font-bold'>H1</span>
       </button>
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
@@ -47,7 +47,7 @@ export default function Component({ editor }: ToolbarProps) {
             : ''
         }`}
       >
-        H2
+        <span className='font-semibold'>H2</span>
       </button>
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
@@ -57,7 +57,7 @@ export default function Component({ editor }: ToolbarProps) {
             : ''
         }`}
       >
-        H3
+        <span className='font-medium'>H3</span>
       </button>
       <button
         onClick={() => {
