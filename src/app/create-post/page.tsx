@@ -4,8 +4,8 @@ import Link from 'next/link'
 export default function Page() {
   return (
     <>
-      <Link href='/'>Go Home</Link>
-      <h1 className='mb-4'>Create Post</h1>
+      <Link href='/'>Vai alla Home</Link>
+      <h1 className='mb-4'>Aggiungi nuovo post</h1>
       <TipTap />
     </>
   )

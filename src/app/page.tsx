@@ -25,7 +25,7 @@ export default async function Home() {
 
   return (
     <>
-      <Link href='/create-post?key=secret'>Create Post</Link>
+      <Link href='/create-post?key=secret'>Aggiungi nuovo post</Link>
       <h1>Blog</h1>
 
       <ul>
