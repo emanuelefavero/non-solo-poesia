@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -32,7 +33,12 @@ export default function RootLayout({
         <header className='flex w-full items-center justify-between bg-gray-500/10 p-4'>
           <Header />
         </header>
+
         <main className='flex flex-col gap-4 p-4'>{children}</main>
+
+        <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 bg-gray-500/20 p-4 text-sm text-white'>
+          <Footer />
+        </footer>
       </body>
     </html>
   )
