@@ -1,6 +1,10 @@
 {
+  "id": "10bd375f-d5b4-437a-b26e-47de207c53be",
+  "slug": "ciao",
   "sanitizedTitle": "ciao",
   "title": "Ciao",
-  "content": "<h1>Ciao come va</h1><p></p>",
-  "publishedAt": "2024-11-27T07:01:56.887Z"
+  "content": "<h1>Ciao</h1><p></p><p><em>Come va</em></p>",
+  "author": "Maria D'Ippolito",
+  "publishedAt": "2024-11-27T12:37:05.266Z",
+  "updatedAt": null
 }

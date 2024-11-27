@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -19,15 +20,25 @@ export async function POST(req: Request) {
     // Sanitize title (remove special characters and spaces) for the file name
     const sanitizedTitle = title
       .trim()
-      .replace(/[^a-z0-9]/gi, '_')
+      .replace(/[^a-z0-9]/gi, '-')
       .toLowerCase()
 
     // Create post object
     const post = {
+      id: randomUUID(),
+      slug: sanitizedTitle,
       sanitizedTitle,
       title,
       content,
+      author: "Maria D'Ippolito", // TODO: Add author field in /create-post
       publishedAt: new Date().toISOString(),
+      updatedAt: null, // Placeholder for future updates
+
+      // TODO: Add other metadata (let the author add these in /create-post)
+      // tags: [],
+      // coverImageURL: '',
+      // description: '',
+      // readingTime: '',
     }
 
     // Save post to json file
