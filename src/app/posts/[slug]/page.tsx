@@ -11,7 +11,11 @@ async function getPost(slug: string) {
   return post
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+// NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
+type Props = { params: Promise<{ slug: string }> }
+
+export default async function Page(props: Props) {
+  const params = await props.params
   const post = await getPost(params.slug)
 
   return (
