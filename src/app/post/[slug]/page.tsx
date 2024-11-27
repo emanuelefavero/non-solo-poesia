@@ -23,10 +23,20 @@ export default async function Page(props: Props) {
       <h1>{post.title}</h1>
 
       {/* Author */}
-      <p>By {post.author}</p>
+      <p>Scritto da {post.author}</p>
 
       {/* Date */}
-      <p>Published on {new Date(post.publishedAt).toDateString()}</p>
+      <p>
+        Pubblicato il{' '}
+        {new Date(post.publishedAt)
+          .toLocaleDateString('it-IT', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+          })
+          // Capitalize the first letter of the month
+          .replace(/(\b\w)/g, (char) => char.toUpperCase())}
+      </p>
 
       {/* Content */}
       <div
