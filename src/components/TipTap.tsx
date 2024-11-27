@@ -34,7 +34,7 @@ export default function Component() {
       Image,
       Link,
       Heading.configure({
-        levels: [1, 2, 3],
+        levels: [2, 3],
       }),
       Placeholder.configure({
         placeholder: 'Write something...',

@@ -2,6 +2,11 @@ import { promises as fs } from 'fs'
 import Link from 'next/link'
 import path from 'path'
 
+// TODO: Limit the number of posts to display on the home page (add pagination)
+// TODO: Add a search bar to filter posts by title or content
+// TODO: Add a filter to sort posts by date, title, or author
+// TODO: Move the getAllPosts function to a separate file (e.g., src/lib/posts.ts)
+
 // Get all json files in the src/posts directory
 export async function getAllPosts() {
   const postsDirectory = path.resolve(process.cwd(), 'src', 'posts')

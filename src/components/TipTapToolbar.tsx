@@ -34,18 +34,6 @@ export default function Component({ editor }: ToolbarProps) {
         <span className='font-serif italic'>I</span>
       </button>
 
-      {/* H1 */}
-      <button
-        onClick={() => editor.chain().focus().setHeading({ level: 1 }).run()}
-        className={`rounded border px-2 py-1 ${
-          editor.isActive('heading', { level: 1 })
-            ? 'bg-blue-500 text-white'
-            : ''
-        }`}
-      >
-        <span className='font-bold'>H1</span>
-      </button>
-
       {/* H2 */}
       <button
         onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
