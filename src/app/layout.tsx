@@ -29,10 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header>
+        <header className='flex w-full items-center justify-between bg-gray-500/10 p-4'>
           <Header />
         </header>
-        <main>{children}</main>
+        <main className='flex flex-col gap-4 p-4'>{children}</main>
       </body>
     </html>
   )

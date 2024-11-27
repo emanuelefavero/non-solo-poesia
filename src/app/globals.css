@@ -19,7 +19,6 @@ body {
   background: var(--background);
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Helvetica, sans-serif;
-  padding: 1rem;
 }
 
 a {
