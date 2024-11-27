@@ -23,10 +23,10 @@ export default async function Page(props: Props) {
       <h1>{post.title}</h1>
 
       {/* Author */}
-      <p>Scritto da {post.author}</p>
+      <span>Scritto da {post.author}</span>
 
       {/* Date */}
-      <p>
+      <span>
         Pubblicato il{' '}
         {new Date(post.publishedAt)
           .toLocaleDateString('it-IT', {
@@ -36,7 +36,7 @@ export default async function Page(props: Props) {
           })
           // Capitalize the first letter of the month
           .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-      </p>
+      </span>
 
       {/* Content */}
       <div

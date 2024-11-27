@@ -3,7 +3,7 @@ export default function Component() {
 
   return (
     <>
-      <p>&copy; {year} Blog</p>
+      <span>&copy; {year} Blog</span>
 
       <span className='xs:inline-block mx-1 hidden text-white'>|</span>
 
