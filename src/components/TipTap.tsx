@@ -139,6 +139,7 @@ export default function Component() {
       }
     } finally {
       setLoading(false)
+      setNewPostTitle('')
     }
   }
 
