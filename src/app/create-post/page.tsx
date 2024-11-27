@@ -1,5 +1,7 @@
 import TipTap from '@/components/TipTap'
 
+// TODO: Add post cover image and description fields
+
 export default function Page() {
   return (
     <>
