@@ -37,7 +37,7 @@ export default function Component() {
         levels: [2, 3],
       }),
       Placeholder.configure({
-        placeholder: 'Write something...',
+        placeholder: 'Scrivi qualcosa...',
       }),
       Youtube.configure({
         controls: false,
@@ -147,7 +147,7 @@ export default function Component() {
     <div className='max-w-3xl'>
       <input
         type='text'
-        placeholder='Title...'
+        placeholder='Titolo...'
         value={newPostTitle}
         onChange={(e) => setNewPostTitle(e.target.value)}
         className='mb-4 w-full'

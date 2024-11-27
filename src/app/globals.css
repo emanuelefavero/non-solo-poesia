@@ -54,7 +54,7 @@ h6 {
 }
 
 p {
-  @apply py-[0.4rem] text-base;
+  @apply py-1.5 text-base;
 }
 
 ul {
