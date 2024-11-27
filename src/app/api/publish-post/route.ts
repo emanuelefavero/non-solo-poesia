@@ -27,7 +27,6 @@ export async function POST(req: Request) {
     const post = {
       id: randomUUID(),
       slug: sanitizedTitle,
-      sanitizedTitle,
       title,
       content,
       author: "Maria D'Ippolito", // TODO: Add author field in /create-post
@@ -42,7 +41,7 @@ export async function POST(req: Request) {
     }
 
     // Save post to json file
-    const fileName = `${post.sanitizedTitle}.json`
+    const fileName = `${post.slug}.json`
     const postsDirectory = path.resolve(process.cwd(), 'src', 'posts')
     const filePath = path.join(postsDirectory, fileName)
     await fs.writeFile(filePath, JSON.stringify(post, null, 2))
