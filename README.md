@@ -10,7 +10,7 @@ The application uses a rich text editor to allow users to format their blog post
 
 - Clone the repository
 - `cd` into the project directory
-- Install dependencies with `npm install`
+- Install dependencies with `npm install --legacy-peer-deps`
 - Create a `.env.local` file in the root of the project and add the following environment variables:
 
 ```bash
