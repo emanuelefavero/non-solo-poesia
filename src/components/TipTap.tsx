@@ -67,7 +67,7 @@ export default function Component() {
     if (!title) {
       setMessage({
         type: 'error',
-        text: 'Please enter a title',
+        text: 'Per favore inserisci un titolo',
       })
       return
     }
@@ -80,7 +80,7 @@ export default function Component() {
     if (!/^[a-zA-Z0-9\s-]+$/.test(title)) {
       setMessage({
         type: 'error',
-        text: 'Title can only contain alphanumeric characters, spaces, and dashes',
+        text: 'Il titolo può contenere solo lettere, numeri, spazi e trattini',
       })
       return
     }
@@ -89,7 +89,7 @@ export default function Component() {
     if (title.length > 100) {
       setMessage({
         type: 'error',
-        text: 'Title must not exceed 100 characters',
+        text: 'Il titolo deve essere inferiore a 100 caratteri',
       })
       return
     }
@@ -101,7 +101,7 @@ export default function Component() {
     if (!coverImage) {
       setMessage({
         type: 'error',
-        text: 'Please add a cover image',
+        text: "Per favore inserisci un'immagine di copertina",
       })
       return
     }
@@ -110,7 +110,7 @@ export default function Component() {
     if (!/^https?:\/\/\S+\.\S+/.test(coverImage)) {
       setMessage({
         type: 'error',
-        text: 'Please enter a valid image URL',
+        text: 'Per favore inserisci un URL di immagine valido',
       })
       return
     }
@@ -119,7 +119,7 @@ export default function Component() {
     if (!htmlContent.length || htmlContent === '<p></p>') {
       setMessage({
         type: 'error',
-        text: 'Please enter some content',
+        text: 'Per favore inserisci del contenuto',
       })
       return
     }
@@ -149,7 +149,7 @@ export default function Component() {
 
       setMessage({
         type: 'success',
-        text: 'Post published successfully!',
+        text: 'Post pubblicato con successo!',
       })
       editor.commands.clearContent()
     } catch (error) {
@@ -219,7 +219,7 @@ export default function Component() {
         }`}
         disabled={loading}
       >
-        {loading ? 'Publishing...' : 'Publish'}
+        {loading ? 'Pubblicando' : 'Pubblica'}
       </button>
       {message && (
         // TODO: Hide the message after a few seconds
