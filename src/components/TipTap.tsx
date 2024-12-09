@@ -184,20 +184,22 @@ export default function Component() {
             setCoverImage(url)
           }
         }}
-        className='mb-4 rounded bg-blue-600 px-4 py-2 text-white'
+        className='mb-4 rounded border border-gray-300 px-4 py-2 active:bg-blue-500 active:text-white'
       >
         {coverImage ? 'Cambia' : 'Aggiungi'} immagine di copertina
       </button>
 
       {/* Show cover image preview */}
       {coverImage ? (
-        <NextImage
-          src={coverImage}
-          width={320}
-          height={180}
-          alt='Immagine di copertina'
-          className='mb-4 rounded-md'
-        />
+        <div className='relative mb-4 flex h-[180px] w-[320px]'>
+          <NextImage
+            src={coverImage}
+            fill={true}
+            alt='Immagine di copertina'
+            className='mb-4 rounded-md'
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
       ) : (
         // Image placeholder
         <div className='mb-4 flex h-[180px] w-[320px] select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm dark:bg-neutral-900'>
