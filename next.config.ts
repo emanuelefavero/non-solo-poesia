@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
 
     return config
   },
+  images: {
+    remotePatterns: [
+      // Allow loading images from any domain
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
 }
 
 export default nextConfig

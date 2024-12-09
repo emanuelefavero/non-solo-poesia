@@ -9,6 +9,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import NextImage from 'next/image'
 import { useState } from 'react'
 import TipTapToolbar from './TipTapToolbar'
 
@@ -24,7 +25,8 @@ export default function Component() {
     text: '',
   })
   const [isFocused, setIsFocused] = useState(false)
-  const [newPostTitle, setNewPostTitle] = useState('')
+  const [title, setTitle] = useState('')
+  const [coverImage, setCoverImage] = useState('')
 
   const editor = useEditor({
     extensions: [
@@ -61,7 +63,7 @@ export default function Component() {
   })
 
   const handlePublish = async () => {
-    if (!newPostTitle) {
+    if (!title) {
       setMessage({
         type: 'error',
         text: 'Please enter a title',
@@ -70,11 +72,11 @@ export default function Component() {
     }
 
     // Validate title: remove leading and trailing spaces
-    setNewPostTitle(newPostTitle.trim())
+    setTitle(title.trim())
 
     // Validate title: accept only alphanumeric characters, spaces, and dashes
     // TODO: Let the title have question marks, exclamation marks, and periods but remember to remove those when creating the file name from the title
-    if (!/^[a-zA-Z0-9\s-]+$/.test(newPostTitle)) {
+    if (!/^[a-zA-Z0-9\s-]+$/.test(title)) {
       setMessage({
         type: 'error',
         text: 'Title can only contain alphanumeric characters, spaces, and dashes',
@@ -83,7 +85,7 @@ export default function Component() {
     }
 
     // Validate title: limit the title to 100 characters
-    if (newPostTitle.length > 100) {
+    if (title.length > 100) {
       setMessage({
         type: 'error',
         text: 'Title must not exceed 100 characters',
@@ -116,7 +118,8 @@ export default function Component() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: newPostTitle,
+          title: title,
+          coverImage: coverImage,
           content: htmlContent,
         }),
       })
@@ -139,19 +142,50 @@ export default function Component() {
       }
     } finally {
       setLoading(false)
-      setNewPostTitle('')
+      setTitle('')
     }
   }
 
   return (
     <div className='max-w-3xl'>
+      {/* Title */}
       <input
         type='text'
         placeholder='Titolo...'
-        value={newPostTitle}
-        onChange={(e) => setNewPostTitle(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         className='mb-4 w-full'
       />
+
+      {/* Add cover image button */}
+      <button
+        onClick={() => {
+          const url = prompt("Inserisci l'URL dell'immagine:")
+          if (url) {
+            setCoverImage(url)
+          }
+        }}
+        className='mb-4 rounded bg-blue-600 px-4 py-2 text-white'
+      >
+        {coverImage ? 'Cambia' : 'Aggiungi'} immagine di copertina
+      </button>
+
+      {/* Show cover image preview */}
+      {coverImage ? (
+        <NextImage
+          src={coverImage}
+          width={320}
+          height={180}
+          alt='Immagine di copertina'
+          className='mb-4 rounded-md'
+        />
+      ) : (
+        // Image placeholder
+        <div className='mb-4 flex h-[180px] w-[320px] select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm dark:bg-neutral-900'>
+          Anteprima immagine di copertina
+        </div>
+      )}
+
       <TipTapToolbar editor={editor} />
       <EditorContent
         editor={editor}
