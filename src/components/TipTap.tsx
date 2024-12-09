@@ -214,12 +214,12 @@ export default function Component() {
       />
       <button
         onClick={handlePublish}
-        className={`mt-4 rounded bg-blue-600 px-4 py-2 text-white ${
+        className={`mt-4 min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${
           loading ? 'cursor-not-allowed opacity-50' : ''
         }`}
         disabled={loading}
       >
-        {loading ? 'Pubblicando' : 'Pubblica'}
+        {loading ? 'Pubblicazione...' : 'Pubblica'}
       </button>
       {message && (
         // TODO: Hide the message after a few seconds
