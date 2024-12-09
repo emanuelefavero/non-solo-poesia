@@ -137,8 +137,8 @@ export default function Component() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: title,
-          coverImage: coverImage,
+          title,
+          coverImage,
           content: htmlContent,
         }),
       })
