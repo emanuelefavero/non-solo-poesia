@@ -63,6 +63,7 @@ export default function Component() {
   })
 
   const handlePublish = async () => {
+    // Validate title: check if the title is empty
     if (!title) {
       setMessage({
         type: 'error',
@@ -95,6 +96,24 @@ export default function Component() {
 
     if (!editor) return
     const htmlContent = editor.getHTML()
+
+    // Validate image: check if the image is empty
+    if (!coverImage) {
+      setMessage({
+        type: 'error',
+        text: 'Please add a cover image',
+      })
+      return
+    }
+
+    // Validate image: check if the image is a valid URL
+    if (!/^https?:\/\/\S+\.\S+/.test(coverImage)) {
+      setMessage({
+        type: 'error',
+        text: 'Please enter a valid image URL',
+      })
+      return
+    }
 
     // Validate content: check if the editor is empty
     if (!htmlContent.length || htmlContent === '<p></p>') {
