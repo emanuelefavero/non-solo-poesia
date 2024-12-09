@@ -180,8 +180,13 @@ export default function Component() {
       <button
         onClick={() => {
           const url = prompt("Inserisci l'URL dell'immagine:")
+          // Check if the user entered a URL and the URL is valid
           if (url) {
-            setCoverImage(url)
+            if (/^https?:\/\/\S+\.\S+/.test(url)) {
+              setCoverImage(url)
+            } else {
+              alert('Per favore inserisci un URL di immagine valido')
+            }
           }
         }}
         className='mb-4 rounded border border-gray-300 px-4 py-2 active:bg-blue-500 active:text-white'
