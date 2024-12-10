@@ -5,13 +5,13 @@ import path from 'path'
 export async function POST(req: Request) {
   try {
     // Get title and content
-    const { title, coverImage, content } = await req.json()
+    const { title, description, coverImage, content } = await req.json()
 
-    // Validate title, cover image, and content
-    if (!title || !coverImage || !content) {
+    // Validate title, description, cover image, and content
+    if (!title || !description || !coverImage || !content) {
       return new Response(
         JSON.stringify({
-          message: 'Title, cover image and content are required',
+          message: 'Title, description, cover image and content are required',
         }),
         {
           status: 400,
@@ -24,6 +24,11 @@ export async function POST(req: Request) {
       .trim()
       .replace(/[^a-z0-9]/gi, '-')
       .toLowerCase()
+
+    // Sanitize description (remove special characters and spaces)
+    const sanitizedDescription = description
+      .trim()
+      .replace(/[^a-z0-9\s-]/gi, '')
 
     // Sanitize cover image URL
     const sanitizedCoverImage = coverImage.trim()
@@ -43,6 +48,7 @@ export async function POST(req: Request) {
       id: randomUUID(),
       slug: sanitizedTitle,
       title,
+      description: sanitizedDescription,
       coverImage: sanitizedCoverImage,
       content,
       author: "Maria D'Ippolito", // TODO: Add author field in /create-post
@@ -51,7 +57,6 @@ export async function POST(req: Request) {
 
       // TODO: Add other metadata (let the author add these in /create-post)
       // tags: [],
-      // description: '',
       // readingTime: '',
     }
 

@@ -26,6 +26,7 @@ export default function Component() {
   })
   const [isFocused, setIsFocused] = useState(false)
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [coverImage, setCoverImage] = useState('')
 
   const editor = useEditor({
@@ -106,8 +107,35 @@ export default function Component() {
       return
     }
 
-    if (!editor) return
-    const htmlContent = editor.getHTML()
+    // Validate description: check if the description is empty
+    if (!description) {
+      setMessage({
+        type: 'error',
+        text: 'Per favore inserisci una descrizione',
+      })
+      return
+    }
+
+    // Validate description: remove leading and trailing spaces
+    setDescription(description.trim())
+
+    // Validate description: limit the description to 130 characters
+    if (description.length > 130) {
+      setMessage({
+        type: 'error',
+        text: 'La descrizione deve essere inferiore a 130 caratteri',
+      })
+      return
+    }
+
+    // Validate description: accept only alphanumeric characters, spaces, and dashes
+    if (!/^[a-zA-Z0-9\s-]+$/.test(description)) {
+      setMessage({
+        type: 'error',
+        text: 'La descrizione può contenere solo lettere, numeri, spazi e trattini',
+      })
+      return
+    }
 
     // Validate image: check if the image is empty
     if (!coverImage) {
@@ -126,6 +154,9 @@ export default function Component() {
       })
       return
     }
+
+    if (!editor) return
+    const htmlContent = editor.getHTML()
 
     // Validate content: check if the editor is empty
     if (!htmlContent.length || htmlContent === '<p></p>') {
@@ -150,6 +181,7 @@ export default function Component() {
         },
         body: JSON.stringify({
           title,
+          description,
           coverImage,
           content: htmlContent,
         }),
@@ -186,6 +218,16 @@ export default function Component() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         className='mb-4 w-full'
+      />
+
+      {/* Description */}
+      <input
+        type='text'
+        placeholder='Descrizione...'
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className='mb-4 w-full'
+        maxLength={130}
       />
 
       {/* Add cover image */}
