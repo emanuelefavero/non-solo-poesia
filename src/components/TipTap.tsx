@@ -62,6 +62,18 @@ export default function Component() {
     immediatelyRender: false,
   })
 
+  const handleAddCoverImage = () => {
+    const url = prompt("Inserisci l'URL dell'immagine:")
+    // Check if the user entered a URL and the URL is valid
+    if (url) {
+      if (/^https?:\/\/\S+\.\S+/.test(url)) {
+        setCoverImage(url)
+      } else {
+        alert('Per favore inserisci un URL di immagine valido')
+      }
+    }
+  }
+
   const handlePublish = async () => {
     // Validate title: check if the title is empty
     if (!title) {
@@ -166,7 +178,7 @@ export default function Component() {
   }
 
   return (
-    <div className='max-w-3xl'>
+    <div className='relative max-w-3xl'>
       {/* Title */}
       <input
         type='text'
@@ -176,41 +188,30 @@ export default function Component() {
         className='mb-4 w-full'
       />
 
-      {/* Add cover image button */}
+      {/* Add cover image */}
       <button
-        onClick={() => {
-          const url = prompt("Inserisci l'URL dell'immagine:")
-          // Check if the user entered a URL and the URL is valid
-          if (url) {
-            if (/^https?:\/\/\S+\.\S+/.test(url)) {
-              setCoverImage(url)
-            } else {
-              alert('Per favore inserisci un URL di immagine valido')
-            }
-          }
-        }}
-        className='mb-4 rounded border border-gray-300 px-4 py-2 active:bg-blue-500 active:text-white'
+        onClick={handleAddCoverImage}
+        className='relative mb-4 flex h-[432px] w-full'
       >
-        {coverImage ? 'Cambia' : 'Aggiungi'} immagine di copertina
+        {coverImage ? (
+          <>
+            <NextImage
+              src={coverImage}
+              fill={true}
+              alt='Immagine di copertina'
+              className='rounded-md'
+              style={{ objectFit: 'cover' }}
+            />
+            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100'>
+              Cambia immagine di copertina
+            </div>
+          </>
+        ) : (
+          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm dark:bg-neutral-900'>
+            Aggiungi immagine di copertina
+          </div>
+        )}
       </button>
-
-      {/* Show cover image preview */}
-      {coverImage ? (
-        <div className='relative mb-4 flex h-[180px] w-[320px]'>
-          <NextImage
-            src={coverImage}
-            fill={true}
-            alt='Immagine di copertina'
-            className='mb-4 rounded-md'
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
-      ) : (
-        // Image placeholder
-        <div className='mb-4 flex h-[180px] w-[320px] select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm dark:bg-neutral-900'>
-          Anteprima immagine di copertina
-        </div>
-      )}
 
       <TipTapToolbar editor={editor} />
       <EditorContent
