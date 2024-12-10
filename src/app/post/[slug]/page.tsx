@@ -1,14 +1,14 @@
-import { promises as fs } from 'fs'
-import path from 'path'
+import { neon } from '@neondatabase/serverless'
 
-// Get post data by slug (the slug comes from the URL)
+// Get post data from neon db by slug (the slug comes from the URL)
 async function getPost(slug: string) {
-  const postsDirectory = path.resolve(process.cwd(), 'src', 'posts')
-  const fileName = `${slug}.json`
-  const filePath = path.join(postsDirectory, fileName)
-  const fileContents = await fs.readFile(filePath, 'utf8')
-  const post = JSON.parse(fileContents)
-  return post
+  const sql = neon(process.env.DATABASE_URL as string)
+  const data = await sql`
+    SELECT * FROM posts
+    WHERE slug = ${slug}
+  `
+  if (!data) return null
+  return data[0]
 }
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
@@ -18,6 +18,8 @@ export default async function Page(props: Props) {
   const params = await props.params
   const post = await getPost(params.slug)
 
+  if (!post) return <p>Post non trovato.</p>
+
   return (
     <>
       <h1>{post.title}</h1>
@@ -26,9 +28,10 @@ export default async function Page(props: Props) {
       <span>Scritto da {post.author}</span>
 
       {/* Date */}
+      {/* Date data example: 2024-12-10 07:23:57.257+00 */}
       <span>
         Pubblicato il{' '}
-        {new Date(post.publishedAt)
+        {new Date(post.publishedat)
           .toLocaleDateString('it-IT', {
             day: 'numeric',
             month: 'long',
