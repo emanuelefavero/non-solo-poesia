@@ -218,6 +218,7 @@ export default function Component() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         className='mb-4 w-full'
+        maxLength={100}
       />
 
       {/* Description */}
