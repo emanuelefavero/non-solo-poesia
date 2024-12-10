@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@tiptap/extension-bold": "^2.10.2",
     "@tiptap/extension-heading": "^2.10.2",
     "@tiptap/extension-image": "^2.10.2",

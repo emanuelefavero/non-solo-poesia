@@ -1,6 +1,6 @@
+import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
-import { promises as fs } from 'fs'
-import path from 'path'
+import { revalidatePath } from 'next/cache'
 
 export async function POST(req: Request) {
   try {
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       )
     }
 
-    // Sanitize title (remove special characters and spaces) for the file name
+    // Sanitize title (remove special characters and spaces) for the slug
     const sanitizedTitle = title
       .trim()
       .replace(/[^a-z0-9]/gi, '-')
@@ -60,14 +60,31 @@ export async function POST(req: Request) {
       // readingTime: '',
     }
 
-    // Save post to json file
-    const fileName = `${post.slug}.json`
-    const postsDirectory = path.resolve(process.cwd(), 'src', 'posts')
-    const filePath = path.join(postsDirectory, fileName)
-    await fs.writeFile(filePath, JSON.stringify(post, null, 2))
+    // NOTE: Before saving the post to the database, create a `posts` table in the SQL Editor of the NeonDB dashboard:
+    // CREATE TABLE IF NOT EXISTS posts(
+    //   id UUID PRIMARY KEY,
+    //   slug TEXT NOT NULL UNIQUE,
+    //   title TEXT NOT NULL,
+    //   description TEXT NOT NULL,
+    //   coverImage TEXT NOT NULL,
+    //   content TEXT NOT NULL,
+    //   author TEXT NOT NULL,
+    //   publishedAt TIMESTAMP WITH TIME ZONE NOT NULL,
+    //   updatedAt TIMESTAMP WITH TIME ZONE
+    // );
+
+    // Save post to database
+    const sql = neon(process.env.DATABASE_URL as string)
+    await sql`
+      INSERT INTO posts (id, slug, title, description, coverImage, content, author, publishedAt, updatedAt)
+      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.coverImage}, ${post.content}, ${post.author}, ${post.publishedAt}, ${post.updatedAt})
+    `
+
+    // Revalidate the home page
+    revalidatePath('/')
 
     return new Response(
-      JSON.stringify({ message: 'Post published successfully!', filePath }),
+      JSON.stringify({ message: 'Post published successfully!' }),
       {
         status: 200,
       },
