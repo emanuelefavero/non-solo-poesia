@@ -36,7 +36,7 @@ export default function RootLayout({
 
         <main className='flex flex-col gap-4 p-4'>{children}</main>
 
-        <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 bg-gray-500/20 p-4 text-sm text-white'>
+        <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 bg-gray-500/10 p-4 text-sm'>
           <Footer />
         </footer>
       </body>
