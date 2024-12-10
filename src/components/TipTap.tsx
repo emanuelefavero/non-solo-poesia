@@ -191,7 +191,7 @@ export default function Component() {
       {/* Add cover image */}
       <button
         onClick={handleAddCoverImage}
-        className='relative mb-4 flex h-[432px] w-full'
+        className='relative mb-4 flex aspect-video w-full'
       >
         {coverImage ? (
           <>
@@ -202,12 +202,12 @@ export default function Component() {
               className='rounded-md'
               style={{ objectFit: 'cover' }}
             />
-            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 text-white opacity-0 hover:opacity-100'>
+            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
               Cambia immagine di copertina
             </div>
           </>
         ) : (
-          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm dark:bg-neutral-900'>
+          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
             Aggiungi immagine di copertina
           </div>
         )}
