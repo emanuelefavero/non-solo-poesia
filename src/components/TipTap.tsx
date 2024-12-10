@@ -213,11 +213,16 @@ export default function Component() {
         )}
       </button>
 
+      {/* Editor toolbar */}
       <TipTapToolbar editor={editor} />
+
+      {/* Editor */}
       <EditorContent
         editor={editor}
         className={`tiptap-editor ${isFocused ? 'focused' : ''}`}
       />
+
+      {/* Publish button */}
       <button
         onClick={handlePublish}
         className={`mt-4 min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${
@@ -227,6 +232,8 @@ export default function Component() {
       >
         {loading ? 'Pubblicazione...' : 'Pubblica'}
       </button>
+
+      {/* Validation messages */}
       {message && (
         // TODO: Hide the message after a few seconds
         <p
