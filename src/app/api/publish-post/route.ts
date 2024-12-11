@@ -66,17 +66,17 @@ export async function POST(req: Request) {
     //   slug TEXT NOT NULL UNIQUE,
     //   title TEXT NOT NULL,
     //   description TEXT NOT NULL,
-    //   coverImage TEXT NOT NULL,
+    //   cover_image TEXT NOT NULL,
     //   content TEXT NOT NULL,
     //   author TEXT NOT NULL,
-    //   publishedAt TIMESTAMP WITH TIME ZONE NOT NULL,
-    //   updatedAt TIMESTAMP WITH TIME ZONE
+    //   published_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    //   updated_at TIMESTAMP WITH TIME ZONE
     // );
 
     // Save post to database
     const sql = neon(process.env.DATABASE_URL as string)
     await sql`
-      INSERT INTO posts (id, slug, title, description, coverImage, content, author, publishedAt, updatedAt)
+      INSERT INTO posts (id, slug, title, description, cover_image, content, author, published_at, updated_at)
       VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.coverImage}, ${post.content}, ${post.author}, ${post.publishedAt}, ${post.updatedAt})
     `
 

@@ -31,7 +31,7 @@ export default async function Page(props: Props) {
       {/* Date data example: 2024-12-10 07:23:57.257+00 */}
       <span>
         Pubblicato il{' '}
-        {new Date(post.publishedat)
+        {new Date(post.published_at)
           .toLocaleDateString('it-IT', {
             day: 'numeric',
             month: 'long',

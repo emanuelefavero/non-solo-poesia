@@ -11,7 +11,7 @@ export async function getAllPosts() {
   const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
-    ORDER BY publishedAt DESC
+    ORDER BY published_at DESC
   `
   if (!data) return []
   return data
