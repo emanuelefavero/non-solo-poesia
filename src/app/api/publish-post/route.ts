@@ -43,23 +43,6 @@ export async function POST(req: Request) {
       )
     }
 
-    // Create post object
-    const post = {
-      id: randomUUID(),
-      slug: sanitizedTitle,
-      title,
-      description: sanitizedDescription,
-      coverImage: sanitizedCoverImage,
-      content,
-      author: "Maria D'Ippolito", // TODO: Add author field in /create-post
-      publishedAt: new Date().toISOString(),
-      updatedAt: null, // Placeholder for future updates
-
-      // TODO: Add other metadata (let the author add these in /create-post)
-      // tags: [],
-      // readingTime: '',
-    }
-
     // NOTE: Before saving the post to the database, create a `posts` table in the SQL Editor of the NeonDB dashboard:
     // CREATE TABLE IF NOT EXISTS posts(
     //   id UUID PRIMARY KEY,
@@ -73,11 +56,28 @@ export async function POST(req: Request) {
     //   updated_at TIMESTAMP WITH TIME ZONE
     // );
 
+    // Create post for the database
+    const post = {
+      id: randomUUID(),
+      slug: sanitizedTitle,
+      title,
+      description: sanitizedDescription,
+      cover_image: sanitizedCoverImage,
+      content,
+      author: "Maria D'Ippolito",
+      published_at: new Date().toISOString(),
+      updated_at: null,
+
+      // TODO: Add other metadata (let the author add these in /create-post)
+      // tags: [],
+      // readingTime: '',
+    }
+
     // Save post to database
     const sql = neon(process.env.DATABASE_URL as string)
     await sql`
       INSERT INTO posts (id, slug, title, description, cover_image, content, author, published_at, updated_at)
-      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.coverImage}, ${post.content}, ${post.author}, ${post.publishedAt}, ${post.updatedAt})
+      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.cover_image}, ${post.content}, ${post.author}, ${post.published_at}, ${post.updated_at})
     `
 
     // Revalidate the home page
