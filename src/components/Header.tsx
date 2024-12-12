@@ -28,7 +28,9 @@ export default function Component() {
             </Link>
           )}
         <SignedOut>
-          <SignInButton />
+          <SignInButton>
+            <button>Accedi</button>
+          </SignInButton>
         </SignedOut>
         <SignedIn>
           <UserButton />

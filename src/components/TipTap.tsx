@@ -1,7 +1,5 @@
 'use client'
 
-import EyeIcon from '@/components/icons/EyeIcon'
-import EyeSlashIcon from '@/components/icons/EyeSlashIcon'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
@@ -30,8 +28,6 @@ export default function Component() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [coverImage, setCoverImage] = useState('')
-  const [secretKey, setSecretKey] = useState('')
-  const [showSecretKey, setShowSecretKey] = useState(false)
 
   const editor = useEditor({
     extensions: [
@@ -171,15 +167,6 @@ export default function Component() {
       return
     }
 
-    // Validate secret key: check if the secret key is empty
-    if (!secretKey) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore inserisci una chiave segreta',
-      })
-      return
-    }
-
     setLoading(true)
     setMessage({
       type: 'success',
@@ -197,7 +184,6 @@ export default function Component() {
           description,
           coverImage,
           content: htmlContent,
-          secretKey,
         }),
       })
 
@@ -215,7 +201,6 @@ export default function Component() {
       setTitle('') // clear the title
       setDescription('') // clear the description
       setCoverImage('') // clear the cover image
-      setSecretKey('') // clear the secret key
     } catch (error) {
       if (error instanceof Error) {
         setMessage({
@@ -283,42 +268,6 @@ export default function Component() {
         editor={editor}
         className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
-
-      <div className='relative mb-4 w-full'>
-        {/* Secret key input */}
-        <input
-          type={showSecretKey ? 'text' : 'password'}
-          placeholder='Chiave segreta...'
-          value={secretKey}
-          onChange={(e) => setSecretKey(e.target.value)}
-          className='w-full rounded border py-2 pl-3 pr-10'
-          maxLength={50}
-        />
-
-        {/* Show secret key button */}
-        <div
-          className={`absolute inset-y-0 right-0 items-center pr-3 ${
-            secretKey ? 'flex' : 'hidden'
-          }`}
-        >
-          <button
-            onClick={() => setShowSecretKey(!showSecretKey)}
-            id='showSecretKey'
-            aria-label={
-              showSecretKey
-                ? 'Nascondi chiave segreta'
-                : 'Mostra chiave segreta'
-            }
-            title={
-              showSecretKey
-                ? 'Nascondi chiave segreta'
-                : 'Mostra chiave segreta'
-            }
-          >
-            {showSecretKey ? <EyeIcon /> : <EyeSlashIcon />}
-          </button>
-        </div>
-      </div>
 
       {/* Publish button */}
       <button
