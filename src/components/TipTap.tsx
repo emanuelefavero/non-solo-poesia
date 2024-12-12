@@ -174,7 +174,7 @@ export default function Component() {
     })
 
     try {
-      const response = await fetch('/api/publish-post', {
+      const response = await fetch('/api/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
