@@ -3,7 +3,7 @@
 
 // TODO: Add a delete button that will be visible only to the admin and author. This button will delete the post and redirect to the homepage
 
-import DeleteButton from '@/components/DeleteButton'
+import DeletePopover from '@/components/DeletePopover'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
@@ -53,14 +53,12 @@ export default async function Page(props: Props) {
       </span>
 
       {(userId === adminId || userId === authorId) && (
-        <div>
-          {/* Edit Button */}
-          <Link href={`/edit-post/${post.slug}`} className='mr-2'>
-            Modifica
-          </Link>
+        <div className='flex gap-2'>
+          {/* Delete popover */}
+          <DeletePopover slug={post.slug} />
 
-          {/* Delete button */}
-          <DeleteButton slug={post.slug} />
+          {/* Edit Button */}
+          <Link href={`/edit-post/${post.slug}`}>Modifica</Link>
         </div>
       )}
 
