@@ -197,11 +197,13 @@ export default function Component() {
           description,
           coverImage,
           content: htmlContent,
+          secretKey,
         }),
       })
 
       if (!response.ok) {
-        throw new Error('Failed to publish post')
+        const data = await response.json()
+        throw new Error(data.message)
       }
 
       setMessage({

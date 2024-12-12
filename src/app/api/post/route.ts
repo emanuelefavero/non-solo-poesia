@@ -5,7 +5,18 @@ import { revalidatePath } from 'next/cache'
 export async function POST(req: Request) {
   try {
     // Get title and content
-    const { title, description, coverImage, content } = await req.json()
+    const { title, description, coverImage, content, secretKey } =
+      await req.json()
+
+    // If the secret key is incorrect, return an error
+    if (secretKey !== process.env.SECRET_KEY) {
+      return new Response(
+        JSON.stringify({ message: 'Unauthorized - Invalid secret key' }),
+        {
+          status: 401,
+        },
+      )
+    }
 
     // Validate title, description, cover image, and content
     if (!title || !description || !coverImage || !content) {
