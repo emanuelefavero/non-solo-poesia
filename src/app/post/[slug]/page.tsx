@@ -1,3 +1,8 @@
+// TODO: Add an edit button that will be visible only to the admin and author (by using userId from Clerk auth method @see https://clerk.com/docs/references/nextjs/read-session-data). This button will redirect to /edit-post/[slug] with a Next.js Link component
+// TODO: In /edit-post/[slug], render the same form as /create-post, but with the post data pre-filled. To get the data, use this getPost function ⤵. You could conditionally check if the post is being edited by checking if the post data is present in the TipTap component props or by checking the url pathname (if /create-post, then it's a new post, otherwise it's an edit). Then, call a PUT request to /api/post/[slug] with the updated data. Finally, redirect to the post page with the updated data
+
+// TODO: Add a delete button that will be visible only to the admin and author. This button will delete the post and redirect to the homepage
+
 import { neon } from '@neondatabase/serverless'
 
 // Get post data from neon db by slug (the slug comes from the URL)
