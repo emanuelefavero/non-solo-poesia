@@ -298,6 +298,16 @@ export default function Component() {
           <button
             onClick={() => setShowSecretKey(!showSecretKey)}
             id='showSecretKey'
+            aria-label={
+              showSecretKey
+                ? 'Nascondi chiave segreta'
+                : 'Mostra chiave segreta'
+            }
+            title={
+              showSecretKey
+                ? 'Nascondi chiave segreta'
+                : 'Mostra chiave segreta'
+            }
           >
             {showSecretKey ? <EyeIcon /> : <EyeSlashIcon />}
           </button>
