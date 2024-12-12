@@ -4,25 +4,28 @@ import { revalidatePath } from 'next/cache'
 
 export async function POST(req: Request) {
   try {
-    // Get title and content
+    // Get data from the request body
     const { title, description, coverImage, content, secretKey } =
       await req.json()
 
     // If the secret key is incorrect, return an error
     if (secretKey !== process.env.SECRET_KEY) {
       return new Response(
-        JSON.stringify({ message: 'Unauthorized - Invalid secret key' }),
+        JSON.stringify({
+          message: 'Autorizzazione negata - Chiave segreta non valida',
+        }),
         {
           status: 401,
         },
       )
     }
 
-    // Validate title, description, cover image, and content
-    if (!title || !description || !coverImage || !content) {
+    // Validate title, description, cover image, content and secret key
+    if (!title || !description || !coverImage || !content || !secretKey) {
       return new Response(
         JSON.stringify({
-          message: 'Title, description, cover image and content are required',
+          message:
+            'Accesso bloccato - Titolo, descrizione, immagine di copertina, contenuti e chiave segreta sono obbligatori',
         }),
         {
           status: 400,
@@ -47,7 +50,10 @@ export async function POST(req: Request) {
     // Make sure the coverImage URL is valid
     if (!/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
       return new Response(
-        JSON.stringify({ message: 'Please enter a valid image URL' }),
+        JSON.stringify({
+          message:
+            'Accesso bloccato - Perfavore inserisci un URL di immagine valido',
+        }),
         {
           status: 400,
         },
@@ -95,15 +101,20 @@ export async function POST(req: Request) {
     revalidatePath('/')
 
     return new Response(
-      JSON.stringify({ message: 'Post published successfully!' }),
+      JSON.stringify({ message: 'Post pubblicato con successo!' }),
       {
         status: 200,
       },
     )
   } catch (error) {
     console.error('Error saving post:', error)
-    return new Response(JSON.stringify({ message: 'Failed to publish post' }), {
-      status: 500,
-    })
+    return new Response(
+      JSON.stringify({
+        message: 'Errore interno del server - Impossibile pubblicare il post',
+      }),
+      {
+        status: 500,
+      },
+    )
   }
 }
