@@ -19,7 +19,7 @@ export default function Component({ slug }: Props) {
       <PopoverPanel
         transition
         anchor='bottom'
-        className='ml-4 mt-1 divide-y divide-gray-50 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0 dark:divide-neutral-900 dark:border-gray-700 dark:bg-neutral-900'
+        className='ml-4 mt-1 divide-y divide-gray-50 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 shadow-md shadow-black/10 transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0 dark:divide-neutral-900 dark:border-gray-700 dark:bg-neutral-900 dark:shadow-black/30'
       >
         <p className='select-none text-gray-600 dark:text-gray-400'>
           Eliminare questo post?
