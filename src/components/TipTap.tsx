@@ -1,5 +1,7 @@
 'use client'
 
+import EyeIcon from '@/components/icons/EyeIcon'
+import EyeSlashIcon from '@/components/icons/EyeSlashIcon'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
@@ -293,7 +295,7 @@ export default function Component() {
             onClick={() => setShowSecretKey(!showSecretKey)}
             id='showSecretKey'
           >
-            {showSecretKey ? 'Nascondi' : 'Mostra'}
+            {showSecretKey ? <EyeIcon /> : <EyeSlashIcon />}
           </button>
         </div>
       </div>
