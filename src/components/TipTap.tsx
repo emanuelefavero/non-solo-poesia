@@ -206,11 +206,16 @@ export default function Component() {
         throw new Error(data.message)
       }
 
+      // * Success
       setMessage({
         type: 'success',
         text: 'Post pubblicato con successo!',
       })
-      editor.commands.clearContent()
+      editor.commands.clearContent() // clear the editor content
+      setTitle('') // clear the title
+      setDescription('') // clear the description
+      setCoverImage('') // clear the cover image
+      setSecretKey('') // clear the secret key
     } catch (error) {
       if (error instanceof Error) {
         setMessage({
@@ -220,7 +225,6 @@ export default function Component() {
       }
     } finally {
       setLoading(false)
-      setTitle('')
     }
   }
 
