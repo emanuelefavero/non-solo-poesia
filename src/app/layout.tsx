@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
@@ -26,20 +27,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <header className='flex w-full items-center justify-between bg-gray-500/10 p-4'>
-          <Header />
-        </header>
+    <ClerkProvider>
+      <html lang='en'>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className='flex min-h-[60px] w-full items-center justify-between bg-gray-500/10 p-4'>
+            <Header />
+          </header>
 
-        <main className='flex flex-col gap-4 p-4'>{children}</main>
+          <main className='flex flex-col gap-4 p-4'>{children}</main>
 
-        <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 bg-gray-500/10 p-4 text-sm'>
-          <Footer />
-        </footer>
-      </body>
-    </html>
+          <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 bg-gray-500/10 p-4 text-sm'>
+            <Footer />
+          </footer>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
