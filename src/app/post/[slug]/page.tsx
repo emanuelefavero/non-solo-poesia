@@ -3,11 +3,10 @@
 
 // TODO: Add a delete button that will be visible only to the admin and author. This button will delete the post and redirect to the homepage
 
+import DeleteButton from '@/components/DeleteButton'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
-import { revalidatePath } from 'next/cache'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 
 // Get post data from neon db by slug (the slug comes from the URL)
 async function getPost(slug: string) {
@@ -61,24 +60,7 @@ export default async function Page(props: Props) {
           </Link>
 
           {/* Delete button */}
-          <button
-            onClick={async () => {
-              'use server'
-
-              const sql = neon(process.env.DATABASE_URL as string)
-              await sql`
-              DELETE FROM posts
-              WHERE slug = ${post.slug}
-            `
-
-              // Revalidate the homepage and navigate to it
-              revalidatePath('/')
-              redirect('/')
-            }}
-            className='text-rose-600 dark:text-rose-500'
-          >
-            Elimina
-          </button>
+          <DeleteButton slug={post.slug} />
         </div>
       )}
 
