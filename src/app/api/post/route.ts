@@ -1,9 +1,40 @@
+import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
 import { revalidatePath } from 'next/cache'
 
 export async function POST(req: Request) {
   try {
+    const { userId } = await auth()
+    if (!userId) {
+      return new Response(
+        JSON.stringify({
+          message:
+            'Accesso bloccato - Devi essere autenticato per pubblicare un post',
+        }),
+        {
+          status: 401,
+        },
+      )
+    }
+
+    // Check if user is an admin or author
+    // TODO: Check if NEXT_PUBLIC variables work in production (on the server), if not, use ADMIN_ID and AUTHOR_ID environment variables
+    const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
+    const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
+
+    if (userId !== adminId && userId !== authorId) {
+      return new Response(
+        JSON.stringify({
+          message:
+            'Accesso bloccato - Solo gli amministratori e gli autori possono pubblicare',
+        }),
+        {
+          status: 403,
+        },
+      )
+    }
+
     // Get data from the request body
     const { title, description, coverImage, content, secretKey } =
       await req.json()
