@@ -290,7 +290,11 @@ export default function Component() {
         />
 
         {/* Show secret key button */}
-        <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+        <div
+          className={`absolute inset-y-0 right-0 items-center pr-3 ${
+            secretKey ? 'flex' : 'hidden'
+          }`}
+        >
           <button
             onClick={() => setShowSecretKey(!showSecretKey)}
             id='showSecretKey'
