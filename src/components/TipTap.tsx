@@ -28,6 +28,8 @@ export default function Component() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [coverImage, setCoverImage] = useState('')
+  const [secretKey, setSecretKey] = useState('')
+  const [showSecretKey, setShowSecretKey] = useState(false)
 
   const editor = useEditor({
     extensions: [
@@ -167,6 +169,15 @@ export default function Component() {
       return
     }
 
+    // Validate secret key: check if the secret key is empty
+    if (!secretKey) {
+      setMessage({
+        type: 'error',
+        text: 'Per favore inserisci una chiave segreta',
+      })
+      return
+    }
+
     setLoading(true)
     setMessage({
       type: 'success',
@@ -262,13 +273,35 @@ export default function Component() {
       {/* Editor */}
       <EditorContent
         editor={editor}
-        className={`tiptap-editor ${isFocused ? 'focused' : ''}`}
+        className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
+
+      <div className='relative mb-4 w-full'>
+        {/* Secret key input */}
+        <input
+          type={showSecretKey ? 'text' : 'password'}
+          placeholder='Chiave segreta...'
+          value={secretKey}
+          onChange={(e) => setSecretKey(e.target.value)}
+          className='w-full rounded border py-2 pl-3 pr-10'
+          maxLength={50}
+        />
+
+        {/* Show secret key button */}
+        <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+          <button
+            onClick={() => setShowSecretKey(!showSecretKey)}
+            id='showSecretKey'
+          >
+            {showSecretKey ? 'Nascondi' : 'Mostra'}
+          </button>
+        </div>
+      </div>
 
       {/* Publish button */}
       <button
         onClick={handlePublish}
-        className={`mt-4 min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${
+        className={`min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${
           loading ? 'cursor-not-allowed opacity-50' : ''
         }`}
         disabled={loading}
