@@ -1,4 +1,5 @@
 import { neon } from '@neondatabase/serverless'
+import Image from 'next/image'
 import Link from 'next/link'
 
 // TODO: Limit the number of posts to display on the home page (add pagination)
@@ -22,15 +23,57 @@ export default async function Home() {
 
   return (
     <>
-      <h1>Blog</h1>
+      <h1 className='mb-4'>Blog</h1>
 
       {!posts.length ? (
         <p>Nessun post trovato.</p>
       ) : (
-        <ul>
+        <ul className='grid grid-cols-[repeat(auto-fit,minmax(300px,375px))] justify-center gap-4 pl-0'>
           {posts.map((post) => (
-            <li key={post.id}>
-              <Link href={`/post/${post.slug}`}>{post.title}</Link>
+            <li key={post.id} className='flex list-none flex-col rounded-md'>
+              <Link
+                href={`/post/${post.slug}`}
+                className='text-black hover:no-underline dark:text-white'
+              >
+                {/* Cover Image */}
+                <div className='relative aspect-video w-full'>
+                  <Image
+                    src={post.cover_image}
+                    alt={post.title}
+                    fill={true}
+                    style={{ objectFit: 'cover' }}
+                    className='rounded-md'
+                  />
+                </div>
+
+                {/* Content Wrapper */}
+                <div className='py-4'>
+                  {/* Title */}
+                  <h2 className='mb-2 text-lg font-semibold'>{post.title}</h2>
+
+                  {/* Description */}
+                  <p className='mb-4 line-clamp-3 text-sm'>
+                    {post.description}
+                  </p>
+
+                  {/* Author */}
+                  <p className='text-sm text-gray-600 dark:text-gray-300'>
+                    Scritto da {post.author}
+                  </p>
+
+                  {/* Date */}
+                  <p className='text-sm text-gray-600 dark:text-gray-300'>
+                    Pubblicato il{' '}
+                    {new Date(post.published_at)
+                      .toLocaleDateString('it-IT', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })
+                      .replace(/(\b\w)/g, (char) => char.toUpperCase())}
+                  </p>
+                </div>
+              </Link>
             </li>
           ))}
         </ul>
