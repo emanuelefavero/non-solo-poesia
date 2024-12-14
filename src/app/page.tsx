@@ -8,7 +8,7 @@ import Link from 'next/link'
 // TODO: Move the getAllPosts function to a separate file (e.g., src/lib/posts.ts)
 
 // Get all posts from the neon database
-export async function getAllPosts() {
+async function getAllPosts() {
   const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
