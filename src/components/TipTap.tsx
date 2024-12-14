@@ -18,8 +18,6 @@ type Props = {
   post?: Post
 }
 
-// TODO: Add author field
-
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({
@@ -281,6 +279,17 @@ export default function Component({ post }: Props) {
         editor={editor}
         className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
+
+      {/* Author */}
+      <div className='mb-4 flex flex-col gap-2'>
+        <label htmlFor='author' className='font-medium'>
+          Autore
+        </label>
+        <select id='author' className='max-w-[151px]'>
+          <option value='maria'>Maria D&apos;Ippolito</option>
+          <option value='teresa'>Teresa</option>
+        </select>
+      </div>
 
       {/* Publish button */}
       <button

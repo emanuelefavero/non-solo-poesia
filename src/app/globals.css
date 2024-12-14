@@ -29,6 +29,10 @@ input {
   @apply rounded border border-gray-300 p-2 dark:bg-neutral-950;
 }
 
+select {
+  @apply rounded border border-gray-300 p-2 dark:bg-neutral-950;
+}
+
 h1 {
   @apply text-5xl font-bold;
 }
