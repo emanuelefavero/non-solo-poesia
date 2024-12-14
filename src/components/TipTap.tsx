@@ -89,7 +89,6 @@ export default function Component({ post }: Props) {
     setTitle(title.trim())
 
     // Validate title: accept only alphanumeric characters, spaces, and dashes
-    // TODO: Let the title have question marks, exclamation marks, and periods but remember to remove those when creating the file name from the title
     if (!/^[a-zA-Z0-9\s-]+$/.test(title)) {
       setMessage({
         type: 'error',
@@ -174,8 +173,11 @@ export default function Component({ post }: Props) {
     })
 
     try {
+      // If post is passed as prop, it means we are editing an existing post
+      const method = post ? 'PUT' : 'POST'
+
       const response = await fetch('/api/post', {
-        method: 'POST',
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -184,6 +186,9 @@ export default function Component({ post }: Props) {
           description,
           coverImage,
           content: htmlContent,
+
+          // If post is passed as prop, also send the post id
+          ...(post && { id: post.id }),
         }),
       })
 
@@ -195,12 +200,18 @@ export default function Component({ post }: Props) {
       // * Success
       setMessage({
         type: 'success',
-        text: 'Post pubblicato con successo!',
+        text: post
+          ? 'Post aggiornato con successo!'
+          : 'Post pubblicato con successo!',
       })
-      editor.commands.clearContent() // clear the editor content
-      setTitle('') // clear the title
-      setDescription('') // clear the description
-      setCoverImage('') // clear the cover image
+
+      // Clear content only if it's a new post
+      if (!post) {
+        editor.commands.clearContent() // clear the editor content
+        setTitle('') // clear the title
+        setDescription('') // clear the description
+        setCoverImage('') // clear the cover image
+      }
     } catch (error) {
       if (error instanceof Error) {
         setMessage({
