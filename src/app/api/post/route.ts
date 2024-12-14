@@ -1,3 +1,4 @@
+import { authors } from '@/data/authors'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
@@ -34,14 +35,15 @@ async function validateRequest(req: Request) {
   }
 
   // Validate the request body
-  const { title, description, coverImage, content, id } = await req.json()
+  const { title, description, coverImage, content, author, id } =
+    await req.json()
 
-  if (!title || !description || !coverImage || !content) {
+  if (!title || !description || !coverImage || !content || !author) {
     return {
       error: new Response(
         JSON.stringify({
           message:
-            'Accesso bloccato - Titolo, descrizione, immagine di copertina e contenuti sono obbligatori',
+            'Accesso bloccato - Titolo, descrizione, immagine di copertina, autore e contenuti sono obbligatori',
         }),
         { status: 400 },
       ),
@@ -67,6 +69,19 @@ async function validateRequest(req: Request) {
     }
   }
 
+  // Sanitize the author (trim and check if it's valid)
+  const sanitizedAuthor = author.trim()
+  if (!authors.find((a) => a.name === sanitizedAuthor)) {
+    return {
+      error: new Response(
+        JSON.stringify({
+          message: 'Accesso bloccato - Per favore seleziona un autore valido',
+        }),
+        { status: 400 },
+      ),
+    }
+  }
+
   return {
     userId,
     sanitizedData: {
@@ -75,6 +90,7 @@ async function validateRequest(req: Request) {
       description: sanitizedDescription,
       coverImage: sanitizedCoverImage,
       content,
+      author: sanitizedAuthor,
       id,
     },
   }
@@ -98,7 +114,7 @@ export async function POST(req: Request) {
       description: sanitizedData.description,
       cover_image: sanitizedData.coverImage,
       content: sanitizedData.content,
-      author: "Maria D'Ippolito",
+      author: sanitizedData.author,
       published_at: new Date().toISOString(),
       updated_at: null,
     }
@@ -142,7 +158,7 @@ export async function PUT(req: Request) {
           description = ${sanitizedData.description},
           cover_image = ${sanitizedData.coverImage},
           content = ${sanitizedData.content},
-          slug = ${sanitizedData.sanitizedTitle},
+          author = ${sanitizedData.author},
           updated_at = ${new Date().toISOString()}
       WHERE id = ${sanitizedData.id}
     `
