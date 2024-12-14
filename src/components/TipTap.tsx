@@ -29,6 +29,7 @@ export default function Component({ post }: Props) {
   const [title, setTitle] = useState(post?.title || '')
   const [description, setDescription] = useState(post?.description || '')
   const [coverImage, setCoverImage] = useState(post?.cover_image || '')
+  const [author, setAuthor] = useState(post?.author || authors[0].name || '')
 
   const editor = useEditor({
     extensions: [
@@ -167,6 +168,28 @@ export default function Component({ post }: Props) {
       return
     }
 
+    // Validate author: check if the author is empty
+    if (!author) {
+      setMessage({
+        type: 'error',
+        text: 'Per favore seleziona un autore',
+      })
+      return
+    }
+
+    // Validate author: check if the author is valid
+    if (!authors.find((a) => a.name === author)) {
+      setMessage({
+        type: 'error',
+        text: 'Per favore seleziona un autore valido',
+      })
+      return
+    }
+
+    // Validate author: remove leading and trailing spaces
+    setAuthor(author.trim())
+
+    // Start the loading state
     setLoading(true)
     setMessage({
       type: 'success',
@@ -187,6 +210,7 @@ export default function Component({ post }: Props) {
           description,
           coverImage,
           content: htmlContent,
+          author,
 
           // If post is passed as prop, also send the post id
           ...(post && { id: post.id }),
@@ -212,6 +236,7 @@ export default function Component({ post }: Props) {
         setTitle('') // clear the title
         setDescription('') // clear the description
         setCoverImage('') // clear the cover image
+        setAuthor(authors[0].name) // set the author to the first author
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -286,7 +311,12 @@ export default function Component({ post }: Props) {
         <label htmlFor='author' className='font-medium'>
           Autore
         </label>
-        <select id='author' className='max-w-[151px]'>
+        <select
+          id='author'
+          className='max-w-[151px]'
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+        >
           {authors.map((author) => (
             <option key={author.id} value={author.name}>
               {author.name}
