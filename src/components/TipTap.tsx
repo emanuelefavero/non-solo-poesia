@@ -18,6 +18,8 @@ type Props = {
   post?: Post
 }
 
+// TODO: Add author field
+
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({

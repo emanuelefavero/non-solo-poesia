@@ -1,8 +1,17 @@
 import TipTap from '@/components/TipTap'
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
 
-// TODO: Add author field
+export default async function Page() {
+  const { userId } = await auth()
+  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
+  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
-export default function Page() {
+  // Redirect if the user is not an admin or author
+  if (!userId || (userId !== adminId && userId !== authorId)) {
+    redirect('/')
+  }
+
   return (
     <>
       <h1 className='mb-4'>Aggiungi nuovo post</h1>
