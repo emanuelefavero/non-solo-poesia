@@ -50,11 +50,14 @@ async function validateRequest(req: Request) {
     }
   }
 
-  const sanitizedTitle = title.trim()
+  // Create a slug from the title
   const slug = title
     .trim()
     .replace(/[^a-z0-9]/gi, '-')
     .toLowerCase()
+
+  // Sanitize the title, description, and cover image
+  const sanitizedTitle = title.trim()
   const sanitizedDescription = description.trim().replace(/[^a-z0-9\s-]/gi, '')
   const sanitizedCoverImage = coverImage.trim()
 
@@ -155,7 +158,9 @@ export async function PUT(req: Request) {
 
     await sql`
       UPDATE posts
-      SET title = ${sanitizedData.title},
+      SET 
+          slug = ${sanitizedData.slug},
+          title = ${sanitizedData.title},
           description = ${sanitizedData.description},
           cover_image = ${sanitizedData.coverImage},
           content = ${sanitizedData.content},
