@@ -14,3 +14,8 @@ export type Message = {
   type: 'success' | 'error'
   text: string
 }
+
+export type Author = {
+  id: string
+  name: "Maria D'Ippolito" | 'Teresa'
+}

@@ -1,5 +1,6 @@
 'use client'
 
+import { authors } from '@/data/authors'
 import type { Message, Post } from '@/types'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
@@ -286,8 +287,11 @@ export default function Component({ post }: Props) {
           Autore
         </label>
         <select id='author' className='max-w-[151px]'>
-          <option value='maria'>Maria D&apos;Ippolito</option>
-          <option value='teresa'>Teresa</option>
+          {authors.map((author) => (
+            <option key={author.id} value={author.name}>
+              {author.name}
+            </option>
+          ))}
         </select>
       </div>
 
