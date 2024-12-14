@@ -1,6 +1,8 @@
 import TipTap from '@/components/TipTap'
 import type { Post } from '@/types'
+import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
+import { redirect } from 'next/navigation'
 
 // Get post data from neon db by slug (the slug comes from the URL)
 async function getPost(slug: string) {
@@ -19,10 +21,14 @@ type Props = { params: Promise<{ slug: string }> }
 export default async function Page(props: Props) {
   const params = await props.params
   const post = await getPost(params.slug)
+  const { userId } = await auth()
+  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
+  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
-  if (!post) return <p>Post non trovato.</p>
-
-  // TODO protect this route with Clerk
+  // Redirect if the user is not an admin or author, or if the post is not found
+  if (!userId || (userId !== adminId && userId !== authorId) || !post) {
+    redirect('/')
+  }
 
   return (
     <>
