@@ -2,6 +2,10 @@
 
 A blog application built with Next.js, TipTap, Clerk and Neon DB that allows users to create blog posts with rich text formatting.
 
+## Website
+
+- [https://rich-text-blog.vercel.app/](https://rich-text-blog.vercel.app/)
+
 ## Getting Started
 
 - Clone the repository
