@@ -22,7 +22,6 @@ export default async function Page(props: Props) {
 
   if (!post) return <p>Post non trovato.</p>
 
-  // TODO: Render the same form as /create-post, but with the post data pre-filled. You could conditionally check if the post is being edited or created by checking if the post data is present in the TipTap component props or by checking the url pathname (if /create-post, then it's a new post, otherwise it's an edit). Then, call a PUT request to /api/post/[slug] with the updated data. Finally, redirect to the post page with the updated data
   // TODO protect this route with Clerk
 
   return (
