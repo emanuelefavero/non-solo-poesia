@@ -44,7 +44,10 @@ export default async function Page(props: Props) {
       <h1>{post.title}</h1>
 
       {/* Author */}
-      <span>Scritto da {post.author}</span>
+      <span>
+        Scritto da{' '}
+        <span className='text-pink-500 dark:text-pink-400'>{post.author}</span>
+      </span>
 
       {/* Date */}
       {/* Date data example: 2024-12-10 07:23:57.257+00 */}
