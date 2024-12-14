@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto'
 import { revalidatePath } from 'next/cache'
 
 async function validateRequest(req: Request) {
+  // Check if the user has access to publish a post
   const { userId } = await auth()
   if (!userId) {
     return {
@@ -32,6 +33,7 @@ async function validateRequest(req: Request) {
     }
   }
 
+  // Validate the request body
   const { title, description, coverImage, content, id } = await req.json()
 
   if (!title || !description || !coverImage || !content) {
@@ -80,10 +82,13 @@ async function validateRequest(req: Request) {
 
 export async function POST(req: Request) {
   try {
+    // Validate the request
     const validation = await validateRequest(req)
     if (validation.error) return validation.error
 
     const { sanitizedData } = validation
+
+    // Save the post to the database
     const sql = neon(process.env.DATABASE_URL as string)
 
     const post = {
@@ -122,10 +127,13 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
   try {
+    // Validate the request
     const validation = await validateRequest(req)
     if (validation.error) return validation.error
 
     const { sanitizedData } = validation
+
+    // Update the post in the database
     const sql = neon(process.env.DATABASE_URL as string)
 
     await sql`
