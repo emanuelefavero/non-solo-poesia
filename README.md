@@ -1,24 +1,44 @@
 # Rich Text Blog
 
-A blog application built with Next.js and TipTap that allows users to create blog posts with rich text formatting.
-
-The application uses a rich text editor to allow users to format their blog posts. The admin dashboard is protected with a secret key that the author of the blog will need to provide to access the dashboard (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
-
-> Note: This project is still in development and is not yet ready for production
+A blog application built with Next.js, TipTap, Clerk and Neon DB that allows users to create blog posts with rich text formatting.
 
 ## Getting Started
 
 - Clone the repository
 - `cd` into the project directory
 - Install dependencies with `npm install --legacy-peer-deps`
+- Go to the [Clerk](https://clerk.dev) console and create a new project
+- Go to the [Neon](https://console.neon.tech/app/projects) console and create a new project
+- Go to the Neon SQL editor and run the following SQL query to create a `posts` table:
+
+```sql
+CREATE TABLE IF NOT EXISTS posts(
+  id UUID PRIMARY KEY,
+  slug TEXT NOT NULL UNIQUE,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  cover_image TEXT NOT NULL,
+  content TEXT NOT NULL,
+  author TEXT NOT NULL,
+  published_at TIMESTAMP WITH TIME ZONE NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE
+)
+```
+
 - Create a `.env.local` file in the root of the project and add the following environment variables:
 
 ```bash
-SECRET_KEY= # Choose a secret key to share with the Blog author
-```
+# Clerk configuration
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= # Go to your Clerk console
+CLERK_SECRET_KEY= # Go to your Clerk console
 
-> NOTE: `SECRET_KEY` is used to access the admin dashboard. The author of the blog will need to provide this key as a query parameter. (e.g. `http://localhost:3000/create-post?key=SECRET_KEY`)
-> TIP: You can share the full link with the author and ask them to replace `SECRET_KEY` with the actual key.
+# Clerk user IDs to assign roles (you will get these after each user signs up)
+NEXT_PUBLIC_ADMIN_ID= # This is the admin of the blog
+NEXT_PUBLIC_AUTHOR_ID= # This is the author of the blog
+
+# Neon database URL
+DATABASE_URL= # Go to your neon project console and copy the DATABASE_URL
+```
 
 - Run the development server:
 
@@ -27,15 +47,6 @@ npm run dev
 ```
 
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-- Go to `http://localhost:3000/create-post?key=SECRET_KEY` to create a new blog post.
-
-## Features
-
-- Create a new blog post
-- Edit an existing blog post
-- Delete a blog post
-- View all blog posts
-- View a single blog post
 
 ## Tech Stack
 
@@ -44,6 +55,9 @@ npm run dev
 - TypeScript
 - Tailwind CSS
 - TipTap (Rich Text Editor)
+- Clerk (Authentication)
+- Neon (Database)
+- Vercel (Deployment)
 
 ## Resources
 
@@ -52,6 +66,8 @@ npm run dev
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [TipTap Documentation](https://www.tiptap.dev/)
+- [Clerk Documentation](https://clerk.com/docs)
+- [Neon Documentation](https://neon.tech/docs/introduction)
 
 ## License
 
