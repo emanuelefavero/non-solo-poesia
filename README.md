@@ -57,6 +57,7 @@ npm run dev
 - TipTap (Rich Text Editor)
 - Clerk (Authentication)
 - Neon (Database)
+- Headless UI (Popover)
 - Vercel (Deployment)
 
 ## Resources
@@ -68,6 +69,7 @@ npm run dev
 - [TipTap Documentation](https://www.tiptap.dev/)
 - [Clerk Documentation](https://clerk.com/docs)
 - [Neon Documentation](https://neon.tech/docs/introduction)
+- [Headless UI Documentation](https://headlessui.dev/)
 
 ## License
 
