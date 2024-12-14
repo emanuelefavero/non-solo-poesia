@@ -50,7 +50,8 @@ async function validateRequest(req: Request) {
     }
   }
 
-  const sanitizedTitle = title
+  const sanitizedTitle = title.trim()
+  const slug = title
     .trim()
     .replace(/[^a-z0-9]/gi, '-')
     .toLowerCase()
@@ -85,8 +86,8 @@ async function validateRequest(req: Request) {
   return {
     userId,
     sanitizedData: {
-      title,
-      sanitizedTitle,
+      title: sanitizedTitle,
+      slug,
       description: sanitizedDescription,
       coverImage: sanitizedCoverImage,
       content,
@@ -109,7 +110,7 @@ export async function POST(req: Request) {
 
     const post = {
       id: randomUUID(),
-      slug: sanitizedData.sanitizedTitle,
+      slug: sanitizedData.slug,
       title: sanitizedData.title,
       description: sanitizedData.description,
       cover_image: sanitizedData.coverImage,
