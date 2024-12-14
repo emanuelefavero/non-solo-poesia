@@ -1,5 +1,6 @@
 'use client'
 
+import type { Message, Post } from '@/types'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
@@ -13,21 +14,20 @@ import NextImage from 'next/image'
 import { useState } from 'react'
 import TipTapToolbar from './TipTapToolbar'
 
-type Message = {
-  type: 'success' | 'error'
-  text: string
+type Props = {
+  post?: Post
 }
 
-export default function Component() {
+export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({
     type: 'success',
     text: '',
   })
   const [isFocused, setIsFocused] = useState(false)
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [coverImage, setCoverImage] = useState('')
+  const [title, setTitle] = useState(post?.title || '')
+  const [description, setDescription] = useState(post?.description || '')
+  const [coverImage, setCoverImage] = useState(post?.cover_image || '')
 
   const editor = useEditor({
     extensions: [
@@ -54,7 +54,7 @@ export default function Component() {
     onBlur: ({ editor }) => {
       if (editor.isEmpty) setIsFocused(false)
     },
-    content: '',
+    content: post?.content || '',
     editorProps: {
       attributes: {
         class: 'min-h-40 border border-gray-300 p-2 rounded-md',

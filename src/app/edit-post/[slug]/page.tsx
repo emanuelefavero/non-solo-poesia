@@ -1,3 +1,5 @@
+import TipTap from '@/components/TipTap'
+import type { Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
 // Get post data from neon db by slug (the slug comes from the URL)
@@ -8,7 +10,7 @@ async function getPost(slug: string) {
     WHERE slug = ${slug}
   `
   if (!data) return null
-  return data[0]
+  return data[0] as Post | null
 }
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
@@ -32,9 +34,7 @@ export default async function Page(props: Props) {
         </sup>
       </h1>
 
-      {/* TODO: Render the same form as /create-post, but with the post data pre-filled */}
-      {/* Example: */}
-      {/* <TipTap post={post} /> */}
+      <TipTap post={post} />
     </>
   )
 }
