@@ -34,6 +34,8 @@ export default function Component({ post }: Props) {
   const [coverImage, setCoverImage] = useState(post?.cover_image || '')
   const [author, setAuthor] = useState(post?.author || authors[0].name || '')
 
+  // TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -282,6 +284,7 @@ export default function Component({ post }: Props) {
       >
         {coverImage ? (
           <>
+            {/* TODO: Decide if it is better to use my CloudinaryImage component here or add a new CldImage  */}
             <NextImage
               src={coverImage}
               fill={true}
