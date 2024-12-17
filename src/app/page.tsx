@@ -1,5 +1,5 @@
+import CloudinaryImage from '@/components/CloudinaryImage'
 import { neon } from '@neondatabase/serverless'
-import Image from 'next/image'
 import Link from 'next/link'
 
 // TODO: Limit the number of posts to display on the home page (add pagination)
@@ -29,7 +29,7 @@ export default async function Home() {
         <p>Nessun post trovato.</p>
       ) : (
         <ul className='grid grid-cols-[repeat(auto-fit,minmax(300px,375px))] justify-center gap-4 pl-0'>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <li key={post.id} className='flex list-none flex-col rounded-md'>
               <Link
                 href={`/post/${post.slug}`}
@@ -37,13 +37,10 @@ export default async function Home() {
               >
                 {/* Cover Image */}
                 <div className='relative aspect-video w-full'>
-                  <Image
-                    src={post.cover_image}
-                    alt={post.title}
-                    fill={true}
-                    sizes='(min-width: 768px) 768px, 100vw'
-                    style={{ objectFit: 'cover' }}
-                    className='rounded-md'
+                  <CloudinaryImage
+                    title={post.title}
+                    cover_image={post.cover_image}
+                    index={index}
                   />
                 </div>
 
