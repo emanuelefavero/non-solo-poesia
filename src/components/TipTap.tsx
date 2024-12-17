@@ -19,6 +19,9 @@ type Props = {
   post?: Post
 }
 
+// TODO Add upload button to upload images to Cloudinary. If the cover image comes from Cloudinary, save `cover_image_cloudinary` in the database (a new column, remember to update the database schema)
+// TODO Go to @/components/CloudinaryImage and add a prop to conditionally render the Cloudinary image or the Next.js image based on if `cover_image_cloudinary` is present or not
+
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({

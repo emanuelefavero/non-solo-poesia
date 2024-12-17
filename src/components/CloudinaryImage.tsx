@@ -12,8 +12,8 @@ type Props = {
 }
 
 export default function Component({ title, cover_image, index = 0 }: Props) {
-  // TODO Conditionally adjust the Cloudinary image width and height based if this component is rendered on the home page or not
   // TODO Conditionally render CldImage or Image based on if cover_image_cloudinary prop is present or not
+  // TODO Conditionally adjust the Cloudinary image width and height based if this component is rendered on the home page or not
 
   return (
     <>
