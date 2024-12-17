@@ -25,7 +25,7 @@ export default function Component({ title, cover_image, index = 0 }: Props) {
         style={{ objectFit: 'cover' }}
         className='rounded-md'
         // ? Handle the image priority prop based on the index of the post
-        priority={index < 4}
+        priority={index >= 0 && index < 4}
       />
 
       {/* <CldImage
@@ -41,7 +41,7 @@ export default function Component({ title, cover_image, index = 0 }: Props) {
         // tint='70:violet:pink'
 
         // ? Handle the image priority prop based on the index of the post
-        priority={index < 4}
+        priority={index >= 0 && index < 4}
       /> */}
     </>
   )
