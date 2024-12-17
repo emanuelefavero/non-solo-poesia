@@ -41,6 +41,7 @@ export default async function Home() {
                     src={post.cover_image}
                     alt={post.title}
                     fill={true}
+                    sizes='(min-width: 768px) 768px, 100vw'
                     style={{ objectFit: 'cover' }}
                     className='rounded-md'
                   />
