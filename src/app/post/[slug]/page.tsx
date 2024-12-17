@@ -1,7 +1,8 @@
+import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
-import Image from 'next/image'
+// import Image from 'next/image'
 import Link from 'next/link'
 
 // Get post data from neon db by slug (the slug comes from the URL)
@@ -31,14 +32,7 @@ export default async function Page(props: Props) {
     <div className='flex max-w-3xl flex-col gap-4'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
-        <Image
-          src={post.cover_image}
-          alt={post.title}
-          fill={true}
-          sizes='(min-width: 768px) 768px, 100vw'
-          style={{ objectFit: 'cover' }}
-          className='rounded-md'
-        />
+        <CloudinaryImage title={post.title} cover_image={post.cover_image} />
       </div>
 
       {/* Title */}
