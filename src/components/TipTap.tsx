@@ -1,5 +1,6 @@
 'use client'
 
+import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
 import type { Message, Post } from '@/types'
@@ -30,16 +31,19 @@ export default function Component({ post }: Props) {
   const [isFocused, setIsFocused] = useState(false)
   const [title, setTitle] = useState(post?.title || '')
   const [description, setDescription] = useState(post?.description || '')
+  const [author, setAuthor] = useState(post?.author || authors[0].name || '')
   const [coverImage, setCoverImage] = useState(post?.cover_image || '')
   const [coverImageType, setCoverImageType] = useState<'url' | 'file'>(
     post?.cover_image_cloudinary ? 'file' : 'url',
   )
   const [coverImageCloudinaryPreview, setCoverImageCloudinaryPreview] =
     useState<string | ArrayBuffer | null>(null)
-  const [coverImageCloudinary, setCoverImageCloudinary] = useState<string>(
+  const [coverImageCloudinary, setCoverImageCloudinary] = useState(
     post?.cover_image_cloudinary || '',
   )
-  const [author, setAuthor] = useState(post?.author || authors[0].name || '')
+  const [prevCloudinaryPublicId, setPrevCloudinaryPublicId] = useState(
+    post?.cover_image_cloudinary || '',
+  )
 
   // TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
 
@@ -121,17 +125,36 @@ export default function Component({ post }: Props) {
         }
 
         // * Upload the image to Cloudinary with Server Action
-        const response = await uploadImageToCloudinary(file)
+        const uploadResponse = await uploadImageToCloudinary(file)
 
-        if (response.message) {
-          alert(response.message)
+        if (uploadResponse.message) {
+          alert(uploadResponse.message)
           return
         }
 
-        if (response) {
-          setCoverImageCloudinary(response.public_id)
+        if (uploadResponse) {
+          setCoverImageCloudinary(uploadResponse.public_id)
           setCoverImage('')
           setCoverImageType('file')
+
+          // ---
+          // // * Delete the previous image from Cloudinary with server action (if it is different from the new image)
+          // if (
+          //   prevCloudinaryPublicId &&
+          //   prevCloudinaryPublicId !== uploadResponse.public_id
+          // ) {
+          //   const deleteResponse = await deleteImageFromCloudinary(
+          //     prevCloudinaryPublicId,
+          //   )
+
+          //   if (deleteResponse.message) {
+          //     alert(deleteResponse.message)
+          //   }
+
+          //   // Update the previous Cloudinary public id
+          //   setPrevCloudinaryPublicId(uploadResponse.public_id)
+          // }
+          // ---
         }
       } catch (error) {
         console.error('An error occurred:', error)
