@@ -8,6 +8,7 @@ import { redirect } from 'next/navigation'
 // Check if the user has access to publish a post
 async function checkUserAccess() {
   const { userId } = await auth()
+
   if (!userId) {
     return 'Accesso bloccato - Devi fare il login per cancellare un post'
   }
@@ -20,6 +21,7 @@ async function checkUserAccess() {
   }
 }
 
+// Delete a post from the database
 export async function deletePost(slug: string) {
   try {
     const accessMessage = await checkUserAccess()
@@ -42,18 +44,26 @@ export async function deletePost(slug: string) {
   }
 }
 
-// Fetch users from jsonplaceholder API
-export async function fetchUsers() {
-  // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+// Upload an image to Cloudinary
+export async function uploadImageToCloudinary(file: File) {
+  const formData = new FormData()
+  formData.append('file', file)
+  formData.append('upload_preset', 'blog_preset')
 
-  // Simulate error
-  const response = await fetch('https://httpbin.org/status/500')
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+    {
+      method: 'POST',
+      body: formData,
+    },
+  )
 
   if (!response.ok) {
     return {
-      message: 'Errore interno del server - Impossibile recuperare gli utenti',
+      message: `Errore - Impossibile caricare l'immagine: ${response.statusText}`,
     }
   }
 
-  return response.json()
+  const data = await response.json()
+  return data
 }

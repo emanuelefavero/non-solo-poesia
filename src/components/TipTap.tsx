@@ -1,5 +1,6 @@
 'use client'
 
+import { uploadImageToCloudinary } from '@/app/actions'
 import { authors } from '@/data/authors'
 import type { Message, Post } from '@/types'
 import Bold from '@tiptap/extension-bold'
@@ -119,30 +120,16 @@ export default function Component({ post }: Props) {
           setCoverImageCloudinaryPreview(filePreview)
         }
 
-        // Prepare form data
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('upload_preset', 'blog_preset')
+        // * Upload the image to Cloudinary with Server Action
+        const response = await uploadImageToCloudinary(file)
 
-        // Upload image to Cloudinary
-        const response = await fetch(
-          `https://api.cloudinary.com/v1_1/${
-            process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME as string
-          }/image/upload`,
-          {
-            method: 'POST',
-            body: formData,
-          },
-        )
-
-        if (!response.ok) {
-          throw new Error(`Upload failed: ${response.statusText}`)
+        if (response.message) {
+          alert(response.message)
+          return
         }
 
-        const data = await response.json()
-
-        if (data) {
-          setCoverImageCloudinary(data.public_id)
+        if (response) {
+          setCoverImageCloudinary(response.public_id)
           setCoverImage('')
           setCoverImageType('file')
         }
