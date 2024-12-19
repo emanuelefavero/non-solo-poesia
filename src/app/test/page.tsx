@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import NextImage from 'next/image'
 import { useState } from 'react'
 
 // Use input type file to upload images and display a preview in the Next.js image component
@@ -81,7 +81,7 @@ export default function Page() {
       />
       {coverImageCloudinaryPreview && (
         <div className='relative h-96 w-96'>
-          <Image
+          <NextImage
             src={coverImageCloudinaryPreview as string}
             alt='Uploaded Image'
             layout='fill'

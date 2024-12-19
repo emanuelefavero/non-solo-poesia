@@ -4,6 +4,7 @@ export type Post = {
   title: string
   description: string
   cover_image: string
+  cover_image_cloudinary?: string
   content: string
   author: string
   published_at: string

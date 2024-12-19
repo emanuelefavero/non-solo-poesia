@@ -32,6 +32,14 @@ export default function Component({ post }: Props) {
   const [title, setTitle] = useState(post?.title || '')
   const [description, setDescription] = useState(post?.description || '')
   const [coverImage, setCoverImage] = useState(post?.cover_image || '')
+  const [coverImageType, setCoverImageType] = useState<'url' | 'file'>(
+    post?.cover_image_cloudinary ? 'file' : 'url',
+  )
+  const [coverImageCloudinaryPreview, setCoverImageCloudinaryPreview] =
+    useState<string | ArrayBuffer | null>(null)
+  const [coverImageCloudinary, setCoverImageCloudinary] = useState<string>(
+    post?.cover_image_cloudinary || '',
+  )
   const [author, setAuthor] = useState(post?.author || authors[0].name || '')
 
   // TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
@@ -78,6 +86,68 @@ export default function Component({ post }: Props) {
         setCoverImage(url)
       } else {
         alert('Per favore inserisci un URL di immagine valido')
+      }
+    }
+  }
+
+  const handleUploadImageToCloudinary = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = e.target.files?.[0]
+
+    // Check if file is greater than 3MB
+    if (file && file.size > 3 * 1024 * 1024) {
+      alert('File size must be less than 3MB')
+      return
+    }
+
+    if (file) {
+      try {
+        const reader = new FileReader()
+
+        // Create a Promise to wait for FileReader to complete
+        const filePreview = await new Promise<string | ArrayBuffer | null>(
+          (resolve, reject) => {
+            reader.onloadend = () => resolve(reader.result)
+            reader.onerror = () => reject(new Error('Error reading file'))
+            reader.readAsDataURL(file)
+          },
+        )
+
+        // Update state with image preview and file name
+        if (filePreview) {
+          setCoverImageCloudinaryPreview(filePreview)
+        }
+
+        // Prepare form data
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append('upload_preset', 'blog_preset')
+
+        // Upload image to Cloudinary
+        const response = await fetch(
+          `https://api.cloudinary.com/v1_1/${
+            process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME as string
+          }/image/upload`,
+          {
+            method: 'POST',
+            body: formData,
+          },
+        )
+
+        if (!response.ok) {
+          throw new Error(`Upload failed: ${response.statusText}`)
+        }
+
+        const data = await response.json()
+
+        if (data) {
+          setCoverImageCloudinary(data.public_id)
+          setCoverImage('')
+          setCoverImageType('file')
+        }
+      } catch (error) {
+        console.error('An error occurred:', error)
       }
     }
   }
@@ -277,31 +347,95 @@ export default function Component({ post }: Props) {
         maxLength={130}
       />
 
+      {/* Choose cover image type */}
+      <div className='mb-4 flex flex-col gap-2'>
+        <label htmlFor='cover-image-type' className='font-medium'>
+          Tipo di immagine di copertina
+        </label>
+        <select
+          id='cover-image-type'
+          value={coverImageType}
+          onChange={(e) => setCoverImageType(e.target.value as 'url' | 'file')}
+          className='max-w-[151px]'
+        >
+          <option value='url'>URL</option>
+          <option value='file'>File</option>
+        </select>
+      </div>
+
+      {/* Display coverImageCloudinary */}
+      {coverImageCloudinary && (
+        <div className='mb-4'>
+          <p className='font-medium'>Immagine di copertina caricata:</p>
+          <p className='text-sm'>{coverImageCloudinary}</p>
+        </div>
+      )}
+
       {/* Add cover image */}
-      <button
-        onClick={handleAddCoverImage}
-        className='relative mb-4 flex aspect-video w-full'
-      >
-        {coverImage ? (
-          <>
-            {/* TODO: Decide if it is better to use my CloudinaryImage component here or add a new CldImage  */}
-            <NextImage
-              src={coverImage}
-              fill={true}
-              alt='Immagine di copertina'
-              className='rounded-md'
-              style={{ objectFit: 'cover' }}
-            />
-            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-              Cambia immagine di copertina
+      {coverImageType === 'url' ? (
+        <button
+          onClick={handleAddCoverImage}
+          className='relative mb-4 flex aspect-video w-full'
+        >
+          {coverImage ? (
+            <>
+              <NextImage
+                src={coverImage}
+                fill={true}
+                alt='Immagine di copertina'
+                className='rounded-md'
+                style={{ objectFit: 'cover' }}
+              />
+              <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+                Cambia immagine di copertina
+              </div>
+            </>
+          ) : (
+            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+              Aggiungi immagine di copertina
             </div>
-          </>
-        ) : (
-          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
-            Aggiungi immagine di copertina
-          </div>
-        )}
-      </button>
+          )}
+        </button>
+      ) : (
+        <div className='relative mb-4 flex aspect-video w-full'>
+          {coverImageCloudinaryPreview ? (
+            <>
+              <NextImage
+                src={coverImageCloudinaryPreview as string}
+                fill={true}
+                alt='Immagine di copertina'
+                className='rounded-md'
+                style={{ objectFit: 'cover' }}
+              />
+              <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+                <label htmlFor='change-cover-image-file'>
+                  Cambia immagine di copertina
+                </label>
+                <input
+                  type='file'
+                  accept='image/*'
+                  onChange={handleUploadImageToCloudinary}
+                  className='mb-4'
+                  id='change-cover-image-file'
+                />
+              </div>
+            </>
+          ) : (
+            <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+              <label htmlFor='add-cover-image-file'>
+                Aggiungi immagine di copertina
+              </label>
+              <input
+                type='file'
+                accept='image/*'
+                onChange={handleUploadImageToCloudinary}
+                className='mb-4'
+                id='add-cover-image-file'
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Editor toolbar */}
       <TipTapToolbar editor={editor} />
