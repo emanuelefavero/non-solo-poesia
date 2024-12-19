@@ -1,6 +1,6 @@
 'use client'
 
-import { uploadImageToCloudinary } from '@/app/actions'
+import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
 import type { Message, Post } from '@/types'
 import Bold from '@tiptap/extension-bold'

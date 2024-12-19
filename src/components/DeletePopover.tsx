@@ -1,6 +1,6 @@
 'use client'
 
-import { deletePost } from '@/app/actions'
+import { deletePost } from '@/app/actions/deletePost'
 import {
   Popover,
   PopoverBackdrop,
@@ -11,7 +11,6 @@ import {
 interface Props {
   slug: string
 }
-
 export default function Component({ slug }: Props) {
   return (
     <Popover className='relative'>
