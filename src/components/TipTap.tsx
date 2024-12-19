@@ -366,14 +366,6 @@ export default function Component({ post }: Props) {
         </select>
       </div>
 
-      {/* Display coverImageCloudinary */}
-      {coverImageCloudinary && (
-        <div className='mb-4'>
-          <p className='font-medium'>Immagine di copertina caricata:</p>
-          <p className='text-sm'>{coverImageCloudinary}</p>
-        </div>
-      )}
-
       {/* Add cover image */}
       {coverImageType === 'url' ? (
         <button
