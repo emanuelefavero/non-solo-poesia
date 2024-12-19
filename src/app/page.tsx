@@ -25,6 +25,8 @@ export default async function Home() {
     <>
       <h1 className='mb-4'>Blog</h1>
 
+      <Link href='/test'>Test</Link>
+
       {!posts.length ? (
         <p>Nessun post trovato.</p>
       ) : (

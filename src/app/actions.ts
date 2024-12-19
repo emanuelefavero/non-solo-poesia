@@ -41,3 +41,19 @@ export async function deletePost(slug: string) {
     }
   }
 }
+
+// Fetch users from jsonplaceholder API
+export async function fetchUsers() {
+  // const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+  // Simulate error
+  const response = await fetch('https://httpbin.org/status/500')
+
+  if (!response.ok) {
+    return {
+      message: 'Errore interno del server - Impossibile recuperare gli utenti',
+    }
+  }
+
+  return response.json()
+}
