@@ -11,6 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { CldImage } from 'next-cloudinary'
 import NextImage from 'next/image'
 import { useState } from 'react'
 import TipTapToolbar from './TipTapToolbar'
@@ -18,9 +19,6 @@ import TipTapToolbar from './TipTapToolbar'
 type Props = {
   post?: Post
 }
-
-// TODO Add upload button to upload images to Cloudinary. If the cover image comes from Cloudinary, save `cover_image_cloudinary` in the database (a new column, remember to update the database schema)
-// TODO Go to @/components/CloudinaryImage and add a prop to conditionally render the Cloudinary image or the Next.js image based on if `cover_image_cloudinary` is present or not
 
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
@@ -84,6 +82,8 @@ export default function Component({ post }: Props) {
     if (url) {
       if (/^https?:\/\/\S+\.\S+/.test(url)) {
         setCoverImage(url)
+        setCoverImageCloudinary('')
+        setCoverImageType('url')
       } else {
         alert('Per favore inserisci un URL di immagine valido')
       }
@@ -214,7 +214,7 @@ export default function Component({ post }: Props) {
     }
 
     // Validate image: check if the image is empty
-    if (!coverImage) {
+    if (!coverImage && !coverImageCloudinary) {
       setMessage({
         type: 'error',
         text: "Per favore inserisci un'immagine di copertina",
@@ -223,7 +223,7 @@ export default function Component({ post }: Props) {
     }
 
     // Validate image: check if the image is a valid URL
-    if (!/^https?:\/\/\S+\.\S+/.test(coverImage)) {
+    if (coverImage && !/^https?:\/\/\S+\.\S+/.test(coverImage)) {
       setMessage({
         type: 'error',
         text: 'Per favore inserisci un URL di immagine valido',
@@ -284,6 +284,7 @@ export default function Component({ post }: Props) {
           title,
           description,
           coverImage,
+          coverImageCloudinary,
           content: htmlContent,
           author,
 
@@ -311,6 +312,8 @@ export default function Component({ post }: Props) {
         setTitle('') // clear the title
         setDescription('') // clear the description
         setCoverImage('') // clear the cover image
+        setCoverImageCloudinary('') // clear the cover image cloudinary
+        setCoverImageCloudinaryPreview(null) // clear the cover image cloudinary preview
         setAuthor(authors[0].name) // set the author to the first author
       }
     } catch (error) {
@@ -406,6 +409,35 @@ export default function Component({ post }: Props) {
                 alt='Immagine di copertina'
                 className='rounded-md'
                 style={{ objectFit: 'cover' }}
+              />
+              <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+                <label htmlFor='change-cover-image-file'>
+                  Cambia immagine di copertina
+                </label>
+                <input
+                  type='file'
+                  accept='image/*'
+                  onChange={handleUploadImageToCloudinary}
+                  className='mb-4'
+                  id='change-cover-image-file'
+                />
+              </div>
+            </>
+          ) : coverImageCloudinary ? (
+            <>
+              <CldImage
+                src={coverImageCloudinary}
+                alt={title}
+                fill={true}
+                sizes='(min-width: 768px) 768px, 100vw'
+                quality='auto'
+                format='auto'
+                crop='auto'
+                className='rounded-md'
+                aspectRatio={16 / 9}
+                // tint='70:violet:pink'
+
+                priority={true}
               />
               <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
                 <label htmlFor='change-cover-image-file'>

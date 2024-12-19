@@ -35,10 +35,23 @@ async function validateRequest(req: Request) {
   }
 
   // Validate the request body
-  const { title, description, coverImage, content, author, id } =
-    await req.json()
+  const {
+    title,
+    description,
+    coverImage,
+    coverImageCloudinary,
+    content,
+    author,
+    id,
+  } = await req.json()
 
-  if (!title || !description || !coverImage || !content || !author) {
+  if (
+    !title ||
+    !description ||
+    (!coverImage && !coverImageCloudinary) ||
+    !content ||
+    !author
+  ) {
     return {
       error: new Response(
         JSON.stringify({
@@ -61,7 +74,7 @@ async function validateRequest(req: Request) {
   const sanitizedDescription = description.trim().replace(/[^a-z0-9\s-]/gi, '')
   const sanitizedCoverImage = coverImage.trim()
 
-  if (!/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
+  if (coverImage && !/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
     return {
       error: new Response(
         JSON.stringify({
@@ -93,6 +106,7 @@ async function validateRequest(req: Request) {
       slug,
       description: sanitizedDescription,
       coverImage: sanitizedCoverImage,
+      coverImageCloudinary,
       content,
       author: sanitizedAuthor,
       id,
@@ -117,6 +131,7 @@ export async function POST(req: Request) {
       title: sanitizedData.title,
       description: sanitizedData.description,
       cover_image: sanitizedData.coverImage,
+      cover_image_cloudinary: sanitizedData.coverImageCloudinary,
       content: sanitizedData.content,
       author: sanitizedData.author,
       published_at: new Date().toISOString(),
@@ -124,8 +139,8 @@ export async function POST(req: Request) {
     }
 
     await sql`
-      INSERT INTO posts (id, slug, title, description, cover_image, content, author, published_at, updated_at)
-      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.cover_image}, ${post.content}, ${post.author}, ${post.published_at}, ${post.updated_at})
+      INSERT INTO posts (id, slug, title, description, cover_image, cover_image_cloudinary, content, author, published_at, updated_at)
+      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.cover_image}, ${post.cover_image_cloudinary}, ${post.content}, ${post.author}, ${post.published_at}, ${post.updated_at})
     `
 
     revalidatePath('/')
@@ -163,6 +178,7 @@ export async function PUT(req: Request) {
           title = ${sanitizedData.title},
           description = ${sanitizedData.description},
           cover_image = ${sanitizedData.coverImage},
+          cover_image_cloudinary = ${sanitizedData.coverImageCloudinary},
           content = ${sanitizedData.content},
           author = ${sanitizedData.author},
           updated_at = ${new Date().toISOString()}

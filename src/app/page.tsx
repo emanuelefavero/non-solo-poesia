@@ -41,6 +41,7 @@ export default async function Home() {
                   <CloudinaryImage
                     title={post.title}
                     cover_image={post.cover_image}
+                    cover_image_cloudinary={post.cover_image_cloudinary}
                     index={index}
                   />
                 </div>

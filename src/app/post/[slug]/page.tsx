@@ -32,7 +32,11 @@ export default async function Page(props: Props) {
     <div className='flex max-w-3xl flex-col gap-4'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
-        <CloudinaryImage title={post.title} cover_image={post.cover_image} />
+        <CloudinaryImage
+          title={post.title}
+          cover_image={post.cover_image}
+          cover_image_cloudinary={post.cover_image_cloudinary}
+        />
       </div>
 
       {/* Title */}
