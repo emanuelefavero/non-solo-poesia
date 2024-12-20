@@ -1,3 +1,5 @@
+'use server'
+
 // Upload an image to Cloudinary
 export async function uploadImageToCloudinary(file: File) {
   const formData = new FormData()

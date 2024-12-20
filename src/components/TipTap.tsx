@@ -146,7 +146,7 @@ export default function Component({ post }: Props) {
               prevCloudinaryPublicId,
             )
 
-            if (deleteResponse.message) {
+            if (deleteResponse && deleteResponse.message) {
               alert(deleteResponse.message)
             }
 
