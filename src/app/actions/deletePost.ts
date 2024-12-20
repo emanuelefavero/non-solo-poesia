@@ -11,7 +11,7 @@ export async function deletePost(slug: string) {
     const accessMessage = await checkUserAccess()
     if (accessMessage) return { message: accessMessage }
 
-    // Delete the post from the database
+    // * Delete the post from the database
     const sql = neon(process.env.DATABASE_URL as string)
     await sql`
       DELETE FROM posts

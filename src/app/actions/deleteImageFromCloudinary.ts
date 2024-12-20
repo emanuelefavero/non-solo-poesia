@@ -1,13 +1,6 @@
 'use server'
 
-import { v2 as cloudinary } from 'cloudinary'
-
-// Configure Cloudinary with environment variables
-cloudinary.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+import cloudinary from '@/lib/cloudinary'
 
 // Server action to delete an image from Cloudinary using the Node.js SDK
 export async function deleteImageFromCloudinary(publicId: string) {
@@ -18,7 +11,7 @@ export async function deleteImageFromCloudinary(publicId: string) {
       throw new Error('Missing public_id')
     }
 
-    // Use the Cloudinary SDK to destroy the image
+    // * Use the Cloudinary SDK to destroy the image
     const result = await cloudinary.uploader.destroy(publicId)
 
     if (result.result !== 'ok') {
