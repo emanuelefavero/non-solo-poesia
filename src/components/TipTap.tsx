@@ -22,6 +22,9 @@ type Props = {
   post?: Post
 }
 
+// TODO move delete image from cloudinary method from handleUploadImageToCloudinary to handlePublish method
+// TODO add progress bar for image upload
+
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<Message>({

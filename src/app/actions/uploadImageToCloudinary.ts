@@ -1,5 +1,7 @@
 'use server'
 
+// TODO use Cloudinary Node.js SDK instead of fetch
+
 // Upload an image to Cloudinary
 export async function uploadImageToCloudinary(file: File) {
   const formData = new FormData()

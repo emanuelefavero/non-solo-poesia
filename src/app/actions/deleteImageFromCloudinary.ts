@@ -4,8 +4,6 @@ import cloudinary from '@/lib/cloudinary'
 
 // Server action to delete an image from Cloudinary using the Node.js SDK
 export async function deleteImageFromCloudinary(publicId: string) {
-  console.log(publicId)
-
   try {
     if (!publicId) {
       throw new Error('Missing public_id')
