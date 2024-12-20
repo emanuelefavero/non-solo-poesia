@@ -137,24 +137,22 @@ export default function Component({ post }: Props) {
           setCoverImage('')
           setCoverImageType('file')
 
-          // ---
-          // // * Delete the previous image from Cloudinary with server action (if it is different from the new image)
-          // if (
-          //   prevCloudinaryPublicId &&
-          //   prevCloudinaryPublicId !== uploadResponse.public_id
-          // ) {
-          //   const deleteResponse = await deleteImageFromCloudinary(
-          //     prevCloudinaryPublicId,
-          //   )
+          // * Delete the previous image from Cloudinary with server action (if it is different from the new image)
+          if (
+            prevCloudinaryPublicId &&
+            prevCloudinaryPublicId !== uploadResponse.public_id
+          ) {
+            const deleteResponse = await deleteImageFromCloudinary(
+              prevCloudinaryPublicId,
+            )
 
-          //   if (deleteResponse.message) {
-          //     alert(deleteResponse.message)
-          //   }
+            if (deleteResponse.message) {
+              alert(deleteResponse.message)
+            }
 
-          //   // Update the previous Cloudinary public id
-          //   setPrevCloudinaryPublicId(uploadResponse.public_id)
-          // }
-          // ---
+            // Update the previous Cloudinary public id
+            setPrevCloudinaryPublicId(uploadResponse.public_id)
+          }
         }
       } catch (error) {
         console.error('An error occurred:', error)
