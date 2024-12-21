@@ -12,14 +12,15 @@ type Props = {
   index?: number
 }
 
+// TODO Try to avoid using CldImage and check if it is possible to use the Image component from Next.js instead
+// TODO Conditionally adjust the Cloudinary image width and height based if this component is rendered on the home page or not
+
 export default function Component({
   title,
   cover_image,
   cover_image_cloudinary,
   index = 0,
 }: Props) {
-  // TODO Conditionally adjust the Cloudinary image width and height based if this component is rendered on the home page or not
-
   return (
     <>
       {cover_image_cloudinary && (
