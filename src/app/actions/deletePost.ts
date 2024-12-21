@@ -5,6 +5,8 @@ import { neon } from '@neondatabase/serverless'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+// TODO before deleting post, find post by slug and delete the image from Cloudinary (by calling server action deleteImageFromCloudinary and passing the cover_image_cloudinary, which is the public_id of the image)
+
 // Delete a post from the database
 export async function deletePost(slug: string) {
   try {
