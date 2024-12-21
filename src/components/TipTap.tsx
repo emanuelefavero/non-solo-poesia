@@ -22,7 +22,8 @@ type Props = {
   post?: Post
 }
 
-// TODO add progress bar for image upload
+// TODO move the `uploadImageToCloudinary` to `handlePublish` function before the `deleteImageFromCloudinary` function. In order to do this, you need to modify the `file` variable from this line `const uploadResponse = await uploadImageToCloudinary(file)` to be a global state variable so it can be passed between functions. NOTE: The image preview should remain in the handleAddCoverImageCloudinary function
+// TODO add progress bar for handlePublish function
 
 export default function Component({ post }: Props) {
   const [loading, setLoading] = useState(false)
