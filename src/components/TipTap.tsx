@@ -22,7 +22,7 @@ type Props = {
   post?: Post
 }
 
-// TODO move delete image from cloudinary method from handleUploadImageToCloudinary to handlePublish method
+// TODO move delete image from cloudinary method from handleAddCoverImageCloudinary to handlePublish method
 // TODO add progress bar for image upload
 
 export default function Component({ post }: Props) {
@@ -98,7 +98,7 @@ export default function Component({ post }: Props) {
     }
   }
 
-  const handleUploadImageToCloudinary = async (
+  const handleAddCoverImageCloudinary = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = e.target.files?.[0]
@@ -420,7 +420,7 @@ export default function Component({ post }: Props) {
                 <input
                   type='file'
                   accept='image/*'
-                  onChange={handleUploadImageToCloudinary}
+                  onChange={handleAddCoverImageCloudinary}
                   className='mb-4'
                   id='change-cover-image-file'
                 />
@@ -449,7 +449,7 @@ export default function Component({ post }: Props) {
                 <input
                   type='file'
                   accept='image/*'
-                  onChange={handleUploadImageToCloudinary}
+                  onChange={handleAddCoverImageCloudinary}
                   className='mb-4'
                   id='change-cover-image-file'
                 />
@@ -463,7 +463,7 @@ export default function Component({ post }: Props) {
               <input
                 type='file'
                 accept='image/*'
-                onChange={handleUploadImageToCloudinary}
+                onChange={handleAddCoverImageCloudinary}
                 className='mb-4'
                 id='add-cover-image-file'
               />
