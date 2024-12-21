@@ -22,7 +22,6 @@ type Props = {
   post?: Post
 }
 
-// TODO move delete image from cloudinary method from handleAddCoverImageCloudinary to handlePublish method
 // TODO add progress bar for image upload
 
 export default function Component({ post }: Props) {
