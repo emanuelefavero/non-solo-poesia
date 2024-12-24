@@ -1,9 +1,8 @@
-type TitleInputProps = {
-  title: string
-  setTitle: (value: string) => void
-}
+import { useEditorStore } from '@/stores/editorStore'
 
-export default function TitleInput({ title, setTitle }: TitleInputProps) {
+export default function Component() {
+  const { title, setTitle } = useEditorStore()
+
   return (
     <input
       type='text'

@@ -15,9 +15,8 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { CldImage } from 'next-cloudinary'
-import NextImage from 'next/image'
 import { useEffect } from 'react'
+import CoverImageSelector from './CoverImageSelector'
 import TipTapToolbar from './TipTapToolbar'
 import TitleInput from './TitleInput'
 
@@ -41,9 +40,7 @@ export default function Component({ post }: Props) {
     setAuthor,
     coverImage,
     setCoverImage,
-    coverImageType,
     setCoverImageType,
-    coverImageCloudinaryPreview,
     setCoverImageCloudinaryPreview,
     coverImageCloudinary,
     setCoverImageCloudinary,
@@ -60,7 +57,16 @@ export default function Component({ post }: Props) {
     setCoverImageType(post?.cover_image_cloudinary ? 'file' : 'url')
     setCoverImageCloudinary(post?.cover_image_cloudinary || '')
     setPrevCloudinaryPublicId(post?.cover_image_cloudinary || '')
-  }, [post])
+  }, [
+    post,
+    setTitle,
+    setDescription,
+    setAuthor,
+    setCoverImage,
+    setCoverImageType,
+    setCoverImageCloudinary,
+    setPrevCloudinaryPublicId,
+  ])
 
   const editor = useEditor({
     extensions: [
@@ -241,21 +247,14 @@ export default function Component({ post }: Props) {
 
   return (
     <div className='relative max-w-3xl'>
-      <TitleInput title={title} setTitle={setTitle} />
+      <TitleInput />
       <DescriptionInput
         description={description}
         setDescription={setDescription}
       />
       <CoverImageSelector
-        coverImageType={coverImageType}
-        setCoverImageType={setCoverImageType}
-        coverImage={coverImage}
-        setCoverImage={setCoverImage}
-        coverImageCloudinaryPreview={coverImageCloudinaryPreview}
-        coverImageCloudinary={coverImageCloudinary}
         handleAddCoverImage={handleAddCoverImage}
         handleAddCoverImageCloudinary={handleAddCoverImageCloudinary}
-        title={title}
       />
       <TipTapToolbar editor={editor} />
       <EditorContent
@@ -285,126 +284,6 @@ const DescriptionInput = ({
     className='mb-4 w-full'
     maxLength={130}
   />
-)
-
-// CoverImageSelector Component
-const CoverImageSelector = ({
-  coverImageType,
-  setCoverImageType,
-  coverImage,
-  setCoverImage,
-  coverImageCloudinaryPreview,
-  coverImageCloudinary,
-  handleAddCoverImage,
-  handleAddCoverImageCloudinary,
-  title,
-}: any) => (
-  <div className='mb-4 flex flex-col gap-2'>
-    <label htmlFor='cover-image-type' className='font-medium'>
-      Tipo di immagine di copertina
-    </label>
-    <select
-      id='cover-image-type'
-      value={coverImageType}
-      onChange={(e) => setCoverImageType(e.target.value as 'url' | 'file')}
-      className='max-w-[151px]'
-    >
-      <option value='url'>URL</option>
-      <option value='file'>File</option>
-    </select>
-
-    {coverImageType === 'url' ? (
-      <button
-        onClick={handleAddCoverImage}
-        className='relative mb-4 flex aspect-video w-full'
-      >
-        {coverImage ? (
-          <>
-            <NextImage
-              src={coverImage}
-              fill={true}
-              alt='Immagine di copertina'
-              className='rounded-md'
-              style={{ objectFit: 'cover' }}
-            />
-            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-              Cambia immagine di copertina
-            </div>
-          </>
-        ) : (
-          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
-            Aggiungi immagine di copertina
-          </div>
-        )}
-      </button>
-    ) : (
-      <div className='relative mb-4 flex aspect-video w-full'>
-        {coverImageCloudinaryPreview ? (
-          <>
-            <NextImage
-              src={coverImageCloudinaryPreview as string}
-              fill={true}
-              alt='Immagine di copertina'
-              className='rounded-md'
-              style={{ objectFit: 'cover' }}
-            />
-            <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-              <label htmlFor='change-cover-image-file'>
-                Cambia immagine di copertina
-              </label>
-              <input
-                type='file'
-                accept='image/*'
-                onChange={handleAddCoverImageCloudinary}
-                className='mb-4'
-                id='change-cover-image-file'
-              />
-            </div>
-          </>
-        ) : coverImageCloudinary ? (
-          <>
-            <CldImage
-              src={coverImageCloudinary}
-              alt={title}
-              fill={true}
-              sizes='(min-width: 768px) 768px, 100vw'
-              quality='auto'
-              format='auto'
-              crop='auto'
-              className='rounded-md'
-              aspectRatio={16 / 9}
-              priority={true}
-            />
-            <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-              <label htmlFor='change-cover-image-file'>
-                Cambia immagine di copertina
-              </label>
-              <input
-                type='file'
-                accept='image/*'
-                onChange={handleAddCoverImageCloudinary}
-                className='mb-4'
-                id='change-cover-image-file'
-              />
-            </div>
-          </>
-        ) : (
-          <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
-            <label htmlFor='add-cover-image-file'>
-              Aggiungi immagine di copertina
-            </label>
-            <input
-              type='file'
-              accept='image/*'
-              onChange={handleAddCoverImageCloudinary}
-              className='mb-4'
-              id='add-cover-image-file'
-            />
-          </div>
-        )}
-      </div>
-    )}
-  </div>
 )
 
 // AuthorSelector Component
