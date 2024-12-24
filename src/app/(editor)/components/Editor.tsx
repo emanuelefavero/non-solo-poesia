@@ -28,6 +28,9 @@ type Props = {
   post?: Post
 }
 
+// TODO add progress bar for handleAddCoverImageCloudinary function
+// TODO add progress bar for handlePublish function
+
 export default function Component({ post }: Props) {
   const {
     setLoading,

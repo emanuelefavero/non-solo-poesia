@@ -2,6 +2,8 @@
 
 import { useEditorStore } from '@/stores/editorStore'
 
+// TODO hide message after a few seconds
+
 export default function Component() {
   const { message } = useEditorStore()
 
