@@ -3,6 +3,7 @@
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
+import { useEditorStore } from '@/stores/editorStore'
 import type { Message, Post } from '@/types'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
@@ -15,7 +16,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { CldImage } from 'next-cloudinary'
 import NextImage from 'next/image'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import TipTapToolbar from './TipTapToolbar'
 
 type Props = {
@@ -24,31 +25,43 @@ type Props = {
 
 // TODO add progress bar for handleAddCoverImageCloudinary function
 // TODO add progress bar for handlePublish function
+// TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
 
 export default function Component({ post }: Props) {
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState<Message>({
-    type: 'success',
-    text: '',
-  })
-  const [isFocused, setIsFocused] = useState(false)
-  const [title, setTitle] = useState(post?.title || '')
-  const [description, setDescription] = useState(post?.description || '')
-  const [author, setAuthor] = useState(post?.author || authors[0].name || '')
-  const [coverImage, setCoverImage] = useState(post?.cover_image || '')
-  const [coverImageType, setCoverImageType] = useState<'url' | 'file'>(
-    post?.cover_image_cloudinary ? 'file' : 'url',
-  )
-  const [coverImageCloudinaryPreview, setCoverImageCloudinaryPreview] =
-    useState<string | ArrayBuffer | null>(null)
-  const [coverImageCloudinary, setCoverImageCloudinary] = useState(
-    post?.cover_image_cloudinary || '',
-  )
-  const [prevCloudinaryPublicId, setPrevCloudinaryPublicId] = useState(
-    post?.cover_image_cloudinary || '',
-  )
+  const {
+    loading,
+    setLoading,
+    message,
+    setMessage,
+    isFocused,
+    setIsFocused,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    author,
+    setAuthor,
+    coverImage,
+    setCoverImage,
+    coverImageType,
+    setCoverImageType,
+    coverImageCloudinaryPreview,
+    setCoverImageCloudinaryPreview,
+    coverImageCloudinary,
+    setCoverImageCloudinary,
+    prevCloudinaryPublicId,
+    setPrevCloudinaryPublicId,
+  } = useEditorStore()
 
-  // TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
+  useEffect(() => {
+    setTitle(post?.title || '')
+    setDescription(post?.description || '')
+    setAuthor(post?.author || authors[0].name || '')
+    setCoverImage(post?.cover_image || '')
+    setCoverImageType(post?.cover_image_cloudinary ? 'file' : 'url')
+    setCoverImageCloudinary(post?.cover_image_cloudinary || '')
+    setPrevCloudinaryPublicId(post?.cover_image_cloudinary || '')
+  }, [post])
 
   const editor = useEditor({
     extensions: [
