@@ -16,6 +16,7 @@ import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
+import AuthorSelector from './AuthorSelector'
 import CoverImageSelector from './CoverImageSelector'
 import DescriptionInput from './DescriptionInput'
 import TipTapToolbar from './TipTapToolbar'
@@ -259,39 +260,12 @@ export default function Component({ post }: Props) {
         editor={editor}
         className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
-      <AuthorSelector author={author} setAuthor={setAuthor} />
+      <AuthorSelector />
       <PublishButton loading={loading} handlePublish={handlePublish} />
       <ValidationMessage message={message} />
     </div>
   )
 }
-
-// AuthorSelector Component
-const AuthorSelector = ({
-  author,
-  setAuthor,
-}: {
-  author: string
-  setAuthor: (value: string) => void
-}) => (
-  <div className='mb-4 flex flex-col gap-2'>
-    <label htmlFor='author' className='font-medium'>
-      Autore
-    </label>
-    <select
-      id='author'
-      className='max-w-[151px]'
-      value={author}
-      onChange={(e) => setAuthor(e.target.value)}
-    >
-      {authors.map((author) => (
-        <option key={author.id} value={author.name}>
-          {author.name}
-        </option>
-      ))}
-    </select>
-  </div>
-)
 
 // PublishButton Component
 const PublishButton = ({
