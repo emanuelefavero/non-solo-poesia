@@ -1,8 +1,21 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 export default function Page() {
+  return (
+    <>
+      <h1>Test</h1>
+
+      <Suspense fallback='Loading...'>
+        <Component />
+      </Suspense>
+    </>
+  )
+}
+
+function Component() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -11,8 +24,6 @@ export default function Page() {
 
   return (
     <>
-      <h1>Test</h1>
-
       <select
         id='color'
         value={color}
