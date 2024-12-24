@@ -19,6 +19,7 @@ import { useEffect } from 'react'
 import AuthorSelector from './AuthorSelector'
 import CoverImageSelector from './CoverImageSelector'
 import DescriptionInput from './DescriptionInput'
+import PublishButton from './PublishButton'
 import TipTapToolbar from './TipTapToolbar'
 import TitleInput from './TitleInput'
 
@@ -261,28 +262,11 @@ export default function Component({ post }: Props) {
         className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
       <AuthorSelector />
-      <PublishButton loading={loading} handlePublish={handlePublish} />
+      <PublishButton handlePublish={handlePublish} />
       <ValidationMessage message={message} />
     </div>
   )
 }
-
-// PublishButton Component
-const PublishButton = ({
-  loading,
-  handlePublish,
-}: {
-  loading: boolean
-  handlePublish: () => void
-}) => (
-  <button
-    onClick={handlePublish}
-    className={`min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
-    disabled={loading}
-  >
-    {loading ? 'Pubblicazione...' : 'Pubblica'}
-  </button>
-)
 
 // ValidationMessage Component
 const ValidationMessage = ({
