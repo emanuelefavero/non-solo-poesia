@@ -22,6 +22,7 @@ import DescriptionInput from './DescriptionInput'
 import PublishButton from './PublishButton'
 import TipTapToolbar from './TipTapToolbar'
 import TitleInput from './TitleInput'
+import ValidationMessage from './ValidationMessage'
 
 type Props = {
   post?: Post
@@ -29,9 +30,7 @@ type Props = {
 
 export default function Component({ post }: Props) {
   const {
-    loading,
     setLoading,
-    message,
     setMessage,
     isFocused,
     setIsFocused,
@@ -263,21 +262,7 @@ export default function Component({ post }: Props) {
       />
       <AuthorSelector />
       <PublishButton handlePublish={handlePublish} />
-      <ValidationMessage message={message} />
+      <ValidationMessage />
     </div>
   )
 }
-
-// ValidationMessage Component
-const ValidationMessage = ({
-  message,
-}: {
-  message: { type: string; text: string } | null
-}) =>
-  message ? (
-    <p
-      className={`mt-4 font-medium ${message.type === 'error' ? 'text-rose-600 dark:text-rose-500' : 'text-green-600 dark:text-green-500'}`}
-    >
-      {message.text}
-    </p>
-  ) : null
