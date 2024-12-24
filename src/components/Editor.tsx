@@ -5,6 +5,7 @@ import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
 import { useEditorStore } from '@/stores/editorStore'
 import type { Post } from '@/types'
+import { validatePost } from '@/utils/validatePost'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
@@ -177,116 +178,22 @@ export default function Component({ post }: Props) {
   }
 
   const handlePublish = async () => {
-    // Validate title: check if the title is empty
-    if (!title) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore inserisci un titolo',
-      })
+    const htmlContent = editor?.getHTML() || ''
+
+    const validationMessage = validatePost({
+      title,
+      description,
+      coverImage,
+      coverImageCloudinary,
+      htmlContent,
+      author,
+      editor,
+    })
+
+    if (validationMessage.type === 'error') {
+      setMessage(validationMessage)
       return
     }
-
-    // Validate title: remove leading and trailing spaces
-    setTitle(title.trim())
-
-    // Validate title: accept only alphanumeric characters, spaces, and dashes
-    if (!/^[a-zA-Z0-9\s-]+$/.test(title)) {
-      setMessage({
-        type: 'error',
-        text: 'Il titolo può contenere solo lettere, numeri, spazi e trattini',
-      })
-      return
-    }
-
-    // Validate title: limit the title to 100 characters
-    if (title.length > 100) {
-      setMessage({
-        type: 'error',
-        text: 'Il titolo deve essere inferiore a 100 caratteri',
-      })
-      return
-    }
-
-    // Validate description: check if the description is empty
-    if (!description) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore inserisci una descrizione',
-      })
-      return
-    }
-
-    // Validate description: remove leading and trailing spaces
-    setDescription(description.trim())
-
-    // Validate description: limit the description to 130 characters
-    if (description.length > 130) {
-      setMessage({
-        type: 'error',
-        text: 'La descrizione deve essere inferiore a 130 caratteri',
-      })
-      return
-    }
-
-    // Validate description: accept only alphanumeric characters, spaces, and dashes
-    if (!/^[a-zA-Z0-9\s-]+$/.test(description)) {
-      setMessage({
-        type: 'error',
-        text: 'La descrizione può contenere solo lettere, numeri, spazi e trattini',
-      })
-      return
-    }
-
-    // Validate image: check if the image is empty
-    if (!coverImage && !coverImageCloudinary) {
-      setMessage({
-        type: 'error',
-        text: "Per favore inserisci un'immagine di copertina",
-      })
-      return
-    }
-
-    // Validate image: check if the image is a valid URL
-    if (coverImage && !/^https?:\/\/\S+\.\S+/.test(coverImage)) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore inserisci un URL di immagine valido',
-      })
-      return
-    }
-
-    if (!editor) return
-    const htmlContent = editor.getHTML()
-
-    // Validate content: check if the editor is empty
-    if (!htmlContent.length || htmlContent === '<p></p>') {
-      setMessage({
-        type: 'error',
-        text: 'Per favore inserisci del contenuto',
-      })
-      return
-    }
-
-    // Validate author: check if the author is empty
-    if (!author) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore seleziona un autore',
-      })
-      return
-    }
-
-    // Validate author: check if the author is valid
-    if (!authors.find((a) => a.name === author)) {
-      setMessage({
-        type: 'error',
-        text: 'Per favore seleziona un autore valido',
-      })
-      return
-    }
-
-    // Validate author: remove leading and trailing spaces
-    setAuthor(author.trim())
 
     // Start the loading state
     setLoading(true)
@@ -332,7 +239,7 @@ export default function Component({ post }: Props) {
 
       // Clear content only if it's a new post
       if (!post) {
-        editor.commands.clearContent() // clear the editor content
+        editor?.commands.clearContent() // clear the editor content
         setTitle('') // clear the title
         setDescription('') // clear the description
         setCoverImage('') // clear the cover image
