@@ -1,4 +1,4 @@
-import TipTap from '@/components/TipTap'
+import Editor from '@/components/Editor'
 import { auth } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 
@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <>
       <h1 className='mb-4'>Aggiungi nuovo post</h1>
-      <TipTap />
+      <Editor />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import TipTap from '@/components/TipTap'
+import Editor from '@/components/Editor'
 import type { Post } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
@@ -39,7 +39,7 @@ export default async function Page(props: Props) {
         </sup>
       </h1>
 
-      <TipTap post={post} />
+      <Editor post={post} />
     </>
   )
 }
