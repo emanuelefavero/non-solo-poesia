@@ -1,6 +1,6 @@
 'use client'
 
-import { useEditorStore } from '@/stores/editorStore'
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
 

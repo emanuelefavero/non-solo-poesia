@@ -1,6 +1,6 @@
 'use client'
 
-import { useEditorStore } from '@/stores/editorStore'
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 
 // TODO hide message after a few seconds
 

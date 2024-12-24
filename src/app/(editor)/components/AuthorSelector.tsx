@@ -1,7 +1,7 @@
 'use client'
 
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { authors } from '@/data/authors'
-import { useEditorStore } from '@/stores/editorStore'
 
 export default function Component() {
   const { author, setAuthor } = useEditorStore()

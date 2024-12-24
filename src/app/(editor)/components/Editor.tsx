@@ -1,9 +1,9 @@
 'use client'
 
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
-import { useEditorStore } from '@/stores/editorStore'
 import type { Post } from '@/types'
 import { validatePost } from '@/utils/validatePost'
 import Bold from '@tiptap/extension-bold'

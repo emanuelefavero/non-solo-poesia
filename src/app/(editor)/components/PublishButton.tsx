@@ -1,6 +1,6 @@
 'use client'
 
-import { useEditorStore } from '@/stores/editorStore'
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 
 type Props = {
   handlePublish: () => void
