@@ -24,10 +24,6 @@ type Props = {
   post?: Post
 }
 
-// TODO add progress bar for handleAddCoverImageCloudinary function
-// TODO add progress bar for handlePublish function
-// TODO: Fix TipTap warning: Duplicate extension names found: ['bold', 'italic', 'heading']
-
 export default function Component({ post }: Props) {
   const {
     loading,
@@ -101,7 +97,6 @@ export default function Component({ post }: Props) {
 
   const handleAddCoverImage = () => {
     const url = prompt("Inserisci l'URL dell'immagine:")
-    // Check if the user entered a URL and the URL is valid
     if (url) {
       if (/^https?:\/\/\S+\.\S+/.test(url)) {
         setCoverImage(url)
@@ -118,7 +113,6 @@ export default function Component({ post }: Props) {
   ) => {
     const file = e.target.files?.[0]
 
-    // Check if file is greater than 3MB
     if (file && file.size > 3 * 1024 * 1024) {
       alert('File size must be less than 3MB')
       return
@@ -128,7 +122,6 @@ export default function Component({ post }: Props) {
       try {
         const reader = new FileReader()
 
-        // Create a Promise to wait for FileReader to complete
         const filePreview = await new Promise<string | ArrayBuffer | null>(
           (resolve, reject) => {
             reader.onloadend = () => resolve(reader.result)
@@ -137,12 +130,10 @@ export default function Component({ post }: Props) {
           },
         )
 
-        // Update state with image preview and file name
         if (filePreview) {
           setCoverImageCloudinaryPreview(filePreview)
         }
 
-        // * Upload the image to Cloudinary with Server Action
         const uploadResponse = await uploadImageToCloudinary(file)
 
         if (uploadResponse.message) {
@@ -155,7 +146,6 @@ export default function Component({ post }: Props) {
           setCoverImage('')
           setCoverImageType('file')
 
-          // * Delete the previous image from Cloudinary with server action (if it is different from the new image)
           if (
             prevCloudinaryPublicId &&
             prevCloudinaryPublicId !== uploadResponse.public_id
@@ -168,7 +158,6 @@ export default function Component({ post }: Props) {
               alert(deleteResponse.message)
             }
 
-            // Update the previous Cloudinary public id
             setPrevCloudinaryPublicId(uploadResponse.public_id)
           }
         }
@@ -196,7 +185,6 @@ export default function Component({ post }: Props) {
       return
     }
 
-    // Start the loading state
     setLoading(true)
     setMessage({
       type: 'success',
@@ -204,7 +192,6 @@ export default function Component({ post }: Props) {
     })
 
     try {
-      // If post is passed as prop, it means we are editing an existing post
       const method = post ? 'PUT' : 'POST'
 
       const response = await fetch('/api/post', {
@@ -219,8 +206,6 @@ export default function Component({ post }: Props) {
           coverImageCloudinary,
           content: htmlContent,
           author,
-
-          // If post is passed as prop, also send the post id
           ...(post && { id: post.id }),
         }),
       })
@@ -230,7 +215,6 @@ export default function Component({ post }: Props) {
         throw new Error(data.message)
       }
 
-      // * Success
       setMessage({
         type: 'success',
         text: post
@@ -238,10 +222,9 @@ export default function Component({ post }: Props) {
           : 'Post pubblicato con successo!',
       })
 
-      // Clear post only if it's a new post
       if (!post) {
-        editor?.commands.clearContent() // clear the editor content
-        clearPost() // clear the post state (title, etc.)
+        editor?.commands.clearContent()
+        clearPost()
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -257,189 +240,244 @@ export default function Component({ post }: Props) {
 
   return (
     <div className='relative max-w-3xl'>
-      {/* Title */}
-      <input
-        type='text'
-        placeholder='Titolo...'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className='mb-4 w-full'
-        maxLength={100}
+      <TitleInput title={title} setTitle={setTitle} />
+      <DescriptionInput
+        description={description}
+        setDescription={setDescription}
       />
-
-      {/* Description */}
-      <input
-        type='text'
-        placeholder='Descrizione...'
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        className='mb-4 w-full'
-        maxLength={130}
+      <CoverImageSelector
+        coverImageType={coverImageType}
+        setCoverImageType={setCoverImageType}
+        coverImage={coverImage}
+        setCoverImage={setCoverImage}
+        coverImageCloudinaryPreview={coverImageCloudinaryPreview}
+        coverImageCloudinary={coverImageCloudinary}
+        handleAddCoverImage={handleAddCoverImage}
+        handleAddCoverImageCloudinary={handleAddCoverImageCloudinary}
+        title={title}
       />
+      <TipTapToolbar editor={editor} />
+      <EditorContent
+        editor={editor}
+        className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
+      />
+      <AuthorSelector author={author} setAuthor={setAuthor} />
+      <PublishButton loading={loading} handlePublish={handlePublish} />
+      <ValidationMessage message={message} />
+    </div>
+  )
+}
 
-      {/* Choose cover image type */}
-      <div className='mb-4 flex flex-col gap-2'>
-        <label htmlFor='cover-image-type' className='font-medium'>
-          Tipo di immagine di copertina
-        </label>
-        <select
-          id='cover-image-type'
-          value={coverImageType}
-          onChange={(e) => setCoverImageType(e.target.value as 'url' | 'file')}
-          className='max-w-[151px]'
-        >
-          <option value='url'>URL</option>
-          <option value='file'>File</option>
-        </select>
-      </div>
+// TitleInput Component
+const TitleInput = ({
+  title,
+  setTitle,
+}: {
+  title: string
+  setTitle: (value: string) => void
+}) => (
+  <input
+    type='text'
+    placeholder='Titolo...'
+    value={title}
+    onChange={(e) => setTitle(e.target.value)}
+    className='mb-4 w-full'
+    maxLength={100}
+  />
+)
 
-      {/* Add cover image */}
-      {coverImageType === 'url' ? (
-        <button
-          onClick={handleAddCoverImage}
-          className='relative mb-4 flex aspect-video w-full'
-        >
-          {coverImage ? (
-            <>
-              <NextImage
-                src={coverImage}
-                fill={true}
-                alt='Immagine di copertina'
-                className='rounded-md'
-                style={{ objectFit: 'cover' }}
-              />
-              <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-                Cambia immagine di copertina
-              </div>
-            </>
-          ) : (
-            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
-              Aggiungi immagine di copertina
+// DescriptionInput Component
+const DescriptionInput = ({
+  description,
+  setDescription,
+}: {
+  description: string
+  setDescription: (value: string) => void
+}) => (
+  <input
+    type='text'
+    placeholder='Descrizione...'
+    value={description}
+    onChange={(e) => setDescription(e.target.value)}
+    className='mb-4 w-full'
+    maxLength={130}
+  />
+)
+
+// CoverImageSelector Component
+const CoverImageSelector = ({
+  coverImageType,
+  setCoverImageType,
+  coverImage,
+  setCoverImage,
+  coverImageCloudinaryPreview,
+  coverImageCloudinary,
+  handleAddCoverImage,
+  handleAddCoverImageCloudinary,
+  title,
+}: any) => (
+  <div className='mb-4 flex flex-col gap-2'>
+    <label htmlFor='cover-image-type' className='font-medium'>
+      Tipo di immagine di copertina
+    </label>
+    <select
+      id='cover-image-type'
+      value={coverImageType}
+      onChange={(e) => setCoverImageType(e.target.value as 'url' | 'file')}
+      className='max-w-[151px]'
+    >
+      <option value='url'>URL</option>
+      <option value='file'>File</option>
+    </select>
+
+    {coverImageType === 'url' ? (
+      <button
+        onClick={handleAddCoverImage}
+        className='relative mb-4 flex aspect-video w-full'
+      >
+        {coverImage ? (
+          <>
+            <NextImage
+              src={coverImage}
+              fill={true}
+              alt='Immagine di copertina'
+              className='rounded-md'
+              style={{ objectFit: 'cover' }}
+            />
+            <div className='absolute inset-0 flex items-center justify-center rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+              Cambia immagine di copertina
             </div>
-          )}
-        </button>
-      ) : (
-        <div className='relative mb-4 flex aspect-video w-full'>
-          {coverImageCloudinaryPreview ? (
-            <>
-              <NextImage
-                src={coverImageCloudinaryPreview as string}
-                fill={true}
-                alt='Immagine di copertina'
-                className='rounded-md'
-                style={{ objectFit: 'cover' }}
-              />
-              <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-                <label htmlFor='change-cover-image-file'>
-                  Cambia immagine di copertina
-                </label>
-                <input
-                  type='file'
-                  accept='image/*'
-                  onChange={handleAddCoverImageCloudinary}
-                  className='mb-4'
-                  id='change-cover-image-file'
-                />
-              </div>
-            </>
-          ) : coverImageCloudinary ? (
-            <>
-              <CldImage
-                src={coverImageCloudinary}
-                alt={title}
-                fill={true}
-                sizes='(min-width: 768px) 768px, 100vw'
-                quality='auto'
-                format='auto'
-                crop='auto'
-                className='rounded-md'
-                aspectRatio={16 / 9}
-                // tint='70:violet:pink'
-
-                priority={true}
-              />
-              <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
-                <label htmlFor='change-cover-image-file'>
-                  Cambia immagine di copertina
-                </label>
-                <input
-                  type='file'
-                  accept='image/*'
-                  onChange={handleAddCoverImageCloudinary}
-                  className='mb-4'
-                  id='change-cover-image-file'
-                />
-              </div>
-            </>
-          ) : (
-            <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
-              <label htmlFor='add-cover-image-file'>
-                Aggiungi immagine di copertina
+          </>
+        ) : (
+          <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+            Aggiungi immagine di copertina
+          </div>
+        )}
+      </button>
+    ) : (
+      <div className='relative mb-4 flex aspect-video w-full'>
+        {coverImageCloudinaryPreview ? (
+          <>
+            <NextImage
+              src={coverImageCloudinaryPreview as string}
+              fill={true}
+              alt='Immagine di copertina'
+              className='rounded-md'
+              style={{ objectFit: 'cover' }}
+            />
+            <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+              <label htmlFor='change-cover-image-file'>
+                Cambia immagine di copertina
               </label>
               <input
                 type='file'
                 accept='image/*'
                 onChange={handleAddCoverImageCloudinary}
                 className='mb-4'
-                id='add-cover-image-file'
+                id='change-cover-image-file'
               />
             </div>
-          )}
-        </div>
-      )}
-
-      {/* Editor toolbar */}
-      <TipTapToolbar editor={editor} />
-
-      {/* Editor */}
-      <EditorContent
-        editor={editor}
-        className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
-      />
-
-      {/* Author */}
-      <div className='mb-4 flex flex-col gap-2'>
-        <label htmlFor='author' className='font-medium'>
-          Autore
-        </label>
-        <select
-          id='author'
-          className='max-w-[151px]'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        >
-          {authors.map((author) => (
-            <option key={author.id} value={author.name}>
-              {author.name}
-            </option>
-          ))}
-        </select>
+          </>
+        ) : coverImageCloudinary ? (
+          <>
+            <CldImage
+              src={coverImageCloudinary}
+              alt={title}
+              fill={true}
+              sizes='(min-width: 768px) 768px, 100vw'
+              quality='auto'
+              format='auto'
+              crop='auto'
+              className='rounded-md'
+              aspectRatio={16 / 9}
+              priority={true}
+            />
+            <div className='absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-md bg-black bg-opacity-50 font-semibold text-white opacity-0 hover:opacity-100'>
+              <label htmlFor='change-cover-image-file'>
+                Cambia immagine di copertina
+              </label>
+              <input
+                type='file'
+                accept='image/*'
+                onChange={handleAddCoverImageCloudinary}
+                className='mb-4'
+                id='change-cover-image-file'
+              />
+            </div>
+          </>
+        ) : (
+          <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+            <label htmlFor='add-cover-image-file'>
+              Aggiungi immagine di copertina
+            </label>
+            <input
+              type='file'
+              accept='image/*'
+              onChange={handleAddCoverImageCloudinary}
+              className='mb-4'
+              id='add-cover-image-file'
+            />
+          </div>
+        )}
       </div>
+    )}
+  </div>
+)
 
-      {/* Publish button */}
-      <button
-        onClick={handlePublish}
-        className={`min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${
-          loading ? 'cursor-not-allowed opacity-50' : ''
-        }`}
-        disabled={loading}
-      >
-        {loading ? 'Pubblicazione...' : 'Pubblica'}
-      </button>
+// AuthorSelector Component
+const AuthorSelector = ({
+  author,
+  setAuthor,
+}: {
+  author: string
+  setAuthor: (value: string) => void
+}) => (
+  <div className='mb-4 flex flex-col gap-2'>
+    <label htmlFor='author' className='font-medium'>
+      Autore
+    </label>
+    <select
+      id='author'
+      className='max-w-[151px]'
+      value={author}
+      onChange={(e) => setAuthor(e.target.value)}
+    >
+      {authors.map((author) => (
+        <option key={author.id} value={author.name}>
+          {author.name}
+        </option>
+      ))}
+    </select>
+  </div>
+)
 
-      {/* Validation messages */}
-      {message && (
-        // TODO: Hide the message after a few seconds
-        <p
-          className={`mt-4 font-medium ${
-            message.type === 'error'
-              ? 'text-rose-600 dark:text-rose-500'
-              : 'text-green-600 dark:text-green-500'
-          }`}
-        >
-          {message.text}
-        </p>
-      )}
-    </div>
-  )
-}
+// PublishButton Component
+const PublishButton = ({
+  loading,
+  handlePublish,
+}: {
+  loading: boolean
+  handlePublish: () => void
+}) => (
+  <button
+    onClick={handlePublish}
+    className={`min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+    disabled={loading}
+  >
+    {loading ? 'Pubblicazione...' : 'Pubblica'}
+  </button>
+)
+
+// ValidationMessage Component
+const ValidationMessage = ({
+  message,
+}: {
+  message: { type: string; text: string } | null
+}) =>
+  message ? (
+    <p
+      className={`mt-4 font-medium ${message.type === 'error' ? 'text-rose-600 dark:text-rose-500' : 'text-green-600 dark:text-green-500'}`}
+    >
+      {message.text}
+    </p>
+  ) : null
