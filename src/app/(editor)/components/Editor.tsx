@@ -1,6 +1,5 @@
 'use client'
 
-import TitleInput from '@/app/(editor)/components/TitleInput'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
@@ -19,7 +18,8 @@ import StarterKit from '@tiptap/starter-kit'
 import { CldImage } from 'next-cloudinary'
 import NextImage from 'next/image'
 import { useEffect } from 'react'
-import TipTapToolbar from '../../../components/TipTapToolbar'
+import TipTapToolbar from './TipTapToolbar'
+import TitleInput from './TitleInput'
 
 type Props = {
   post?: Post
