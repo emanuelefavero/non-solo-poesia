@@ -52,6 +52,7 @@ export default function Component({ post }: Props) {
     setCoverImageCloudinary,
     prevCloudinaryPublicId,
     setPrevCloudinaryPublicId,
+    clearPost,
   } = useEditorStore()
 
   useEffect(() => {
@@ -237,15 +238,10 @@ export default function Component({ post }: Props) {
           : 'Post pubblicato con successo!',
       })
 
-      // Clear content only if it's a new post
+      // Clear post only if it's a new post
       if (!post) {
         editor?.commands.clearContent() // clear the editor content
-        setTitle('') // clear the title
-        setDescription('') // clear the description
-        setCoverImage('') // clear the cover image
-        setCoverImageCloudinary('') // clear the cover image cloudinary
-        setCoverImageCloudinaryPreview(null) // clear the cover image cloudinary preview
-        setAuthor(authors[0].name) // set the author to the first author
+        clearPost() // clear the post state (title, etc.)
       }
     } catch (error) {
       if (error instanceof Error) {

@@ -1,3 +1,4 @@
+import { authors } from '@/data/authors'
 import type { Message } from '@/types'
 import { create } from 'zustand'
 
@@ -24,6 +25,7 @@ interface EditorState {
   setCoverImageCloudinary: (id: string) => void
   prevCloudinaryPublicId: string
   setPrevCloudinaryPublicId: (id: string) => void
+  clearPost: () => void
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
@@ -37,7 +39,7 @@ export const useEditorStore = create<EditorState>((set) => ({
   setTitle: (title) => set({ title }),
   description: '',
   setDescription: (description) => set({ description }),
-  author: '',
+  author: authors[0].name,
   setAuthor: (author) => set({ author }),
   coverImage: '',
   setCoverImage: (coverImage) => set({ coverImage }),
@@ -50,4 +52,14 @@ export const useEditorStore = create<EditorState>((set) => ({
   setCoverImageCloudinary: (id) => set({ coverImageCloudinary: id }),
   prevCloudinaryPublicId: '',
   setPrevCloudinaryPublicId: (id) => set({ prevCloudinaryPublicId: id }),
+  clearPost: () => {
+    set({
+      title: '',
+      description: '',
+      coverImage: '',
+      coverImageCloudinary: '',
+      coverImageCloudinaryPreview: null,
+      author: authors[0].name,
+    })
+  },
 }))
