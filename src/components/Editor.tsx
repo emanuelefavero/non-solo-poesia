@@ -4,7 +4,7 @@ import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudina
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
 import { useEditorStore } from '@/stores/editorStore'
-import type { Message, Post } from '@/types'
+import type { Post } from '@/types'
 import Bold from '@tiptap/extension-bold'
 import Heading from '@tiptap/extension-heading'
 import Image from '@tiptap/extension-image'
