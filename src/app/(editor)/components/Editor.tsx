@@ -1,5 +1,6 @@
 'use client'
 
+import TitleInput from '@/app/(editor)/components/TitleInput'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
@@ -18,7 +19,7 @@ import StarterKit from '@tiptap/starter-kit'
 import { CldImage } from 'next-cloudinary'
 import NextImage from 'next/image'
 import { useEffect } from 'react'
-import TipTapToolbar from './TipTapToolbar'
+import TipTapToolbar from '../../../components/TipTapToolbar'
 
 type Props = {
   post?: Post
@@ -267,24 +268,6 @@ export default function Component({ post }: Props) {
     </div>
   )
 }
-
-// TitleInput Component
-const TitleInput = ({
-  title,
-  setTitle,
-}: {
-  title: string
-  setTitle: (value: string) => void
-}) => (
-  <input
-    type='text'
-    placeholder='Titolo...'
-    value={title}
-    onChange={(e) => setTitle(e.target.value)}
-    className='mb-4 w-full'
-    maxLength={100}
-  />
-)
 
 // DescriptionInput Component
 const DescriptionInput = ({

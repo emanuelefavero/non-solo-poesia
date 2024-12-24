@@ -1,4 +1,4 @@
-import Editor from '@/components/Editor'
+import Editor from '@/app/(editor)/components/Editor'
 import type { Post } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
