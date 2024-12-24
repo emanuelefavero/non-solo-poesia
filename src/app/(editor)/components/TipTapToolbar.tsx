@@ -1,3 +1,5 @@
+'use client'
+
 import type { useEditor } from '@tiptap/react'
 
 type ToolbarProps = {

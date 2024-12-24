@@ -17,6 +17,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
 import CoverImageSelector from './CoverImageSelector'
+import DescriptionInput from './DescriptionInput'
 import TipTapToolbar from './TipTapToolbar'
 import TitleInput from './TitleInput'
 
@@ -248,10 +249,7 @@ export default function Component({ post }: Props) {
   return (
     <div className='relative max-w-3xl'>
       <TitleInput />
-      <DescriptionInput
-        description={description}
-        setDescription={setDescription}
-      />
+      <DescriptionInput />
       <CoverImageSelector
         handleAddCoverImage={handleAddCoverImage}
         handleAddCoverImageCloudinary={handleAddCoverImageCloudinary}
@@ -267,24 +265,6 @@ export default function Component({ post }: Props) {
     </div>
   )
 }
-
-// DescriptionInput Component
-const DescriptionInput = ({
-  description,
-  setDescription,
-}: {
-  description: string
-  setDescription: (value: string) => void
-}) => (
-  <input
-    type='text'
-    placeholder='Descrizione...'
-    value={description}
-    onChange={(e) => setDescription(e.target.value)}
-    className='mb-4 w-full'
-    maxLength={130}
-  />
-)
 
 // AuthorSelector Component
 const AuthorSelector = ({

@@ -1,3 +1,5 @@
+'use client'
+
 import { useEditorStore } from '@/stores/editorStore'
 
 export default function Component() {
