@@ -57,6 +57,10 @@ export default function Component({ post }: Props) {
   useEffect(() => {
     setProgress(0)
     setLoading(false)
+    setMessage({
+      type: 'success',
+      text: '',
+    })
     setTitle(post?.title || '')
     setDescription(post?.description || '')
     setAuthor(post?.author || authors[0].name || '')
@@ -67,6 +71,7 @@ export default function Component({ post }: Props) {
   }, [
     setProgress,
     setLoading,
+    setMessage,
     post,
     setTitle,
     setDescription,
@@ -184,8 +189,10 @@ export default function Component({ post }: Props) {
   }
 
   const handlePublish = async () => {
+    setProgress(0)
     const htmlContent = editor?.getHTML() || ''
 
+    setProgress(25)
     const validationMessage = validatePost({
       title,
       description,
@@ -202,7 +209,7 @@ export default function Component({ post }: Props) {
     }
 
     setLoading(true)
-    setProgress(0)
+    setProgress(50)
     setMessage({
       type: 'success',
       text: '',
@@ -232,6 +239,7 @@ export default function Component({ post }: Props) {
         throw new Error(data.message)
       }
 
+      setProgress(100)
       setMessage({
         type: 'success',
         text: post
@@ -245,6 +253,7 @@ export default function Component({ post }: Props) {
       }
     } catch (error) {
       if (error instanceof Error) {
+        setProgress(101) // ? 101 to show red progress bar
         setMessage({
           type: 'error',
           text: `Error: ${error.message}`,
@@ -252,7 +261,6 @@ export default function Component({ post }: Props) {
       }
     } finally {
       setLoading(false)
-      setProgress(100)
     }
   }
 
