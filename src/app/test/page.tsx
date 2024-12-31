@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Page() {
   return (
@@ -11,51 +11,147 @@ export default function Page() {
   )
 }
 
+type Post = {
+  id: number
+  title: string
+  body: string
+}
+
 function Component() {
-  const [progress, setProgress] = useState(0)
+  const [posts, setPosts] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(false)
 
-  const fetchData = async () => {
-    setProgress(0) // Reset progress
+  const postsPerPage = 10
 
-    const response = await fetch('https://jsonplaceholder.typicode.com/users')
-
-    const contentLength = response.headers.get('Content-Length')
-    if (!response.body) {
-      throw new Error('Response body is null')
-    }
-    const reader = response.body.getReader()
-    let receivedLength = 0
-    const chunks = []
-
-    while (true) {
-      const { done, value } = await reader.read()
-      if (done) break
-
-      chunks.push(value)
-      receivedLength += value.length
-
-      if (contentLength) {
-        setProgress((receivedLength / Number(contentLength)) * 100)
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch(
+          'https://jsonplaceholder.typicode.com/posts',
+        )
+        const data = await response.json()
+        setPosts(data)
+      } catch (error) {
+        console.error('Error fetching posts:', error)
       }
+      setLoading(false)
     }
 
-    setProgress(100)
+    fetchPosts()
+  }, [])
+
+  // Get current posts for the page
+  const indexOfLastPost = currentPage * postsPerPage
+  const indexOfFirstPost = indexOfLastPost - postsPerPage
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+
+  const totalPages = Math.ceil(posts.length / postsPerPage)
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
+  const renderPagination = () => {
+    const pages = []
+
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+      }
+    } else {
+      pages.push(1)
+      pages.push(2)
+
+      if (currentPage > 3) {
+        pages.push('...')
+      }
+
+      if (currentPage > 2 && currentPage < totalPages - 1) {
+        pages.push(currentPage)
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push('...')
+      }
+
+      pages.push(totalPages)
+    }
+
+    return pages.map((page, index) => (
+      <button
+        key={index}
+        onClick={() => typeof page === 'number' && handlePageChange(page)}
+        style={{
+          margin: '0 5px',
+          padding: '5px 10px',
+          backgroundColor: page === currentPage ? '#007BFF' : '#f8f9fa',
+          color: page === currentPage ? 'white' : 'black',
+          border: '1px solid #ddd',
+          cursor: 'pointer',
+          pointerEvents: typeof page === 'number' ? 'auto' : 'none',
+        }}
+        disabled={typeof page !== 'number'}
+      >
+        {page}
+      </button>
+    ))
   }
 
   return (
-    <>
-      <button onClick={fetchData}>Fetch Data</button>
-
-      <div className='h-[4px] w-full rounded-lg bg-gray-500/20'>
-        <div
-          style={{
-            width: `${progress}%`,
-          }}
-          className={`h-full rounded-lg transition-all duration-300 ${
-            progress === 100 ? 'bg-green-500' : 'bg-blue-500'
-          }`}
-        ></div>
-      </div>
-    </>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>Posts</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            {currentPosts.map((post: Post) => (
+              <li
+                key={post.id}
+                style={{
+                  marginBottom: '10px',
+                  border: '1px solid #ddd',
+                  padding: '10px',
+                }}
+              >
+                <h3>{post.title}</h3>
+                <p>{post.body}</p>
+              </li>
+            ))}
+          </ul>
+          <div style={{ marginTop: '20px' }}>
+            <button
+              onClick={() => handlePageChange(1)}
+              style={{
+                margin: '0 5px',
+                padding: '5px 10px',
+                backgroundColor: '#f8f9fa',
+                color: 'black',
+                border: '1px solid #ddd',
+                cursor: 'pointer',
+              }}
+            >
+              First
+            </button>
+            {renderPagination()}
+            <button
+              onClick={() => handlePageChange(totalPages)}
+              style={{
+                margin: '0 5px',
+                padding: '5px 10px',
+                backgroundColor: '#f8f9fa',
+                color: 'black',
+                border: '1px solid #ddd',
+                cursor: 'pointer',
+              }}
+            >
+              Last
+            </button>
+          </div>
+        </>
+      )}
+    </div>
   )
 }
