@@ -1,33 +1,11 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
-import { neon } from '@neondatabase/serverless'
+import { getPosts, getTotalPostCount } from '@/lib/posts'
 import Link from 'next/link'
 
 // TODO: Add a search bar to filter posts by title or content
 // TODO: Add a filter to sort posts by date, title, or author
-// TODO: Move the getPosts, getTotalPostCount functions to a separate file (e.g., src/lib/posts.ts)
 // TODO Change posts per page to 6 👇
-const POSTS_PER_PAGE = 1 // ! Change this to 6 !
-
-// Get posts for the current page from the database
-async function getPosts(page: number) {
-  const sql = neon(process.env.DATABASE_URL as string)
-  const offset = (page - 1) * POSTS_PER_PAGE
-  const data = await sql`
-    SELECT * FROM posts
-    ORDER BY published_at DESC
-    LIMIT ${POSTS_PER_PAGE} OFFSET ${offset}
-  `
-  return data
-}
-
-// Get the total count of posts
-async function getTotalPostCount() {
-  const sql = neon(process.env.DATABASE_URL as string)
-  const data = await sql`
-    SELECT COUNT(*) as count FROM posts
-  `
-  return data[0]?.count || 0
-}
+const POSTS_PER_PAGE = 3 // ! Change this to 6 !
 
 export default async function Home({
   searchParams,
@@ -38,7 +16,7 @@ export default async function Home({
   const currentPage = parseInt(page || '1', 10) // ? Default to page 1
   const totalPosts = await getTotalPostCount()
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
-  const posts = await getPosts(currentPage)
+  const posts = await getPosts(currentPage, POSTS_PER_PAGE)
 
   const renderPagination = () => {
     const pages = []
