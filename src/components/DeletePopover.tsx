@@ -8,9 +8,10 @@ import {
   PopoverPanel,
 } from '@headlessui/react'
 
-interface Props {
+type Props = {
   slug: string
 }
+
 export default function Component({ slug }: Props) {
   return (
     <Popover className='relative'>

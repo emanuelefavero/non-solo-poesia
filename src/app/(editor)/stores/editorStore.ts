@@ -2,7 +2,7 @@ import { authors } from '@/data/authors'
 import type { Message } from '@/types'
 import { create } from 'zustand'
 
-interface EditorState {
+type EditorState = {
   loading: boolean
   setLoading: (loading: boolean) => void
   message: Message
