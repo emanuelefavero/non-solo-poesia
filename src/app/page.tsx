@@ -2,24 +2,107 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
 
-// TODO: Limit the number of posts to display on the home page (add pagination)
 // TODO: Add a search bar to filter posts by title or content
 // TODO: Add a filter to sort posts by date, title, or author
-// TODO: Move the getAllPosts function to a separate file (e.g., src/lib/posts.ts)
+// TODO: Move the getPosts, getTotalPostCount functions to a separate file (e.g., src/lib/posts.ts)
+// TODO Change posts per page to 6 👇
+const POSTS_PER_PAGE = 2 // ! Change this to 6 !
 
-// Get all posts from the neon database
-async function getAllPosts() {
+// Get posts for the current page from the database
+async function getPosts(page: number) {
   const sql = neon(process.env.DATABASE_URL as string)
+  const offset = (page - 1) * POSTS_PER_PAGE
   const data = await sql`
     SELECT * FROM posts
     ORDER BY published_at DESC
+    LIMIT ${POSTS_PER_PAGE} OFFSET ${offset}
   `
-  if (!data) return []
   return data
 }
 
-export default async function Home() {
-  const posts = await getAllPosts()
+// Get the total count of posts
+async function getTotalPostCount() {
+  const sql = neon(process.env.DATABASE_URL as string)
+  const data = await sql`
+    SELECT COUNT(*) as count FROM posts
+  `
+  return data[0]?.count || 0
+}
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>
+}) {
+  const { page } = await searchParams
+  const currentPage = parseInt(page || '1', 10) // ? Default to page 1
+  const totalPosts = await getTotalPostCount()
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+  const posts = await getPosts(currentPage)
+
+  const renderPagination = () => {
+    const pages = []
+
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i)
+      }
+    } else {
+      pages.push(1)
+      pages.push(2)
+
+      if (currentPage > 3) {
+        pages.push('...')
+      }
+
+      if (currentPage > 2 && currentPage < totalPages - 1) {
+        pages.push(currentPage)
+      }
+
+      if (currentPage < totalPages - 2) {
+        pages.push('...')
+      }
+
+      pages.push(totalPages)
+    }
+
+    return (
+      <div className='mt-4 flex items-center justify-center'>
+        {currentPage > 1 && (
+          <Link href={`/?page=1`} className='mx-1 rounded border px-2 py-1'>
+            First
+          </Link>
+        )}
+
+        {pages.map((page, index) =>
+          typeof page === 'number' ? (
+            <Link
+              key={index}
+              href={`/?page=${page}`}
+              className={`mx-1 rounded border px-2 py-1 ${
+                page === currentPage ? 'bg-blue-500 text-white' : ''
+              }`}
+            >
+              {page}
+            </Link>
+          ) : (
+            <span key={index} className='mx-1 px-2 py-1'>
+              {page}
+            </span>
+          ),
+        )}
+
+        {currentPage < totalPages && (
+          <Link
+            href={`/?page=${totalPages}`}
+            className='mx-1 rounded border px-2 py-1'
+          >
+            Last
+          </Link>
+        )}
+      </div>
+    )
+  }
 
   return (
     <>
@@ -79,6 +162,8 @@ export default async function Home() {
           ))}
         </ul>
       )}
+
+      {renderPagination()}
     </>
   )
 }
