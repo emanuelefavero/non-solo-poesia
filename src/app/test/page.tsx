@@ -51,7 +51,9 @@ function Component() {
           style={{
             width: `${progress}%`,
           }}
-          className='h-full rounded-lg bg-green-500 transition-all duration-300'
+          className={`h-full rounded-lg transition-all duration-300 ${
+            progress === 100 ? 'bg-green-500' : 'bg-blue-500'
+          }`}
         ></div>
       </div>
     </>
