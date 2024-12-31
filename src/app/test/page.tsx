@@ -83,16 +83,10 @@ function Component() {
       <button
         key={index}
         onClick={() => typeof page === 'number' && handlePageChange(page)}
-        style={{
-          margin: '0 5px',
-          padding: '5px 10px',
-          backgroundColor: page === currentPage ? '#007BFF' : '#f8f9fa',
-          color: page === currentPage ? 'white' : 'black',
-          border: '1px solid #ddd',
-          cursor: 'pointer',
-          pointerEvents: typeof page === 'number' ? 'auto' : 'none',
-        }}
         disabled={typeof page !== 'number'}
+        className={`${
+          currentPage === page ? 'bg-blue-500 text-white' : ''
+        } rounded px-3 py-1`}
       >
         {page}
       </button>
@@ -100,54 +94,35 @@ function Component() {
   }
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div>
       <h1>Posts</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <>
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <ul className='list-none'>
             {currentPosts.map((post: Post) => (
-              <li
-                key={post.id}
-                style={{
-                  marginBottom: '10px',
-                  border: '1px solid #ddd',
-                  padding: '10px',
-                }}
-              >
+              <li key={post.id}>
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
               </li>
             ))}
           </ul>
-          <div style={{ marginTop: '20px' }}>
+          <div className='flex gap-3'>
             <button
               onClick={() => handlePageChange(1)}
-              style={{
-                margin: '0 5px',
-                padding: '5px 10px',
-                backgroundColor: '#f8f9fa',
-                color: 'black',
-                border: '1px solid #ddd',
-                cursor: 'pointer',
-              }}
+              aria-label='First Page'
+              title='First Page'
             >
-              First
+              {'<'}
             </button>
             {renderPagination()}
             <button
               onClick={() => handlePageChange(totalPages)}
-              style={{
-                margin: '0 5px',
-                padding: '5px 10px',
-                backgroundColor: '#f8f9fa',
-                color: 'black',
-                border: '1px solid #ddd',
-                cursor: 'pointer',
-              }}
+              aria-label='Last Page'
+              title='Last Page'
             >
-              Last
+              {'>'}
             </button>
           </div>
         </>
