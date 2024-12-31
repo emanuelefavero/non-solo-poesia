@@ -13,7 +13,6 @@ export default function Page() {
 
 function Component() {
   const [progress, setProgress] = useState(0)
-  const [data, setData] = useState<string | null>(null)
 
   const fetchData = async () => {
     setProgress(0) // Reset progress
@@ -40,16 +39,13 @@ function Component() {
       }
     }
 
-    const decoder = new TextDecoder()
-    const arrayBuffer = await new Response(new Blob(chunks)).arrayBuffer()
-    const result = decoder.decode(arrayBuffer)
-    setData(result)
     setProgress(100)
   }
 
   return (
     <>
       <button onClick={fetchData}>Fetch Data</button>
+
       <div className='h-[4px] w-full rounded-lg bg-gray-500/20'>
         <div
           style={{
@@ -58,7 +54,6 @@ function Component() {
           className='h-full rounded-lg bg-green-500 transition-all duration-300'
         ></div>
       </div>
-      {data && <pre>{data}</pre>}
     </>
   )
 }
