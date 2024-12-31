@@ -3,6 +3,7 @@
 import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
+import ProgressBar from '@/components/ProgressBar'
 import { authors } from '@/data/authors'
 import type { Post } from '@/types'
 import { validatePost } from '@/utils/validatePost'
@@ -270,17 +271,7 @@ export default function Component({ post }: Props) {
       <AuthorSelector />
       <PublishButton handlePublish={handlePublish} />
       <ValidationMessage />
-      {/* Progress Bar */}
-      <div className={`h-[3px] w-full rounded-lg bg-gray-500/20`}>
-        <div
-          style={{
-            width: `${progress}%`,
-          }}
-          className={`h-full rounded-lg transition-all duration-300 ${
-            progress === 100 ? 'bg-green-500' : 'bg-blue-500'
-          }`}
-        ></div>
-      </div>
+      <ProgressBar progress={progress} />
     </div>
   )
 }
