@@ -39,6 +39,3 @@ export default function Component() {
     </>
   )
 }
-
-// user.primaryEmailAddress.emailAddress
-// user.id

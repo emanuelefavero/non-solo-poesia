@@ -6,7 +6,7 @@ import Link from 'next/link'
 // TODO: Add a search bar to filter posts by title or content
 // TODO: Add a filter to sort posts by date, title, or author
 // TODO Change posts per page to 6 👇
-const POSTS_PER_PAGE = 3 // ! Change this to 6 !
+const POSTS_PER_PAGE = 1 // ! Change this to 6 !
 
 type Props = {
   searchParams: Promise<{ page?: string }>
@@ -86,7 +86,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage > 1 && (
         <Link
           href='/?page=1'
-          className='mx-0.5 rounded px-4 py-1 font-bold text-white hover:bg-blue-500 hover:no-underline'
+          className='mx-0.5 rounded px-4 py-1 font-bold text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white'
           aria-label='Prima pagina'
           title='Prima pagina'
         >
@@ -99,14 +99,17 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
           <Link
             key={index}
             href={`/?page=${page}`}
-            className={`mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline ${
-              page === currentPage ? 'bg-blue-500/50' : ''
+            className={`mx-0.5 rounded px-4 py-1 text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white ${
+              page === currentPage ? 'bg-blue-500/80 text-white' : ''
             }`}
           >
             {page}
           </Link>
         ) : (
-          <span key={index} className='mx-1 select-none px-2 py-1'>
+          <span
+            key={index}
+            className='mx-1 select-none px-2 py-1 text-black dark:text-white'
+          >
             {page}
           </span>
         ),
@@ -115,7 +118,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage < totalPages && (
         <Link
           href={`/?page=${totalPages}`}
-          className='mx-0.5 rounded px-4 py-1 font-bold text-white hover:bg-blue-500 hover:no-underline'
+          className='mx-0.5 rounded px-4 py-1 font-bold text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white'
           aria-label='Ultima pagina'
           title='Ultima pagina'
         >
