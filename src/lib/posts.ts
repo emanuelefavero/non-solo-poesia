@@ -1,3 +1,4 @@
+import type { Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
 // Get posts for the current page from the database
@@ -9,7 +10,7 @@ export async function getPosts(page: number, postsPerPage: number) {
     ORDER BY published_at DESC
     LIMIT ${postsPerPage} OFFSET ${offset}
   `
-  return data
+  return data as Post[]
 }
 
 // Get the total count of posts
