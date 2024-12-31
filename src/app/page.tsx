@@ -6,7 +6,7 @@ import Link from 'next/link'
 // TODO: Add a filter to sort posts by date, title, or author
 // TODO: Move the getPosts, getTotalPostCount functions to a separate file (e.g., src/lib/posts.ts)
 // TODO Change posts per page to 6 👇
-const POSTS_PER_PAGE = 2 // ! Change this to 6 !
+const POSTS_PER_PAGE = 1 // ! Change this to 6 !
 
 // Get posts for the current page from the database
 async function getPosts(page: number) {
@@ -72,8 +72,10 @@ export default async function Home({
           <Link
             href={`/?page=1`}
             className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
+            aria-label='Prima pagina'
+            title='Prima pagina'
           >
-            First
+            {'<'}
           </Link>
         )}
 
@@ -89,7 +91,7 @@ export default async function Home({
               {page}
             </Link>
           ) : (
-            <span key={index} className='mx-1 px-2 py-1'>
+            <span key={index} className='mx-1 select-none px-2 py-1'>
               {page}
             </span>
           ),
@@ -99,8 +101,10 @@ export default async function Home({
           <Link
             href={`/?page=${totalPages}`}
             className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
+            aria-label='Ultima pagina'
+            title='Ultima pagina'
           >
-            Last
+            {'>'}
           </Link>
         )}
       </div>
