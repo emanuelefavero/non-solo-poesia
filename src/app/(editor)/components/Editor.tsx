@@ -133,6 +133,7 @@ export default function Component({ post }: Props) {
     }
 
     setLoading(false)
+    hideMessageAndResetProgress()
   }
 
   const handleAddCoverImageCloudinary = async (
@@ -201,6 +202,7 @@ export default function Component({ post }: Props) {
         console.error('An error occurred:', error)
       } finally {
         setLoading(false)
+        hideMessageAndResetProgress()
       }
     }
   }
@@ -278,7 +280,19 @@ export default function Component({ post }: Props) {
       }
     } finally {
       setLoading(false)
+      hideMessageAndResetProgress()
     }
+  }
+
+  // Utility function to hide message and reset progress after a few seconds
+  function hideMessageAndResetProgress() {
+    setTimeout(() => {
+      setProgress(0)
+      setMessage({
+        type: 'success',
+        text: '',
+      })
+    }, 2000)
   }
 
   return (
