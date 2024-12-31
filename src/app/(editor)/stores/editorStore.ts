@@ -58,6 +58,8 @@ export const useEditorStore = create<EditorState>((set) => ({
   setPrevCloudinaryPublicId: (id) => set({ prevCloudinaryPublicId: id }),
   clearPost: () => {
     set({
+      progress: 0,
+      loading: false,
       title: '',
       description: '',
       coverImage: '',

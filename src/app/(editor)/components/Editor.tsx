@@ -55,6 +55,8 @@ export default function Component({ post }: Props) {
   } = useEditorStore()
 
   useEffect(() => {
+    setProgress(0)
+    setLoading(false)
     setTitle(post?.title || '')
     setDescription(post?.description || '')
     setAuthor(post?.author || authors[0].name || '')
@@ -63,6 +65,8 @@ export default function Component({ post }: Props) {
     setCoverImageCloudinary(post?.cover_image_cloudinary || '')
     setPrevCloudinaryPublicId(post?.cover_image_cloudinary || '')
   }, [
+    setProgress,
+    setLoading,
     post,
     setTitle,
     setDescription,
