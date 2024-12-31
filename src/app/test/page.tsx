@@ -1,43 +1,64 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
+import { useState } from 'react'
 
 export default function Page() {
   return (
     <>
       <h1>Test</h1>
-
-      <Suspense fallback='Loading...'>
-        <Component />
-      </Suspense>
+      <Component />
     </>
   )
 }
 
 function Component() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const [progress, setProgress] = useState(0)
+  const [data, setData] = useState<string | null>(null)
 
-  const color = searchParams.get('color') || 'red'
+  const fetchData = async () => {
+    setProgress(0) // Reset progress
+
+    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+
+    const contentLength = response.headers.get('Content-Length')
+    if (!response.body) {
+      throw new Error('Response body is null')
+    }
+    const reader = response.body.getReader()
+    let receivedLength = 0
+    const chunks = []
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      chunks.push(value)
+      receivedLength += value.length
+
+      if (contentLength) {
+        setProgress((receivedLength / Number(contentLength)) * 100)
+      }
+    }
+
+    const decoder = new TextDecoder()
+    const arrayBuffer = await new Response(new Blob(chunks)).arrayBuffer()
+    const result = decoder.decode(arrayBuffer)
+    setData(result)
+    setProgress(100)
+  }
 
   return (
     <>
-      <select
-        id='color'
-        value={color}
-        onChange={(e) => {
-          router.replace(`${pathname}?color=${e.target.value}`)
-        }}
-      >
-        <option value='red'>Red</option>
-        <option value='blue'>Blue</option>
-      </select>
-
-      <p className={color === 'red' ? 'text-red-500' : 'text-blue-500'}>
-        Hello
-      </p>
+      <button onClick={fetchData}>Fetch Data</button>
+      <div className='h-[4px] w-full rounded-lg bg-gray-500/20'>
+        <div
+          style={{
+            width: `${progress}%`,
+          }}
+          className='h-full rounded-lg bg-green-500 transition-all duration-300'
+        ></div>
+      </div>
+      {data && <pre>{data}</pre>}
     </>
   )
 }
