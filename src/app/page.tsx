@@ -71,7 +71,7 @@ export default async function Home({
         {currentPage > 1 && (
           <Link
             href={`/?page=1`}
-            className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
+            className='mx-0.5 rounded px-4 py-1 font-bold text-white hover:bg-blue-500 hover:no-underline'
             aria-label='Prima pagina'
             title='Prima pagina'
           >
@@ -100,7 +100,7 @@ export default async function Home({
         {currentPage < totalPages && (
           <Link
             href={`/?page=${totalPages}`}
-            className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
+            className='mx-0.5 rounded px-4 py-1 font-bold text-white hover:bg-blue-500 hover:no-underline'
             aria-label='Ultima pagina'
             title='Ultima pagina'
           >
