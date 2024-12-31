@@ -1,5 +1,6 @@
 'use client'
 
+import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { deletePost } from '@/app/actions/deletePost'
 import {
   Popover,
@@ -13,6 +14,8 @@ type Props = {
 }
 
 export default function Component({ slug }: Props) {
+  const { loading, setLoading } = useEditorStore()
+
   return (
     <Popover className='relative'>
       <PopoverButton className='block rounded-sm font-semibold text-rose-500/80 focus:outline-none data-[active]:text-rose-500 data-[hover]:text-rose-500 data-[focus]:outline-1 data-[focus]:outline-gray-300 dark:data-[focus]:outline-white'>
@@ -31,15 +34,20 @@ export default function Component({ slug }: Props) {
         </p>
 
         <div className='flex gap-2'>
-          <PopoverButton className='block rounded-lg px-3 py-2 text-gray-600 transition hover:bg-black/5 dark:text-gray-400 dark:hover:bg-white/5'>
+          <PopoverButton
+            className={`block rounded-lg px-3 py-2 text-gray-600 transition hover:bg-black/5 dark:text-gray-400 dark:hover:bg-white/5 ${loading ? 'invisible' : ''}`}
+          >
             Annulla
           </PopoverButton>
 
           <button
             onClick={async () => {
+              setLoading(true)
               await deletePost(slug)
+              setLoading(false)
             }}
-            className='block rounded-lg px-3 py-2 text-rose-500 transition hover:bg-black/5 dark:hover:bg-white/5'
+            disabled={loading}
+            className='block rounded-lg px-3 py-2 text-rose-500 transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-white/5'
           >
             Elimina
           </button>
