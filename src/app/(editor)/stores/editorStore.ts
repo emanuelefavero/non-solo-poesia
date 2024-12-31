@@ -3,6 +3,8 @@ import type { Message } from '@/types'
 import { create } from 'zustand'
 
 type EditorState = {
+  progress: number
+  setProgress: (progress: number) => void
   loading: boolean
   setLoading: (loading: boolean) => void
   message: Message
@@ -29,6 +31,8 @@ type EditorState = {
 }
 
 export const useEditorStore = create<EditorState>((set) => ({
+  progress: 0,
+  setProgress: (progress) => set({ progress }),
   loading: false,
   setLoading: (loading) => set({ loading }),
   message: { type: 'success', text: '' },
