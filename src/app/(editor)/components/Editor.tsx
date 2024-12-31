@@ -138,9 +138,13 @@ export default function Component({ post }: Props) {
   const handleAddCoverImageCloudinary = async (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
+    setLoading(true)
+    setProgress(0)
     const file = e.target.files?.[0]
 
     if (file && file.size > 3 * 1024 * 1024) {
+      setLoading(false)
+      setProgress(101) // ? 101 to show red progress bar
       alert('File size must be less than 3MB')
       return
     }
@@ -156,6 +160,7 @@ export default function Component({ post }: Props) {
             reader.readAsDataURL(file)
           },
         )
+        setProgress(50)
 
         if (filePreview) {
           setCoverImageCloudinaryPreview(filePreview)
@@ -164,11 +169,14 @@ export default function Component({ post }: Props) {
         const uploadResponse = await uploadImageToCloudinary(file)
 
         if (uploadResponse.message) {
+          setLoading(false)
+          setProgress(101)
           alert(uploadResponse.message)
           return
         }
 
         if (uploadResponse) {
+          setProgress(100)
           setCoverImageCloudinary(uploadResponse.public_id)
           setCoverImage('')
           setCoverImageType('file')
@@ -189,7 +197,10 @@ export default function Component({ post }: Props) {
           }
         }
       } catch (error) {
+        setProgress(101)
         console.error('An error occurred:', error)
+      } finally {
+        setLoading(false)
       }
     }
   }
