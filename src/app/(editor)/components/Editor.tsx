@@ -117,16 +117,22 @@ export default function Component({ post }: Props) {
   })
 
   const handleAddCoverImage = () => {
+    setLoading(true)
+    setProgress(0)
     const url = prompt("Inserisci l'URL dell'immagine:")
     if (url) {
       if (/^https?:\/\/\S+\.\S+/.test(url)) {
         setCoverImage(url)
         setCoverImageCloudinary('')
         setCoverImageType('url')
+        setProgress(100)
       } else {
+        setProgress(101) // ? 101 to show red progress bar
         alert('Per favore inserisci un URL di immagine valido')
       }
     }
+
+    setLoading(false)
   }
 
   const handleAddCoverImageCloudinary = async (

@@ -16,6 +16,7 @@ export default function Component({
   handleAddCoverImageCloudinary,
 }: Props) {
   const {
+    setProgress,
     coverImageType,
     setCoverImageType,
     coverImage,
@@ -32,7 +33,10 @@ export default function Component({
       <select
         id='cover-image-type'
         value={coverImageType}
-        onChange={(e) => setCoverImageType(e.target.value as 'url' | 'file')}
+        onChange={(e) => {
+          setCoverImageType(e.target.value as 'url' | 'file')
+          setProgress(0)
+        }}
         className='max-w-[151px]'
       >
         <option value='url'>URL</option>
