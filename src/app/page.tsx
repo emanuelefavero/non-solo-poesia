@@ -69,7 +69,10 @@ export default async function Home({
     return (
       <div className='mt-4 flex items-center justify-center'>
         {currentPage > 1 && (
-          <Link href={`/?page=1`} className='mx-1 rounded border px-2 py-1'>
+          <Link
+            href={`/?page=1`}
+            className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
+          >
             First
           </Link>
         )}
@@ -79,8 +82,8 @@ export default async function Home({
             <Link
               key={index}
               href={`/?page=${page}`}
-              className={`mx-1 rounded border px-2 py-1 ${
-                page === currentPage ? 'bg-blue-500 text-white' : ''
+              className={`mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline ${
+                page === currentPage ? 'bg-blue-500/50' : ''
               }`}
             >
               {page}
@@ -95,7 +98,7 @@ export default async function Home({
         {currentPage < totalPages && (
           <Link
             href={`/?page=${totalPages}`}
-            className='mx-1 rounded border px-2 py-1'
+            className='mx-0.5 rounded px-4 py-1 text-white hover:bg-blue-500 hover:no-underline'
           >
             Last
           </Link>
