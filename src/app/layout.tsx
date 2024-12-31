@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import ProgressBar from '@/components/ProgressBar'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -32,6 +33,8 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <ProgressBar />
+
           <header className='flex min-h-[60px] w-full items-center justify-between bg-gray-500/10 p-4'>
             <Header />
           </header>

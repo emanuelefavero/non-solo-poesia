@@ -3,7 +3,6 @@
 import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
-import ProgressBar from '@/components/ProgressBar'
 import { authors } from '@/data/authors'
 import type { Post } from '@/types'
 import { validatePost } from '@/utils/validatePost'
@@ -30,11 +29,9 @@ type Props = {
 }
 
 // TODO add progress bar for handleAddCoverImageCloudinary function
-// TODO add progress bar for handlePublish function
 
 export default function Component({ post }: Props) {
   const {
-    progress,
     setProgress,
     setLoading,
     setMessage,
@@ -271,7 +268,6 @@ export default function Component({ post }: Props) {
       <AuthorSelector />
       <PublishButton handlePublish={handlePublish} />
       <ValidationMessage />
-      <ProgressBar progress={progress} />
     </div>
   )
 }
