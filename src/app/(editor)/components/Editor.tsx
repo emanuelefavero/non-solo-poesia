@@ -15,7 +15,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import Youtube from '@tiptap/extension-youtube'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AuthorSelector from './AuthorSelector'
 import CoverImageSelector from './CoverImageSelector'
 import DescriptionInput from './DescriptionInput'
@@ -32,6 +32,8 @@ type Props = {
 // TODO add progress bar for handlePublish function
 
 export default function Component({ post }: Props) {
+  const [progress, setProgress] = useState(0)
+
   const {
     setLoading,
     setMessage,
@@ -198,6 +200,7 @@ export default function Component({ post }: Props) {
     }
 
     setLoading(true)
+    setProgress(0)
     setMessage({
       type: 'success',
       text: '',
@@ -247,6 +250,7 @@ export default function Component({ post }: Props) {
       }
     } finally {
       setLoading(false)
+      setProgress(100)
     }
   }
 
@@ -266,6 +270,17 @@ export default function Component({ post }: Props) {
       <AuthorSelector />
       <PublishButton handlePublish={handlePublish} />
       <ValidationMessage />
+      {/* Progress Bar */}
+      <div className={`h-[3px] w-full rounded-lg bg-gray-500/20`}>
+        <div
+          style={{
+            width: `${progress}%`,
+          }}
+          className={`h-full rounded-lg transition-all duration-300 ${
+            progress === 100 ? 'bg-green-500' : 'bg-blue-500'
+          }`}
+        ></div>
+      </div>
     </div>
   )
 }
