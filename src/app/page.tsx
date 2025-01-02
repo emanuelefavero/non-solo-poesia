@@ -88,7 +88,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage > 1 && (
         <Link
           href='/?page=1'
-          className='mx-0.5 rounded px-4 py-1 font-bold text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white'
+          className='mx-0.5 rounded px-4 py-1 font-bold text-black transition-transform duration-200 hover:bg-blue-500 hover:text-white hover:no-underline active:scale-95 dark:text-white'
           aria-label='Prima pagina'
           title='Prima pagina'
         >
@@ -103,7 +103,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
           <Link
             key={index}
             href={`/?page=${page}`}
-            className={`mx-0.5 rounded px-4 py-1 text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white ${
+            className={`mx-0.5 rounded px-4 py-1 text-black transition-transform duration-200 hover:bg-blue-500 hover:text-white hover:no-underline active:scale-95 dark:text-white ${
               page === currentPage ? 'bg-blue-500/80 text-white' : ''
             }`}
           >
@@ -122,7 +122,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
       {currentPage < totalPages && (
         <Link
           href={`/?page=${totalPages}`}
-          className='mx-0.5 rounded px-4 py-1 font-bold text-black hover:bg-blue-500 hover:text-white hover:no-underline dark:text-white'
+          className='mx-0.5 rounded px-4 py-1 font-bold text-black transition-transform duration-200 hover:bg-blue-500 hover:text-white hover:no-underline active:scale-95 dark:text-white'
           aria-label='Ultima pagina'
           title='Ultima pagina'
         >
