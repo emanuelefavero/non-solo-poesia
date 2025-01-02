@@ -9,7 +9,7 @@ import { useState } from 'react'
 export default function Page() {
   const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<Post[] | null>(null)
+  const [foundPosts, setFoundPosts] = useState<Post[] | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
   const handleSearch = async () => {
@@ -20,17 +20,17 @@ export default function Page() {
 
     setLoading(true)
     setMessage('Cerco i post...')
-    const posts = await searchPosts(query)
+    const response = await searchPosts(query)
     setLoading(false)
     setMessage(null)
 
     // if server action returns {message}, show an error message
-    if ('message' in posts) {
-      setMessage(posts.message)
+    if ('message' in response) {
+      setMessage(response.message)
       return
     }
 
-    setResults(posts as Post[])
+    setFoundPosts(response as Post[])
   }
 
   return (
@@ -59,9 +59,9 @@ export default function Page() {
         {message}
       </p>
 
-      {results && (
+      {foundPosts && (
         <ul>
-          {results.map((post) => (
+          {foundPosts.map((post) => (
             <li key={post.id}>{post.title}</li>
           ))}
         </ul>
