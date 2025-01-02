@@ -1,6 +1,7 @@
 'use client'
 
 import { searchPosts } from '@/app/actions/searchPosts'
+import PostList from '@/components/PostList'
 import type { Post } from '@/types'
 import { useState } from 'react'
 
@@ -63,13 +64,7 @@ export default function Page() {
         {message}
       </p>
 
-      {foundPosts && (
-        <ul>
-          {foundPosts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
-      )}
+      {foundPosts && <PostList posts={foundPosts} />}
     </div>
   )
 }
