@@ -1,10 +1,10 @@
 import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
+import { POSTS_PER_PAGE } from '@/config/posts'
 import { getPosts, getTotalPostCount } from '@/lib/posts'
 import Link from 'next/link'
 
 // TODO: Add a filter to sort posts by date, title, or author
-const POSTS_PER_PAGE = 6
 
 type Props = {
   searchParams: Promise<{ page?: string }>

@@ -1,5 +1,6 @@
 'use server'
 
+import { POSTS_PER_PAGE } from '@/config/posts'
 import { neon } from '@neondatabase/serverless'
 import { revalidatePath } from 'next/cache'
 
@@ -15,7 +16,7 @@ export async function searchPosts(query: string) {
       FROM posts
       WHERE title ILIKE ${`%${query}%`}
       ORDER BY published_at DESC
-      LIMIT 6
+      LIMIT ${POSTS_PER_PAGE}
     `
 
     return posts
