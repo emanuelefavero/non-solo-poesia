@@ -5,7 +5,6 @@ import { getPosts, getTotalPostCount } from '@/lib/posts'
 import { generatePagination } from '@/utils/pagination'
 import Link from 'next/link'
 
-// TODO: Add a search bar to filter posts by title or content
 // TODO: Add a filter to sort posts by date, title, or author
 const POSTS_PER_PAGE = 6
 
