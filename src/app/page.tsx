@@ -1,4 +1,6 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
+import ChevronLeftIcon from '@/components/icons/ChevronLeftIcon'
+import ChevronRightIcon from '@/components/icons/ChevronRightIcon'
 import { getPosts, getTotalPostCount } from '@/lib/posts'
 import type { Post } from '@/types'
 import Link from 'next/link'
@@ -82,7 +84,7 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
   const pages = generatePagination(currentPage, totalPages)
 
   return (
-    <div className='mt-4 flex items-center justify-center'>
+    <div className='mt-4 flex h-[34px] items-center justify-center'>
       {currentPage > 1 && (
         <Link
           href='/?page=1'
@@ -90,7 +92,9 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
           aria-label='Prima pagina'
           title='Prima pagina'
         >
-          {'<'}
+          <div className='flex h-[24px] items-center'>
+            <ChevronLeftIcon className='h-[16px]' />
+          </div>
         </Link>
       )}
 
@@ -122,7 +126,9 @@ function Pagination({ currentPage, totalPages }: PaginationProps) {
           aria-label='Ultima pagina'
           title='Ultima pagina'
         >
-          {'>'}
+          <div className='flex h-[24px] items-center'>
+            <ChevronRightIcon className='h-[16px]' />
+          </div>
         </Link>
       )}
     </div>
