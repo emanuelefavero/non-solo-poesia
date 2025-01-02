@@ -2,7 +2,7 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import type { Post } from '@/types'
 import Link from 'next/link'
 
-export default function PostList({ posts }: { posts: Post[] }) {
+export default function Component({ posts }: { posts: Post[] }) {
   if (!posts.length) return <p>Nessun post trovato.</p>
 
   return (

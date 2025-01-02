@@ -8,7 +8,7 @@ type PaginationProps = {
   totalPages: number
 }
 
-export default function Pagination({
+export default function Component({
   currentPage,
   totalPages,
 }: PaginationProps) {
