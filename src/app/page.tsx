@@ -8,8 +8,7 @@ import Link from 'next/link'
 
 // TODO: Add a search bar to filter posts by title or content
 // TODO: Add a filter to sort posts by date, title, or author
-// TODO Change posts per page to 6 👇
-const POSTS_PER_PAGE = 1 // ! Change this to 6 !
+const POSTS_PER_PAGE = 6
 
 type Props = {
   searchParams: Promise<{ page?: string }>
