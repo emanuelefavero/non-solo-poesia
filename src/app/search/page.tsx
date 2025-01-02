@@ -4,35 +4,68 @@ import { searchPosts } from '@/app/actions/searchPosts'
 import type { Post } from '@/types'
 import { useState } from 'react'
 
+// TODO add loading spinner
+
 export default function Page() {
+  const [query, setQuery] = useState('')
+  const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Post[] | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
+  const handleSearch = async () => {
+    if (!query) {
+      setMessage('👆 Inserisci un termine di ricerca')
+      return
+    }
+
+    setLoading(true)
+    setMessage('Cerco i post...')
+    const posts = await searchPosts(query)
+    setLoading(false)
+    setMessage(null)
+
+    // if server action returns {message}, show an error message
+    if ('message' in posts) {
+      setMessage(posts.message)
+      return
+    }
+
+    setResults(posts as Post[])
+  }
+
   return (
-    <>
-      <h1>Cerca post</h1>
+    <div className='min-h-[calc(100vh-90px)]'>
+      <h1 className='mb-8'>Cerca post</h1>
 
-      <button
-        onClick={async () => {
-          const posts = await searchPosts('Pasta')
+      <div className='flex w-full max-w-prose flex-col gap-3 xs:flex-row xs:gap-2'>
+        <input
+          type='text'
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder='Cerca un post...'
+          required
+          className='w-full'
+        />
+        <button
+          onClick={handleSearch}
+          className={`rounded bg-blue-600 px-4 py-2 text-white xs:min-w-[88px] ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+          disabled={loading}
+        >
+          {loading ? 'Cerco...' : 'Cerca'}
+        </button>
+      </div>
 
-          // if server action returns {message}, show an error message
-          if ('message' in posts) {
-            setMessage(posts.message)
-            return
-          }
+      <p className='mt-1 min-h-[36px] font-semibold italic text-yellow-700 transition-opacity duration-300 dark:text-yellow-500'>
+        {message}
+      </p>
 
-          setResults(posts as Post[])
-        }}
-      >
-        Cerca
-      </button>
-
-      <code>
-        <pre>{JSON.stringify(results, null, 2)}</pre>
-      </code>
-
-      {message && <p>{message}</p>}
-    </>
+      {results && (
+        <ul>
+          {results.map((post) => (
+            <li key={post.id}>{post.title}</li>
+          ))}
+        </ul>
+      )}
+    </div>
   )
 }
