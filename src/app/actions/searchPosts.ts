@@ -4,8 +4,6 @@ import { POSTS_PER_PAGE } from '@/config/posts'
 import { neon } from '@neondatabase/serverless'
 import { revalidatePath } from 'next/cache'
 
-// TODO move POSTS_PER_PAGE (from homepage) to a config file and import it here
-
 export async function searchPosts(query: string) {
   try {
     const sql = neon(process.env.DATABASE_URL as string)
