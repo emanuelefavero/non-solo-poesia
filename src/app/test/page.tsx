@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const sortByLinks = [
+const sortingOptions = [
   { label: 'Data', value: 'published_at' },
   { label: 'Titolo', value: 'title' },
 ]
@@ -20,11 +20,11 @@ export default async function Page({ searchParams }: Props) {
       <div className='flex w-full items-center justify-end'>
         <span className='mr-2'>Ordina per:</span>
 
-        {sortByLinks.map(({ label, value }) => (
+        {sortingOptions.map(({ label, value }) => (
           <Link
             key={`sort-by-${value}`}
             href={`/test?page=${currentPage}&sort_by=${value}`}
-            className={`mx-0.5 rounded-sm px-4 py-1 text-black transition-transform duration-200 hover:bg-gray-500/20 hover:text-white hover:no-underline active:scale-95 dark:text-white ${value === sort_by ? 'border-b-2 border-b-blue-500 text-white' : ''}`}
+            className={`rounded-sm px-4 py-1 text-gray-600 transition-all duration-200 hover:bg-gray-500/20 hover:no-underline active:scale-95 dark:text-gray-400 ${value === sort_by ? 'border-b-2 border-b-blue-500 text-gray-950 dark:text-gray-50' : ''}`}
           >
             {label}
           </Link>
