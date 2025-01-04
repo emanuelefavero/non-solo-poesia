@@ -32,7 +32,7 @@ export default function Component() {
   return (
     <div className='flex w-full max-w-prose flex-col gap-3 xs:flex-row xs:gap-2'>
       <input
-        type='text'
+        type='search'
         placeholder='Cerca un post...'
         value={query}
         onChange={(e) => setQuery(e.target.value)}
