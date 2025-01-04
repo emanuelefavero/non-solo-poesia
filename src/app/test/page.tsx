@@ -1,132 +1,35 @@
-'use client'
+import Link from 'next/link'
 
-import { useEffect, useState } from 'react'
+const sortByLinks = [
+  { label: 'Data', value: 'published_at' },
+  { label: 'Titolo', value: 'title' },
+]
 
-export default function Page() {
+type Props = {
+  searchParams: Promise<{ page?: string; sort_by?: string }>
+}
+
+export default async function Page({ searchParams }: Props) {
+  const { page, sort_by } = await searchParams
+  const currentPage = parseInt(page || '1', 10)
+
   return (
     <>
       <h1>Test</h1>
-      <Component />
+
+      <div className='flex w-full items-center justify-end'>
+        <span className='mr-2'>Ordina per:</span>
+
+        {sortByLinks.map(({ label, value }) => (
+          <Link
+            key={`sort-by-${value}`}
+            href={`/test?page=${currentPage}&sort_by=${value}`}
+            className={`mx-0.5 rounded-sm px-4 py-1 text-black transition-transform duration-200 hover:bg-gray-500/20 hover:text-white hover:no-underline active:scale-95 dark:text-white ${value === sort_by ? 'border-b-2 border-b-blue-500 text-white' : ''}`}
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
     </>
-  )
-}
-
-type Post = {
-  id: number
-  title: string
-  body: string
-}
-
-function Component() {
-  const [posts, setPosts] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [loading, setLoading] = useState(false)
-
-  const postsPerPage = 10
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true)
-      try {
-        const response = await fetch(
-          'https://jsonplaceholder.typicode.com/posts',
-        )
-        const data = await response.json()
-        setPosts(data)
-      } catch (error) {
-        console.error('Error fetching posts:', error)
-      }
-      setLoading(false)
-    }
-
-    fetchPosts()
-  }, [])
-
-  // Get current posts for the page
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
-
-  const totalPages = Math.ceil(posts.length / postsPerPage)
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
-
-  const renderPagination = () => {
-    const pages = []
-
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i)
-      }
-    } else {
-      pages.push(1)
-      pages.push(2)
-
-      if (currentPage > 3) {
-        pages.push('...')
-      }
-
-      if (currentPage > 2 && currentPage < totalPages - 1) {
-        pages.push(currentPage)
-      }
-
-      if (currentPage < totalPages - 2) {
-        pages.push('...')
-      }
-
-      pages.push(totalPages)
-    }
-
-    return pages.map((page, index) => (
-      <button
-        key={index}
-        onClick={() => typeof page === 'number' && handlePageChange(page)}
-        disabled={typeof page !== 'number'}
-        className={`${
-          currentPage === page ? 'bg-blue-500 text-white' : ''
-        } rounded px-3 py-1`}
-      >
-        {page}
-      </button>
-    ))
-  }
-
-  return (
-    <div>
-      <h1>Posts</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <ul className='list-none'>
-            {currentPosts.map((post: Post) => (
-              <li key={post.id}>
-                <h3>{post.title}</h3>
-                <p>{post.body}</p>
-              </li>
-            ))}
-          </ul>
-          <div className='flex gap-3'>
-            <button
-              onClick={() => handlePageChange(1)}
-              aria-label='First Page'
-              title='First Page'
-            >
-              {'<'}
-            </button>
-            {renderPagination()}
-            <button
-              onClick={() => handlePageChange(totalPages)}
-              aria-label='Last Page'
-              title='Last Page'
-            >
-              {'>'}
-            </button>
-          </div>
-        </>
-      )}
-    </div>
   )
 }
