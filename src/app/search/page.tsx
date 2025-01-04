@@ -1,17 +1,22 @@
 'use client'
 
 import { searchPosts } from '@/app/actions/searchPosts'
-import PostList from '@/components/PostList'
+import FoundPosts from '@/app/search/components/FoundPosts'
+import { useSearchStore } from '@/app/search/store/searchStore'
 import type { Post } from '@/types'
-import { useState } from 'react'
 
 // TODO add loading spinner
 
 export default function Page() {
-  const [query, setQuery] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [foundPosts, setFoundPosts] = useState<Post[] | null>(null)
-  const [message, setMessage] = useState<string | null>(null)
+  const {
+    query,
+    setQuery,
+    loading,
+    setLoading,
+    setFoundPosts,
+    message,
+    setMessage,
+  } = useSearchStore()
 
   const handleSearch = async () => {
     if (!query) {
@@ -64,7 +69,7 @@ export default function Page() {
         {message}
       </p>
 
-      {foundPosts && <PostList posts={foundPosts} />}
+      <FoundPosts />
     </div>
   )
 }
