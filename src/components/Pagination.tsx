@@ -6,11 +6,13 @@ import Link from 'next/link'
 type PaginationProps = {
   currentPage: number
   totalPages: number
+  currentOrderBy: string
 }
 
 export default function Component({
   currentPage,
   totalPages,
+  currentOrderBy,
 }: PaginationProps) {
   const pages = generatePagination(currentPage, totalPages)
 
@@ -18,7 +20,7 @@ export default function Component({
     <div className='mt-4 flex h-[34px] items-center justify-center'>
       {currentPage > 1 && (
         <PaginationLink
-          href={`/?page=1`}
+          href={`/?page=1&order_by=${currentOrderBy}`}
           ariaLabel='Prima pagina'
           title='Prima pagina'
         >
@@ -32,7 +34,7 @@ export default function Component({
         typeof page === 'number' ? (
           <PaginationLink
             key={index}
-            href={`/?page=${page}`}
+            href={`/?page=${page}&order_by=${currentOrderBy}`}
             className={page === currentPage ? 'bg-blue-500/80 text-white' : ''}
             ariaLabel={`Pagina ${page}`}
             title={`Pagina ${page}`}
@@ -51,7 +53,7 @@ export default function Component({
 
       {currentPage < totalPages && (
         <PaginationLink
-          href={`/?page=${totalPages}`}
+          href={`/?page=${totalPages}&order_by=${currentOrderBy}`}
           ariaLabel='Ultima pagina'
           title='Ultima pagina'
         >
