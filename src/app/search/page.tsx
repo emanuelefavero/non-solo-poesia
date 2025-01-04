@@ -2,21 +2,15 @@
 
 import { searchPosts } from '@/app/actions/searchPosts'
 import FoundPosts from '@/app/search/components/FoundPosts'
+import SearchMessage from '@/app/search/components/SearchMessage'
 import { useSearchStore } from '@/app/search/store/searchStore'
 import type { Post } from '@/types'
 
 // TODO add loading spinner
 
 export default function Page() {
-  const {
-    query,
-    setQuery,
-    loading,
-    setLoading,
-    setFoundPosts,
-    message,
-    setMessage,
-  } = useSearchStore()
+  const { query, setQuery, loading, setLoading, setFoundPosts, setMessage } =
+    useSearchStore()
 
   const handleSearch = async () => {
     if (!query) {
@@ -61,14 +55,7 @@ export default function Page() {
         </button>
       </div>
 
-      <p
-        className={`mb-4 mt-1 min-h-[36px] font-semibold italic text-yellow-700 transition-opacity duration-300 dark:text-yellow-500 ${
-          message ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        {message}
-      </p>
-
+      <SearchMessage />
       <FoundPosts />
     </div>
   )
