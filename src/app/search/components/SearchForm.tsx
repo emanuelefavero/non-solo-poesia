@@ -33,9 +33,14 @@ export default function Component() {
     <div className='flex w-full max-w-prose flex-col gap-3 xs:flex-row xs:gap-2'>
       <input
         type='text'
+        placeholder='Cerca un post...'
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder='Cerca un post...'
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSearch()
+          }
+        }}
         required
         className='w-full'
       />
