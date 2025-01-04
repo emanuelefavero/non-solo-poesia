@@ -1,6 +1,8 @@
 'use client'
 
-import { useSearchStore } from '../store/searchStore'
+import { useSearchStore } from '@/app/search/store/searchStore'
+
+// TODO add loading spinner
 
 export default function Component() {
   const { message } = useSearchStore()
