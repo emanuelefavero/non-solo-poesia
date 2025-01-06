@@ -9,6 +9,9 @@ type Props = {
   searchParams: Promise<{ page?: string; order_by?: string }>
 }
 
+// TODO Create categories for the posts like "Poesie", "Racconti", "Pensieri", "Annunci". Start with updating the postgreSQL posts table with a "category" field (and populate it). Make sure the category field is UNIQUE. In the NeonDB console, create indexes for the "category" field with: `CREATE INDEX idx_category ON posts(category);`
+// TODO Update the getPosts function to accept a category parameter and filter the posts by category if the category parameter exists or create a new function getPostsByCategory that accepts a category parameter. The query should be something like: `SELECT * FROM posts WHERE category = ${category} ORDER BY published_at DESC LIMIT ${postsPerPage} OFFSET ${offset}`. 
+
 export default async function Home({ searchParams }: Props) {
   const { page, order_by } = await searchParams
   const currentOrderBy = order_by || 'published_at'
