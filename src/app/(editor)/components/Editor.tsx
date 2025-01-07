@@ -4,6 +4,7 @@ import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { deleteImageFromCloudinary } from '@/app/actions/deleteImageFromCloudinary'
 import { uploadImageToCloudinary } from '@/app/actions/uploadImageToCloudinary'
 import { authors } from '@/data/authors'
+import { categories } from '@/data/categories'
 import type { Post } from '@/types'
 import { validatePost } from '@/utils/validatePost'
 import Bold from '@tiptap/extension-bold'
@@ -42,6 +43,8 @@ export default function Component({ post }: Props) {
     setDescription,
     author,
     setAuthor,
+    category,
+    setCategory,
     coverImage,
     setCoverImage,
     setCoverImageType,
@@ -63,6 +66,7 @@ export default function Component({ post }: Props) {
     setTitle(post?.title || '')
     setDescription(post?.description || '')
     setAuthor(post?.author || authors[0].name || '')
+    setCategory(post?.category || categories[0].name || '')
     setCoverImage(post?.cover_image || '')
     setCoverImageType(post?.cover_image_cloudinary ? 'file' : 'url')
     setCoverImageCloudinary(post?.cover_image_cloudinary || '')
@@ -75,6 +79,7 @@ export default function Component({ post }: Props) {
     setTitle,
     setDescription,
     setAuthor,
+    setCategory,
     setCoverImage,
     setCoverImageType,
     setCoverImageCloudinary,
@@ -218,6 +223,7 @@ export default function Component({ post }: Props) {
       coverImageCloudinary,
       htmlContent,
       author,
+      category,
       editor,
     })
 
@@ -248,6 +254,7 @@ export default function Component({ post }: Props) {
           coverImageCloudinary,
           content: htmlContent,
           author,
+          category,
           ...(post && { id: post.id }),
         }),
       })
