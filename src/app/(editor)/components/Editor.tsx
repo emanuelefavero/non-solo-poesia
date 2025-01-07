@@ -17,6 +17,7 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useEffect } from 'react'
 import AuthorSelector from './AuthorSelector'
+import CategorySelector from './CategorySelector'
 import CoverImageSelector from './CoverImageSelector'
 import DescriptionInput from './DescriptionInput'
 import PublishButton from './PublishButton'
@@ -307,6 +308,7 @@ export default function Component({ post }: Props) {
         className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
       <AuthorSelector />
+      <CategorySelector />
       <PublishButton handlePublish={handlePublish} />
       <ValidationMessage />
     </div>

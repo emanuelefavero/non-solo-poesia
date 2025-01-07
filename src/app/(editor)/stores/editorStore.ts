@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
-import type { Message } from '@/types'
+import { categories } from '@/data/categories'
+import type { CategoryNames, Message } from '@/types'
 import { create } from 'zustand'
 
 type EditorState = {
@@ -17,6 +18,8 @@ type EditorState = {
   setDescription: (description: string) => void
   author: string
   setAuthor: (author: string) => void
+  category: CategoryNames
+  setCategory: (category: CategoryNames) => void
   coverImage: string
   setCoverImage: (coverImage: string) => void
   coverImageType: 'url' | 'file'
@@ -45,6 +48,8 @@ export const useEditorStore = create<EditorState>((set) => ({
   setDescription: (description) => set({ description }),
   author: authors[0].name,
   setAuthor: (author) => set({ author }),
+  category: categories[0].name,
+  setCategory: (category) => set({ category }),
   coverImage: '',
   setCoverImage: (coverImage) => set({ coverImage }),
   coverImageType: 'url',
@@ -66,6 +71,7 @@ export const useEditorStore = create<EditorState>((set) => ({
       coverImageCloudinary: '',
       coverImageCloudinaryPreview: null,
       author: authors[0].name,
+      category: categories[0].name,
     })
   },
 }))
