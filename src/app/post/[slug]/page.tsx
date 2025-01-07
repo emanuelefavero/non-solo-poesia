@@ -1,8 +1,8 @@
+import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
-// import Image from 'next/image'
 import Link from 'next/link'
 
 // Get post data from neon db by slug (the slug comes from the URL)
@@ -41,9 +41,7 @@ export default async function Page(props: Props) {
 
       <div>
         {/* Category */}
-        <span className='text-sm font-semibold uppercase text-pink-500 dark:text-pink-400'>
-          {post.category}
-        </span>
+        <Category category={post.category} />
 
         {/* Title */}
         <h1>{post.title}</h1>
