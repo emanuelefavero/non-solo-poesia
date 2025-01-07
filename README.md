@@ -49,6 +49,11 @@ CLERK_SECRET_KEY= # Go to your Clerk console
 NEXT_PUBLIC_ADMIN_ID= # This is the admin of the blog
 NEXT_PUBLIC_AUTHOR_ID= # This is the author of the blog
 
+# Cloudinary configuration
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME= # Go to your Cloudinary console
+NEXT_PUBLIC_CLOUDINARY_API_KEY= # Go to your Cloudinary console
+CLOUDINARY_API_SECRET= # Go to your Cloudinary console
+
 # Neon database URL
 DATABASE_URL= # Go to your neon project console and copy the DATABASE_URL
 ```
