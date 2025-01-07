@@ -41,7 +41,7 @@ export default async function Page(props: Props) {
 
       <div>
         {/* Category */}
-        <Category category={post.category} />
+        <Category category={post.category} className='text-sm' />
 
         {/* Title */}
         <h1>{post.title}</h1>
