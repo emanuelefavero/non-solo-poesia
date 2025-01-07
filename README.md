@@ -25,9 +25,17 @@ CREATE TABLE IF NOT EXISTS posts(
   cover_image_cloudinary TEXT DEFAULT '',
   content TEXT NOT NULL,
   author TEXT NOT NULL,
+  category TEXT DEFAULT '',
   published_at TIMESTAMP WITH TIME ZONE NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE
 )
+```
+
+- Also create an index on the `slug` and `category` columns to speed up queries (run this in the Neon SQL editor):
+
+```sql
+CREATE INDEX idx_slug ON posts(slug);
+CREATE INDEX idx_category ON posts(category);
 ```
 
 - Create a `.env.local` file in the root of the project and add the following environment variables:
