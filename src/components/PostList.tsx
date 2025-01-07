@@ -1,3 +1,4 @@
+import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import type { Post } from '@/types'
 import Link from 'next/link'
@@ -23,6 +24,7 @@ export default function Component({ posts }: { posts: Post[] }) {
             </div>
 
             <div className='py-4'>
+              <Category category={post.category} className='text-sm' />
               <h2 className='mb-2 text-lg font-semibold'>{post.title}</h2>
               <p className='mb-4 line-clamp-3 text-sm'>{post.description}</p>
               <p className='text-sm text-gray-600 dark:text-gray-300'>
