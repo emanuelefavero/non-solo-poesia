@@ -1,4 +1,5 @@
 import { authors } from '@/data/authors'
+import { categories } from '@/data/categories'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
@@ -42,6 +43,7 @@ async function validateRequest(req: Request) {
     coverImageCloudinary,
     content,
     author,
+    category,
     id,
   } = await req.json()
 
@@ -50,13 +52,14 @@ async function validateRequest(req: Request) {
     !description ||
     (!coverImage && !coverImageCloudinary) ||
     !content ||
-    !author
+    !author ||
+    !category
   ) {
     return {
       error: new Response(
         JSON.stringify({
           message:
-            'Accesso bloccato - Titolo, descrizione, immagine di copertina, autore e contenuti sono obbligatori',
+            'Accesso bloccato - Titolo, descrizione, immagine di copertina, autore, categoria e contenuti sono obbligatori',
         }),
         { status: 400 },
       ),
@@ -99,6 +102,20 @@ async function validateRequest(req: Request) {
     }
   }
 
+  // Sanitize the category (trim and check if it's valid)
+  const sanitizedCategory = category.trim()
+  if (!categories.find((c) => c.name === sanitizedCategory)) {
+    return {
+      error: new Response(
+        JSON.stringify({
+          message:
+            'Accesso bloccato - Per favore seleziona una categoria valida',
+        }),
+        { status: 400 },
+      ),
+    }
+  }
+
   return {
     userId,
     sanitizedData: {
@@ -109,6 +126,7 @@ async function validateRequest(req: Request) {
       coverImageCloudinary,
       content,
       author: sanitizedAuthor,
+      category: sanitizedCategory,
       id,
     },
   }
@@ -134,14 +152,43 @@ export async function POST(req: Request) {
       cover_image_cloudinary: sanitizedData.coverImageCloudinary,
       content: sanitizedData.content,
       author: sanitizedData.author,
+      category: sanitizedData.category,
       published_at: new Date().toISOString(),
       updated_at: null,
     }
 
     await sql`
-      INSERT INTO posts (id, slug, title, description, cover_image, cover_image_cloudinary, content, author, published_at, updated_at)
-      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.cover_image}, ${post.cover_image_cloudinary}, ${post.content}, ${post.author}, ${post.published_at}, ${post.updated_at})
+      INSERT INTO posts (
+        id,
+        slug,
+        title,
+        description,
+        cover_image,
+        cover_image_cloudinary,
+        content,
+        author,
+        category,
+        published_at,
+        updated_at
+      ) VALUES (
+        ${post.id},
+        ${post.slug},
+        ${post.title},
+        ${post.description},
+        ${post.cover_image},
+        ${post.cover_image_cloudinary},
+        ${post.content},
+        ${post.author},
+        ${post.category},
+        ${post.published_at},
+        ${post.updated_at}
+      )
     `
+
+    /*
+    INSERT INTO posts (id, slug, title, description, cover_image, cover_image_cloudinary, content, author, category, published_at, updated_at)
+      VALUES (${post.id}, ${post.slug}, ${post.title}, ${post.description}, ${post.cover_image}, ${post.cover_image_cloudinary}, ${post.content}, ${post.author}, ${post.category}, ${post.published_at}, ${post.updated_at})
+    */
 
     revalidatePath('/')
 
@@ -181,6 +228,7 @@ export async function PUT(req: Request) {
           cover_image_cloudinary = ${sanitizedData.coverImageCloudinary},
           content = ${sanitizedData.content},
           author = ${sanitizedData.author},
+          category = ${sanitizedData.category},
           updated_at = ${new Date().toISOString()}
       WHERE id = ${sanitizedData.id}
     `
