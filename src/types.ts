@@ -21,8 +21,15 @@ export type Author = {
   name: "Maria D'Ippolito" | 'Teresa'
 }
 
+export type CategoryNames =
+  | 'Poesie'
+  | 'Racconti'
+  | 'Pensieri'
+  | 'Ricette'
+  | 'Eventi'
+
 export type Category = {
   id: string
-  name: 'Poesie' | 'Racconti' | 'Pensieri' | 'Ricette' | 'Eventi'
+  name: CategoryNames
   slug: 'poesie' | 'racconti' | 'pensieri' | 'ricette' | 'eventi'
 }
