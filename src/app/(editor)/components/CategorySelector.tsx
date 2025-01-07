@@ -8,11 +8,11 @@ export default function Component() {
 
   return (
     <div className='mb-4 flex flex-col gap-2'>
-      <label htmlFor='author' className='font-medium'>
-        Autore
+      <label htmlFor='category' className='font-medium'>
+        Categoria
       </label>
       <select
-        id='author'
+        id='category'
         className='max-w-[151px]'
         value={category}
         onChange={(e) => setCategory(e.target.value)}
