@@ -29,7 +29,7 @@ export default async function Page(props: Props) {
   if (!post) return <p>Post non trovato.</p>
 
   return (
-    <div className='flex max-w-3xl flex-col gap-4'>
+    <div className='flex max-w-3xl flex-col gap-3.5'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage
@@ -39,18 +39,25 @@ export default async function Page(props: Props) {
         />
       </div>
 
-      {/* Title */}
-      <h1>{post.title}</h1>
+      <div>
+        {/* Category */}
+        <span className='text-sm font-semibold uppercase text-pink-500 dark:text-pink-400'>
+          {post.category}
+        </span>
+
+        {/* Title */}
+        <h1>{post.title}</h1>
+      </div>
 
       {/* Author */}
-      <span>
+      <div>
         Scritto da{' '}
         <span className='text-pink-500 dark:text-pink-400'>{post.author}</span>
-      </span>
+      </div>
 
       {/* Date */}
       {/* Date data example: 2024-12-10 07:23:57.257+00 */}
-      <span>
+      <div>
         Pubblicato il{' '}
         {new Date(post.published_at)
           .toLocaleDateString('it-IT', {
@@ -60,7 +67,7 @@ export default async function Page(props: Props) {
           })
           // Capitalize the first letter of the month
           .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-      </span>
+      </div>
 
       {(userId === adminId || userId === authorId) && (
         <div className='flex gap-2'>
