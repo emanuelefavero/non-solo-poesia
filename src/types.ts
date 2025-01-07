@@ -1,3 +1,10 @@
+export type CategoryNames =
+  | 'Poesie'
+  | 'Racconti'
+  | 'Pensieri'
+  | 'Ricette'
+  | 'Eventi'
+
 export type Post = {
   id: string
   slug: string
@@ -7,6 +14,7 @@ export type Post = {
   cover_image_cloudinary?: string
   content: string
   author: string
+  category: CategoryNames
   published_at: string
   updated_at?: string | null
 }
@@ -20,13 +28,6 @@ export type Author = {
   id: string
   name: "Maria D'Ippolito" | 'Teresa'
 }
-
-export type CategoryNames =
-  | 'Poesie'
-  | 'Racconti'
-  | 'Pensieri'
-  | 'Ricette'
-  | 'Eventi'
 
 export type Category = {
   id: string

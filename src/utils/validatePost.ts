@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
-import type { Message } from '@/types'
+import { categories } from '@/data/categories'
+import type { CategoryNames, Message } from '@/types'
 import { Editor } from '@tiptap/react'
 
 type ValidatePost = {
@@ -9,6 +10,7 @@ type ValidatePost = {
   coverImageCloudinary: string
   htmlContent: string
   author: string
+  category: CategoryNames
   editor: Editor | null
 }
 
@@ -19,6 +21,7 @@ export function validatePost({
   coverImageCloudinary,
   htmlContent,
   author,
+  category,
   editor,
 }: ValidatePost): Message {
   if (!title) {
@@ -95,6 +98,20 @@ export function validatePost({
     return {
       type: 'error',
       text: 'Per favore seleziona un autore valido',
+    }
+  }
+
+  if (!category) {
+    return {
+      type: 'error',
+      text: 'Per favore seleziona una categoria',
+    }
+  }
+
+  if (!categories.find((c) => c.name === category)) {
+    return {
+      type: 'error',
+      text: 'Per favore seleziona una categoria valida',
     }
   }
 
