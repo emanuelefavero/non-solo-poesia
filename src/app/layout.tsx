@@ -32,6 +32,7 @@ export default function RootLayout({
       appearance={{
         elements: {
           userButtonOuterIdentifier: 'text-zinc-800 dark:text-zinc-100',
+          userButtonAvatarBox: 'w-5 h-5',
         },
       }}
     >
