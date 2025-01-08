@@ -1,3 +1,4 @@
+import { dancing_script } from '@/app/fonts'
 import { TITLE } from '@/config/index'
 import Link from 'next/link'
 
@@ -14,14 +15,14 @@ export default function Component({ isHomepage }: Props) {
   if (isHomepage) {
     return (
       <button onClick={handleRefreshPage}>
-        <h1>{TITLE}</h1>
+        <h1 className={`${dancing_script.className}`}>{TITLE}</h1>
       </button>
     )
   }
 
   return (
     <Link href='/'>
-      <span>{TITLE}</span>
+      <span className={`${dancing_script.className}`}>{TITLE}</span>
     </Link>
   )
 }
