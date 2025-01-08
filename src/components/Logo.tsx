@@ -15,14 +15,22 @@ export default function Component({ isHomepage }: Props) {
   if (isHomepage) {
     return (
       <button onClick={handleRefreshPage}>
-        <h1 className={`${dancing_script.className}`}>{TITLE}</h1>
+        <h1
+          className={`${dancing_script.className} text-zinc-800 dark:text-zinc-100`}
+        >
+          {TITLE}
+        </h1>
       </button>
     )
   }
 
   return (
     <Link href='/'>
-      <span className={`${dancing_script.className}`}>{TITLE}</span>
+      <span
+        className={`${dancing_script.className} text-zinc-800 dark:text-zinc-100`}
+      >
+        {TITLE}
+      </span>
     </Link>
   )
 }

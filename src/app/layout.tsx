@@ -35,7 +35,7 @@ export default function RootLayout({
         >
           <ProgressBar />
 
-          <header className='flex min-h-[60px] w-full items-center justify-between bg-gray-500/10 p-4'>
+          <header className='relative flex min-h-[60px] w-full items-center justify-center border-b border-b-zinc-800 px-2 py-2.5 dark:border-b-zinc-200'>
             <Header />
           </header>
 
