@@ -3,7 +3,6 @@ import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import { getPosts, getTotalPostCount } from '@/lib/posts'
-import Link from 'next/link'
 
 type Props = {
   searchParams: Promise<{ page?: string; order_by?: string }>
@@ -21,7 +20,6 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <Link href='/test'>Test</Link>
       <OrderBy currentOrderBy={currentOrderBy} />
       <PostList posts={posts} />
       <Pagination
