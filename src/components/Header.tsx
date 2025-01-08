@@ -54,7 +54,7 @@ export default function Component() {
           </SignInButton>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <UserButton showName={true} />
         </SignedIn>
       </div>
       <div className='px-2 py-2'>

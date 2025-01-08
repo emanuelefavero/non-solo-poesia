@@ -28,7 +28,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          userButtonOuterIdentifier: 'text-zinc-800 dark:text-zinc-100',
+        },
+      }}
+    >
       <html lang='en'>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
