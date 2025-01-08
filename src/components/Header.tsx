@@ -1,5 +1,6 @@
 'use client'
 
+import BsSearchIcon from '@/components/icons/BsSearchIcon'
 import {
   SignInButton,
   SignedIn,
@@ -19,13 +20,6 @@ export default function Component() {
   const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
-  // TODO Add icons to search and create post buttons
-  /*
-  <div className='flex h-[24px] items-center'>
-              <ChevronLeftIcon className='h-[16px]' />
-  </div>
-  */
-
   return (
     <>
       <div className='flex w-full items-center justify-end border-b border-b-zinc-800/10 bg-[#fff8fc] px-1.5 py-0.5 text-lg dark:border-b-zinc-200/10 dark:bg-[#1c060f]'>
@@ -37,7 +31,9 @@ export default function Component() {
               aria-label='Cerca post'
               className='hover:no-underline'
             >
-              🔍
+              <div className='flex h-[24px] items-center'>
+                <BsSearchIcon className='h-[16px]' />
+              </div>
             </Link>
           )}
 
