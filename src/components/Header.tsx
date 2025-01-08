@@ -9,6 +9,7 @@ import {
 } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Logo from './Logo'
 
 export default function Component() {
   const pathname = usePathname()
@@ -20,7 +21,7 @@ export default function Component() {
 
   return (
     <>
-      {!isHomepage ? <Link href='/'>Vai alla Home</Link> : <div>Home</div>}
+      <Logo isHomepage={isHomepage} />
       <div className='flex items-center'>
         <nav className='mr-3 flex gap-3'>
           {!isSearchPage ? <Link href='/search'>Cerca</Link> : <div>Cerca</div>}
