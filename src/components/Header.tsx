@@ -30,9 +30,9 @@ export default function Component() {
               href='/search'
               title='Cerca post'
               aria-label='Cerca post'
-              className='hover:no-underline'
+              className='flex h-[24px] w-[24px] items-center hover:no-underline'
             >
-              <BsSearchIcon className='h-[16px]' />
+              <BsSearchIcon className='h-[19px]' />
             </Link>
           )}
 
@@ -42,9 +42,9 @@ export default function Component() {
                 href='/create-post'
                 title='Crea nuovo post'
                 aria-label='Crea nuovo post'
-                className='hover:no-underline'
+                className='flex h-[24px] w-[24px] items-center hover:no-underline'
               >
-                <BsPlusLgIcon className='h-[18px]' />
+                <BsPlusLgIcon className='h-[24px]' />
               </Link>
             )}
         </nav>
