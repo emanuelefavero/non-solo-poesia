@@ -24,7 +24,7 @@ export default function Component() {
   return (
     <>
       <div className='flex w-full items-center justify-end border-b border-b-zinc-800/10 bg-[#fff8fc] px-1.5 py-1 text-lg dark:border-b-zinc-200/10 dark:bg-[#1c060f]'>
-        <nav className='flex items-center gap-2'>
+        <nav className='mr-3 flex items-center gap-2 3xs:mr-0'>
           {!isSearchPage && (
             <Link
               href='/search'
@@ -50,7 +50,9 @@ export default function Component() {
         </nav>
         <SignedOut>
           <SignInButton>
-            <button>Accedi</button>
+            <button className='ml-3 mr-1 text-sm transition-transform duration-200 hover:no-underline active:scale-95'>
+              Accedi
+            </button>
           </SignInButton>
         </SignedOut>
         <SignedIn>
