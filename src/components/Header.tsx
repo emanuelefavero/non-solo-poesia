@@ -23,7 +23,7 @@ export default function Component() {
 
   return (
     <>
-      <div className='flex w-full items-center justify-end border-b border-b-zinc-800 px-2 py-2 text-xl dark:border-b-zinc-200/10'>
+      <div className='flex w-full items-center justify-end border-b border-b-zinc-800/10 bg-pink-100 px-0.5 py-0.5 text-lg dark:border-b-zinc-200/10 dark:bg-[#1c060f]'>
         <nav className='mr-3 flex items-center gap-3'>
           {!isSearchPage && (
             <Link
