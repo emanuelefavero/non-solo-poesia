@@ -30,7 +30,7 @@ export default function Component() {
               href='/search'
               title='Cerca post'
               aria-label='Cerca post'
-              className='flex h-[24px] w-[24px] items-center hover:no-underline'
+              className='flex h-[24px] w-[24px] items-center transition-transform duration-200 hover:no-underline active:scale-95'
             >
               <BsSearchIcon className='h-[19px]' />
             </Link>
@@ -42,7 +42,7 @@ export default function Component() {
                 href='/create-post'
                 title='Crea nuovo post'
                 aria-label='Crea nuovo post'
-                className='flex h-[24px] w-[24px] items-center hover:no-underline'
+                className='flex h-[24px] w-[24px] items-center transition-transform duration-200 hover:no-underline active:scale-95'
               >
                 <BsPlusLgIcon className='h-[24px]' />
               </Link>
