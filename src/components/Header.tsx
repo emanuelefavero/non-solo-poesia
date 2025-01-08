@@ -1,5 +1,6 @@
 'use client'
 
+import BsPlusLgIcon from '@/components/icons/BsPlusLgIcon'
 import BsSearchIcon from '@/components/icons/BsSearchIcon'
 import {
   SignInButton,
@@ -31,9 +32,7 @@ export default function Component() {
               aria-label='Cerca post'
               className='hover:no-underline'
             >
-              <div className='flex h-[24px] items-center'>
-                <BsSearchIcon className='h-[16px]' />
-              </div>
+              <BsSearchIcon className='h-[16px]' />
             </Link>
           )}
 
@@ -45,7 +44,7 @@ export default function Component() {
                 aria-label='Crea nuovo post'
                 className='hover:no-underline'
               >
-                +
+                <BsPlusLgIcon className='h-[18px]' />
               </Link>
             )}
         </nav>
