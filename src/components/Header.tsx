@@ -20,6 +20,11 @@ export default function Component() {
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
   // TODO Add icons to search and create post buttons
+  /*
+  <div className='flex h-[24px] items-center'>
+              <ChevronLeftIcon className='h-[16px]' />
+  </div>
+  */
 
   return (
     <>
