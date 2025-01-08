@@ -31,7 +31,8 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         elements: {
-          userButtonOuterIdentifier: 'text-zinc-800 dark:text-zinc-100',
+          userButtonOuterIdentifier:
+            'text-zinc-800 dark:text-zinc-100 max-w-[150px] truncate hidden 3xs:inline-block',
           userButtonAvatarBox: 'w-5 h-5',
         },
       }}
