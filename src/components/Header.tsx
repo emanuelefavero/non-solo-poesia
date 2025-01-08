@@ -19,17 +19,35 @@ export default function Component() {
   const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
+  // TODO Add icons to search and create post buttons
+
   return (
     <>
-      <div className='absolute left-2 top-1/2 mb-2 flex -translate-y-1/2 transform items-center'>
-        {/* TODO uncomment these!!!! */}
-        {/* <nav className='mr-3 flex gap-3'>
-          {!isSearchPage ? <Link href='/search'>Cerca</Link> : <div>Cerca</div>}
+      <div className='flex w-full items-center justify-end border-b border-b-zinc-800 px-2 py-2 text-xl dark:border-b-zinc-200/10'>
+        <nav className='mr-3 flex items-center gap-3'>
+          {!isSearchPage && (
+            <Link
+              href='/search'
+              title='Cerca post'
+              aria-label='Cerca post'
+              className='hover:no-underline'
+            >
+              🔍
+            </Link>
+          )}
+
           {(userId === adminId || userId === authorId) &&
             pathname !== '/create-post' && (
-              <Link href='/create-post'>+ Nuovo Post</Link>
+              <Link
+                href='/create-post'
+                title='Crea nuovo post'
+                aria-label='Crea nuovo post'
+                className='hover:no-underline'
+              >
+                +
+              </Link>
             )}
-        </nav> */}
+        </nav>
         <SignedOut>
           <SignInButton>
             <button>Accedi</button>
@@ -39,7 +57,9 @@ export default function Component() {
           <UserButton />
         </SignedIn>
       </div>
-      <Logo isHomepage={isHomepage} />
+      <div className='px-2 py-2'>
+        <Logo isHomepage={isHomepage} />
+      </div>
     </>
   )
 }
