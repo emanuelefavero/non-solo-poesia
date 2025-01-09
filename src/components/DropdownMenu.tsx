@@ -1,15 +1,30 @@
+import { useDarkMode } from '@/hooks/useDarkMode'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Twirl as Hamburger } from 'hamburger-react'
 
 export default function Component() {
+  const isDarkMode = useDarkMode()
+
   return (
     <Menu as='div' className='relative inline-block text-left'>
-      <MenuButton className='relative h-7 w-7 rounded'>
+      <MenuButton
+        className='relative h-7 w-7 rounded'
+        title='Menu'
+        aria-label='Menu'
+      >
         {({ open }) => (
           <div className='absolute -left-3 -top-1.5 h-7 w-7'>
             <Hamburger
               toggled={open}
-              color='#db2777'
+              color={
+                isDarkMode
+                  ? open
+                    ? '#f43f5e'
+                    : '#f472b6'
+                  : open
+                    ? '#e11d48'
+                    : '#db2777'
+              }
               size={20}
               duration={0.3}
             />
