@@ -36,14 +36,14 @@ export default function Component() {
 
       <MenuItems
         transition
-        className='absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md border border-zinc-800/20 bg-white/50 px-3 py-2 shadow-md shadow-zinc-200 ring-1 ring-black/5 backdrop-blur-lg transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in dark:border-zinc-200/20 dark:bg-black/20 dark:shadow-black'
+        className='absolute right-0 z-10 mt-2 origin-top-right rounded-md border border-zinc-800/20 bg-white/50 px-3 py-1.5 shadow-md shadow-zinc-200 ring-1 ring-black/5 backdrop-blur-lg transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in 5xs:w-40 dark:border-zinc-200/20 dark:bg-black/20 dark:shadow-black'
       >
         {categories.map((category) => (
           <MenuItem key={category.id}>
             <CategoryLink
               name={category.name}
               slug={category.slug}
-              className='block capitalize text-zinc-700 hover:text-black data-[focus]:text-black dark:text-zinc-300 dark:hover:text-white dark:data-[focus]:text-white'
+              className='block py-0.5 capitalize text-zinc-700 hover:text-black data-[focus]:text-black dark:text-zinc-300 dark:hover:text-white dark:data-[focus]:text-white'
             />
           </MenuItem>
         ))}
