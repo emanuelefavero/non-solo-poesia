@@ -12,6 +12,7 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Categories from './Categories'
+import DropdownMenu from './DropdownMenu'
 import Logo from './Logo'
 
 export default function Component() {
@@ -49,6 +50,7 @@ export default function Component() {
               </Link>
             )}
         </nav>
+
         <SignedOut>
           <SignInButton>
             <button className='ml-3 mr-1 text-sm transition-transform duration-200 hover:no-underline active:scale-95'>
@@ -59,6 +61,10 @@ export default function Component() {
         <SignedIn>
           <UserButton showName={true} />
         </SignedIn>
+
+        <div className='ml-3 mr-1 block 2xs:hidden'>
+          <DropdownMenu />
+        </div>
       </div>
       <div className='px-2 py-2'>
         <Logo isHomepage={isHomepage} />
