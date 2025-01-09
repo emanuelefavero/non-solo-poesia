@@ -64,7 +64,7 @@ export default function Component() {
         <Logo isHomepage={isHomepage} />
       </div>
 
-      <nav className='flex items-center justify-center gap-2 pb-1'>
+      <nav className='hidden items-center justify-center gap-2 pb-1 text-sm 2xs:flex xs:gap-4 xs:text-base'>
         <Categories />
       </nav>
     </>
