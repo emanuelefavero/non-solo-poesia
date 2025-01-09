@@ -8,12 +8,13 @@ export default function Component() {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <MenuButton
-        className='relative h-7 w-7 rounded'
+        className='relative mr-0.5 mt-1.5 h-6 w-6 overflow-hidden rounded bg-transparent'
         title='Menu'
         aria-label='Menu'
       >
         {({ open }) => (
-          <div className='absolute -left-3 -top-1.5 h-7 w-7'>
+          // Position absolute on the top left
+          <div className='absolute -left-3 -top-[0.72rem]'>
             <Hamburger
               toggled={open}
               color={
@@ -25,7 +26,7 @@ export default function Component() {
                     ? '#e11d48'
                     : '#db2777'
               }
-              size={20}
+              size={20} // Adjust size if needed for better alignment
               duration={0.3}
             />
           </div>
