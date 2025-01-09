@@ -1,13 +1,21 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { Twirl as Hamburger } from 'hamburger-react'
 
 export default function Component() {
   return (
     <Menu as='div' className='relative inline-block text-left'>
-      <div>
-        <MenuButton className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
-          {({ open }) => <>{open ? 'Close' : 'Open'}</>}
-        </MenuButton>
-      </div>
+      <MenuButton className='relative h-7 w-7 rounded'>
+        {({ open }) => (
+          <div className='absolute -left-3 -top-1.5 h-7 w-7'>
+            <Hamburger
+              toggled={open}
+              color='#db2777'
+              size={20}
+              duration={0.3}
+            />
+          </div>
+        )}
+      </MenuButton>
 
       <MenuItems
         transition
