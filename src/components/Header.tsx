@@ -70,7 +70,7 @@ export default function Component() {
         <Logo isHomepage={isHomepage} />
       </div>
 
-      <nav className='hidden items-center justify-center gap-2 pb-1 text-sm 2xs:flex xs:gap-4 xs:text-base'>
+      <nav className='hidden items-center justify-center gap-2.5 pb-1 text-sm 2xs:flex xs:gap-4 xs:text-base'>
         <Categories />
       </nav>
     </>

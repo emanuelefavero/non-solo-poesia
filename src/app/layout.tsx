@@ -49,7 +49,9 @@ export default function RootLayout({
             <Header />
           </header>
 
-          <main className='flex flex-col gap-4 px-4 py-16'>{children}</main>
+          <main className='flex flex-col gap-4 px-4 pb-32 pt-6'>
+            {children}
+          </main>
 
           <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 border-t border-t-pink-500/10 bg-pink-400/10 p-4 text-sm dark:bg-pink-600/10'>
             <Footer />
