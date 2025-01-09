@@ -1,5 +1,6 @@
 import { categories } from '@/data/categories'
 import type { CategoryNames } from '@/types'
+import { convertNameToSlug } from '@/utils/slug'
 import Link from 'next/link'
 
 export default function Component() {
@@ -25,8 +26,4 @@ function CategoryLink({ name, slug, className }: Props) {
       {name}
     </Link>
   )
-}
-
-function convertNameToSlug(name: string) {
-  return name.toLowerCase().replace(/\s/g, '-')
 }
