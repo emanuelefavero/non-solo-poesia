@@ -8,7 +8,7 @@ export default function Component() {
   const { progress } = useEditorStore()
 
   if (
-    !pathname.includes('/create-post') &&
+    !pathname.includes('/crea-nuovo-post') &&
     !pathname.includes('/modifica-post')
   ) {
     return null

@@ -38,9 +38,9 @@ export default function Component() {
           )}
 
           {(userId === adminId || userId === authorId) &&
-            pathname !== '/create-post' && (
+            pathname !== '/crea-nuovo-post' && (
               <Link
-                href='/create-post'
+                href='/crea-nuovo-post'
                 title='Crea nuovo post'
                 aria-label='Crea nuovo post'
                 className='flex h-6 w-6 items-center transition-transform duration-200 hover:no-underline active:scale-95'
