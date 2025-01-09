@@ -11,6 +11,7 @@ import {
 } from '@clerk/nextjs'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Categories from './Categories'
 import Logo from './Logo'
 
 export default function Component() {
@@ -62,6 +63,8 @@ export default function Component() {
       <div className='px-2 py-2'>
         <Logo isHomepage={isHomepage} />
       </div>
+
+      <Categories />
     </>
   )
 }
