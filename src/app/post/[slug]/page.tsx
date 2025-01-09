@@ -50,7 +50,7 @@ export default async function Page(props: Props) {
       {/* Author */}
       <div>
         Scritto da{' '}
-        <span className='text-pink-500 dark:text-pink-400'>{post.author}</span>
+        <span className='text-pink-600 dark:text-pink-400'>{post.author}</span>
       </div>
 
       {/* Date */}

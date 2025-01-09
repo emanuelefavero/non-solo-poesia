@@ -8,7 +8,7 @@ interface Props {
 export default function Component({ category, className }: Props) {
   return (
     <span
-      className={`font-semibold uppercase text-pink-500 dark:text-pink-400 ${className || ''}`}
+      className={`font-semibold uppercase text-pink-600 dark:text-pink-400 ${className || ''}`}
     >
       {category}
     </span>

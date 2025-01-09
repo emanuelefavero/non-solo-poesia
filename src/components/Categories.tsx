@@ -21,7 +21,7 @@ function CategoryLink({ name, slug, className }: Props) {
       href={`/category/${slug ? slug : convertNameToSlug(name)}`}
       title={`Vai a ${name}`}
       aria-label={`Vai a ${name}`}
-      className={`font-semibold uppercase text-pink-500 dark:text-pink-400 ${className || ''}`}
+      className={`font-medium uppercase text-pink-600 dark:text-pink-400 ${className || ''}`}
     >
       {name}
     </Link>
