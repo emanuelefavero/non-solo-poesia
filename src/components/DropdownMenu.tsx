@@ -43,7 +43,7 @@ export default function Component() {
             <CategoryLink
               name={category.name}
               slug={category.slug}
-              className='block'
+              className='block capitalize text-zinc-700 hover:text-black data-[focus]:text-black dark:text-zinc-300 dark:hover:text-white dark:data-[focus]:text-white'
             />
           </MenuItem>
         ))}
