@@ -45,7 +45,7 @@ export default function RootLayout({
         >
           <ProgressBar />
 
-          <header className='relative flex min-h-[60px] w-full flex-col items-center justify-center border-b border-b-zinc-800/20 dark:border-b-zinc-200/20'>
+          <header className='relative flex min-h-[60px] w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 dark:border-b-zinc-200/20'>
             <Header />
           </header>
 
