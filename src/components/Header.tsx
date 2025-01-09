@@ -17,7 +17,7 @@ import Logo from './Logo'
 export default function Component() {
   const pathname = usePathname()
   const isHomepage = pathname === '/'
-  const isSearchPage = pathname === '/search'
+  const isSearchPage = pathname === '/cerca'
   const { userId } = useAuth()
   const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
@@ -28,7 +28,7 @@ export default function Component() {
         <nav className='mr-3 flex items-center gap-2 3xs:mr-0'>
           {!isSearchPage && (
             <Link
-              href='/search'
+              href='/cerca'
               title='Cerca post'
               aria-label='Cerca post'
               className='flex h-6 w-6 items-center transition-transform duration-200 hover:no-underline active:scale-95'

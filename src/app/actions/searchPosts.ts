@@ -25,5 +25,5 @@ export async function searchPosts(query: string) {
     }
   }
 
-  revalidatePath('/search')
+  revalidatePath('/cerca')
 }

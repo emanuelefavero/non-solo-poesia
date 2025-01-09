@@ -1,6 +1,6 @@
 'use client'
 
-import { useSearchStore } from '@/app/search/store/searchStore'
+import { useSearchStore } from '@/app/cerca/store/searchStore'
 
 // TODO add loading spinner
 

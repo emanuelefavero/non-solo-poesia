@@ -1,7 +1,7 @@
 'use client'
 
 import { searchPosts } from '@/app/actions/searchPosts'
-import { useSearchStore } from '@/app/search/store/searchStore'
+import { useSearchStore } from '@/app/cerca/store/searchStore'
 import type { Post } from '@/types'
 
 export default function Component() {

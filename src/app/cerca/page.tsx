@@ -1,6 +1,6 @@
-import FoundPosts from '@/app/search/components/FoundPosts'
-import SearchForm from '@/app/search/components/SearchForm'
-import SearchMessage from '@/app/search/components/SearchMessage'
+import FoundPosts from '@/app/cerca/components/FoundPosts'
+import SearchForm from '@/app/cerca/components/SearchForm'
+import SearchMessage from '@/app/cerca/components/SearchMessage'
 
 export default function Page() {
   return (
