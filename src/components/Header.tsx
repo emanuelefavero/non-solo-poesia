@@ -62,8 +62,7 @@ export default function Component() {
           <UserButton showName={true} />
         </SignedIn>
 
-        {/* TODO: add this class here 2xs:hidden */}
-        <div className='ml-3 mr-1 block'>
+        <div className='ml-3 mr-1 block 2xs:hidden'>
           <DropdownMenu />
         </div>
       </div>
