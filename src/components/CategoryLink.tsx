@@ -14,7 +14,7 @@ export default function Component({ name, slug, className }: Props) {
       href={`/categoria/${slug ? slug : convertNameToSlug(name)}`}
       title={`Vai a ${name}`}
       aria-label={`Vai a ${name}`}
-      className={`font-medium uppercase text-pink-600 transition-all duration-300 hover:text-pink-800 hover:no-underline active:scale-95 dark:text-pink-400 dark:hover:text-pink-300 ${className || ''}`}
+      className={`font-medium uppercase text-pink-600 transition-all duration-300 hover:text-pink-800 hover:no-underline active:scale-95 data-[focus]:outline-none dark:text-pink-400 dark:hover:text-pink-300 ${className || ''}`}
     >
       {name}
     </Link>

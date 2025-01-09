@@ -1,6 +1,8 @@
+import { categories } from '@/data/categories'
 import { useDarkMode } from '@/hooks/useDarkMode'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Twirl as Hamburger } from 'hamburger-react'
+import CategoryLink from './CategoryLink'
 
 export default function Component() {
   const isDarkMode = useDarkMode()
@@ -13,7 +15,6 @@ export default function Component() {
         aria-label='Menu'
       >
         {({ open }) => (
-          // Position absolute on the top left
           <div className='absolute -left-3 -top-[0.72rem]'>
             <Hamburger
               toggled={open}
@@ -26,7 +27,7 @@ export default function Component() {
                     ? '#e11d48'
                     : '#db2777'
               }
-              size={20} // Adjust size if needed for better alignment
+              size={20}
               duration={0.3}
             />
           </div>
@@ -35,44 +36,17 @@ export default function Component() {
 
       <MenuItems
         transition
-        className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in'
+        className='absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md border border-zinc-800/20 bg-white/50 px-3 py-2 shadow-md shadow-zinc-200 ring-1 ring-black/5 backdrop-blur-lg transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in dark:border-zinc-200/20 dark:bg-black/20 dark:shadow-black'
       >
-        <div className='py-1'>
-          <MenuItem>
-            <a
-              href='#'
-              className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none'
-            >
-              Account settings
-            </a>
+        {categories.map((category) => (
+          <MenuItem key={category.id}>
+            <CategoryLink
+              name={category.name}
+              slug={category.slug}
+              className='block'
+            />
           </MenuItem>
-          <MenuItem>
-            <a
-              href='#'
-              className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none'
-            >
-              Support
-            </a>
-          </MenuItem>
-          <MenuItem>
-            <a
-              href='#'
-              className='block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none'
-            >
-              License
-            </a>
-          </MenuItem>
-          <form action='#' method='POST'>
-            <MenuItem>
-              <button
-                type='submit'
-                className='block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none'
-              >
-                Sign out
-              </button>
-            </MenuItem>
-          </form>
-        </div>
+        ))}
       </MenuItems>
     </Menu>
   )
