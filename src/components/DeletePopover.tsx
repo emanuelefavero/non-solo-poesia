@@ -18,7 +18,7 @@ export default function Component({ slug }: Props) {
 
   return (
     <Popover className='relative'>
-      <PopoverButton className='block rounded-sm font-semibold text-rose-500/80 transition-transform duration-200 focus:outline-none active:scale-95 data-[active]:text-rose-500 data-[hover]:text-rose-500 data-[focus]:outline-1 data-[focus]:outline-gray-300 dark:data-[focus]:outline-white'>
+      <PopoverButton className='block rounded-sm font-semibold text-rose-600 transition-transform duration-200 focus:outline-none data-[active]:scale-95 data-[hover]:text-rose-500 data-[focus]:outline-1 data-[focus]:outline-gray-300 dark:text-rose-500 dark:data-[hover]:text-rose-400 dark:data-[focus]:outline-white'>
         Elimina
       </PopoverButton>
 
@@ -47,7 +47,7 @@ export default function Component({ slug }: Props) {
               setLoading(false)
             }}
             disabled={loading}
-            className='block rounded-lg px-3 py-2 text-rose-500 transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-50 dark:hover:bg-white/5'
+            className='block rounded-lg px-3 py-2 text-rose-600 transition hover:bg-black/5 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 dark:text-rose-500 dark:hover:bg-white/5'
           >
             Elimina
           </button>
