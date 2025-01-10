@@ -66,14 +66,15 @@ async function validateRequest(req: Request) {
     }
   }
 
-  // Create a slug from the title
-  const slug = title
+  // Sanitize the title (remove invalid characters for URLs)
+  const sanitizedTitle = title
     .trim()
-    .replace(/[^a-z0-9]/gi, '-')
-    .toLowerCase()
+    .replace(/[^a-zA-Z0-9\s$\-_.+!*'(),]/gu, '')
 
-  // Sanitize the title, description, and cover image
-  const sanitizedTitle = title.trim()
+  // Create a slug from title (lowercase and replace spaces with dashes)
+  const slug = sanitizedTitle.toLowerCase().replace(/\s+/g, '-')
+
+  // Sanitize the description (allow letters, numbers, spaces, punctuation and unicode characters)
   const sanitizedDescription = description
     .trim()
     .replace(/[^\p{L}0-9\s\-.,;:!?']/gu, '')
