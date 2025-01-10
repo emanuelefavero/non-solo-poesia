@@ -34,7 +34,7 @@ select {
 }
 
 h1 {
-  @apply text-[2.5rem] font-bold leading-[2.75rem];
+  @apply text-[2.5rem] font-semibold leading-[2.75rem];
 }
 
 h2 {
