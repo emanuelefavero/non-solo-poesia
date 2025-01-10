@@ -58,6 +58,8 @@ export async function getPosts(
   // NOTE: Two queries are needed because the ORDER BY clause cannot be parameterized @see https://github.com/vercel/storage/issues/495
 }
 
+// TODO Implement an optimization cap limit on how many posts there can be as more posts are added the following queries will become slower
+
 // Get the total count of posts
 export async function getTotalPostCount() {
   const sql = neon(process.env.DATABASE_URL as string)

@@ -1,7 +1,10 @@
+'use client'
+
 import ChevronLeftIcon from '@/components/icons/ChevronLeftIcon'
 import ChevronRightIcon from '@/components/icons/ChevronRightIcon'
 import { generatePagination } from '@/utils/pagination'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 type PaginationProps = {
   currentPage: number
@@ -14,13 +17,14 @@ export default function Component({
   totalPages,
   currentOrderBy,
 }: PaginationProps) {
+  const pathname = usePathname()
   const pages = generatePagination(currentPage, totalPages)
 
   return (
     <div className='mt-4 flex h-[34px] items-center justify-center'>
       {currentPage > 1 && (
         <PaginationLink
-          href={`/?page=1&order_by=${currentOrderBy}`}
+          href={`${pathname}?page=1&order_by=${currentOrderBy}`}
           ariaLabel='Prima pagina'
           title='Prima pagina'
         >
@@ -34,7 +38,7 @@ export default function Component({
         typeof page === 'number' ? (
           <PaginationLink
             key={index}
-            href={`/?page=${page}&order_by=${currentOrderBy}`}
+            href={`${pathname}?page=${page}&order_by=${currentOrderBy}`}
             className={page === currentPage ? 'bg-blue-500/80 text-white' : ''}
             ariaLabel={`Pagina ${page}`}
             title={`Pagina ${page}`}
@@ -53,7 +57,7 @@ export default function Component({
 
       {currentPage < totalPages && (
         <PaginationLink
-          href={`/?page=${totalPages}&order_by=${currentOrderBy}`}
+          href={`${pathname}?page=${totalPages}&order_by=${currentOrderBy}`}
           ariaLabel='Ultima pagina'
           title='Ultima pagina'
         >

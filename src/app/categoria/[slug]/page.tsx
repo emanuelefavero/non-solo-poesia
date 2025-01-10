@@ -1,4 +1,9 @@
+import OrderBy from '@/components/OrderBy'
+import Pagination from '@/components/Pagination'
+import PostList from '@/components/PostList'
 import { CATEGORY_SLUGS } from '@/config/categories'
+import { POSTS_PER_PAGE } from '@/config/posts'
+import { getPosts, getTotalPostCountByCategory } from '@/lib/posts'
 import type { CategorySlug } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
 import { redirect } from 'next/navigation'
@@ -16,11 +21,29 @@ export default async function Page({ params, searchParams }: Props) {
   // Redirect to the homepage if the category slug is not valid
   if (!CATEGORY_SLUGS.includes(slug as CategorySlug)) redirect('/')
 
-  const name = convertSlugToName(slug)
+  const category = convertSlugToName(slug)
+  const currentOrderBy = order_by || 'published_at'
+  const currentPage = parseInt(page || '1', 10)
+  const totalPosts = await getTotalPostCountByCategory(category)
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
+  const posts = await getPosts(
+    currentPage,
+    POSTS_PER_PAGE,
+    currentOrderBy,
+    category,
+  )
 
   return (
     <>
-      <h1>{name}</h1>
+      <h1>{category}</h1>
+
+      <OrderBy currentOrderBy={currentOrderBy} />
+      <PostList posts={posts} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        currentOrderBy={currentOrderBy}
+      />
     </>
   )
 }
