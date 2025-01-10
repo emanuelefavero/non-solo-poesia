@@ -59,7 +59,7 @@ export function validatePost({
     }
   }
 
-  if (!/^[a-zA-Z0-9\s\-.,;:!?]+$/.test(description)) {
+  if (!/^[\p{L}0-9\s\-.,;:!?'"]+$/u.test(description)) {
     return {
       type: 'error',
       text: 'La descrizione può contenere solo lettere, numeri, spazi e punteggiatura',

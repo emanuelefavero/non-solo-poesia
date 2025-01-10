@@ -76,7 +76,7 @@ async function validateRequest(req: Request) {
   const sanitizedTitle = title.trim()
   const sanitizedDescription = description
     .trim()
-    .replace(/[^a-z0-9\s\-.,;:!?]/gi, '')
+    .replace(/[^\p{L}0-9\s\-.,;:!?']/gu, '')
   const sanitizedCoverImage = coverImage.trim()
 
   if (coverImage && !/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
