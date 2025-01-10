@@ -104,7 +104,7 @@ hr {
 
 /* Style the TipTap edit placeholder */
 .tiptap-editor .ProseMirror p.is-empty::before {
-  @apply italic text-gray-500;
+  @apply italic text-zinc-500;
   content: attr(data-placeholder);
 }
 

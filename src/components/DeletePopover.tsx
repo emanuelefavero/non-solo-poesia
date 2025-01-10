@@ -27,15 +27,15 @@ export default function Component({ slug }: Props) {
       <PopoverPanel
         transition
         anchor='bottom'
-        className='relative ml-4 mr-4 mt-1 divide-y divide-gray-50 rounded-xl border border-gray-200 bg-gray-50 px-4 py-2 shadow-md shadow-black/10 transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0 dark:divide-neutral-900 dark:border-gray-700 dark:bg-neutral-900 dark:shadow-black/30'
+        className='relative ml-4 mr-4 mt-1 rounded-xl border border-zinc-800/20 bg-white/50 px-4 py-2 shadow-sm shadow-zinc-400 backdrop-blur-lg transition duration-200 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0 dark:border-zinc-200/20 dark:bg-black/20 dark:shadow-black'
       >
-        <p className='select-none text-gray-600 dark:text-gray-400'>
+        <p className='select-none pb-1 text-zinc-600 dark:text-zinc-400'>
           Eliminare questo post?
         </p>
 
         <div className='flex gap-2'>
           <PopoverButton
-            className={`block rounded-lg px-3 py-2 text-gray-600 transition hover:bg-black/5 dark:text-gray-400 dark:hover:bg-white/5 ${loading ? 'invisible' : ''}`}
+            className={`block rounded-lg px-3 py-2 text-zinc-600 transition hover:bg-black/5 dark:text-zinc-400 dark:hover:bg-white/5 ${loading ? 'invisible' : ''}`}
           >
             Annulla
           </PopoverButton>
