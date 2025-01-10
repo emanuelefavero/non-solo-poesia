@@ -77,7 +77,12 @@ export default async function Page({ params }: Props) {
           <DeletePopover slug={post.slug} />
 
           {/* Edit Button */}
-          <Link href={`/modifica-post/${post.slug}`}>Modifica</Link>
+          <Link
+            href={`/modifica-post/${post.slug}`}
+            className='font-semibold text-yellow-600 transition-transform duration-200 hover:text-yellow-700 hover:no-underline active:scale-95 dark:text-yellow-500 dark:hover:text-yellow-400'
+          >
+            Modifica
+          </Link>
         </div>
       )}
       {/* Content */}

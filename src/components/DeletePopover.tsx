@@ -18,7 +18,7 @@ export default function Component({ slug }: Props) {
 
   return (
     <Popover className='relative'>
-      <PopoverButton className='block rounded-sm font-semibold text-rose-500/80 focus:outline-none data-[active]:text-rose-500 data-[hover]:text-rose-500 data-[focus]:outline-1 data-[focus]:outline-gray-300 dark:data-[focus]:outline-white'>
+      <PopoverButton className='block rounded-sm font-semibold text-rose-500/80 transition-transform duration-200 focus:outline-none active:scale-95 data-[active]:text-rose-500 data-[hover]:text-rose-500 data-[focus]:outline-1 data-[focus]:outline-gray-300 dark:data-[focus]:outline-white'>
         Elimina
       </PopoverButton>
 
