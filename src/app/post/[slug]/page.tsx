@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
         <Category category={post.category} className='text-sm' />
 
         {/* Title */}
-        <PostTitle as='h1' title={post.title} className='font-bold' />
+        <PostTitle as='h1' title={post.title} />
       </div>
 
       {/* Author */}

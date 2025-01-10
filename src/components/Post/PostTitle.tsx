@@ -5,5 +5,5 @@ type Props = {
 }
 
 export default function Component({ title, as: Tag = 'h2', className }: Props) {
-  return <Tag className={`${className}`}>{title}</Tag>
+  return <Tag className={`font-bold ${className}`}>{title}</Tag>
 }
