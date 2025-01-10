@@ -114,7 +114,8 @@ export default function Component({ post }: Props) {
     content: post?.content || '',
     editorProps: {
       attributes: {
-        class: 'min-h-40 border border-gray-300 p-2 rounded-md',
+        class:
+          'min-h-40 rounded border border-zinc-800/40 bg-zinc-200/20 px-3 py-2 text-zinc-800 placeholder:text-zinc-600 focus:border-pink-600 focus:outline-none dark:border-zinc-200/30 dark:bg-zinc-950/40 dark:text-zinc-100 dark:placeholder:text-zinc-400 dark:focus:border-pink-400/80',
       },
     },
     immediatelyRender: false,
