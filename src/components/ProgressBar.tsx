@@ -27,7 +27,7 @@ export default function Component() {
             ? 'bg-green-500'
             : progress === 101 // show error state on 101
               ? 'bg-rose-500'
-              : 'bg-blue-500'
+              : 'bg-pink-500'
         }`}
       ></div>
     </div>

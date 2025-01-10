@@ -46,7 +46,7 @@ export default function Component() {
       />
       <button
         onClick={handleSearch}
-        className={`rounded bg-blue-600 px-4 py-2 text-white xs:min-w-[88px] ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+        className={`rounded bg-pink-600 px-4 py-2 text-white xs:min-w-[88px] ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
         disabled={loading}
       >
         {loading ? 'Cerco...' : 'Cerca'}

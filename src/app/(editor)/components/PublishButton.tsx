@@ -12,7 +12,7 @@ export default function Component({ handlePublish }: Props) {
   return (
     <button
       onClick={handlePublish}
-      className={`min-w-[138px] rounded bg-blue-600 px-4 py-2 text-white ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+      className={`min-w-[138px] rounded bg-pink-600 px-4 py-2 text-white ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
       disabled={loading}
     >
       {loading ? 'Pubblicazione...' : 'Pubblica'}

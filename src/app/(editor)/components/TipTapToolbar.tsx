@@ -20,7 +20,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('bold') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('bold') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-bold'>B</span>
@@ -30,7 +30,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('italic') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('italic') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-serif italic'>I</span>
@@ -41,7 +41,7 @@ export default function Component({ editor }: ToolbarProps) {
         onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
         className={`rounded border px-2 py-1 ${
           editor.isActive('heading', { level: 2 })
-            ? 'bg-blue-500 text-white'
+            ? 'bg-pink-600 text-white'
             : ''
         }`}
       >
@@ -53,7 +53,7 @@ export default function Component({ editor }: ToolbarProps) {
         onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
         className={`rounded border px-2 py-1 ${
           editor.isActive('heading', { level: 3 })
-            ? 'bg-blue-500 text-white'
+            ? 'bg-pink-600 text-white'
             : ''
         }`}
       >
@@ -70,10 +70,10 @@ export default function Component({ editor }: ToolbarProps) {
         }}
         className={`rounded border px-2 py-1 ${
           editor.isActive('image')
-            ? 'bg-blue-500 text-white'
-            : 'active:bg-blue-500 active:text-white'
+            ? 'bg-pink-600 text-white'
+            : 'active:bg-pink-600 active:text-white'
         }`}
-        // className='rounded border px-2 py-1 active:bg-blue-500 active:text-white'
+        // className='rounded border px-2 py-1 active:bg-pink-600 active:text-white'
       >
         Img
       </button>
@@ -88,8 +88,8 @@ export default function Component({ editor }: ToolbarProps) {
         }}
         className={`rounded border px-2 py-1 ${
           editor.isActive('link')
-            ? 'bg-blue-500 text-white'
-            : 'active:bg-blue-500 active:text-white'
+            ? 'bg-pink-600 text-white'
+            : 'active:bg-pink-600 active:text-white'
         }`}
       >
         Link
@@ -99,7 +99,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('bulletList') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('bulletList') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-bold'>•</span>
@@ -109,7 +109,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('orderedList') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('orderedList') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-bold'>1.</span>
@@ -119,7 +119,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('blockquote') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('blockquote') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-bold'>{'”'}</span>
@@ -129,7 +129,7 @@ export default function Component({ editor }: ToolbarProps) {
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         className={`rounded border px-2 py-1 ${
-          editor.isActive('strike') ? 'bg-blue-500 text-white' : ''
+          editor.isActive('strike') ? 'bg-pink-600 text-white' : ''
         }`}
       >
         <span className='font-bold'>~</span>
@@ -145,8 +145,8 @@ export default function Component({ editor }: ToolbarProps) {
         }}
         className={`rounded border px-2 py-1 ${
           editor.isActive('youtube')
-            ? 'bg-blue-500 text-white'
-            : 'active:bg-blue-500 active:text-white'
+            ? 'bg-pink-600 text-white'
+            : 'active:bg-pink-600 active:text-white'
         }`}
       >
         YT

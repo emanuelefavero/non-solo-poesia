@@ -39,7 +39,7 @@ export default function Component({
           <PaginationLink
             key={index}
             href={`${pathname}?page=${page}&order_by=${currentOrderBy}`}
-            className={page === currentPage ? 'bg-blue-500/80 text-white' : ''}
+            className={page === currentPage ? 'bg-pink-500/80 text-white' : ''}
             ariaLabel={`Pagina ${page}`}
             title={`Pagina ${page}`}
           >
@@ -89,7 +89,7 @@ function PaginationLink({
   return (
     <Link
       href={href}
-      className={`mx-0.5 rounded px-4 py-1 text-black transition-transform duration-200 hover:bg-blue-500 hover:text-white hover:no-underline active:scale-95 dark:text-white ${
+      className={`mx-0.5 rounded px-4 py-1 text-black transition-transform duration-200 hover:bg-pink-500 hover:text-white hover:no-underline active:scale-95 dark:text-white ${
         className || ''
       }`}
       aria-label={ariaLabel}
