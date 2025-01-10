@@ -8,7 +8,7 @@ type Props = {
   searchParams: Promise<{ page?: string; order_by?: string }>
 }
 
-// TODO Add a category/[slug] page that queries the database with the category slug. The query should be something like: `SELECT * FROM posts WHERE category = ${category} ORDER BY published_at DESC LIMIT ${postsPerPage} OFFSET ${offset}`.
+// TODO Add an hero section in the homepage with the latest post shown bigger with an h1 (if you add an h1, remember to remove the h1 in the homepage header). Remove the latest post from the post list of course.
 
 export default async function Home({ searchParams }: Props) {
   const { page, order_by } = await searchParams
