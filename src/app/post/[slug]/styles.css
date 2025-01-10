@@ -1,0 +1,25 @@
+.post-content {
+  & p,
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6,
+  & ul,
+  & ol,
+  & pre,
+  & blockquote,
+  & table {
+    @apply mt-4;
+  }
+
+  & ul,
+  & ol {
+    @apply ml-8;
+  }
+
+  & blockquote {
+    @apply ml-4 pl-3;
+  }
+}

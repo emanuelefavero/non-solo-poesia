@@ -5,6 +5,7 @@ import PostTitle from '@/components/Post/PostTitle'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
+import './styles.css'
 
 // Get post data from neon db by slug (the slug comes from the URL)
 async function getPost(slug: string) {
@@ -81,6 +82,7 @@ export default async function Page({ params }: Props) {
       )}
       {/* Content */}
       <div
+        className='post-content'
         dangerouslySetInnerHTML={{
           __html: post.content,
         }}

@@ -58,15 +58,15 @@ h6 {
 }
 
 p {
-  @apply py-2 text-base;
+  @apply text-base leading-relaxed;
 }
 
 ul {
-  @apply list-disc pl-4;
+  @apply list-disc;
 }
 
 ol {
-  @apply list-decimal pl-4;
+  @apply list-decimal;
 }
 
 code {
@@ -78,7 +78,7 @@ pre {
 }
 
 blockquote {
-  @apply border-l-4 border-gray-800 pl-4 italic;
+  @apply ml-4 border-l-4 border-gray-800 pl-3 italic;
 }
 
 table {
