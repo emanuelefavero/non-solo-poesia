@@ -46,6 +46,8 @@ export default async function Page({ params }: Props) {
 
         {/* Title */}
         <PostTitle as='h1' title={post.title} className='mt-3' />
+
+        {/* TODO Display description */}
       </div>
       <div className='mt-2.5 text-sm'>
         {/* Author */}
@@ -58,7 +60,7 @@ export default async function Page({ params }: Props) {
         {/* Date */}
         {/* Date data example: 2024-12-10 07:23:57.257+00 */}
         {/* TODO check if post is updated, if so, display updated date instead of published */}
-        <div className='mt-1'>
+        <div className='mt-1 font-medium italic text-zinc-500 dark:text-zinc-400'>
           Pubblicato il{' '}
           {new Date(post.published_at)
             .toLocaleDateString('it-IT', {
