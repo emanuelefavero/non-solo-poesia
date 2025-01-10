@@ -49,18 +49,18 @@ export default async function Page({ params }: Props) {
 
         {/* TODO Display description */}
       </div>
-      <div className='mt-2.5 text-sm'>
+      <div className='mt-2.5'>
         {/* Author */}
-        <div>
+        <p className='text-sm'>
           Scritto da{' '}
           <span className='text-pink-600 dark:text-pink-400'>
             {post.author}
           </span>
-        </div>
+        </p>
         {/* Date */}
         {/* Date data example: 2024-12-10 07:23:57.257+00 */}
         {/* TODO check if post is updated, if so, display updated date instead of published */}
-        <div className='mt-1 font-medium italic text-zinc-500 dark:text-zinc-400'>
+        <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
           Pubblicato il{' '}
           {new Date(post.published_at)
             .toLocaleDateString('it-IT', {
@@ -70,7 +70,7 @@ export default async function Page({ params }: Props) {
             })
             // Capitalize the first letter of the month
             .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-        </div>
+        </p>
       </div>
       {/* Edit and Delete Buttons */}
       {(userId === adminId || userId === authorId) && (

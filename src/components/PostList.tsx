@@ -26,14 +26,18 @@ export default function Component({ posts }: { posts: Post[] }) {
 
             <div className='py-4'>
               <Category category={post.category} className='text-sm' />
-              <PostTitle title={post.title} className='mb-2 text-3xl' />
-              <p className='mb-4 line-clamp-3 text-base font-normal tracking-wide text-zinc-600 dark:text-zinc-50'>
+              <PostTitle title={post.title} className='text-3xl' />
+              <p className='mt-2.5 line-clamp-3 text-base font-normal tracking-wide text-zinc-600 dark:text-zinc-50'>
                 {post.description}
               </p>
-              <p className='text-sm text-zinc-600 dark:text-zinc-300'>
-                Scritto da {post.author}
+              {/* TODO Create PostAuthor component to prevent duplicate */}
+              <p className='mt-4 text-sm text-zinc-600 dark:text-zinc-300'>
+                Scritto da{' '}
+                <span className='text-pink-600 dark:text-pink-400'>
+                  {post.author}
+                </span>
               </p>
-              <p className='text-sm text-zinc-600 dark:text-zinc-300'>
+              <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
                 Pubblicato il{' '}
                 {new Date(post.published_at)
                   .toLocaleDateString('it-IT', {
