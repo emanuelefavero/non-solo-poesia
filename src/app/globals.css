@@ -104,19 +104,21 @@ hr {
   @apply mx-auto;
 } */
 
-/* Style the TipTap editor placeholder */
-.tiptap-editor .ProseMirror p.is-empty::before {
-  @apply italic text-zinc-500;
-  content: attr(data-placeholder);
-}
+.tiptap-editor {
+  /* Style the TipTap editor placeholder */
+  & p.is-empty::before {
+    @apply italic text-zinc-500;
+    content: attr(data-placeholder);
+  }
 
-/* Hide placeholder when editor is focused */
-.tiptap-editor.focused .ProseMirror p.is-empty::before {
-  content: none;
-}
+  /* Hide placeholder when editor is focused */
+  &.focused p.is-empty::before {
+    content: none;
+  }
 
-/* Style the TipTap editor lists */
-.tiptap-editor .ProseMirror ul,
-.tiptap-editor .ProseMirror ol {
-  @apply ml-8;
+  /* Style the TipTap editor lists */
+  & ul,
+  & ol {
+    @apply ml-8;
+  }
 }
