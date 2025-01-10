@@ -25,18 +25,19 @@ a {
   @apply text-pink-600 hover:underline dark:text-pink-400;
 }
 
-input {
-  /* @apply rounded border border-zinc-200/20 p-2 dark:bg-neutral-950; */
-  /* @apply rounded border border-zinc-200/20 p-2 dark:bg-[#0c0709]; */
-  @apply rounded border border-zinc-800/40 bg-zinc-200/20 p-2 text-zinc-800 placeholder:text-zinc-600 focus:border-pink-600 focus:outline-none dark:border-zinc-200/30 dark:bg-zinc-950/40 dark:text-zinc-100 dark:placeholder:text-zinc-400 dark:focus:border-pink-400/80;
-}
-
+input,
 select {
   @apply rounded border border-zinc-800/40 bg-zinc-200/20 p-2 text-zinc-800 placeholder:text-zinc-600 focus:border-pink-600 focus:outline-none dark:border-zinc-200/30 dark:bg-zinc-950/40 dark:text-zinc-100 dark:placeholder:text-zinc-400 dark:focus:border-pink-400/80;
 }
 
+h1,
+h2,
+h3 {
+  @apply font-semibold text-zinc-900 dark:text-zinc-100;
+}
+
 h1 {
-  @apply text-[2.5rem] font-semibold leading-[2.75rem];
+  @apply text-[2.5rem] leading-[2.75rem];
 }
 
 h2 {
@@ -60,7 +61,7 @@ h6 {
 }
 
 p {
-  @apply text-base leading-relaxed;
+  @apply text-base leading-relaxed text-zinc-800 dark:text-zinc-200;
 }
 
 ul {
