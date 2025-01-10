@@ -1,9 +1,23 @@
+// TODO rename CategoryNames to CategoryName
 export type CategoryNames =
   | 'Poesie'
   | 'Racconti'
   | 'Pensieri'
   | 'Ricette'
   | 'Eventi'
+
+export type CategorySlug =
+  | 'poesie'
+  | 'racconti'
+  | 'pensieri'
+  | 'ricette'
+  | 'eventi'
+
+export type Category = {
+  id: string
+  name: CategoryNames
+  slug: CategorySlug
+}
 
 export type Post = {
   id: string
@@ -27,10 +41,4 @@ export type Message = {
 export type Author = {
   id: string
   name: "Maria D'Ippolito" | 'Teresa'
-}
-
-export type Category = {
-  id: string
-  name: CategoryNames
-  slug: 'poesie' | 'racconti' | 'pensieri' | 'ricette' | 'eventi'
 }
