@@ -62,7 +62,7 @@ export default function Component({
               </div>
             </>
           ) : (
-            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-zinc-950'>
+            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded border border-zinc-800/40 bg-zinc-200/20 p-2 text-sm font-semibold text-zinc-800 dark:border-zinc-200/30 dark:bg-zinc-950/40 dark:text-zinc-100'>
               Aggiungi immagine di copertina
             </div>
           )}
@@ -119,7 +119,7 @@ export default function Component({
               </div>
             </>
           ) : (
-            <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+            <div className='flex h-full w-full select-none flex-col flex-wrap items-center justify-center gap-4 rounded-md border border-zinc-800/40 bg-zinc-200/20 p-2 text-sm font-semibold text-zinc-800 dark:border-zinc-200/30 dark:bg-zinc-950/40 dark:text-zinc-100'>
               <label htmlFor='add-cover-image-file'>
                 Aggiungi immagine di copertina
               </label>

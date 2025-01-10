@@ -72,15 +72,15 @@ ol {
 }
 
 code {
-  @apply rounded bg-gray-800 px-1 text-white;
+  @apply rounded bg-zinc-800 px-1 text-white;
 }
 
 pre {
-  @apply rounded bg-gray-800 p-4 text-white;
+  @apply rounded bg-zinc-800 p-4 text-white;
 }
 
 blockquote {
-  @apply ml-4 border-l-4 border-gray-800 pl-3 italic;
+  @apply ml-4 border-l-4 border-zinc-800 pl-3 italic;
 }
 
 table {
@@ -89,15 +89,15 @@ table {
 
 th,
 td {
-  @apply border border-gray-800 p-2;
+  @apply border border-zinc-800 p-2;
 }
 
 th {
-  @apply bg-gray-800 text-white;
+  @apply bg-zinc-800 text-white;
 }
 
 hr {
-  @apply my-4 border-t border-gray-300 dark:border-gray-800;
+  @apply my-4 border-t border-zinc-300 dark:border-zinc-800;
 }
 
 /* img {
