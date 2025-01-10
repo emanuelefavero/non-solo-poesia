@@ -1,6 +1,7 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
+import PostTitle from '@/components/Post/PostTitle'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
@@ -44,7 +45,7 @@ export default async function Page({ params }: Props) {
         <Category category={post.category} className='text-sm' />
 
         {/* Title */}
-        <h1>{post.title}</h1>
+        <PostTitle as='h1' title={post.title} className='font-bold' />
       </div>
 
       {/* Author */}
