@@ -23,7 +23,7 @@ export default function Component({ currentOrderBy }: Props) {
         <Link
           key={`order-by-${value}`}
           href={`${pathname}?page=1&order_by=${value}`}
-          className={`rounded-sm px-4 py-1 text-gray-600 transition-all duration-200 hover:bg-gray-500/20 hover:no-underline active:scale-95 dark:text-gray-400 ${value === currentOrderBy ? 'border-b-2 border-b-blue-500 text-gray-950 dark:text-gray-50' : ''}`}
+          className={`rounded-sm px-4 py-1 text-zinc-600 transition-all duration-200 hover:bg-zinc-500/20 hover:no-underline active:scale-95 dark:text-zinc-400 ${value === currentOrderBy ? 'border-b-2 border-b-blue-500 text-zinc-950 dark:text-zinc-50' : ''}`}
         >
           {label}
         </Link>

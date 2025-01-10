@@ -28,10 +28,10 @@ export default function Component({ posts }: { posts: Post[] }) {
               <Category category={post.category} className='text-sm' />
               <PostTitle title={post.title} className='mb-2 text-2xl' />
               <p className='mb-4 line-clamp-3 text-sm'>{post.description}</p>
-              <p className='text-sm text-gray-600 dark:text-gray-300'>
+              <p className='text-sm text-zinc-600 dark:text-zinc-300'>
                 Scritto da {post.author}
               </p>
-              <p className='text-sm text-gray-600 dark:text-gray-300'>
+              <p className='text-sm text-zinc-600 dark:text-zinc-300'>
                 Pubblicato il{' '}
                 {new Date(post.published_at)
                   .toLocaleDateString('it-IT', {
