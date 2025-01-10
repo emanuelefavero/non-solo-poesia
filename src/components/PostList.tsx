@@ -26,7 +26,7 @@ export default function Component({ posts }: { posts: Post[] }) {
 
             <div className='py-4'>
               <Category category={post.category} className='text-sm' />
-              <PostTitle title={post.title} className='mb-2 text-xl' />
+              <PostTitle title={post.title} className='mb-2 text-2xl' />
               <p className='mb-4 line-clamp-3 text-sm'>{post.description}</p>
               <p className='text-sm text-gray-600 dark:text-gray-300'>
                 Scritto da {post.author}
