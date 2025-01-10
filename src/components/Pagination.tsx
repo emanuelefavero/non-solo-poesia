@@ -21,7 +21,7 @@ export default function Component({
   const pages = generatePagination(currentPage, totalPages)
 
   return (
-    <div className='mt-4 flex h-[34px] items-center justify-center'>
+    <div className='mt-4 flex h-[34px] select-none items-center justify-center'>
       {currentPage > 1 && (
         <PaginationLink
           href={`${pathname}?page=1&order_by=${currentOrderBy}`}
