@@ -1,5 +1,6 @@
 import { CATEGORY_SLUGS } from '@/config/categories'
 import type { CategorySlug } from '@/types'
+import { convertSlugToName } from '@/utils/slug'
 import { redirect } from 'next/navigation'
 
 type Props = { params: Promise<{ slug: string; order_by?: string }> }
@@ -11,9 +12,11 @@ export default async function Page({ params }: Props) {
     redirect('/')
   }
 
+  const name = convertSlugToName(slug)
+
   return (
     <>
-      <h1>{slug}</h1>
+      <h1>{name}</h1>
     </>
   )
 }
