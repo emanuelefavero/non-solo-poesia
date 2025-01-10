@@ -61,7 +61,7 @@ h6 {
 }
 
 p {
-  @apply text-base leading-relaxed text-zinc-800 dark:text-zinc-200;
+  @apply text-[1.0625rem] font-normal leading-[1.625rem] text-zinc-800 dark:text-zinc-200;
 }
 
 ul {
