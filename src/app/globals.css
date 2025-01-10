@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #27272a;
+  --selection: rgba(220, 98, 175, 0.25);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +13,10 @@
     --background: #150209;
     --foreground: #fafafa;
   }
+}
+
+::selection {
+  background-color: var(--selection);
 }
 
 body {
