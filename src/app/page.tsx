@@ -9,6 +9,7 @@ type Props = {
 }
 
 // TODO Add an hero section in the homepage with the latest post shown bigger with an h1 (if you add an h1, remember to remove the h1 in the homepage header). Remove the latest post from the post list of course.
+// TODO Style 404 page
 
 export default async function Home({ searchParams }: Props) {
   const { page, order_by } = await searchParams

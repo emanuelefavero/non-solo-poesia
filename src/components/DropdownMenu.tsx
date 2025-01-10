@@ -4,6 +4,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Twirl as Hamburger } from 'hamburger-react'
 import CategoryLink from './CategoryLink'
 
+// TODO Add browser detection to fix the menu position on FireFox, Safari and Mobile, OR simply remove absolute positioning and let the icon be larger as the problem is only with the icon size being smaller
+
 export default function Component() {
   const isDarkMode = useDarkMode()
 
