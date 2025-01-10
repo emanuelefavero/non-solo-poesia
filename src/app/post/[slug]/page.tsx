@@ -30,7 +30,7 @@ export default async function Page({ params }: Props) {
   if (!post) return <p>Post non trovato.</p>
 
   return (
-    <div className='flex max-w-3xl flex-col gap-3.5'>
+    <div className='flex max-w-3xl flex-col gap-3'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage
@@ -39,37 +39,39 @@ export default async function Page({ params }: Props) {
           cover_image_cloudinary={post.cover_image_cloudinary}
         />
       </div>
-
-      <div>
+      <div className='mt-3'>
         {/* Category */}
         <Category category={post.category} className='text-sm' />
 
         {/* Title */}
-        <PostTitle as='h1' title={post.title} />
+        <PostTitle as='h1' title={post.title} className='mt-3' />
       </div>
-
-      {/* Author */}
-      <div>
-        Scritto da{' '}
-        <span className='text-pink-600 dark:text-pink-400'>{post.author}</span>
+      <div className='mt-2.5 text-sm'>
+        {/* Author */}
+        <div>
+          Scritto da{' '}
+          <span className='text-pink-600 dark:text-pink-400'>
+            {post.author}
+          </span>
+        </div>
+        {/* Date */}
+        {/* Date data example: 2024-12-10 07:23:57.257+00 */}
+        {/* TODO check if post is updated, if so, display updated date instead of published */}
+        <div className='mt-1'>
+          Pubblicato il{' '}
+          {new Date(post.published_at)
+            .toLocaleDateString('it-IT', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })
+            // Capitalize the first letter of the month
+            .replace(/(\b\w)/g, (char) => char.toUpperCase())}
+        </div>
       </div>
-
-      {/* Date */}
-      {/* Date data example: 2024-12-10 07:23:57.257+00 */}
-      <div>
-        Pubblicato il{' '}
-        {new Date(post.published_at)
-          .toLocaleDateString('it-IT', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-          })
-          // Capitalize the first letter of the month
-          .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-      </div>
-
+      {/* Edit and Delete Buttons */}
       {(userId === adminId || userId === authorId) && (
-        <div className='flex gap-2'>
+        <div className='mt-2 flex gap-2'>
           {/* Delete popover */}
           <DeletePopover slug={post.slug} />
 
@@ -77,7 +79,6 @@ export default async function Page({ params }: Props) {
           <Link href={`/modifica-post/${post.slug}`}>Modifica</Link>
         </div>
       )}
-
       {/* Content */}
       <div
         dangerouslySetInnerHTML={{

@@ -58,7 +58,7 @@ h6 {
 }
 
 p {
-  @apply py-1.5 text-base;
+  @apply py-2 text-base;
 }
 
 ul {
