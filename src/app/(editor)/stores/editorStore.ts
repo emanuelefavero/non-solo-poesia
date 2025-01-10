@@ -1,6 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
-import type { CategoryNames, Message } from '@/types'
+import type { CategoryName, Message } from '@/types'
 import { create } from 'zustand'
 
 type EditorState = {
@@ -18,8 +18,8 @@ type EditorState = {
   setDescription: (description: string) => void
   author: string
   setAuthor: (author: string) => void
-  category: CategoryNames
-  setCategory: (category: CategoryNames) => void
+  category: CategoryName
+  setCategory: (category: CategoryName) => void
   coverImage: string
   setCoverImage: (coverImage: string) => void
   coverImageType: 'url' | 'file'

@@ -1,5 +1,4 @@
-// TODO rename CategoryNames to CategoryName
-export type CategoryNames =
+export type CategoryName =
   | 'Poesie'
   | 'Racconti'
   | 'Pensieri'
@@ -15,7 +14,7 @@ export type CategorySlug =
 
 export type Category = {
   id: string
-  name: CategoryNames
+  name: CategoryName
   slug: CategorySlug
 }
 
@@ -28,7 +27,7 @@ export type Post = {
   cover_image_cloudinary?: string
   content: string
   author: string
-  category: CategoryNames
+  category: CategoryName
   published_at: string
   updated_at?: string | null
 }

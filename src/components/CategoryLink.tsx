@@ -1,9 +1,9 @@
-import type { CategoryNames } from '@/types'
+import type { CategoryName } from '@/types'
 import { convertNameToSlug } from '@/utils/slug'
 import Link from 'next/link'
 
 type Props = {
-  name: CategoryNames
+  name: CategoryName
   slug?: string
   className?: string
 }

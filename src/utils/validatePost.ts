@@ -1,6 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
-import type { CategoryNames, Message } from '@/types'
+import type { CategoryName, Message } from '@/types'
 import { Editor } from '@tiptap/react'
 
 type ValidatePost = {
@@ -10,7 +10,7 @@ type ValidatePost = {
   coverImageCloudinary: string
   htmlContent: string
   author: string
-  category: CategoryNames
+  category: CategoryName
   editor: Editor | null
 }
 

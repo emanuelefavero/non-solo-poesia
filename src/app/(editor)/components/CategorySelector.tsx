@@ -2,7 +2,7 @@
 
 import { useEditorStore } from '@/app/(editor)/stores/editorStore'
 import { categories } from '@/data/categories'
-import type { CategoryNames } from '@/types'
+import type { CategoryName } from '@/types'
 
 export default function Component() {
   const { category, setCategory } = useEditorStore()
@@ -16,7 +16,7 @@ export default function Component() {
         id='category'
         className='max-w-[151px]'
         value={category}
-        onChange={(e) => setCategory(e.target.value as CategoryNames)}
+        onChange={(e) => setCategory(e.target.value as CategoryName)}
       >
         {categories.map((category) => (
           <option key={category.id} value={category.name}>

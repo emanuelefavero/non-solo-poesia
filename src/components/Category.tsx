@@ -1,7 +1,7 @@
-import type { CategoryNames } from '@/types'
+import type { CategoryName } from '@/types'
 
 interface Props {
-  category: CategoryNames
+  category: CategoryName
   className?: string
 }
 
