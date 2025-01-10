@@ -34,7 +34,7 @@ export default async function Page(props: Props) {
     <>
       <h1 className='mb-4'>
         {post.title}{' '}
-        <sup className='text-2xl text-yellow-600 dark:text-yellow-500'>
+        <sup className='text-2xl text-yellow-700 dark:text-yellow-500'>
           (Modifica)
         </sup>
       </h1>

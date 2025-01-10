@@ -79,7 +79,7 @@ export default async function Page({ params }: Props) {
           {/* Edit Button */}
           <Link
             href={`/modifica-post/${post.slug}`}
-            className='font-semibold text-yellow-600 transition-transform duration-200 hover:text-yellow-700 hover:no-underline active:scale-95 dark:text-yellow-500 dark:hover:text-yellow-400'
+            className='font-semibold text-yellow-700 transition-transform duration-200 hover:text-yellow-600 hover:no-underline active:scale-95 dark:text-yellow-500 dark:hover:text-yellow-400'
           >
             Modifica
           </Link>
