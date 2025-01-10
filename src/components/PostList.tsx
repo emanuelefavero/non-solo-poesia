@@ -30,13 +30,14 @@ export default function Component({ posts }: { posts: Post[] }) {
               <p className='mt-2.5 line-clamp-3 text-base font-normal tracking-wide text-zinc-600 dark:text-zinc-50'>
                 {post.description}
               </p>
-              {/* TODO Create PostAuthor component to prevent duplicate */}
+              {/* TODO Create PostAuthor component to prevent duplicate in PostList */}
               <p className='mt-4 text-sm text-zinc-600 dark:text-zinc-300'>
                 Scritto da{' '}
                 <span className='text-pink-600 dark:text-pink-400'>
                   {post.author}
                 </span>
               </p>
+              {/* TODO Create PostDate component to prevent duplicate in PostList */}
               <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
                 Pubblicato il{' '}
                 {new Date(post.published_at)

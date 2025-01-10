@@ -47,7 +47,10 @@ export default async function Page({ params }: Props) {
         {/* Title */}
         <PostTitle as='h1' title={post.title} className='mt-3' />
 
-        {/* TODO Display description */}
+        {/* Description */}
+        <h2 className='mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-7 tracking-wide text-zinc-600 dark:text-zinc-300'>
+          {post.description}
+        </h2>
       </div>
       <div className='mt-2.5'>
         {/* Author */}
