@@ -1,0 +1,18 @@
+.editor {
+  /* Style the TipTap editor placeholder */
+  & p.is-empty::before {
+    @apply italic text-zinc-500;
+    content: attr(data-placeholder);
+  }
+
+  /* Hide placeholder when editor is focused */
+  &.focused p.is-empty::before {
+    content: none;
+  }
+
+  /* Style the TipTap editor lists */
+  & ul,
+  & ol {
+    @apply ml-8;
+  }
+}

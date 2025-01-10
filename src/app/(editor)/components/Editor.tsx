@@ -21,6 +21,7 @@ import AuthorSelector from './AuthorSelector'
 import CategorySelector from './CategorySelector'
 import CoverImageSelector from './CoverImageSelector'
 import DescriptionInput from './DescriptionInput'
+import './Editor.css'
 import PublishButton from './PublishButton'
 import TipTapToolbar from './TipTapToolbar'
 import TitleInput from './TitleInput'
@@ -313,7 +314,7 @@ export default function Component({ post }: Props) {
       <TipTapToolbar editor={editor} />
       <EditorContent
         editor={editor}
-        className={`tiptap-editor mb-4 ${isFocused ? 'focused' : ''}`}
+        className={`editor mb-4 ${isFocused ? 'focused' : ''}`}
       />
       <AuthorSelector />
       <CategorySelector />
