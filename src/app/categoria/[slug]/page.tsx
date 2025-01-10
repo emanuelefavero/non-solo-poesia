@@ -1,7 +1,6 @@
 import { CATEGORY_SLUGS } from '@/config/categories'
 import type { CategorySlug } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 // TIP: This is how you can get both the slug and searchParams from the URL
