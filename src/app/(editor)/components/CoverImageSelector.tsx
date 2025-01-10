@@ -62,7 +62,7 @@ export default function Component({
               </div>
             </>
           ) : (
-            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-neutral-900'>
+            <div className='flex h-full w-full select-none flex-wrap items-center justify-center rounded-md border border-gray-300 bg-gray-100 text-sm font-semibold dark:bg-zinc-950'>
               Aggiungi immagine di copertina
             </div>
           )}
