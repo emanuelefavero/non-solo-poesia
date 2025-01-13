@@ -1,8 +1,9 @@
+import type { Post } from '@/types'
 import { isAtLeastOneDayLater } from '@/utils/date'
 
 type Props = {
-  published_at: string // e.g. 2024-12-10 07:23:57.257+00
-  updated_at?: string | null
+  published_at: Post['published_at'] // e.g. 2024-12-10 07:23:57.257+00
+  updated_at: Post['updated_at']
 }
 
 export default function Component({ published_at, updated_at }: Props) {
