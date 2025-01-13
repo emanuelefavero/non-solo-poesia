@@ -22,6 +22,8 @@ export default function Component({ isHomepage }: Props) {
     )
   }
 
+  // TODO Add page and order_by search parameter to the link (page=1&order_by=published_at). Check if the Order By 'Data' or 'Titolo' gets updated properly when the page is reloaded, if not, you have to convert this component to a client component and use the order_by state or try to only update the page state to 1 and see if the behavior is fine.
+
   return (
     <Link href='/' className='hover:no-underline'>
       <span className={`${commonStyles}`}>{TITLE}</span>
