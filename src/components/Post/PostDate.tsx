@@ -1,5 +1,5 @@
 import type { Post } from '@/types'
-import { isAtLeastOneDayLater } from '@/utils/date'
+import { is1or8or11, isAtLeastOneDayLater } from '@/utils/date'
 
 type Props = {
   published_at: Post['published_at'] // e.g. 2024-12-10 07:23:57.257+00
@@ -7,24 +7,25 @@ type Props = {
 }
 
 export default function Component({ published_at, updated_at }: Props) {
-  const date =
+  const date = new Date(
     updated_at && isAtLeastOneDayLater(published_at, updated_at)
       ? updated_at
-      : published_at
+      : published_at,
+  )
 
   return (
     <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
-        ? 'Aggiornato'
-        : 'Pubblicato'}{' '}
-      il{' '}
-      {new Date(date)
+        ? 'Aggiornato '
+        : 'Pubblicato '}
+      {is1or8or11(date) ? "l'" : 'il '}
+      {date
         .toLocaleDateString('it-IT', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
         })
-        // Capitalize the first letter of the month
+        // Capitalize the month name
         .replace(/(\b\w)/g, (char) => char.toUpperCase())}
     </p>
   )

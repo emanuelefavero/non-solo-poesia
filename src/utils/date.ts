@@ -18,3 +18,9 @@ export function isAtLeastOneDayLater(
       updatedDate.getDate() > publishedDate.getDate())
   )
 }
+
+// Return true if the day of the month is 1, 8 or 11
+// TIP: In Italy they say l'1, l'8, l'11 instead of il 1, il 8, il 11
+export function is1or8or11(date: Date) {
+  return date.getDate() === 1 || date.getDate() === 8 || date.getDate() === 11
+}
