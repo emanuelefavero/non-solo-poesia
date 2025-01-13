@@ -62,9 +62,10 @@ export default async function Page({ params }: Props) {
           </span>
         </p>
         {/* Date */}
-        {/* Date data example: 2024-12-10 07:23:57.257+00 */}
-        {/* TODO check if post is updated, if so, display updated date instead of published */}
-        <PostDate date={post.published_at} />
+        <PostDate
+          published_at={post.published_at}
+          updated_at={post.updated_at}
+        />
       </div>
       {/* Edit and Delete Buttons */}
       {(userId === adminId || userId === authorId) && (

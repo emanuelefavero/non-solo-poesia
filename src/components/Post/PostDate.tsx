@@ -1,9 +1,14 @@
-type Props = { date: string }
+type Props = {
+  published_at: string
+  updated_at?: string | null
+}
 
-export default function Component({ date }: Props) {
+export default function Component({ published_at, updated_at }: Props) {
+  const date = updated_at || published_at // ? 2024-12-10 07:23:57.257+00
+
   return (
     <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
-      Pubblicato il{' '}
+      {updated_at ? 'Aggiornato' : 'Pubblicato'} il{' '}
       {new Date(date)
         .toLocaleDateString('it-IT', {
           day: 'numeric',

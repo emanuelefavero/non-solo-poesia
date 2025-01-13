@@ -38,7 +38,10 @@ export default function Component({ posts }: { posts: Post[] }) {
                   {post.author}
                 </span>
               </p>
-              <PostDate date={post.published_at} />
+              <PostDate
+                published_at={post.published_at}
+                updated_at={post.updated_at}
+              />
             </div>
           </Link>
         </li>
