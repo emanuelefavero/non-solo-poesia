@@ -1,6 +1,7 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
+import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
@@ -63,17 +64,7 @@ export default async function Page({ params }: Props) {
         {/* Date */}
         {/* Date data example: 2024-12-10 07:23:57.257+00 */}
         {/* TODO check if post is updated, if so, display updated date instead of published */}
-        <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
-          Pubblicato il{' '}
-          {new Date(post.published_at)
-            .toLocaleDateString('it-IT', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })
-            // Capitalize the first letter of the month
-            .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-        </p>
+        <PostDate date={post.published_at} />
       </div>
       {/* Edit and Delete Buttons */}
       {(userId === adminId || userId === authorId) && (

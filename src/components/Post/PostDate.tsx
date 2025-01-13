@@ -1,4 +1,4 @@
-type Props = { date: Date }
+type Props = { date: string }
 
 export default function Component({ date }: Props) {
   return (

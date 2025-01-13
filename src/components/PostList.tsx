@@ -1,8 +1,9 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
+import PostDate from '@/components/Post/PostDate'
+import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
 import Link from 'next/link'
-import PostTitle from './Post/PostTitle'
 
 export default function Component({ posts }: { posts: Post[] }) {
   if (!posts.length) return <p>Nessun post trovato.</p>
@@ -37,17 +38,7 @@ export default function Component({ posts }: { posts: Post[] }) {
                   {post.author}
                 </span>
               </p>
-              {/* TODO Create PostDate component to prevent duplicate in PostList */}
-              <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
-                Pubblicato il{' '}
-                {new Date(post.published_at)
-                  .toLocaleDateString('it-IT', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric',
-                  })
-                  .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-              </p>
+              <PostDate date={post.published_at} />
             </div>
           </Link>
         </li>
