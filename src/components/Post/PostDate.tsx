@@ -1,5 +1,5 @@
 import type { Post } from '@/types'
-import { is1or8or11, isAtLeastOneDayLater } from '@/utils/date'
+import { isAtLeastOneDayLater, isMonthDay1or8or11 } from '@/utils/date'
 
 type Props = {
   published_at: Post['published_at'] // e.g. 2024-12-10 07:23:57.257+00
@@ -18,7 +18,7 @@ export default function Component({ published_at, updated_at }: Props) {
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
         ? 'Aggiornato '
         : 'Pubblicato '}
-      {is1or8or11(date) ? "l'" : 'il '}
+      {isMonthDay1or8or11(date) ? "l'" : 'il '}
       {date
         .toLocaleDateString('it-IT', {
           day: 'numeric',
