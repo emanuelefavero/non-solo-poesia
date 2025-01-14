@@ -27,7 +27,7 @@ export default function Component() {
 
   return (
     <header
-      className={`fixed z-[999] flex w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 bg-[#fff8fc] transition-transform duration-200 dark:border-b-zinc-200/20 dark:bg-[#1c060f] ${
+      className={`fixed z-[999] flex w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 bg-[rgba(255,248,252,0.8)] backdrop-blur-md transition-transform duration-150 dark:border-b-zinc-200/20 dark:bg-[rgba(28,6,15,0.85)] ${
         scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
