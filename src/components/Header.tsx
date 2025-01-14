@@ -2,6 +2,7 @@
 
 import BsPlusLgIcon from '@/components/icons/BsPlusLgIcon'
 import BsSearchIcon from '@/components/icons/BsSearchIcon'
+import { useScrollDirection } from '@/hooks/useScrollDirection'
 import {
   SignInButton,
   SignedIn,
@@ -16,6 +17,7 @@ import DropdownMenu from './DropdownMenu'
 import Logo from './Logo'
 
 export default function Component() {
+  const scrollDirection = useScrollDirection()
   const pathname = usePathname()
   const isHomepage = pathname === '/'
   const isSearchPage = pathname === '/cerca'
@@ -24,7 +26,11 @@ export default function Component() {
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
   return (
-    <header className='fixed z-[999] flex w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 bg-[#fff8fc] dark:border-b-zinc-200/20 dark:bg-[#1c060f]'>
+    <header
+      className={`fixed z-[999] flex w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 bg-[#fff8fc] transition-transform duration-200 dark:border-b-zinc-200/20 dark:bg-[#1c060f] ${
+        scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
       <div className='flex w-full items-center justify-end border-b border-b-zinc-800/10 px-1.5 py-1 text-lg dark:border-b-zinc-200/10'>
         <nav className='mr-3 flex items-center gap-2 3xs:mr-0'>
           {!isSearchPage && (
