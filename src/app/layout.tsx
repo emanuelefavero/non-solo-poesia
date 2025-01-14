@@ -2,6 +2,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import ProgressBar from '@/components/ProgressBar'
 import { authors } from '@/data/authors'
+import { TITLE } from '@/data/title'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -19,7 +20,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Non Solo Poesie',
+  title: TITLE,
   description: `Un blog di poesie e racconti scritti da ${authors[0].name}`,
 }
 
