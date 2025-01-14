@@ -1,5 +1,5 @@
 import { dancing_script } from '@/app/fonts'
-import { TITLE } from '@/config/index'
+import { TITLE } from '@/data/title'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
