@@ -47,11 +47,10 @@ export default function RootLayout({
         >
           <ProgressBar />
 
-          <header className='relative flex min-h-[60px] w-full select-none flex-col items-center justify-center border-b border-b-zinc-800/20 dark:border-b-zinc-200/20'>
-            <Header />
-          </header>
+          <Header />
 
-          <main className='flex flex-col gap-4 px-4 pb-32 pt-6'>
+          {/* NOTE: We are accounting for the Header height by adding padding at the top (so the Header can be fixed when scrolling) */}
+          <main className='flex flex-col gap-4 px-4 pb-32 pt-[118px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
             {children}
           </main>
 

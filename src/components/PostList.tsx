@@ -9,7 +9,7 @@ export default function Component({ posts }: { posts: Post[] }) {
   if (!posts.length) return <p>Nessun post trovato.</p>
 
   return (
-    <ul className='grid grid-cols-[repeat(auto-fit,minmax(300px,375px))] justify-center gap-4 pl-0'>
+    <ul className='grid grid-cols-[repeat(auto-fit,minmax(300px,375px))] justify-center gap-4 pl-0 pt-28 5xs:pt-0'>
       {posts.map((post, index) => (
         <li key={post.id} className='flex list-none flex-col rounded-md'>
           <Link
