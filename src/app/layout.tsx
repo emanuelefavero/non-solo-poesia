@@ -58,9 +58,7 @@ export default function RootLayout({
             </div>
           </main>
 
-          <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 border-t border-t-pink-500/10 bg-pink-400/10 p-4 text-sm dark:bg-pink-600/10'>
-            <Footer />
-          </footer>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
