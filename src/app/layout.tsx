@@ -51,8 +51,11 @@ export default function RootLayout({
           <Header />
 
           {/* NOTE: We are accounting for the Header height by adding padding at the top (so the Header can be fixed when scrolling) */}
-          <main className='flex flex-col gap-4 px-4 pb-32 pt-[115px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
-            {children}
+
+          <main className='flex flex-col items-center justify-center gap-4 px-4 pb-32 pt-[115px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
+            <div className='flex w-full max-w-[1157px] flex-col gap-4'>
+              {children}
+            </div>
           </main>
 
           <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 border-t border-t-pink-500/10 bg-pink-400/10 p-4 text-sm dark:bg-pink-600/10'>
