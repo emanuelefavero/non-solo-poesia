@@ -47,11 +47,9 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ProgressBar />
-
           <Header />
 
-          {/* NOTE: We are accounting for the Header height by adding padding at the top (so the Header can be fixed when scrolling) */}
-
+          {/* NOTE: Since the Header is fixed, we have to account for its height by adding padding at the top of the next element */}
           <main className='flex flex-col items-center justify-center gap-4 px-4 pb-32 pt-[115px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
             <div className='flex w-full max-w-[1157px] flex-col gap-4'>
               {children}
