@@ -35,9 +35,8 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <>
-      <h1>{category}</h1>
-
       <OrderBy currentOrderBy={currentOrderBy} />
+      <h1>{category}</h1>
       <PostList posts={posts} />
       <Pagination
         currentPage={currentPage}
