@@ -16,7 +16,7 @@ export default function Component() {
 
   return (
     <div
-      className={`fixed z-[999] h-[3px] w-full overflow-x-hidden bg-zinc-500/20`}
+      className={`fixed z-40 h-[3px] w-full overflow-x-hidden bg-zinc-500/20`}
     >
       <div
         style={{
