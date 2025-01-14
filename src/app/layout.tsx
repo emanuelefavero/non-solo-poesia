@@ -50,7 +50,7 @@ export default function RootLayout({
           <Header />
 
           {/* NOTE: We are accounting for the Header height by adding padding at the top (so the Header can be fixed when scrolling) */}
-          <main className='flex flex-col gap-4 px-4 pb-32 pt-[118px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
+          <main className='flex flex-col gap-4 px-4 pb-32 pt-[115px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
             {children}
           </main>
 
