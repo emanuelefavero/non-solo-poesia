@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const orderByOptions = [
-  { label: 'Data', value: 'published_at' },
   { label: 'Titolo', value: 'title' },
+  { label: 'Data', value: 'published_at' },
 ]
 
 type Props = {
