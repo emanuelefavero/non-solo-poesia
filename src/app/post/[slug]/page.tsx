@@ -5,11 +5,24 @@ import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import './styles.css'
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
 type Props = { params: Promise<{ slug: string }> }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug
+  const post = await getPost(slug)
+
+  if (!post) return { title: 'Post non trovato' }
+
+  return {
+    title: post.title,
+    description: post.description,
+  }
+}
 
 export default async function Page({ params }: Props) {
   const slug = (await params).slug
