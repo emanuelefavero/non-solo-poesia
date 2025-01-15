@@ -3,6 +3,7 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
+import { TITLE } from '@/data/title'
 import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Post non trovato' }
 
   return {
-    title: post.title,
+    title: `${post.title} - ${TITLE}`,
     description: post.description,
   }
 }
