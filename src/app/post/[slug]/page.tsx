@@ -13,6 +13,7 @@ import './styles.css'
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
 type Props = { params: Promise<{ slug: string }> }
 
+// * Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug
   const post = await getPost(slug)
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// * Page
 export default async function Page({ params }: Props) {
   const slug = (await params).slug
   const post = await getPost(slug)

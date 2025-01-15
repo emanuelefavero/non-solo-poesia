@@ -1,11 +1,27 @@
 import Editor from '@/app/(editor)/components/Editor'
+import { TITLE } from '@/data/title'
 import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
 type Props = { params: Promise<{ slug: string }> }
 
+// * Metadata
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug
+  const post = await getPost(slug)
+
+  if (!post) return { title: 'Post non trovato' }
+
+  return {
+    title: `Modifica "${post.title}" - ${TITLE}`,
+    description: post.description,
+  }
+}
+
+// * Page
 export default async function Page(props: Props) {
   const params = await props.params
   const post = await getPost(params.slug)
