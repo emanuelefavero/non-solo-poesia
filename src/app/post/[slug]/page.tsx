@@ -3,6 +3,7 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
+import type { Post } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
@@ -16,7 +17,7 @@ async function getPost(slug: string) {
     WHERE slug = ${slug}
   `
   if (!data) return null
-  return data[0]
+  return data[0] as Post | null
 }
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
