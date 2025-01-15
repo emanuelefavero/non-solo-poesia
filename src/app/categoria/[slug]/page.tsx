@@ -3,9 +3,11 @@ import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
 import { CATEGORY_SLUGS } from '@/config/categories'
 import { POSTS_PER_PAGE } from '@/config/posts'
+import { TITLE } from '@/data/title'
 import { getPosts, getTotalPostCountByCategory } from '@/lib/posts'
 import type { CategorySlug } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 // TIP: This is how you can get both the slug and searchParams from the URL
@@ -14,6 +16,20 @@ type Props = {
   searchParams: Promise<{ page?: string; order_by?: string }>
 }
 
+// * Metadata
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const category = convertSlugToName(slug)
+
+  // TIP: No need to check if the category is valid, because the page will redirect home if it's not. @see redirect('/') method below
+
+  return {
+    title: `${category} - ${TITLE}`,
+    description: `Tutti i post di ${TITLE} nella categoria ${category}.`,
+  }
+}
+
+// * Page
 export default async function Page({ params, searchParams }: Props) {
   const { slug } = await params
   const { page, order_by } = await searchParams

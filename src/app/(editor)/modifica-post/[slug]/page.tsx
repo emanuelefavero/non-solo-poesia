@@ -2,7 +2,7 @@ import Editor from '@/app/(editor)/components/Editor'
 import { TITLE } from '@/data/title'
 import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
