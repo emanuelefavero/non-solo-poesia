@@ -51,7 +51,11 @@ export default async function Page({ params }: Props) {
         <Category category={post.category} className='text-sm' />
 
         {/* Title */}
-        <PostTitle as='h1' title={post.title} className='mt-3' />
+        <PostTitle
+          as='h1'
+          title={post.title}
+          className='mt-3 text-xl 5xs:text-[2.5rem] 5xs:leading-[2.75rem]'
+        />
 
         {/* Description */}
         <h2 className='mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-7 tracking-wide text-zinc-600 dark:text-zinc-300'>
