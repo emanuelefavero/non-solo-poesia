@@ -29,8 +29,6 @@ export const metadata: Metadata = {
   },
 }
 
-// TODO Fix responsive design (set a max-width)
-
 export default function RootLayout({
   children,
 }: Readonly<{
