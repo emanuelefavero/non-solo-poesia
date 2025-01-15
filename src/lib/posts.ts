@@ -69,7 +69,7 @@ export async function getTotalPostCount() {
   return data[0]?.count || 0
 }
 
-// Get the total cout of posts by category name
+// Get the total count of posts of a specific category
 export async function getTotalPostCountByCategory(category: string) {
   const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
@@ -77,4 +77,15 @@ export async function getTotalPostCountByCategory(category: string) {
     WHERE category = ${category}
   `
   return data[0]?.count || 0
+}
+
+// Get a single post by slug
+export async function getPost(slug: string) {
+  const sql = neon(process.env.DATABASE_URL as string)
+  const data = await sql`
+    SELECT * FROM posts
+    WHERE slug = ${slug}
+  `
+  if (!data) return null
+  return data[0] as Post | null
 }

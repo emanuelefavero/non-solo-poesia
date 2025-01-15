@@ -3,22 +3,10 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
-import type { Post } from '@/types'
+import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
-import { neon } from '@neondatabase/serverless'
 import Link from 'next/link'
 import './styles.css'
-
-// Get post data from neon db by slug (the slug comes from the URL)
-async function getPost(slug: string) {
-  const sql = neon(process.env.DATABASE_URL as string)
-  const data = await sql`
-    SELECT * FROM posts
-    WHERE slug = ${slug}
-  `
-  if (!data) return null
-  return data[0] as Post | null
-}
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
 type Props = { params: Promise<{ slug: string }> }
