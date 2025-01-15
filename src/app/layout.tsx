@@ -22,6 +22,11 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: TITLE,
   description: `Un blog di poesie e racconti scritti da ${authors[0].name}`,
+
+  // This will use png as the icon instead of favicon.ico:
+  icons: {
+    icon: '/logo.png',
+  },
 }
 
 // TODO Fix responsive design (set a max-width)
