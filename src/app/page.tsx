@@ -26,8 +26,8 @@ export default async function Home({ searchParams }: Props) {
       <Title>
         {currentOrderBy === 'title' ? (
           <span>
-            Tutti i Post
-            <sup className='ml-1 text-pink-600 dark:text-pink-400'>A-Z</sup>
+            Tutti i Post{' '}
+            <sup className='text-pink-600 dark:text-pink-400'>A-Z</sup>
           </span>
         ) : (
           'Ultimi Post'

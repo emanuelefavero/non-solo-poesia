@@ -53,7 +53,12 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <>
       <OrderBy currentOrderBy={currentOrderBy} />
-      <Title>{category}</Title>
+      <Title>
+        {category}{' '}
+        {currentOrderBy === 'title' ? (
+          <sup className='text-pink-600 dark:text-pink-400'>A-Z</sup>
+        ) : null}
+      </Title>
 
       <PostList posts={posts} />
       <Pagination
