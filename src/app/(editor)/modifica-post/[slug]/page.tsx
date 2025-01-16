@@ -1,4 +1,5 @@
 import Editor from '@/app/(editor)/components/Editor'
+import PostTitle from '@/components/Post/PostTitle'
 import { TITLE } from '@/data/title'
 import { getPost } from '@/lib/posts'
 import { auth } from '@clerk/nextjs/server'
@@ -36,12 +37,12 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <h1 className='mb-4'>
+      <PostTitle as='h1' className='mt-[5.7rem]'>
         {post.title}{' '}
         <sup className='text-2xl text-yellow-700 dark:text-yellow-500'>
           (Modifica)
         </sup>
-      </h1>
+      </PostTitle>
 
       <Editor post={post} />
     </>
