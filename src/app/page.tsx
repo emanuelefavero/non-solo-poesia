@@ -1,6 +1,7 @@
 import OrderBy from '@/components/OrderBy'
 import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
+import Title from '@/components/Title'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import { getPosts, getTotalPostCount } from '@/lib/posts'
 
@@ -22,6 +23,16 @@ export default async function Home({ searchParams }: Props) {
   return (
     <>
       <OrderBy currentOrderBy={currentOrderBy} />
+      <Title>
+        {currentOrderBy === 'title' ? (
+          <span>
+            Tutti i Post
+            <sup className='ml-1 text-pink-600 dark:text-pink-400'>A-Z</sup>
+          </span>
+        ) : (
+          'Ultimi Post'
+        )}
+      </Title>
       <PostList posts={posts} />
       <Pagination
         currentPage={currentPage}
