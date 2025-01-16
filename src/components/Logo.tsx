@@ -18,7 +18,7 @@ export default function Component({ isHomepage }: Props) {
   if (isHomepage) {
     return (
       <button onClick={handleRefreshPage}>
-        <h1 className={`${commonStyles}`}>{TITLE}</h1>
+        <span className={`${commonStyles}`}>{TITLE}</span>
       </button>
     )
   }
