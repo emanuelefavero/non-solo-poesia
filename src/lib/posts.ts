@@ -1,11 +1,11 @@
-import type { Post } from '@/types'
+import type { OrderBy, Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
 // Get posts from the database
 export async function getPosts(
   page: number,
   postsPerPage: number,
-  currentOrderBy: string,
+  currentOrderBy: OrderBy,
   category?: string,
 ) {
   const sql = neon(process.env.DATABASE_URL as string)

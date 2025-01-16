@@ -41,3 +41,10 @@ export type Author = {
   id: string
   name: "Maria D'Ippolito" | 'Teresa'
 }
+
+export type OrderBy = 'published_at' | 'title'
+
+export type OrderByOption = {
+  value: OrderBy
+  label: string
+}

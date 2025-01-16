@@ -6,7 +6,7 @@ import { CATEGORY_SLUGS } from '@/config/categories'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import { TITLE } from '@/data/title'
 import { getPosts, getTotalPostCountByCategory } from '@/lib/posts'
-import type { CategorySlug } from '@/types'
+import type { CategorySlug, OrderBy as OrderByType } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -14,7 +14,7 @@ import { redirect } from 'next/navigation'
 // TIP: This is how you can get both the slug and searchParams from the URL
 type Props = {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ page?: string; order_by?: string }>
+  searchParams: Promise<{ page?: string; order_by?: OrderByType }>
 }
 
 // * Metadata

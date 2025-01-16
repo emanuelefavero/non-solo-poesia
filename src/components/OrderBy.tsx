@@ -1,15 +1,12 @@
 'use client'
 
+import { orderByOptions } from '@/data/orderByOptions'
+import type { OrderBy } from '@/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const orderByOptions = [
-  { label: 'Titolo', value: 'title' },
-  { label: 'Data', value: 'published_at' },
-]
-
 type Props = {
-  currentOrderBy: string
+  currentOrderBy: OrderBy
 }
 
 export default function Component({ currentOrderBy }: Props) {

@@ -4,9 +4,10 @@ import PostList from '@/components/PostList'
 import Title from '@/components/Title'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import { getPosts, getTotalPostCount } from '@/lib/posts'
+import type { OrderBy as OrderByType } from '@/types'
 
 type Props = {
-  searchParams: Promise<{ page?: string; order_by?: string }>
+  searchParams: Promise<{ page?: string; order_by?: OrderByType }>
 }
 
 // TODO Add an hero section in the homepage with the latest post shown bigger with an h1 (if you add an h1, remember to remove the h1 in the homepage header). Remove the latest post from the post list of course.

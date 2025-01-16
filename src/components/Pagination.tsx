@@ -2,6 +2,7 @@
 
 import ChevronLeftIcon from '@/components/icons/ChevronLeftIcon'
 import ChevronRightIcon from '@/components/icons/ChevronRightIcon'
+import type { OrderBy } from '@/types'
 import { generatePagination } from '@/utils/pagination'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -9,7 +10,7 @@ import { usePathname } from 'next/navigation'
 type PaginationProps = {
   currentPage: number
   totalPages: number
-  currentOrderBy: string
+  currentOrderBy: OrderBy
 }
 
 export default function Component({
