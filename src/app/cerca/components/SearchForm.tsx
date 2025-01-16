@@ -30,7 +30,7 @@ export default function Component() {
   }
 
   return (
-    <div className='flex w-full max-w-prose flex-col gap-3 xs:flex-row xs:gap-2'>
+    <div className='mt-6 flex w-full max-w-prose flex-col gap-3 xs:flex-row xs:gap-2'>
       <input
         type='search'
         placeholder='Cerca un post...'
