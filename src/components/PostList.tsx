@@ -19,12 +19,12 @@ export default function Component({ posts }: { posts: Post[] }) {
 
 function PostListItem({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='flex list-none flex-col rounded-md'>
+    <li className='group flex list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
         className='text-black hover:no-underline dark:text-white'
       >
-        <div className='relative aspect-video w-full'>
+        <div className='relative aspect-video w-full from-pink-800/20 to-pink-200/50 content-none after:absolute after:inset-0 after:z-10 after:rounded-md after:bg-gradient-to-t after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100 dark:from-pink-200/20 dark:to-pink-800/40'>
           <CloudinaryImage
             title={post.title}
             cover_image={post.cover_image}
