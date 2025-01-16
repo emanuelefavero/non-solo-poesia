@@ -1,4 +1,5 @@
 import Editor from '@/app/(editor)/components/Editor'
+import Title from '@/components/Title'
 import { TITLE } from '@/data/title'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
@@ -21,7 +22,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className='mb-4'>Crea nuovo post</h1>
+      <Title className='mt-[5.7rem]'>Crea nuovo post</Title>
       <Editor />
     </>
   )
