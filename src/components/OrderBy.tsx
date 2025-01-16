@@ -16,7 +16,7 @@ export default function Component({ currentOrderBy }: Props) {
   const pathname = usePathname()
 
   return (
-    <div className='relative -top-4 mb-16 flex w-full select-none flex-wrap items-center justify-end'>
+    <div className='relative -top-4 mb-10 flex w-full select-none flex-wrap items-center justify-end'>
       <span className='mr-2 hidden 4xs:inline'>Ordina per:</span>
 
       {orderByOptions.map(({ label, value }) => (
