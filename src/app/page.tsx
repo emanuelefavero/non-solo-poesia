@@ -26,9 +26,11 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <Section>
-        <Hero post={latestPost} />
-      </Section>
+      {latestPost && currentPage === 1 && (
+        <Section>
+          <Hero post={latestPost} />
+        </Section>
+      )}
       <Section>
         <Title>
           {currentOrderBy === 'title' ? (
