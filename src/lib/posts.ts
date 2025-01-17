@@ -16,18 +16,18 @@ export async function getPosts(
   if (currentOrderBy === 'title') {
     // Order by title in ascending order
     if (category) {
-      // Filter by category
       const data = await sql`
         SELECT * FROM posts
         WHERE category = ${category}
+          AND id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY title ASC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
       return data as Post[]
     } else {
-      // No category filter
       const data = await sql`
         SELECT * FROM posts
+        WHERE id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY title ASC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
@@ -36,18 +36,18 @@ export async function getPosts(
   } else {
     // Order by published_at in descending order
     if (category) {
-      // Filter by category
       const data = await sql`
         SELECT * FROM posts
         WHERE category = ${category}
+          AND id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY published_at DESC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
       return data as Post[]
     } else {
-      // No category filter
       const data = await sql`
         SELECT * FROM posts
+        WHERE id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY published_at DESC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
@@ -66,7 +66,7 @@ export async function getTotalPostCount() {
   const data = await sql`
     SELECT COUNT(*) as count FROM posts
   `
-  return data[0]?.count || 0
+  return data[0]?.count ? data[0]?.count - 1 : 0
 }
 
 // Get the total count of posts of a specific category
