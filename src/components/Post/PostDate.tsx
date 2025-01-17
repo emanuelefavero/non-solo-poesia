@@ -4,9 +4,14 @@ import { isAtLeastOneDayLater, isMonthDay1or8or11 } from '@/utils/date'
 type Props = {
   published_at: Post['published_at'] // e.g. 2024-12-10 07:23:57.257+00
   updated_at: Post['updated_at']
+  className?: string
 }
 
-export default function Component({ published_at, updated_at }: Props) {
+export default function Component({
+  published_at,
+  updated_at,
+  className,
+}: Props) {
   const date = new Date(
     updated_at && isAtLeastOneDayLater(published_at, updated_at)
       ? updated_at
@@ -14,7 +19,9 @@ export default function Component({ published_at, updated_at }: Props) {
   )
 
   return (
-    <p className='mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
+    <p
+      className={`mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400 ${className}`}
+    >
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
         ? 'Aggiornato '
         : 'Pubblicato '}

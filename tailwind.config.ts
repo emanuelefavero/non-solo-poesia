@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 // * Uncomment the following line to use the default Tailwind CSS colors
 // import colors from 'tailwindcss/colors'
@@ -60,7 +61,25 @@ export default {
         slideRightAndFade:
           'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
       },
+
+      textShadow: {
+        sm: '0.25px 0.5px 0.25px var(--text-shadow)',
+        DEFAULT: '0.5px 1px 0.5px var(--text-shadow)',
+        lg: '1px 1.5px 1px var(--text-shadow)',
+        none: 'none',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') },
+      )
+    }),
+  ],
 } satisfies Config

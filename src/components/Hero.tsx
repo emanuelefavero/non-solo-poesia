@@ -20,12 +20,13 @@ export default function Component({ post }: Props) {
           cover_image={post.cover_image}
           cover_image_cloudinary={post.cover_image_cloudinary}
         />
+        <div className='absolute inset-0 bg-gradient-to-t from-[#2c171f] to-transparent opacity-60'></div>
         <div className='absolute bottom-0 left-0 p-4'>
           <div className='mt-3'>
             {/* Title */}
             <PostTitle
-              as='h1'
-              className='mt-3 text-xl 5xs:text-[2.5rem] 5xs:leading-[2.75rem]'
+              as='h2'
+              className='text-shadow mt-3 text-xl text-white 5xs:text-[2.5rem] 5xs:leading-[2.75rem]'
             >
               {post.title}
             </PostTitle>
@@ -33,9 +34,8 @@ export default function Component({ post }: Props) {
 
           <div className='mt-2.5'>
             {/* Author */}
-            <p className='text-sm'>
-              Scritto da{' '}
-              <span className='text-pink-600 dark:text-pink-400'>
+            <p className='text-sm text-white'>
+              <span className='text-shadow-sm font-medium text-pink-400'>
                 {post.author}
               </span>
             </p>
@@ -43,6 +43,7 @@ export default function Component({ post }: Props) {
             <PostDate
               published_at={post.published_at}
               updated_at={post.updated_at}
+              className='text-shadow-sm font-medium text-[#e4e4e7] dark:text-[#e4e4e7]'
             />
           </div>
         </div>
