@@ -54,7 +54,7 @@ export default function RootLayout({
           <Header />
 
           {/* NOTE: Since the Header is fixed, we have to account for its height by adding padding at the top of the next element */}
-          <main className='flex flex-col items-center justify-center gap-4 px-4 pb-32 pt-[115px] 3xs:pt-[128px] 2xs:pt-[144px] xs:pt-[160px] sm:pt-[174px]'>
+          <main className='flex flex-col items-center justify-center gap-4 px-4 pb-32 pt-[111px] 3xs:pt-[118px] 2xs:pt-[141px] xs:pt-[157px] sm:pt-[170px]'>
             <div className='flex w-full max-w-[1157px] flex-col gap-4'>
               {children}
             </div>

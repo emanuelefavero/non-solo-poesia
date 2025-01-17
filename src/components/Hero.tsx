@@ -12,7 +12,7 @@ type Props = {
 
 export default function Component({ post }: Props) {
   return (
-    <div className='mb-2 flex max-w-3xl flex-col gap-3'>
+    <div className='flex max-w-3xl flex-col gap-3'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage

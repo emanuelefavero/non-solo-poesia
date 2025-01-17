@@ -9,7 +9,7 @@ export default function Component({ posts }: { posts: Post[] }) {
   if (!posts.length) return <p>Nessun post trovato.</p>
 
   return (
-    <ul className='grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
+    <ul className='mt-2 grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
       {posts.map((post, index) => (
         <PostListItem key={post.id} post={post} index={index} />
       ))}

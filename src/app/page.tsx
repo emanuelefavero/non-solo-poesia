@@ -30,7 +30,6 @@ export default async function Home({ searchParams }: Props) {
         <Hero post={latestPost} />
       </Section>
       <Section>
-        <OrderBy currentOrderBy={currentOrderBy} />
         <Title>
           {currentOrderBy === 'title' ? (
             <span>
@@ -41,6 +40,7 @@ export default async function Home({ searchParams }: Props) {
             'Ultimi Post'
           )}
         </Title>
+        <OrderBy currentOrderBy={currentOrderBy} />
         <PostList posts={posts} />
         <Pagination
           currentPage={currentPage}
