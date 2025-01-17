@@ -89,3 +89,14 @@ export async function getPost(slug: string) {
   if (!data) return null
   return data[0] as Post | null
 }
+
+// Get latest post
+export async function getLatestPost() {
+  const sql = neon(process.env.DATABASE_URL as string)
+  const data = await sql`
+    SELECT * FROM posts
+    ORDER BY published_at DESC
+    LIMIT 1
+  `
+  return data[0] as Post
+}

@@ -1,10 +1,11 @@
+import Hero from '@/components/Hero'
 import OrderBy from '@/components/OrderBy'
 import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
 import { POSTS_PER_PAGE } from '@/config/posts'
-import { getPosts, getTotalPostCount } from '@/lib/posts'
+import { getLatestPost, getPosts, getTotalPostCount } from '@/lib/posts'
 import type { OrderBy as OrderByType } from '@/types'
 
 type Props = {
@@ -21,9 +22,13 @@ export default async function Home({ searchParams }: Props) {
   const totalPosts = await getTotalPostCount()
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
   const posts = await getPosts(currentPage, POSTS_PER_PAGE, currentOrderBy)
+  const latestPost = await getLatestPost()
 
   return (
     <>
+      <Section>
+        <Hero post={latestPost} />
+      </Section>
       <Section>
         <OrderBy currentOrderBy={currentOrderBy} />
         <Title>
