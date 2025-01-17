@@ -18,10 +18,10 @@ export default function Component({
   totalPages,
   currentOrderBy,
 }: PaginationProps) {
-  if (totalPages <= 1) return null
-
   const pathname = usePathname()
   const pages = generatePagination(currentPage, totalPages)
+
+  if (totalPages <= 1) return null
 
   return (
     <div className='mt-4 flex h-[34px] select-none items-center justify-center'>
