@@ -1,6 +1,7 @@
 import OrderBy from '@/components/OrderBy'
 import Pagination from '@/components/Pagination'
 import PostList from '@/components/PostList'
+import Section from '@/components/Section'
 import Title from '@/components/Title'
 import { CATEGORY_SLUGS } from '@/config/categories'
 import { POSTS_PER_PAGE } from '@/config/posts'
@@ -52,20 +53,22 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <>
-      <OrderBy currentOrderBy={currentOrderBy} />
-      <Title>
-        {category}{' '}
-        {currentOrderBy === 'title' ? (
-          <sup className='text-pink-600 dark:text-pink-400'>A-Z</sup>
-        ) : null}
-      </Title>
+      <Section>
+        <OrderBy currentOrderBy={currentOrderBy} />
+        <Title>
+          {category}{' '}
+          {currentOrderBy === 'title' ? (
+            <sup className='text-pink-600 dark:text-pink-400'>A-Z</sup>
+          ) : null}
+        </Title>
 
-      <PostList posts={posts} />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        currentOrderBy={currentOrderBy}
-      />
+        <PostList posts={posts} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          currentOrderBy={currentOrderBy}
+        />
+      </Section>
     </>
   )
 }
