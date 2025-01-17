@@ -1,6 +1,4 @@
-import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
-import DeletePopover from '@/components/DeletePopover'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
@@ -12,7 +10,10 @@ type Props = {
 
 export default function Component({ post }: Props) {
   return (
-    <div className='hidden max-w-3xl flex-col gap-3 5xs:flex'>
+    <Link
+      href={`/post/${post.slug}`}
+      className='hidden max-w-3xl flex-col gap-3 transition-transform duration-200 active:scale-95 5xs:flex'
+    >
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage
@@ -48,6 +49,6 @@ export default function Component({ post }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
