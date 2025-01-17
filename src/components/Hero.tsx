@@ -12,7 +12,7 @@ type Props = {
 
 export default function Component({ post }: Props) {
   return (
-    <div className='flex max-w-3xl flex-col gap-3'>
+    <div className='hidden max-w-3xl flex-col gap-3 5xs:flex'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage
@@ -26,13 +26,13 @@ export default function Component({ post }: Props) {
             {/* Title */}
             <PostTitle
               as='h2'
-              className='text-shadow mt-3 text-xl text-white 5xs:text-[2.5rem] 5xs:leading-[2.75rem]'
+              className='text-shadow mt-3 text-xl text-white 5xs:text-2xl 2xs:text-3xl sm:text-[2.5rem] sm:leading-[2.75rem]'
             >
               {post.title}
             </PostTitle>
           </div>
 
-          <div className='mt-2.5'>
+          <div className='mt-1.5 hidden 3xs:block'>
             {/* Author */}
             <p className='text-sm text-white'>
               <span className='text-shadow-sm font-medium text-pink-400'>
