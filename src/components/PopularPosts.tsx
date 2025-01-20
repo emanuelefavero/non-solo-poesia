@@ -10,7 +10,7 @@ export default async function Component() {
   if (!posts.length) return <p>Nessun post trovato.</p>
 
   return (
-    <ul className='mt-2 flex flex-col gap-4'>
+    <ul className='mt-4 flex flex-col justify-around gap-2.5'>
       {posts.map((post, index) => (
         <PostListItem key={post.id} post={post} index={index} />
       ))}
@@ -20,14 +20,14 @@ export default async function Component() {
 
 function PostListItem({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='flex w-full list-none flex-row justify-between rounded-md bg-red-500 transition-transform duration-200 active:scale-95'>
+    <li className='list-none justify-between rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
-        className='text-black hover:no-underline dark:text-white'
+        className='flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white'
       >
-        <PostTitle className='bg-blue-500 text-lg'>{post.title}</PostTitle>
+        <PostTitle className='text-lg'>{post.title}</PostTitle>
 
-        <div className='relative aspect-video w-[100px] bg-green-500'>
+        <div className='relative aspect-video min-w-[100px]'>
           <CloudinaryImage
             title={post.title}
             cover_image={post.cover_image}
