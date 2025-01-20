@@ -100,3 +100,15 @@ export async function getLatestPost() {
   `
   return data[0] as Post
 }
+
+// TODO Modify the following function to get the 3 posts with more views instead of the latest 3 posts
+// Get latest 3 posts for the aside
+export async function getLatestPosts() {
+  const sql = neon(process.env.DATABASE_URL as string)
+  const data = await sql`
+    SELECT * FROM posts
+    ORDER BY published_at DESC
+    LIMIT 3
+  `
+  return data as Post[]
+}
