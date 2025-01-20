@@ -19,9 +19,7 @@ export default function Component({
   )
 
   return (
-    <p
-      className={`mt-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400 ${className}`}
-    >
+    <p className={`mt-1 text-sm font-medium italic ${className}`}>
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
         ? 'Aggiornato '
         : 'Pubblicato '}

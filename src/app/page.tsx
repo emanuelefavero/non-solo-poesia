@@ -1,3 +1,4 @@
+import Aside from '@/components/Aside'
 import Hero from '@/components/Hero'
 import OrderBy from '@/components/OrderBy'
 import Pagination from '@/components/Pagination'
@@ -24,11 +25,18 @@ export default async function Home({ searchParams }: Props) {
   const posts = await getPosts(currentPage, POSTS_PER_PAGE, currentOrderBy)
   const latestPost = await getLatestPost()
 
+  // TODO Add content to the aside (the aside should have a transparent background and no border. Try a border bottom below the aside title)
+  // TODO Add a "Questo Mese" and "Di Sempre" selector to the aside to select the top posts of the month or of all time
+  // TODO Create a component for the aside content called "TopPosts"
+
   return (
     <>
       {latestPost && currentPage === 1 && (
-        <Section>
-          <Hero post={latestPost} />
+        <Section className='flex justify-center gap-4'>
+          <Hero post={latestPost} className='flex-1' />
+          <Aside className='w-[375px]'>
+            <h2 className='text-xl'>In Evidenza</h2>
+          </Aside>
         </Section>
       )}
       <Section>

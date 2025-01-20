@@ -49,6 +49,7 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
           <PostDate
             published_at={post.published_at}
             updated_at={post.updated_at}
+            className='text-zinc-500 dark:text-zinc-400'
           />
         </div>
       </Link>
