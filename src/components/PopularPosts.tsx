@@ -10,7 +10,7 @@ export default async function Component() {
   if (!posts.length) return <p>Nessun post trovato.</p>
 
   return (
-    <ul className='mt-4 flex flex-col justify-around gap-2.5'>
+    <ul className='mt-4 flex h-[calc(100%-54px)] flex-col justify-around gap-2.5 xl:gap-4'>
       {posts.map((post, index) => (
         <PostListItem key={post.id} post={post} index={index} />
       ))}
@@ -20,7 +20,7 @@ export default async function Component() {
 
 function PostListItem({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='list-none justify-between rounded-md transition-transform duration-200 active:scale-95'>
+    <li className='list-none rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
         className='flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white'
