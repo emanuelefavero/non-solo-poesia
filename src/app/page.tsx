@@ -14,6 +14,7 @@ type Props = {
 }
 
 // TODO Style 404 page
+// TODO Find the most expensive functions and add memoization (especially in client components, search 'use client' to find them)
 
 export default async function Home({ searchParams }: Props) {
   const { page, order_by } = await searchParams
