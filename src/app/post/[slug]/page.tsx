@@ -1,14 +1,13 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
-import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
+import PostViews from '@/components/Post/PostViews'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/posts'
-import { formatViews } from '@/utils/views'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -78,13 +77,7 @@ export default async function Page({ params }: Props) {
               {post.author}
             </span>
             {/* Views */}
-            <span
-              className='flex select-none items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'
-              title={`${formatViews(post.views)} Visualizzazioni`}
-            >
-              <BsEyeIcon className='relative inline-block h-5 w-5' />
-              {formatViews(post.views)}
-            </span>
+            <PostViews views={post.views} />
           </span>
 
           {/* Date */}
