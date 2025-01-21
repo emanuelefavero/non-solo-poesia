@@ -8,6 +8,7 @@ import PostTitle from '@/components/Post/PostTitle'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/posts'
+import { formatViews } from '@/utils/views'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -70,7 +71,7 @@ export default async function Page({ params }: Props) {
         </div>
 
         <p className='mt-2.5'>
-          <div className='flex flex-wrap gap-2 text-sm'>
+          <span className='flex flex-wrap gap-2 text-sm'>
             {/* Author */}
             Scritto da{' '}
             <span className='text-pink-600 dark:text-pink-400'>
@@ -79,12 +80,12 @@ export default async function Page({ params }: Props) {
             {/* Views */}
             <span
               className='flex select-none items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'
-              title={`${post.views * 3} Visualizzazioni`}
+              title={`${formatViews(post.views)} Visualizzazioni`}
             >
               <BsEyeIcon className='relative inline-block h-5 w-5' />
-              {post.views * 3}
+              {formatViews(post.views)}
             </span>
-          </div>
+          </span>
 
           {/* Date */}
           <PostDate
