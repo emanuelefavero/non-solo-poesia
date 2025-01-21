@@ -1,14 +1,13 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
 import PostTitle from '@/components/Post/PostTitle'
-import { getLatestPosts } from '@/lib/posts'
 import type { Post } from '@/types'
 import Link from 'next/link'
 
-export default async function Component() {
-  const posts = await getLatestPosts()
+type Props = {
+  posts: Post[]
+}
 
-  if (!posts.length) return <p>Nessun post trovato.</p>
-
+export default async function Component({ posts }: Props) {
   return (
     <ul className='mt-4 flex h-[calc(100%-54px)] flex-col justify-evenly gap-3.5'>
       {posts.map((post, index) => (
