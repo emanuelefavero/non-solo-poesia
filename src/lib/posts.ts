@@ -112,3 +112,14 @@ export async function getLatestPosts() {
   `
   return data as Post[]
 }
+
+// Increment post views
+export async function incrementPostViews(slug: string) {
+  const sql = neon(process.env.DATABASE_URL as string)
+
+  await sql`
+    UPDATE posts
+    SET views = views + 1
+    WHERE slug = ${slug}
+  `
+}
