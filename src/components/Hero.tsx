@@ -33,7 +33,7 @@ export default function Component({ post, className }: Props) {
             {/* Title */}
             <PostTitle
               as='h2'
-              className='mt-3 text-xl text-shadow 5xs:text-2xl 2xs:text-3xl sm:text-[2.5rem] sm:leading-[2.75rem]'
+              className='mt-3 line-clamp-2 text-xl text-shadow 5xs:text-2xl 2xs:text-3xl sm:text-[2.5rem] sm:leading-[2.75rem]'
             >
               {post.title}
             </PostTitle>
