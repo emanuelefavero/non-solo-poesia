@@ -20,7 +20,7 @@ export default async function Component() {
 
 function PopularPost({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='list-none rounded-md transition-transform duration-200 active:scale-95'>
+    <li className='group list-none rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
         className={`${
@@ -28,7 +28,7 @@ function PopularPost({ post, index }: { post: Post; index: number }) {
         } 2lg:flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white`}
         title={post.title.length > 52 ? post.title : ''}
       >
-        <PostTitle className='line-clamp-2 w-full text-lg'>
+        <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
           {post.title}
         </PostTitle>
 
