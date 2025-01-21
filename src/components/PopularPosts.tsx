@@ -26,6 +26,7 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
         className={`${
           index < 4 ? 'flex' : 'hidden'
         } 2lg:flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white`}
+        title={post.title.length > 52 ? post.title : ''}
       >
         <PostTitle className='line-clamp-2 w-full text-lg'>
           {post.title}
