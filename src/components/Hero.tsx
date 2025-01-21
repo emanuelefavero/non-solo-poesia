@@ -16,7 +16,7 @@ export default function Component({ post, className }: Props) {
   return (
     <Link
       href={`/post/${post.slug}`}
-      className={`group hidden max-w-3xl flex-col gap-3 rounded-lg border border-zinc-800/20 transition-transform duration-200 active:scale-[0.98] 5xs:flex dark:border-zinc-200/25 ${className}`}
+      className={`group hidden max-w-3xl flex-col gap-3 rounded-lg transition-transform duration-200 active:scale-[0.98] 5xs:flex ${className}`}
       title={post.title.length > 52 ? post.title : ''}
     >
       {/* Cover Image */}
