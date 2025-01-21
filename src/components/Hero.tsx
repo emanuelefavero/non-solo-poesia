@@ -51,6 +51,7 @@ export default function Component({ post, className }: Props) {
               published_at={post.published_at}
               updated_at={post.updated_at}
               className='font-medium text-[#e4e4e7] text-shadow'
+              iconClassName='fill-[#e4e4e7] dark:fill-[#e4e4e7]'
             />
           </div>
         </div>
