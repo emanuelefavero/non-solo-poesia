@@ -9,7 +9,6 @@ type Props = {
   className?: string
 }
 
-// TODO Set the date text color to white (it's still too dark when the background image is white)
 // TODO Make sure the hero image has rounded corners on all 4 corners
 
 export default function Component({ post, className }: Props) {
