@@ -1,6 +1,7 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
+import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
@@ -68,26 +69,30 @@ export default async function Page({ params }: Props) {
           </h2>
         </div>
 
-        <div className='mt-2.5'>
-          {/* Views */}
-          <div className='text-zinc-500 dark:text-zinc-400'>
-            {post.views * 3} visualizzazioni
-          </div>
-
-          {/* Author */}
-          <p className='mt-0.5 text-sm'>
+        <p className='mt-2.5'>
+          <div className='flex flex-wrap gap-2 text-sm'>
+            {/* Author */}
             Scritto da{' '}
             <span className='text-pink-600 dark:text-pink-400'>
               {post.author}
             </span>
-          </p>
+            {/* Views */}
+            <span
+              className='flex select-none items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'
+              title={`${post.views * 3} Visualizzazioni`}
+            >
+              <BsEyeIcon className='relative inline-block h-5 w-5' />
+              {post.views * 3}
+            </span>
+          </div>
+
           {/* Date */}
           <PostDate
             published_at={post.published_at}
             updated_at={post.updated_at}
             className='text-zinc-500 dark:text-zinc-400'
           />
-        </div>
+        </p>
         {/* Edit and Delete Buttons */}
         {(userId === adminId || userId === authorId) && (
           <div className='mt-2 flex gap-2'>

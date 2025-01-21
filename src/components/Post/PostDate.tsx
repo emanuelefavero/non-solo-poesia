@@ -19,7 +19,7 @@ export default function Component({
   )
 
   return (
-    <p className={`mt-1 text-sm font-medium italic ${className}`}>
+    <div className={`mt-1 text-sm font-medium italic ${className}`}>
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
         ? 'Aggiornato '
         : 'Pubblicato '}
@@ -32,6 +32,6 @@ export default function Component({
         })
         // Capitalize the month name
         .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-    </p>
+    </div>
   )
 }
