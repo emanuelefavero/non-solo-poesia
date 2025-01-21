@@ -3,7 +3,7 @@ import AsideTitle from '@/components/AsideTitle'
 import Hero from '@/components/Hero'
 import OrderBy from '@/components/OrderBy'
 import Pagination from '@/components/Pagination'
-import PopularPosts from '@/components/PopularPosts'
+import AsidePostList from '@/components/AsidePostList'
 import PostList from '@/components/PostList'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
@@ -35,7 +35,7 @@ export default async function Home({ searchParams }: Props) {
           <Hero post={latestPost} className='flex-1' />
           <Aside className='w-[375px]'>
             <AsideTitle>In Evidenza</AsideTitle>
-            <PopularPosts />
+            <AsidePostList />
           </Aside>
         </Section>
       )}

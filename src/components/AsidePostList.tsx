@@ -12,13 +12,13 @@ export default async function Component() {
   return (
     <ul className='mt-4 flex h-[calc(100%-54px)] flex-col justify-evenly gap-3.5'>
       {posts.map((post, index) => (
-        <PopularPost key={post.id} post={post} index={index} />
+        <AsidePostListItem key={post.id} post={post} index={index} />
       ))}
     </ul>
   )
 }
 
-function PopularPost({ post, index }: { post: Post; index: number }) {
+function AsidePostListItem({ post, index }: { post: Post; index: number }) {
   return (
     <li className='group list-none rounded-md transition-transform duration-200 active:scale-95'>
       <Link
