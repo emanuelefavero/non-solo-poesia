@@ -1,8 +1,6 @@
 'use server'
 
 import { neon } from '@neondatabase/serverless'
-// import { revalidatePath } from 'next/cache'
-// import { redirect } from 'next/navigation'
 
 export async function incrementPostViews(slug: string) {
   try {
@@ -13,9 +11,6 @@ export async function incrementPostViews(slug: string) {
       SET views = views + 1
       WHERE slug = ${slug}
     `
-
-    // revalidatePath(`/post/${slug}`)
-    // redirect(`/post/${slug}`)
   } catch (error) {
     console.error('Error incrementing post views:', error)
     return {
