@@ -19,7 +19,10 @@ export default function Component({
   )
 
   return (
-    <span className={`mt-1 text-sm font-medium italic ${className}`}>
+    <time
+      className={`mt-1 text-sm font-medium italic ${className || ''}`}
+      dateTime={date.toISOString()}
+    >
       {updated_at && isAtLeastOneDayLater(published_at, updated_at)
         ? 'Aggiornato '
         : 'Pubblicato '}
@@ -30,8 +33,13 @@ export default function Component({
           month: 'long',
           year: 'numeric',
         })
-        // Capitalize the month name
-        .replace(/(\b\w)/g, (char) => char.toUpperCase())}
-    </span>
+
+        // Capitalize the first letter of the month
+        .split(' ')
+        .map((word, index) =>
+          index === 1 ? word.charAt(0).toUpperCase() + word.slice(1) : word,
+        )
+        .join(' ')}
+    </time>
   )
 }
