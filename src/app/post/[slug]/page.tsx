@@ -2,6 +2,7 @@ import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import PopularPostsAside from '@/components/PopularPostsAside'
+import PostAuthor from '@/components/Post/PostAuthor'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import PostViews from '@/components/Post/PostViews'
@@ -72,10 +73,7 @@ export default async function Page({ params }: Props) {
         <p className='mt-2.5'>
           <span className='flex flex-wrap gap-2 text-sm'>
             {/* Author */}
-            Scritto da{' '}
-            <span className='text-pink-600 dark:text-pink-400'>
-              {post.author}
-            </span>
+            <PostAuthor author={post.author} />
             {/* Views */}
             <PostViews views={post.views} />
           </span>
