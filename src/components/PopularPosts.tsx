@@ -38,6 +38,7 @@ function PopularPost({ post, index }: { post: Post; index: number }) {
             cover_image={post.cover_image}
             cover_image_cloudinary={post.cover_image_cloudinary}
             index={index}
+            className='rounded-[0.225rem]'
           />
         </div>
       </Link>

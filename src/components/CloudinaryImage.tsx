@@ -7,6 +7,7 @@ type Props = {
   title: string
   cover_image?: string
   cover_image_cloudinary?: string
+  className?: string
 
   // ? Get the index of the post to handle the image priority prop
   index?: number
@@ -19,6 +20,7 @@ export default function Component({
   title,
   cover_image,
   cover_image_cloudinary,
+  className,
   index = 0,
 }: Props) {
   return (
@@ -32,7 +34,7 @@ export default function Component({
           quality='auto'
           format='auto'
           crop='auto'
-          className='rounded-md'
+          className={`rounded-md ${className}`}
           aspectRatio={16 / 9}
           // tint='70:violet:pink'
 
@@ -48,7 +50,7 @@ export default function Component({
           fill={true}
           sizes='(min-width: 768px) 768px, 100vw'
           style={{ objectFit: 'cover' }}
-          className='rounded-md'
+          className={`rounded-md ${className}`}
           // ? Handle the image priority prop based on the index of the post
           priority={index >= 0 && index < 4}
         />
@@ -62,7 +64,7 @@ export default function Component({
           fill={true}
           sizes='(min-width: 768px) 768px, 100vw'
           style={{ objectFit: 'cover' }}
-          className='rounded-md'
+          className={`rounded-md ${className}`}
           // ? Handle the image priority prop based on the index of the post
           priority={index >= 0 && index < 4}
         />
