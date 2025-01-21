@@ -4,6 +4,7 @@ import DeletePopover from '@/components/DeletePopover'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostAuthor from '@/components/Post/PostAuthor'
 import PostDate from '@/components/Post/PostDate'
+import PostDescription from '@/components/Post/PostDescription'
 import PostTitle from '@/components/Post/PostTitle'
 import PostViews from '@/components/Post/PostViews'
 import Section from '@/components/Section'
@@ -65,9 +66,7 @@ export default async function Page({ params }: Props) {
           </PostTitle>
 
           {/* Description */}
-          <h2 className='mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-7 tracking-wide text-zinc-600 dark:text-zinc-300'>
-            {post.description}
-          </h2>
+          <PostDescription description={post.description} />
         </div>
 
         <div className='mt-2.5 flex flex-col gap-0.5'>
