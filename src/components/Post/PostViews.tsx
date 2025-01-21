@@ -9,12 +9,13 @@ type Props = {
 
 export default function Component({ views, className, iconClassName }: Props) {
   return (
-    <span
+    <p
       className={`flex select-none items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400 ${className}`}
       title={`${formatViews(views)} Visualizzazioni`}
+      aria-label={`${formatViews(views)} Visualizzazioni`}
     >
       <BsEyeIcon className={`relative inline-block h-5 w-5 ${iconClassName}`} />
       {formatViews(views)}
-    </span>
+    </p>
   )
 }

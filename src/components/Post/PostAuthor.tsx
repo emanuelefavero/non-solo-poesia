@@ -10,11 +10,11 @@ export default function Component({
   authorClassName,
 }: Props) {
   return (
-    <span className={`${className}`}>
+    <p className={`${className} text-sm`}>
       Scritto da{' '}
       <span className={`text-pink-600 dark:text-pink-400 ${authorClassName}`}>
         {author}
       </span>
-    </span>
+    </p>
   )
 }
