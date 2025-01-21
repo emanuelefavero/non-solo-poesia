@@ -27,7 +27,9 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
           index < 4 ? 'flex' : 'hidden'
         } 2lg:flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white`}
       >
-        <PostTitle className='text-lg'>{post.title}</PostTitle>
+        <PostTitle className='line-clamp-2 w-full text-lg'>
+          {post.title}
+        </PostTitle>
 
         <div className='relative aspect-video min-w-[100px]'>
           <CloudinaryImage
