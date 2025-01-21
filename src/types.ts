@@ -30,6 +30,7 @@ export type Post = {
   category: CategoryName
   published_at: string
   updated_at?: string | null
+  views: number
 }
 
 export type Message = {

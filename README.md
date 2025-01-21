@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS posts(
   author TEXT NOT NULL,
   category TEXT DEFAULT '',
   published_at TIMESTAMP WITH TIME ZONE NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE
+  updated_at TIMESTAMP WITH TIME ZONE,
+  views INTEGER DEFAULT 0
 )
 ```
 

@@ -1,3 +1,4 @@
+import { incrementPostViews } from '@/app/actions/incrementPostViews'
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
@@ -18,6 +19,7 @@ type Props = { params: Promise<{ slug: string }> }
 // * Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug
+  await incrementPostViews(slug)
   const post = await getPost(slug)
 
   if (!post) return { title: 'Post non trovato' }
@@ -66,9 +68,15 @@ export default async function Page({ params }: Props) {
             {post.description}
           </h2>
         </div>
+
         <div className='mt-2.5'>
+          {/* Views */}
+          <div className='text-zinc-500 dark:text-zinc-400'>
+            {post.views * 3} visualizzazioni
+          </div>
+
           {/* Author */}
-          <p className='text-sm'>
+          <p className='mt-0.5 text-sm'>
             Scritto da{' '}
             <span className='text-pink-600 dark:text-pink-400'>
               {post.author}
