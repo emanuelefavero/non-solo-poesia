@@ -2,11 +2,9 @@ import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import DeletePopover from '@/components/DeletePopover'
 import PopularPostsAside from '@/components/PopularPostsAside'
-import PostAuthor from '@/components/Post/PostAuthor'
-import PostDate from '@/components/Post/PostDate'
 import PostDescription from '@/components/Post/PostDescription'
+import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
-import PostViews from '@/components/Post/PostViews'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/posts'
@@ -69,21 +67,9 @@ export default async function Page({ params }: Props) {
           <PostDescription description={post.description} />
         </div>
 
-        <div className='mt-2.5 flex flex-col gap-0.5'>
-          <span className='flex flex-wrap gap-2 text-sm'>
-            {/* Author */}
-            <PostAuthor author={post.author} />
-            {/* Views */}
-            <PostViews views={post.views} />
-          </span>
+        {/* Post Info */}
+        <PostInfo post={post} />
 
-          {/* Date */}
-          <PostDate
-            published_at={post.published_at}
-            updated_at={post.updated_at}
-            className='text-zinc-500 dark:text-zinc-400'
-          />
-        </div>
         {/* Edit and Delete Buttons */}
         {(userId === adminId || userId === authorId) && (
           <div className='mt-2 flex gap-2'>
@@ -99,6 +85,7 @@ export default async function Page({ params }: Props) {
             </Link>
           </div>
         )}
+
         {/* Content */}
         <div
           className='post-content'
