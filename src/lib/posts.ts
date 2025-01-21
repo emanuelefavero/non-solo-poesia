@@ -101,19 +101,18 @@ export async function getLatestPost() {
   return data[0] as Post
 }
 
-// TODO Modify the following function to get the 5 posts with more views instead of the latest 5 posts
-// Get latest 5 posts for the aside
-export async function getLatestPosts() {
+// Get popular posts
+export async function getPopularPosts() {
   const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
-    ORDER BY published_at DESC
+    ORDER BY views DESC
     LIMIT 5
   `
   return data as Post[]
 }
 
-// Increment post views
+// Increment single post views
 export async function incrementPostViews(slug: string) {
   const sql = neon(process.env.DATABASE_URL as string)
 
