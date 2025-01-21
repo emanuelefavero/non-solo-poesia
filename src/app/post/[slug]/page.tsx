@@ -39,7 +39,7 @@ export default async function Page({ params }: Props) {
   if (!post) return <p>Post non trovato.</p>
 
   return (
-    <Section className='flex justify-between gap-4'>
+    <Section className='flex justify-center gap-4'>
       <div className='flex w-full max-w-3xl flex-col gap-3'>
         {/* Cover Image */}
         <div className='relative aspect-video w-full'>
