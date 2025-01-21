@@ -24,3 +24,23 @@ export function isAtLeastOneDayLater(
 export function isMonthDay1or8or11(date: Date) {
   return date.getDate() === 1 || date.getDate() === 8 || date.getDate() === 11
 }
+
+// Format date to italian format with Capitalized month
+// ? e.g. 10 dicembre 2024
+export function formatDate(date: Date) {
+  return (
+    date
+      .toLocaleDateString('it-IT', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+
+      // Capitalize the first letter of the month
+      .split(' ')
+      .map((word, index) =>
+        index === 1 ? word.charAt(0).toUpperCase() + word.slice(1) : word,
+      )
+      .join(' ')
+  )
+}
