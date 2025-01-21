@@ -70,7 +70,7 @@ export default async function Page({ params }: Props) {
           </h2>
         </div>
 
-        <p className='mt-2.5'>
+        <div className='mt-2.5 flex flex-col gap-0.5'>
           <span className='flex flex-wrap gap-2 text-sm'>
             {/* Author */}
             <PostAuthor author={post.author} />
@@ -84,7 +84,7 @@ export default async function Page({ params }: Props) {
             updated_at={post.updated_at}
             className='text-zinc-500 dark:text-zinc-400'
           />
-        </p>
+        </div>
         {/* Edit and Delete Buttons */}
         {(userId === adminId || userId === authorId) && (
           <div className='mt-2 flex gap-2'>
