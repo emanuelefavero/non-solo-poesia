@@ -67,9 +67,7 @@ async function validateRequest(req: Request) {
   }
 
   // Sanitize the title (remove invalid characters for URLs)
-  const sanitizedTitle = title
-    .trim()
-    .replace(/[^a-zA-Z0-9\s$\-_.+!*'(),]/gu, '')
+  const sanitizedTitle = title.trim().replace(/[^a-zA-Z0-9\s$\-_.+!*'()]/gu, '')
 
   // Create a slug from title (lowercase and replace spaces with dashes)
   const slug = sanitizedTitle.toLowerCase().replace(/\s+/g, '-')

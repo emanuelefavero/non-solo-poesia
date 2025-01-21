@@ -32,7 +32,7 @@ export function validatePost({
   }
 
   // Check if the title contains special characters that are not allowed in URLs
-  if (!/^[a-zA-Z0-9\s$\-_.+!*'(),]+$/u.test(title)) {
+  if (!/^[a-zA-Z0-9\s$\-_.+!*'()]+$/u.test(title)) {
     return {
       type: 'error',
       text: 'Il titolo non può contenere caratteri speciali non consentiti negli URL',
