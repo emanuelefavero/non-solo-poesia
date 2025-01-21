@@ -15,7 +15,6 @@ type Props = {
   searchParams: Promise<{ page?: string; order_by?: OrderByType }>
 }
 
-// TODO Add an hero section in the homepage with the latest post shown bigger with an h1 (if you add an h1, remember to remove the h1 in the homepage header). Remove the latest post from the post list of course.
 // TODO Style 404 page
 
 export default async function Home({ searchParams }: Props) {
@@ -27,9 +26,7 @@ export default async function Home({ searchParams }: Props) {
   const posts = await getPosts(currentPage, POSTS_PER_PAGE, currentOrderBy)
   const latestPost = await getLatestPost()
 
-  // TODO Add content to the aside (the aside should have a transparent background and no border. Try a border bottom below the aside title)
   // TODO Add a "Questo Mese" and "Di Sempre" selector to the aside to select the top posts of the month or of all time
-  // TODO Create a component for the aside content called "TopPosts"
 
   return (
     <>
