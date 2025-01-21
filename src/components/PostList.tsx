@@ -35,7 +35,9 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
 
         <div className='py-4'>
           <Category category={post.category} className='text-sm' />
-          <PostTitle className='text-xl 5xs:text-3xl'>{post.title}</PostTitle>
+          <PostTitle className='line-clamp-4 text-xl 5xs:text-3xl'>
+            {post.title}
+          </PostTitle>
           <p className='mt-2.5 line-clamp-3 text-[1.0625rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 dark:text-zinc-200'>
             {post.description}
           </p>
