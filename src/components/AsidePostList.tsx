@@ -9,7 +9,7 @@ type Props = {
 
 export default async function Component({ posts }: Props) {
   return (
-    <ul className='mt-4 flex h-[calc(100%-54px)] flex-col justify-evenly gap-3.5'>
+    <ul className='mt-4 flex flex-col gap-3.5'>
       {posts.map((post, index) => (
         <AsidePostListItem key={post.id} post={post} index={index} />
       ))}
