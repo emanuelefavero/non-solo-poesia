@@ -101,14 +101,14 @@ export async function getLatestPost() {
   return data[0] as Post
 }
 
-// TODO Modify the following function to get the 4 posts with more views instead of the latest 4 posts
-// Get latest 4 posts for the aside
+// TODO Modify the following function to get the 5 posts with more views instead of the latest 5 posts
+// Get latest 5 posts for the aside
 export async function getLatestPosts() {
   const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
     ORDER BY published_at DESC
-    LIMIT 4
+    LIMIT 5
   `
   return data as Post[]
 }

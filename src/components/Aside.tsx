@@ -5,7 +5,7 @@ type Props = {
 
 export default function Component({ children, className }: Props) {
   return (
-    <aside className={`relative hidden rounded-md p-3 lg:block ${className}`}>
+    <aside className={`relative hidden rounded-md lg:block ${className}`}>
       {children}
     </aside>
   )
