@@ -1,6 +1,6 @@
-import Aside from '@/components/Aside'
-import AsidePostList from '@/components/AsidePostList'
-import AsideTitle from '@/components/AsideTitle'
+import Aside from '@/components/Aside/Aside'
+import AsidePostList from '@/components/Aside/AsidePostList'
+import AsideTitle from '@/components/Aside/AsideTitle'
 import { getPopularPosts } from '@/lib/posts'
 
 export default async function PopularPostsAside() {
