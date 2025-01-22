@@ -1,9 +1,11 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
+import PostDescription from '@/components/Post/PostDescription'
 import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
 import Link from 'next/link'
+import './PostList.css'
 
 export default function Component({ posts }: { posts: Post[] }) {
   if (!posts.length) return <p>Nessun post trovato.</p>
@@ -34,14 +36,16 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
           />
         </div>
 
-        <div className='py-4'>
+        <div className='flex flex-col gap-1 py-4'>
           <Category category={post.category} className='text-sm' />
           <PostTitle className='line-clamp-4 text-xl 5xs:text-3xl'>
             {post.title}
           </PostTitle>
-          <p className='mt-2.5 line-clamp-3 text-[1.0625rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 dark:text-zinc-200'>
-            {post.description}
-          </p>
+
+          <PostDescription
+            description={post.description}
+            className='post-description leading-[1.625rem]'
+          />
 
           <PostInfo post={post} />
         </div>
