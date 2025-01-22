@@ -2,6 +2,7 @@ import CloudinaryImage from '@/components/CloudinaryImage'
 import PostAuthor from '@/components/Post/PostAuthor'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
+import PostViews from '@/components/Post/PostViews'
 import type { Post } from '@/types'
 import Link from 'next/link'
 import './Hero.css'
@@ -42,13 +43,21 @@ export default function Component({ post, className }: Props) {
           </div>
 
           <div className='mt-1.5 hidden 3xs:block'>
-            {/* Author */}
-            <PostAuthor
-              author={post.author}
-              className='text-sm text-white'
-              authorClassName='hero-author font-medium text-shadow'
-              iconClassName='hero-icon'
-            />
+            <span className='flex flex-wrap gap-2 text-sm'>
+              {/* Author */}
+              <PostAuthor
+                author={post.author}
+                className='text-sm text-white'
+                authorClassName='hero-author font-medium text-shadow'
+                iconClassName='hero-icon'
+              />
+              {/* Views */}
+              <PostViews
+                views={post.views}
+                className='hero-views font-medium text-shadow'
+                iconClassName='hero-icon'
+              />
+            </span>
             {/* Date */}
             <PostDate
               published_at={post.published_at}

@@ -7,8 +7,11 @@
   --foreground: #27272a;
   --selection: rgba(220, 98, 175, 0.25);
   --text-shadow: #150209;
+
+  /* Hero */
   --hero-icon: #e4e4e7;
   --hero-author: #f9a8d4;
+  --hero-views: var(--hero-icon);
 }
 
 @media (prefers-color-scheme: dark) {

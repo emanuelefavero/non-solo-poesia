@@ -6,3 +6,7 @@
 .hero-author {
   color: var(--hero-author);
 }
+
+.hero-views {
+  color: var(--hero-views);
+}
