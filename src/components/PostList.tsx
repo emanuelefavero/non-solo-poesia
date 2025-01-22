@@ -1,6 +1,5 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
-import PostDate from '@/components/Post/PostDate'
 import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
