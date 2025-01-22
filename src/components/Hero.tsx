@@ -3,6 +3,7 @@ import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
 import Link from 'next/link'
+import './Hero.css'
 
 type Props = {
   post: Post
@@ -51,7 +52,7 @@ export default function Component({ post, className }: Props) {
               published_at={post.published_at}
               updated_at={post.updated_at}
               className='font-medium text-[#e4e4e7] text-shadow'
-              iconClassName='fill-[#e4e4e7] dark:fill-[#e4e4e7]'
+              iconClassName='hero-icon'
             />
           </div>
         </div>
