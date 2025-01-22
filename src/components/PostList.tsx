@@ -1,6 +1,7 @@
 import Category from '@/components/Category'
 import CloudinaryImage from '@/components/CloudinaryImage'
 import PostDate from '@/components/Post/PostDate'
+import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
 import Link from 'next/link'
@@ -42,18 +43,8 @@ function PostListItem({ post, index }: { post: Post; index: number }) {
           <p className='mt-2.5 line-clamp-3 text-[1.0625rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 dark:text-zinc-200'>
             {post.description}
           </p>
-          {/* TODO Create PostAuthor component to prevent duplicate in PostList */}
-          <p className='mt-4 text-sm text-zinc-600 dark:text-zinc-300'>
-            Scritto da{' '}
-            <span className='text-pink-600 dark:text-pink-400'>
-              {post.author}
-            </span>
-          </p>
-          <PostDate
-            published_at={post.published_at}
-            updated_at={post.updated_at}
-            className='text-zinc-500 dark:text-zinc-400'
-          />
+
+          <PostInfo post={post} />
         </div>
       </Link>
     </li>
