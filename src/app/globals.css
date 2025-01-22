@@ -8,6 +8,7 @@
   --selection: rgba(220, 98, 175, 0.25);
   --text-shadow: #150209;
   --hero-icon: #e4e4e7;
+  --hero-author: #f9a8d4;
 }
 
 @media (prefers-color-scheme: dark) {

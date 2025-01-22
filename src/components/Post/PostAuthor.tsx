@@ -4,12 +4,14 @@ type Props = {
   author: string
   className?: string
   authorClassName?: string
+  iconClassName?: string
 }
 
 export default function Component({
   author,
   className,
   authorClassName,
+  iconClassName,
 }: Props) {
   return (
     <p
@@ -17,7 +19,9 @@ export default function Component({
       title={`Scritto da ${author}`}
       aria-label={`Scritto da ${author}`}
     >
-      <BiPencilIcon className='relative inline-block h-5 w-5' />
+      <BiPencilIcon
+        className={`relative inline-block h-5 w-5 ${iconClassName}`}
+      />
       <span className='sr-only'>Scritto da </span>
       <span className={`text-pink-600 dark:text-pink-400 ${authorClassName}`}>
         {author}

@@ -1,4 +1,5 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
+import PostAuthor from '@/components/Post/PostAuthor'
 import PostDate from '@/components/Post/PostDate'
 import PostTitle from '@/components/Post/PostTitle'
 import type { Post } from '@/types'
@@ -42,11 +43,12 @@ export default function Component({ post, className }: Props) {
 
           <div className='mt-1.5 hidden 3xs:block'>
             {/* Author */}
-            <p className='text-sm text-white'>
-              <span className='font-medium text-pink-300 text-shadow'>
-                {post.author}
-              </span>
-            </p>
+            <PostAuthor
+              author={post.author}
+              className='text-sm text-white'
+              authorClassName='hero-author font-medium text-shadow'
+              iconClassName='hero-icon'
+            />
             {/* Date */}
             <PostDate
               published_at={post.published_at}
