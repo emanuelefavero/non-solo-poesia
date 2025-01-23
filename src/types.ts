@@ -51,3 +51,8 @@ export type OrderByOption = {
 }
 
 export type PopularPostsFilter = 'all_time' | 'this_month'
+
+export type PopularPostsFilterOption = {
+  value: PopularPostsFilter
+  label: string
+}

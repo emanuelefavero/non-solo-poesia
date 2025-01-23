@@ -1,5 +1,6 @@
 'use client'
 
+import { popularPostsFilterOptions } from '@/data/popularPostsFilterOptions'
 import type { PopularPostsFilter } from '@/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -7,11 +8,6 @@ import { usePathname } from 'next/navigation'
 type Props = {
   currentPopularPostsFilter: PopularPostsFilter
 }
-
-const popularPostsFilterOptions = [
-  { label: 'Questo Mese', value: 'this_month' },
-  { label: 'Di Sempre', value: 'all_time' },
-]
 
 export default function Component({ currentPopularPostsFilter }: Props) {
   const pathname = usePathname()
