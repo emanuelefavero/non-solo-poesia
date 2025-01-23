@@ -1,16 +1,14 @@
 import OrderBy from '@/components/OrderBy'
-import Pagination from '@/components/Pagination'
-import PostList from '@/components/PostList'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
 import { CATEGORY_SLUGS } from '@/config/categories'
-import { POSTS_PER_PAGE } from '@/config/posts'
 import { TITLE } from '@/data/title'
-import { getPosts, getTotalPostCountByCategory } from '@/lib/posts'
 import type { CategorySlug, OrderBy as OrderByType } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
+import PostListLoader from './PostListLoader'
 
 // TIP: This is how you can get both the slug and searchParams from the URL
 type Props = {
@@ -42,14 +40,6 @@ export default async function Page({ params, searchParams }: Props) {
   const category = convertSlugToName(slug)
   const currentOrderBy = order_by || 'published_at'
   const currentPage = parseInt(page || '1', 10)
-  const totalPosts = await getTotalPostCountByCategory(category)
-  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
-  const posts = await getPosts(
-    currentPage,
-    POSTS_PER_PAGE,
-    currentOrderBy,
-    category,
-  )
 
   return (
     <>
@@ -62,12 +52,13 @@ export default async function Page({ params, searchParams }: Props) {
           ) : null}
         </Title>
 
-        <PostList posts={posts} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          currentOrderBy={currentOrderBy}
-        />
+        <Suspense fallback={<p>Caricamento...</p>}>
+          <PostListLoader
+            currentPage={currentPage}
+            currentOrderBy={currentOrderBy}
+            category={category}
+          />
+        </Suspense>
       </Section>
     </>
   )
