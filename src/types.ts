@@ -4,6 +4,7 @@ export type CategoryName =
   | 'Pensieri'
   | 'Ricette'
   | 'Eventi'
+  | 'Categoria' // Added for the skeleton
 
 export type CategorySlug =
   | 'poesie'
