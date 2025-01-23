@@ -2,6 +2,7 @@
 
 import { CldImage } from 'next-cloudinary'
 import Image from 'next/image'
+import { memo } from 'react'
 
 type Props = {
   title: string
@@ -16,7 +17,7 @@ type Props = {
 // TODO Try to avoid using CldImage and check if it is possible to use the Image component from Next.js instead
 // TODO Conditionally adjust the Cloudinary image width and height based if this component is rendered on the home page or not
 
-export default function Component({
+const Component = memo(function Component({
   title,
   cover_image,
   cover_image_cloudinary,
@@ -71,4 +72,6 @@ export default function Component({
       )}
     </>
   )
-}
+})
+
+export default Component
