@@ -29,8 +29,6 @@ export default async function Home({ searchParams }: Props) {
   const posts = await getPosts(currentPage, POSTS_PER_PAGE, currentOrderBy)
   const latestPost = await getLatestPost()
 
-  // TODO Add a "Questo Mese" and "Di Sempre" selector to the aside to select the top posts of the month or of all time
-
   return (
     <>
       {latestPost && currentPage === 1 && (

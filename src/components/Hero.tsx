@@ -12,8 +12,6 @@ type Props = {
   className?: string
 }
 
-// TODO Make sure the hero image has rounded corners on all 4 corners
-
 export default function Component({ post, className }: Props) {
   return (
     <Link
