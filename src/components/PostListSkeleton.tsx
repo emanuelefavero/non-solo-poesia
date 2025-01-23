@@ -5,6 +5,8 @@ import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import Image from 'next/image'
 
+// TODO Style skeleton (remove text, add background color, lower opacity and add pulse animation effect. If animate-pulse is ugly, create new animation with css file or in tailwind.config). To test the skeleton, comment out Suspense PostListLoader in home page or category page and render PostLitSkeleton instead
+
 // * Skeleton
 export default function Component() {
   return (
