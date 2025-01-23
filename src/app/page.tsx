@@ -1,13 +1,12 @@
 import Hero from '@/components/Hero'
 import OrderBy from '@/components/OrderBy'
-import Pagination from '@/components/Pagination'
 import PopularPostsAside from '@/components/PopularPostsAside'
-import PostList from '@/components/PostList'
+import PostListLoader from '@/components/PostListLoader'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
-import { POSTS_PER_PAGE } from '@/config/posts'
-import { getLatestPost, getPosts, getTotalPostCount } from '@/lib/posts'
+import { getLatestPost } from '@/lib/posts'
 import type { OrderBy as OrderByType, PopularPostsFilter } from '@/types'
+import { Suspense } from 'react'
 
 type Props = {
   searchParams: Promise<{
@@ -24,9 +23,6 @@ export default async function Home({ searchParams }: Props) {
   const { page, order_by, popular_posts_filter } = await searchParams
   const currentOrderBy = order_by || 'published_at'
   const currentPage = parseInt(page || '1', 10)
-  const totalPosts = await getTotalPostCount()
-  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE)
-  const posts = await getPosts(currentPage, POSTS_PER_PAGE, currentOrderBy)
   const latestPost = await getLatestPost()
 
   return (
@@ -49,12 +45,13 @@ export default async function Home({ searchParams }: Props) {
           )}
         </Title>
         <OrderBy currentOrderBy={currentOrderBy} />
-        <PostList posts={posts} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          currentOrderBy={currentOrderBy}
-        />
+
+        <Suspense fallback={<div>Caricamento...</div>}>
+          <PostListLoader
+            currentPage={currentPage}
+            currentOrderBy={currentOrderBy}
+          />
+        </Suspense>
       </Section>
     </>
   )

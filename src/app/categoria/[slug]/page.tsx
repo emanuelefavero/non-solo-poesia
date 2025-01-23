@@ -8,7 +8,7 @@ import { convertSlugToName } from '@/utils/slug'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
-import PostListLoader from './PostListLoader'
+import PostListLoader from '../../../components/PostListLoader'
 
 // TIP: This is how you can get both the slug and searchParams from the URL
 type Props = {
@@ -52,7 +52,7 @@ export default async function Page({ params, searchParams }: Props) {
           ) : null}
         </Title>
 
-        <Suspense fallback={<p>Caricamento...</p>}>
+        <Suspense fallback={<div>Caricamento...</div>}>
           <PostListLoader
             currentPage={currentPage}
             currentOrderBy={currentOrderBy}
