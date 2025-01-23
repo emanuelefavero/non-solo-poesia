@@ -8,13 +8,17 @@ import PostTitle from '@/components/Post/PostTitle'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/posts'
+import { PopularPostsFilter } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import './styles.css'
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
-type Props = { params: Promise<{ slug: string }> }
+type Props = {
+  params: Promise<{ slug: string; popular_posts_filter: PopularPostsFilter }>
+  searchParams: Promise<{ popular_posts_filter?: PopularPostsFilter }>
+}
 
 // * Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,9 +35,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // * Page
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const slug = (await params).slug
   const post = await getPost(slug)
+  const { popular_posts_filter } = await searchParams
   const { userId } = await auth()
   const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
@@ -94,7 +99,7 @@ export default async function Page({ params }: Props) {
           }}
         />
       </div>
-      <PopularPostsAside />
+      <PopularPostsAside popular_posts_filter={popular_posts_filter} />
     </Section>
   )
 }

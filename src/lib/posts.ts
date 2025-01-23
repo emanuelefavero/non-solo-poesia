@@ -1,4 +1,4 @@
-import type { OrderBy, Post } from '@/types'
+import type { OrderBy, PopularPostsFilter, Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
 // Get posts from the database
@@ -101,14 +101,27 @@ export async function getLatestPost() {
   return data[0] as Post
 }
 
-// Get popular posts
-export async function getPopularPosts() {
+// Get popular posts (filter all time or this month)
+export async function getPopularPosts(
+  popular_posts_filter?: PopularPostsFilter,
+) {
   const sql = neon(process.env.DATABASE_URL as string)
-  const data = await sql`
-    SELECT * FROM posts
-    ORDER BY views DESC
-    LIMIT 5
-  `
+
+  const query =
+    popular_posts_filter === 'this_month'
+      ? sql`
+        SELECT * FROM posts
+        WHERE date_trunc('month', published_at) = date_trunc('month', current_date)
+        ORDER BY views DESC
+        LIMIT 5
+      `
+      : sql`
+        SELECT * FROM posts
+        ORDER BY views DESC
+        LIMIT 5
+      `
+
+  const data = await query
   return data as Post[]
 }
 
