@@ -21,7 +21,7 @@ export default function Component({
 }: PaginationProps) {
   const pathname = usePathname()
 
-  // Generate pagination links (memoized)
+  // Generate pagination navigation links (memoized)
   const pages = useMemo(
     () => generatePagination(currentPage, totalPages),
     [currentPage, totalPages],
