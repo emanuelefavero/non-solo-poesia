@@ -6,6 +6,7 @@ import type { OrderBy } from '@/types'
 import { generatePagination } from '@/utils/pagination'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useMemo } from 'react'
 
 type PaginationProps = {
   currentPage: number
@@ -19,7 +20,12 @@ export default function Component({
   currentOrderBy,
 }: PaginationProps) {
   const pathname = usePathname()
-  const pages = generatePagination(currentPage, totalPages)
+
+  // Generate pagination links (memoized)
+  const pages = useMemo(
+    () => generatePagination(currentPage, totalPages),
+    [currentPage, totalPages],
+  )
 
   if (totalPages <= 1) return null
 
