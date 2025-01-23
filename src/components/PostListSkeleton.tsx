@@ -4,7 +4,6 @@ import BiPencilIcon from '@/components/icons/BiPencilIcon'
 import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import { POSTS_PER_PAGE } from '@/config/posts'
 import Image from 'next/image'
-import Link from 'next/link'
 
 // * Skeleton
 export default function Component() {
@@ -20,10 +19,7 @@ export default function Component() {
 function PostListItem({ index }: { index: number }) {
   return (
     <li className='group flex list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
-      <Link
-        href={`/`}
-        className='text-black hover:no-underline dark:text-white'
-      >
+      <div className='text-black hover:no-underline dark:text-white'>
         <div className='relative aspect-video w-full from-pink-800/20 to-pink-200/30 content-none after:absolute after:inset-0 after:z-10 after:rounded-md after:bg-gradient-to-t after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100 dark:from-pink-200/20 dark:to-pink-800/30'>
           {/* CloudinaryImage */}
           <Image
@@ -76,7 +72,7 @@ function PostListItem({ index }: { index: number }) {
             </span>
           </div>
         </div>
-      </Link>
+      </div>
     </li>
   )
 }
