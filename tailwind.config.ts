@@ -70,6 +70,10 @@ export default {
         slideRightAndFade:
           'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         skeleton: 'skeleton 1.5s infinite ease-in-out',
+        'skeleton-150': 'skeleton 1.5s infinite ease-in-out 150ms',
+        'skeleton-300': 'skeleton 1.5s infinite ease-in-out 300ms',
+        'skeleton-450': 'skeleton 1.5s infinite ease-in-out 450ms',
+        'skeleton-600': 'skeleton 1.5s infinite ease-in-out 600ms',
       },
 
       textShadow: {

@@ -10,7 +10,7 @@ import Image from 'next/image'
 // * Skeleton
 export default function Component() {
   return (
-    <ul className='animate-skeleton mt-2 grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 opacity-60 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
+    <ul className='mt-2 grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
       {Array.from({ length: POSTS_PER_PAGE }).map((_, index) => (
         <PostListItem key={index} index={index} />
       ))}
@@ -30,31 +30,31 @@ function PostListItem({ index }: { index: number }) {
             fill={true}
             sizes='(min-width: 768px) 768px, 100vw'
             style={{ objectFit: 'cover' }}
-            className='rounded-md'
+            className='animate-skeleton rounded-md opacity-70'
             priority={index >= 0 && index < 4}
           />
         </div>
 
         <div className='flex flex-col gap-1 py-4'>
           {/* PostCategory */}
-          <span className='text-sm font-semibold uppercase text-pink-600 dark:text-pink-400'>
+          <span className='animate-skeleton-150 text-sm font-semibold uppercase text-pink-600 opacity-70 dark:text-pink-400'>
             Categoria
           </span>
 
           {/* PostTitle */}
           <h2
-            className={`${playfair_display.className} line-clamp-4 text-xl 5xs:text-3xl`}
+            className={`${playfair_display.className} animate-skeleton-300 line-clamp-4 text-xl opacity-70 5xs:text-3xl`}
           >
             Titolo
           </h2>
 
           {/* PostDescription */}
-          <h2 className='post-description mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 dark:text-zinc-300'>
+          <h2 className='post-description animate-skeleton-450 mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 opacity-70 dark:text-zinc-300'>
             Descrizione
           </h2>
 
           {/* PostInfo */}
-          <div className='mt-2.5 flex flex-col gap-0.5'>
+          <div className='animate-skeleton-600 mt-2.5 flex flex-col gap-0.5 opacity-70'>
             <span className='flex flex-wrap gap-2 text-sm'>
               {/* PostAuthor */}
               <p className='flex items-center gap-1 text-sm'>
