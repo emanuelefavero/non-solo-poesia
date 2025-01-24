@@ -2,6 +2,7 @@ import Hero from '@/components/Hero'
 import OrderBy from '@/components/OrderBy'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostListLoader from '@/components/PostListLoader'
+import PostListSkeleton from '@/components/PostListSkeleton'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
 import { getLatestPost } from '@/lib/posts'
@@ -46,7 +47,7 @@ export default async function Home({ searchParams }: Props) {
         </Title>
         <OrderBy currentOrderBy={currentOrderBy} />
 
-        <Suspense fallback={<div>Caricamento...</div>}>
+        <Suspense fallback={<PostListSkeleton />}>
           <PostListLoader
             currentPage={currentPage}
             currentOrderBy={currentOrderBy}
