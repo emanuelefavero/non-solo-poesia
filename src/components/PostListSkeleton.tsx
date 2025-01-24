@@ -54,8 +54,8 @@ function PostListItem({ index }: { index: number }) {
           </h2>
 
           {/* PostInfo */}
-          <div className='animate-skeleton-600 mt-2.5 flex flex-col gap-0.5 opacity-70'>
-            <span className='flex flex-wrap gap-2 text-sm'>
+          <div className='mt-2.5 flex flex-col gap-0.5'>
+            <span className='animate-skeleton-600 flex flex-wrap gap-2 text-sm opacity-70'>
               {/* PostAuthor */}
               <p className='flex items-center gap-1 text-sm'>
                 <BiPencilIcon className='relative inline-block h-5 w-5' />
@@ -68,7 +68,7 @@ function PostListItem({ index }: { index: number }) {
             </span>
 
             {/* PostDate */}
-            <span className='mt-1 flex items-center gap-1 text-sm font-medium italic text-zinc-500 dark:text-zinc-400'>
+            <span className='animate-skeleton-1000 mt-1 flex items-center gap-1 text-sm font-medium italic text-zinc-500 opacity-70 dark:text-zinc-400'>
               <BiCalendarEditIcon className='relative inline-block h-5 w-5' />
               {new Date().toLocaleDateString()}
             </span>
