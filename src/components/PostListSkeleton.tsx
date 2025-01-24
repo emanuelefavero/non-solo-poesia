@@ -37,19 +37,22 @@ function PostListItem({ index }: { index: number }) {
 
         <div className='flex flex-col gap-1 py-4'>
           {/* PostCategory */}
-          <span className='animate-skeleton-150 text-sm font-semibold uppercase text-pink-600 opacity-70 dark:text-pink-400'>
+          <span className='animate-skeleton-150 w-fit rounded bg-pink-600 text-sm font-semibold uppercase text-pink-600 opacity-70 dark:bg-pink-400 dark:text-pink-400'>
             Categoria
           </span>
 
           {/* PostTitle */}
           <h2
-            className={`${playfair_display.className} animate-skeleton-300 line-clamp-4 text-xl opacity-70 5xs:text-3xl`}
+            className={`${playfair_display.className} animate-skeleton-300 line-clamp-4 w-full rounded bg-zinc-900 text-xl opacity-70 5xs:text-3xl dark:bg-zinc-100`}
           >
-            Titolo
+            &nbsp;
           </h2>
 
           {/* PostDescription */}
-          <h2 className='post-description animate-skeleton-450 mt-2.5 line-clamp-6 text-[1.2rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 opacity-70 dark:text-zinc-300'>
+          <h2 className='post-description animate-skeleton-450 mt-2.5 line-clamp-6 rounded bg-zinc-600 text-[1.2rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 opacity-70 dark:bg-zinc-300 dark:text-zinc-300'>
+            Descrizione
+          </h2>
+          <h2 className='post-description animate-skeleton-450 mt-2.5 line-clamp-6 rounded bg-zinc-600 text-[1.2rem] font-normal leading-[1.625rem] tracking-wide text-zinc-600 opacity-70 dark:bg-zinc-300 dark:text-zinc-300'>
             Descrizione
           </h2>
 
@@ -58,17 +61,19 @@ function PostListItem({ index }: { index: number }) {
             <span className='animate-skeleton-600 flex flex-wrap gap-2 text-sm opacity-70'>
               {/* PostAuthor */}
               <p className='flex items-center gap-1 text-sm'>
-                <BiPencilIcon className='relative inline-block h-5 w-5' />
-                <span className='text-pink-600 dark:text-pink-400'>Autore</span>
+                <BiPencilIcon className='relative inline-block h-5 w-5 rounded bg-zinc-500 dark:bg-zinc-400' />
+                <span className='rounded bg-pink-600 text-pink-600 dark:bg-pink-400 dark:text-pink-400'>
+                  Autore
+                </span>
               </p>
               {/* PostViews */}
-              <p className='flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'>
+              <p className='flex items-center gap-1 rounded bg-zinc-500 text-sm text-zinc-500 dark:bg-zinc-400 dark:text-zinc-400'>
                 <BsEyeIcon className='relative inline-block h-5 w-5' />0
               </p>
             </span>
 
             {/* PostDate */}
-            <span className='animate-skeleton-1000 mt-1 flex items-center gap-1 text-sm font-medium italic text-zinc-500 opacity-70 dark:text-zinc-400'>
+            <span className='animate-skeleton-1000 mt-1 flex items-center gap-1 rounded bg-zinc-500 text-sm font-medium italic text-zinc-500 opacity-70 dark:bg-zinc-400 dark:text-zinc-400'>
               <BiCalendarEditIcon className='relative inline-block h-5 w-5' />
               {new Date().toLocaleDateString()}
             </span>
