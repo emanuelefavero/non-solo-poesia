@@ -10,7 +10,7 @@ import Image from 'next/image'
 // * Skeleton
 export default function Component() {
   return (
-    <ul className='mt-2 grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
+    <ul className='animate-skeleton mt-2 grid grid-cols-[repeat(auto-fit,minmax(30px,375px))] justify-center gap-4 pl-0 pt-28 opacity-60 5xs:pt-0 3xs:grid-cols-[repeat(auto-fit,minmax(300px,375px))]'>
       {Array.from({ length: POSTS_PER_PAGE }).map((_, index) => (
         <PostListItem key={index} index={index} />
       ))}

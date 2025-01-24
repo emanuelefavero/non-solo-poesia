@@ -1,5 +1,5 @@
 import OrderBy from '@/components/OrderBy'
-import PostListLoader from '@/components/PostListLoader'
+// import PostListLoader from '@/components/PostListLoader'
 import PostListSkeleton from '@/components/PostListSkeleton'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
@@ -9,7 +9,7 @@ import type { CategorySlug, OrderBy as OrderByType } from '@/types'
 import { convertSlugToName } from '@/utils/slug'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { Suspense } from 'react'
+// import { Suspense } from 'react'
 
 // TIP: This is how you can get both the slug and searchParams from the URL
 type Props = {
@@ -53,13 +53,14 @@ export default async function Page({ params, searchParams }: Props) {
           ) : null}
         </Title>
 
-        <Suspense fallback={<PostListSkeleton />}>
+        {/* <Suspense fallback={<PostListSkeleton />}>
           <PostListLoader
             currentPage={currentPage}
             currentOrderBy={currentOrderBy}
             category={category}
           />
-        </Suspense>
+        </Suspense> */}
+        <PostListSkeleton />
       </Section>
     </>
   )

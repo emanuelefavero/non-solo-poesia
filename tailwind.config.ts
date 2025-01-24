@@ -51,6 +51,14 @@ export default {
           from: { opacity: '0', transform: 'translateX(-2px)' },
           to: { opacity: '1', transform: 'translateX(0)' },
         },
+        skeleton: {
+          '0%, 100%': {
+            opacity: '0.7',
+          },
+          '50%': {
+            opacity: '0.4',
+          },
+        },
       },
 
       animation: {
@@ -61,6 +69,7 @@ export default {
         slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideRightAndFade:
           'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        skeleton: 'skeleton 1.5s infinite ease-in-out',
       },
 
       textShadow: {
