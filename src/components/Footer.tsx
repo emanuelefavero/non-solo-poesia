@@ -1,5 +1,7 @@
 import { TITLE } from '@/data/title'
 
+// TODO Add more content (contact us, privacy policy, etc.) and style Footer (see other websites)
+
 export default function Component() {
   const year = new Date().getFullYear()
 

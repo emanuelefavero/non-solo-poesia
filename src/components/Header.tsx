@@ -16,8 +16,6 @@ import Categories from './Categories'
 import DropdownMenu from './DropdownMenu'
 import Logo from './Logo'
 
-// TODO Change border color to pink instead of zinc (like the Footer)
-
 export default function Component() {
   const scrollDirection = useScrollDirection()
   const pathname = usePathname()

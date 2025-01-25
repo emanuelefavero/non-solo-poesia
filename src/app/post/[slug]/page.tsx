@@ -34,6 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+// TODO Add Ad aside below the popular posts aside
+// TODO Add Social Media buttons to share the post
+
 // * Page
 export default async function Page({ params, searchParams }: Props) {
   const slug = (await params).slug
