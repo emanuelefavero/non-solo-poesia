@@ -19,12 +19,12 @@ export async function getPosts(
       const data = await sql`
         SELECT * FROM posts
         WHERE category = ${category}
-          AND id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY title ASC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
       return data as Post[]
     } else {
+      // NOTE: Exclude the latest post from the list if category is not passed (for the homepage)
       const data = await sql`
         SELECT * FROM posts
         WHERE id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
@@ -39,12 +39,12 @@ export async function getPosts(
       const data = await sql`
         SELECT * FROM posts
         WHERE category = ${category}
-          AND id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)
         ORDER BY published_at DESC
         LIMIT ${postsPerPage} OFFSET ${offset}
       `
       return data as Post[]
     } else {
+      // NOTE: Exclude the latest post from the list if category is not passed (for the homepage)
       const data = await sql`
         SELECT * FROM posts
         WHERE id != (SELECT id FROM posts ORDER BY published_at DESC LIMIT 1)

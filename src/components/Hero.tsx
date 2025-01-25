@@ -12,6 +12,8 @@ type Props = {
   className?: string
 }
 
+// TODO Change margins between title and info (author, views, date)
+
 export default function Component({ post, className }: Props) {
   return (
     <Link
