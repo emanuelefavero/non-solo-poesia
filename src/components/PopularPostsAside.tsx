@@ -2,19 +2,18 @@ import Aside from '@/components/Aside/Aside'
 import AsidePostList from '@/components/Aside/AsidePostList'
 import AsideTitle from '@/components/Aside/AsideTitle'
 import PopularPostsFilter from '@/components/PopularPostsFilter'
-import { getPopularPosts } from '@/lib/posts'
+import type { PopularPostsFilter as PopularPostsFilterType } from '@/types'
+import { Suspense } from 'react'
 
 type Props = {
-  popular_posts_filter?: 'all_time' | 'this_month'
+  popular_posts_filter?: PopularPostsFilterType
 }
 
-export default async function PopularPostsAside({
+// TODO Create a AsidePostListSkeleton component
+
+export default async function Component({
   popular_posts_filter = 'all_time',
 }: Props) {
-  const posts = await getPopularPosts(popular_posts_filter)
-
-  if (!posts.length) return null
-
   return (
     <>
       <Aside className='w-[375px]'>
@@ -26,7 +25,10 @@ export default async function PopularPostsAside({
             />
           </div>
         </AsideTitle>
-        <AsidePostList posts={posts} />
+
+        <Suspense fallback={'Caricamento...'}>
+          <AsidePostList popular_posts_filter={popular_posts_filter} />
+        </Suspense>
       </Aside>
     </>
   )

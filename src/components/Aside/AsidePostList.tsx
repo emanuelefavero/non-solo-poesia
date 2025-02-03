@@ -1,13 +1,18 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
 import PostTitle from '@/components/Post/PostTitle'
-import type { Post } from '@/types'
+import { getPopularPosts } from '@/lib/posts'
+import type { PopularPostsFilter, Post } from '@/types'
 import Link from 'next/link'
 
 type Props = {
-  posts: Post[]
+  popular_posts_filter?: PopularPostsFilter
 }
 
-export default async function Component({ posts }: Props) {
+export default async function Component({ popular_posts_filter }: Props) {
+  const posts = await getPopularPosts(popular_posts_filter)
+
+  if (!posts.length) return null
+
   return (
     <ul className='mt-4 flex flex-col gap-3.5'>
       {posts.map((post, index) => (
@@ -24,7 +29,7 @@ function AsidePostListItem({ post, index }: { post: Post; index: number }) {
         href={`/post/${post.slug}`}
         className={`${
           index < 4 ? 'flex' : 'hidden'
-        } 2lg:flex w-full justify-between gap-3 text-black hover:no-underline dark:text-white`}
+        } w-full justify-between gap-3 text-black hover:no-underline 2lg:flex dark:text-white`}
         title={post.title.length > 52 ? post.title : ''}
       >
         <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
