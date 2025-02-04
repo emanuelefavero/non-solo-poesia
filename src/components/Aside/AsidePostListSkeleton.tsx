@@ -1,14 +1,7 @@
 import PostTitle from '@/components/Post/PostTitle'
 import { POPULAR_POSTS_LENGTH } from '@/config/posts'
+import { skeletonAnimations } from '@/data/animations'
 import Image from 'next/image'
-
-const animations = [
-  'animate-skeleton',
-  'animate-skeleton-150',
-  'animate-skeleton-300',
-  'animate-skeleton-450',
-  'animate-skeleton-600',
-]
 
 export default async function Component() {
   return (
@@ -26,7 +19,7 @@ function AsidePostListItem({ index }: { index: number }) {
       <div
         className={`${
           index < 4 ? 'flex' : 'hidden'
-        } ${animations[index]} w-full justify-between gap-3 text-black opacity-40 hover:no-underline 2lg:flex dark:text-white`}
+        } ${skeletonAnimations[index]} w-full justify-between gap-3 text-black opacity-40 hover:no-underline 2lg:flex dark:text-white`}
       >
         <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
           &nbsp;
