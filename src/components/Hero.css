@@ -1,4 +1,19 @@
 /* TIP: This css file is needed to override the PostAuthor and PostDate colors */
+
+/* TODO Move animation to tailwind file */
+
+/* Add an opacity animation on load */
+.animate-fadeIn {
+  opacity: 0.4; /* set to .4 to match skeleton opacity */
+  animation: fadeIn 0.2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 .hero-icon {
   fill: var(--hero-icon);
 }
