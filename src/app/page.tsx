@@ -30,6 +30,7 @@ export default async function Home({ searchParams }: Props) {
     <>
       {latestPost && currentPage === 1 && (
         <Section className='flex justify-center gap-4'>
+          {/* TODO Add HeroLoader component (move getLatestPost there) and add suspense around HeroLoader */}
           <Hero post={latestPost} className='flex-1' />
           <PopularPostsAside popular_posts_filter={popular_posts_filter} />
         </Section>
