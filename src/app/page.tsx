@@ -19,7 +19,7 @@ type Props = {
   }>
 }
 
-// TODO Add animate-fadeIn to all components that have a skeleton (remember to move the fadeIn animation from Hero.css to tailwind.config.ts)
+// TODO Add animate-fadeIn to all components that have a skeleton
 // TODO Style 404 page
 // TODO Add mailing list subscription form (below post list)
 
