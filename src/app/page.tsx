@@ -1,4 +1,5 @@
-import Hero from '@/components/Hero'
+// import Hero from '@/components/Hero'
+import HeroLoader from '@/components/HeroLoader'
 import OrderBy from '@/components/OrderBy'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostListLoader from '@/components/PostListLoader'
@@ -30,8 +31,9 @@ export default async function Home({ searchParams }: Props) {
     <>
       {latestPost && currentPage === 1 && (
         <Section className='flex justify-center gap-4'>
-          {/* TODO Add HeroLoader component (move getLatestPost there) and add suspense around HeroLoader */}
-          <Hero post={latestPost} className='flex-1' />
+          <Suspense fallback={'Caricamento...'}>
+            <HeroLoader />
+          </Suspense>
           <PopularPostsAside popular_posts_filter={popular_posts_filter} />
         </Section>
       )}
