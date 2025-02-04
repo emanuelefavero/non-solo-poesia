@@ -2,6 +2,14 @@ import PostTitle from '@/components/Post/PostTitle'
 import { POPULAR_POSTS_LENGTH } from '@/config/posts'
 import Image from 'next/image'
 
+const animations = [
+  'animate-skeleton',
+  'animate-skeleton-150',
+  'animate-skeleton-300',
+  'animate-skeleton-450',
+  'animate-skeleton-600',
+]
+
 export default async function Component() {
   return (
     <ul className='mt-4 flex flex-col gap-3.5'>
@@ -31,7 +39,7 @@ function AsidePostListItem({ index }: { index: number }) {
             fill={true}
             sizes='(min-width: 768px) 768px, 100vw'
             style={{ objectFit: 'cover' }}
-            className='animate-skeleton rounded-[0.225rem] opacity-40'
+            className={`${animations[index]} rounded-[0.225rem] opacity-40`}
             priority={index >= 0 && index < 4}
           />
         </div>
