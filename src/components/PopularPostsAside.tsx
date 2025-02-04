@@ -1,9 +1,9 @@
 import Aside from '@/components/Aside/Aside'
-// import AsidePostList from '@/components/Aside/AsidePostList'
+import AsidePostList from '@/components/Aside/AsidePostList'
 import AsideTitle from '@/components/Aside/AsideTitle'
 import PopularPostsFilter from '@/components/PopularPostsFilter'
 import type { PopularPostsFilter as PopularPostsFilterType } from '@/types'
-// import { Suspense } from 'react'
+import { Suspense } from 'react'
 import AsidePostListSkeleton from './Aside/AsidePostListSkeleton'
 
 type Props = {
@@ -27,11 +27,9 @@ export default async function Component({
           </div>
         </AsideTitle>
 
-        {/* <Suspense fallback={<AsidePostListSkeleton />}>
+        <Suspense fallback={<AsidePostListSkeleton />}>
           <AsidePostList popular_posts_filter={popular_posts_filter} />
-        </Suspense> */}
-
-        <AsidePostListSkeleton />
+        </Suspense>
       </Aside>
     </>
   )
