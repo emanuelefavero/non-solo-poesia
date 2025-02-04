@@ -21,7 +21,7 @@ function AsidePostListItem({ index }: { index: number }) {
           index < 4 ? 'flex' : 'hidden'
         } ${skeletonAnimations[index]} w-full justify-between gap-3 text-black opacity-40 hover:no-underline 2lg:flex dark:text-white`}
       >
-        <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
+        <PostTitle className='line-clamp-2 w-full rounded-[0.225rem] bg-zinc-900 text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:bg-zinc-100 dark:group-hover:text-pink-200'>
           &nbsp;
         </PostTitle>
 
