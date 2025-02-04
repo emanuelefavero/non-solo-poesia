@@ -59,6 +59,10 @@ export default {
             opacity: '0.2',
           },
         },
+        fadeInFromSkeleton: {
+          from: { opacity: '0.4' }, // ? 0.4 to match the skeleton opacity
+          to: { opacity: '1' },
+        },
       },
 
       animation: {
@@ -75,6 +79,7 @@ export default {
         'skeleton-450': 'skeleton 1.5s infinite ease-in-out 600ms',
         'skeleton-600': 'skeleton 1.5s infinite ease-in-out 800ms',
         'skeleton-1000': 'skeleton 1.5s infinite ease-in-out 1000ms',
+        fadeInFromSkeleton: 'fadeInFromSkeleton 200ms ease-in',
       },
 
       textShadow: {
