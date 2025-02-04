@@ -10,8 +10,6 @@ type Props = {
   popular_posts_filter?: PopularPostsFilterType
 }
 
-// TODO Create a AsidePostListSkeleton component
-
 export default async function Component({
   popular_posts_filter = 'all_time',
 }: Props) {
