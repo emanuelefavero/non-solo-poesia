@@ -14,7 +14,7 @@ export default async function Component({ popular_posts_filter }: Props) {
   if (!posts.length) return null
 
   return (
-    <ul className='mt-4 flex flex-col gap-3.5'>
+    <ul className='animate-fadeInFromSkeleton mt-4 flex flex-col gap-3.5'>
       {posts.map((post, index) => (
         <AsidePostListItem key={post.id} post={post} index={index} />
       ))}

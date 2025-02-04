@@ -21,7 +21,7 @@ export default function Component({ posts }: { posts: Post[] }) {
 
 function PostListItem({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='group flex list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
+    <li className='animate-fadeInFromSkeleton group flex list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
         className='text-black hover:no-underline dark:text-white'

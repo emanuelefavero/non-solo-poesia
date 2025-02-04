@@ -19,7 +19,6 @@ type Props = {
   }>
 }
 
-// TODO Add animate-fadeIn to all components that have a skeleton
 // TODO Style 404 page
 // TODO Add mailing list subscription form (below post list)
 
