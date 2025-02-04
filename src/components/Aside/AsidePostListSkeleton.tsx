@@ -26,7 +26,7 @@ function AsidePostListItem({ index }: { index: number }) {
       <div
         className={`${
           index < 4 ? 'flex' : 'hidden'
-        } w-full justify-between gap-3 text-black hover:no-underline 2lg:flex dark:text-white`}
+        } ${animations[index]} w-full justify-between gap-3 text-black opacity-40 hover:no-underline 2lg:flex dark:text-white`}
       >
         <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
           &nbsp;
@@ -39,7 +39,7 @@ function AsidePostListItem({ index }: { index: number }) {
             fill={true}
             sizes='(min-width: 768px) 768px, 100vw'
             style={{ objectFit: 'cover' }}
-            className={`${animations[index]} rounded-[0.225rem] opacity-40`}
+            className='rounded-[0.225rem]'
             priority={index >= 0 && index < 4}
           />
         </div>
