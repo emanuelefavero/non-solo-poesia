@@ -1,5 +1,6 @@
 // import Hero from '@/components/Hero'
 import HeroLoader from '@/components/HeroLoader'
+import HeroSkeleton from '@/components/HeroSkeleton'
 import OrderBy from '@/components/OrderBy'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import PostListLoader from '@/components/PostListLoader'
@@ -31,9 +32,10 @@ export default async function Home({ searchParams }: Props) {
     <>
       {latestPost && currentPage === 1 && (
         <Section className='flex justify-center gap-4'>
-          <Suspense fallback={'Caricamento...'}>
+          <Suspense fallback={<HeroSkeleton className='flex-1' />}>
             <HeroLoader />
           </Suspense>
+          {/* <HeroSkeleton className='flex-1' /> */}
           <PopularPostsAside popular_posts_filter={popular_posts_filter} />
         </Section>
       )}
