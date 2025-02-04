@@ -1,51 +1,41 @@
-import CloudinaryImage from '@/components/CloudinaryImage'
 import PostTitle from '@/components/Post/PostTitle'
-import { getPopularPosts } from '@/lib/posts'
-import type { PopularPostsFilter, Post } from '@/types'
-import Link from 'next/link'
+import { POPULAR_POSTS_LENGTH } from '@/config/posts'
+import Image from 'next/image'
 
-type Props = {
-  popular_posts_filter?: PopularPostsFilter
-}
-
-export default async function Component({ popular_posts_filter }: Props) {
-  const posts = await getPopularPosts(popular_posts_filter)
-
-  if (!posts.length) return null
-
+export default async function Component() {
   return (
     <ul className='mt-4 flex flex-col gap-3.5'>
-      {posts.map((post, index) => (
-        <AsidePostListItem key={post.id} post={post} index={index} />
+      {Array.from({ length: POPULAR_POSTS_LENGTH }).map((_, index) => (
+        <AsidePostListItem key={index} index={index} />
       ))}
     </ul>
   )
 }
 
-function AsidePostListItem({ post, index }: { post: Post; index: number }) {
+function AsidePostListItem({ index }: { index: number }) {
   return (
     <li className='group list-none rounded-md transition-transform duration-200 active:scale-95'>
-      <Link
-        href={`/post/${post.slug}`}
+      <div
         className={`${
           index < 4 ? 'flex' : 'hidden'
         } w-full justify-between gap-3 text-black hover:no-underline 2lg:flex dark:text-white`}
-        title={post.title.length > 52 ? post.title : ''}
       >
         <PostTitle className='line-clamp-2 w-full text-lg transition-colors duration-200 group-hover:text-pink-800/80 dark:group-hover:text-pink-200'>
-          {post.title}
+          &nbsp;
         </PostTitle>
 
         <div className='relative aspect-video min-w-[100px]'>
-          <CloudinaryImage
-            title={post.title}
-            cover_image={post.cover_image}
-            cover_image_cloudinary={post.cover_image_cloudinary}
-            index={index}
-            className='rounded-[0.225rem]'
+          <Image
+            src='/fallback.webp'
+            alt='Fallback Image'
+            fill={true}
+            sizes='(min-width: 768px) 768px, 100vw'
+            style={{ objectFit: 'cover' }}
+            className='animate-skeleton rounded-[0.225rem] opacity-40'
+            priority={index >= 0 && index < 4}
           />
         </div>
-      </Link>
+      </div>
     </li>
   )
 }
