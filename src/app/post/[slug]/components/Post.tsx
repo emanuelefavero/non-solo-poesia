@@ -17,7 +17,7 @@ export default async function Component({ slug }: { slug: string }) {
   if (!post) return <p>Post non trovato.</p>
 
   return (
-    <div className='flex w-full max-w-3xl flex-col gap-3'>
+    <div className='animate-fadeInFromSkeleton flex w-full max-w-3xl flex-col gap-3'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage
