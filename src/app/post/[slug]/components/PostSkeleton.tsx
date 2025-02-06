@@ -47,19 +47,19 @@ export default function Component() {
       <div className='mt-2.5 flex animate-skeleton-1000 flex-col gap-0.5'>
         <span className='flex flex-wrap gap-2 text-sm'>
           {/* Author */}
-          <p className='flex items-center gap-1 text-sm'>
+          <div className='flex items-center gap-1 text-sm'>
             <BiPencilIcon className='relative inline-block h-5 w-5' />
             <div className='w-[6ch] rounded-md bg-pink-600 5xs:w-[12ch] dark:bg-pink-400'>
               &nbsp;
             </div>
-          </p>
+          </div>
           {/* Views */}
-          <p className='flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'>
+          <div className='flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400'>
             <BsEyeIcon className='relative inline-block h-5 w-5' />
             <div className='w-[4ch] rounded-md bg-zinc-500 dark:bg-zinc-400'>
               &nbsp;
             </div>
-          </p>
+          </div>
         </span>
 
         {/* Date */}
