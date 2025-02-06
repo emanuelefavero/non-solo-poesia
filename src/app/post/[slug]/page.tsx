@@ -28,7 +28,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// TODO Add PostLoader component (with getPost method) and skeleton suspense to this page
 // TODO Add Ad aside below the popular posts aside
 // TODO Add Social Media buttons to share the post
 
