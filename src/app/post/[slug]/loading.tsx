@@ -10,7 +10,7 @@ export default function Loading() {
     <Section className='flex justify-center gap-4'>
       <PostSkeleton />
 
-      <Aside className='w-[375px]'>
+      <Aside>
         <AsideTitle>
           <div className='flex flex-wrap items-center justify-between gap-2'>
             In Evidenza

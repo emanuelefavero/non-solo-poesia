@@ -1,3 +1,4 @@
+import AdAside from '@/components/AdAside'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // TODO Add Ad aside below the popular posts aside
+// TODO Add Ad Aside skeleton to loading component (check if popular posts are3 rendered in other pages (except on the right of the homepage hero section))
 // TODO Add Social Media buttons to share the post
 
 // * Page
@@ -42,7 +44,11 @@ export default async function Page({ params, searchParams }: Props) {
       <Suspense fallback={<PostSkeleton />}>
         <Post slug={slug} />
       </Suspense>
-      <PopularPostsAside popular_posts_filter={popular_posts_filter} />
+      {/* TODO Add AsideContainer component with this section element and children */}
+      <section className='flex flex-1 flex-col gap-20'>
+        <PopularPostsAside popular_posts_filter={popular_posts_filter} />
+        <AdAside />
+      </section>
     </Section>
   )
 }

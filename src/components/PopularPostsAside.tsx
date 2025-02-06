@@ -15,7 +15,7 @@ export default async function Component({
 }: Props) {
   return (
     <>
-      <Aside className='w-[375px]'>
+      <Aside>
         <AsideTitle>
           <div className='flex flex-wrap items-center justify-between gap-2'>
             In Evidenza
