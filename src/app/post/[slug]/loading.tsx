@@ -1,8 +1,6 @@
 import Aside from '@/components/Aside/Aside'
 import AsidePostListSkeleton from '@/components/Aside/AsidePostListSkeleton'
 import AsideTitle from '@/components/Aside/AsideTitle'
-import PopularPostsAside from '@/components/PopularPostsAside'
-import PopularPostsFilter from '@/components/PopularPostsFilter'
 import Section from '@/components/Section'
 import { popularPostsFilterOptions } from '@/data/popularPostsFilterOptions'
 import PostSkeleton from './components/PostSkeleton'
