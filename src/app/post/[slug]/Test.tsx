@@ -5,12 +5,6 @@ import { skeletonAnimations } from '@/data/animations'
 import Image from 'next/image'
 
 export default function Component() {
-  const description = (
-    <div className='mt-2.5 line-clamp-6 rounded-md bg-zinc-600 text-[1.2rem] font-normal leading-7 tracking-wide dark:bg-zinc-300'>
-      &nbsp;
-    </div>
-  )
-
   return (
     <div className='flex w-full max-w-3xl flex-col gap-3 opacity-40'>
       {/* Cover Image */}
@@ -37,8 +31,16 @@ export default function Component() {
         </div>
 
         {/* Description */}
-        {description}
-        {description}
+        {Array.from({ length: 2 }).map((_, index) => (
+          <div
+            key={index}
+            className={`${
+              index === 0 ? 'animate-skeleton-450' : 'animate-skeleton-600'
+            } mt-2.5 line-clamp-6 rounded-md bg-zinc-600 text-[1.2rem] font-normal leading-7 tracking-wide dark:bg-zinc-300`}
+          >
+            &nbsp;
+          </div>
+        ))}
       </div>
 
       {/* Post Info */}
