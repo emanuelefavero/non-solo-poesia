@@ -4,7 +4,7 @@ import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import { skeletonAnimations } from '@/data/animations'
 import Image from 'next/image'
 
-export default function Component() {
+export default function Loading() {
   return (
     <div className='flex w-full max-w-3xl flex-col gap-3 opacity-40'>
       {/* Cover Image */}
