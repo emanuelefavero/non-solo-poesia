@@ -6,6 +6,7 @@ import { PopularPostsFilter } from '@/types'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Post from './components/Post'
+import PostSkeleton from './components/PostSkeleton'
 import './styles.css'
 
 // NOTE: This props need to be a Promise, this fix was added with the following code mod: #see https://nextjs.org/docs/messages/sync-dynamic-apis
@@ -38,7 +39,7 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <Section className='flex justify-center gap-4'>
-      <Suspense fallback={'Caricamento...'}>
+      <Suspense fallback={<PostSkeleton />}>
         <Post slug={slug} />
       </Suspense>
       <PopularPostsAside popular_posts_filter={popular_posts_filter} />
