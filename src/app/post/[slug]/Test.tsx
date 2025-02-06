@@ -44,7 +44,7 @@ export default function Component() {
       </div>
 
       {/* Post Info */}
-      <div className='mt-2.5 flex flex-col gap-0.5'>
+      <div className='mt-2.5 flex animate-skeleton-1000 flex-col gap-0.5'>
         <span className='flex flex-wrap gap-2 text-sm'>
           {/* Author */}
           <p className='flex items-center gap-1 text-sm'>
