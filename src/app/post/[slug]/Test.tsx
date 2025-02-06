@@ -1,6 +1,7 @@
 import BiCalendarIcon from '@/components/icons/BiCalendarIcon'
 import BiPencilIcon from '@/components/icons/BiPencilIcon'
 import BsEyeIcon from '@/components/icons/BsEyeIcon'
+import { skeletonAnimations } from '@/data/animations'
 import Image from 'next/image'
 
 export default function Component() {
@@ -11,9 +12,9 @@ export default function Component() {
   )
 
   return (
-    <div className='flex w-full max-w-3xl flex-col gap-3'>
+    <div className='flex w-full max-w-3xl flex-col gap-3 opacity-40'>
       {/* Cover Image */}
-      <div className='relative aspect-video w-full'>
+      <div className='relative aspect-video w-full animate-skeleton'>
         <Image
           src='/fallback.webp'
           alt='Fallback Image'
@@ -26,12 +27,12 @@ export default function Component() {
       </div>
       <div className='mt-3'>
         {/* Category */}
-        <div className='w-full rounded-md bg-pink-600 text-sm font-semibold uppercase text-pink-600 5xs:w-[12ch] dark:bg-pink-400 dark:text-pink-400'>
+        <div className='w-full animate-skeleton-150 rounded-md bg-pink-600 text-sm font-semibold uppercase text-pink-600 5xs:w-[12ch] dark:bg-pink-400 dark:text-pink-400'>
           &nbsp;
         </div>
 
         {/* Title */}
-        <div className='mt-3 rounded-md bg-black text-xl 5xs:text-[2.5rem] 5xs:leading-[2.75rem] dark:bg-white'>
+        <div className='mt-3 animate-skeleton-300 rounded-md bg-black text-xl 5xs:text-[2.5rem] 5xs:leading-[2.75rem] dark:bg-white'>
           &nbsp;
         </div>
 
@@ -71,7 +72,13 @@ export default function Component() {
       {/* Content */}
       <div className='mt-3 flex flex-col gap-2'>
         {Array.from({ length: 10 }).map((_, index) => (
-          <div key={index} className='rounded-md bg-[var(--foreground)]'>
+          // loop through the skeleton animations and go back to 0 when reaching the end
+          <div
+            key={index}
+            className={`${
+              skeletonAnimations[index % skeletonAnimations.length]
+            } rounded-md bg-[var(--foreground)]`}
+          >
             &nbsp;
           </div>
         ))}
