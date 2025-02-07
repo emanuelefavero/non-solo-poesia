@@ -1,4 +1,5 @@
 import AdAside from '@/components/AdAside'
+import AsideContainer from '@/components/Aside/AsideContainer'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
@@ -44,11 +45,11 @@ export default async function Page({ params, searchParams }: Props) {
       <Suspense fallback={<PostSkeleton />}>
         <Post slug={slug} />
       </Suspense>
-      {/* TODO Add AsideContainer component with this section element and children */}
-      <section className='flex flex-1 flex-col gap-20'>
+
+      <AsideContainer>
         <PopularPostsAside popular_posts_filter={popular_posts_filter} />
         <AdAside />
-      </section>
+      </AsideContainer>
     </Section>
   )
 }
