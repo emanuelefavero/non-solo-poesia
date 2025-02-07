@@ -31,8 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// TODO Add Ad aside below the popular posts aside
-// TODO Add Ad Aside skeleton to loading component (check if popular posts are3 rendered in other pages (except on the right of the homepage hero section))
 // TODO Add Social Media buttons to share the post
 
 // * Page
