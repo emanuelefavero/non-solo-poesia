@@ -30,6 +30,9 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
+      <AdBanner />
+
+      {/* HERO */}
       {latestPost && currentPage === 1 && (
         <Section className='flex justify-center gap-4'>
           <Suspense fallback={<HeroSkeleton className='flex-1' />}>
@@ -39,8 +42,7 @@ export default async function Home({ searchParams }: Props) {
         </Section>
       )}
 
-      <AdBanner />
-
+      {/* POST LIST */}
       <Section>
         <Title>
           {currentOrderBy === 'title' ? (
