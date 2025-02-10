@@ -1,4 +1,3 @@
-// import Hero from '@/components/Hero'
 import HeroLoader from '@/components/HeroLoader'
 import HeroSkeleton from '@/components/HeroSkeleton'
 import OrderBy from '@/components/OrderBy'
