@@ -18,8 +18,9 @@ export default function Component({ post, className }: Props) {
   return (
     <Link
       href={`/post/${post.slug}`}
-      className={`animate-fadeInFromSkeleton group hidden max-w-3xl flex-col gap-3 rounded-lg transition-transform duration-200 active:scale-[0.98] 5xs:flex ${className}`}
+      className={`group hidden max-w-3xl animate-fadeInFromSkeleton flex-col gap-3 rounded-lg transition-transform duration-200 active:scale-[0.98] 5xs:flex ${className}`}
       title={post.title.length > 52 ? post.title : ''}
+      scroll={true}
     >
       {/* Cover Image */}
       {/* Hover gradient background */}

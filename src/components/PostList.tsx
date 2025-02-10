@@ -21,11 +21,12 @@ export default function Component({ posts }: { posts: Post[] }) {
 
 function PostListItem({ post, index }: { post: Post; index: number }) {
   return (
-    <li className='animate-fadeInFromSkeleton group flex list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
+    <li className='group flex animate-fadeInFromSkeleton list-none flex-col rounded-md transition-transform duration-200 active:scale-95'>
       <Link
         href={`/post/${post.slug}`}
         className='text-black hover:no-underline dark:text-white'
         title={post.title.length > 52 ? post.title : ''}
+        scroll={true}
       >
         <div className='relative aspect-video w-full from-pink-800/20 to-pink-200/30 content-none after:absolute after:inset-0 after:z-10 after:rounded-md after:bg-gradient-to-t after:opacity-0 after:transition-opacity after:duration-200 group-hover:after:opacity-100 dark:from-pink-200/20 dark:to-pink-800/30'>
           <CloudinaryImage

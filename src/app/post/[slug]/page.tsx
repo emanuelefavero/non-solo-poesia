@@ -1,6 +1,7 @@
 import AdAside from '@/components/AdAside'
 import AsideContainer from '@/components/Aside/AsideContainer'
 import PopularPostsAside from '@/components/PopularPostsAside'
+import ScrollToTop from '@/components/ScrollToTop'
 import Section from '@/components/Section'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/posts'
@@ -39,15 +40,19 @@ export default async function Page({ params, searchParams }: Props) {
   const { popular_posts_filter } = await searchParams
 
   return (
-    <Section className='flex justify-center gap-4'>
-      <Suspense fallback={<PostSkeleton />}>
-        <Post slug={slug} />
-      </Suspense>
+    <>
+      <ScrollToTop />
 
-      <AsideContainer>
-        <PopularPostsAside popular_posts_filter={popular_posts_filter} />
-        <AdAside />
-      </AsideContainer>
-    </Section>
+      <Section className='flex justify-center gap-4'>
+        <Suspense fallback={<PostSkeleton />}>
+          <Post slug={slug} />
+        </Suspense>
+
+        <AsideContainer>
+          <PopularPostsAside popular_posts_filter={popular_posts_filter} />
+          <AdAside />
+        </AsideContainer>
+      </Section>
+    </>
   )
 }
