@@ -1,3 +1,4 @@
+import AdBanner from '@/components/AdBanner'
 import HeroLoader from '@/components/HeroLoader'
 import HeroSkeleton from '@/components/HeroSkeleton'
 import OrderBy from '@/components/OrderBy'
@@ -37,6 +38,9 @@ export default async function Home({ searchParams }: Props) {
           <PopularPostsAside popular_posts_filter={popular_posts_filter} />
         </Section>
       )}
+
+      <AdBanner />
+
       <Section>
         <Title>
           {currentOrderBy === 'title' ? (
