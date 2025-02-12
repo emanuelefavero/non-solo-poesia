@@ -1,3 +1,5 @@
+'use server'
+
 import { validateEmail } from '@/utils/validateEmail'
 import { neon } from '@neondatabase/serverless'
 import { redirect } from 'next/navigation'
