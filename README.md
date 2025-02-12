@@ -39,6 +39,16 @@ CREATE INDEX idx_slug ON posts(slug);
 CREATE INDEX idx_category ON posts(category);
 ```
 
+- Create a new table called `subscribers` to store email addresses of users who subscribe to the blog:
+
+```sql
+CREATE TABLE subscribers (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT UNIQUE NOT NULL,
+  subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
 - Create a `.env.local` file in the root of the project and add the following environment variables:
 
 ```bash
