@@ -1,5 +1,6 @@
 'use client'
 
+import Spinner from '@/components/icons/Spinner'
 import { ReactNode, Ref } from 'react'
 import { useFormStatus } from 'react-dom'
 
@@ -31,7 +32,7 @@ export default function Component({
       }`}
       ref={ref}
     >
-      {pending ? 'Inviando...' : children || ''}
+      {pending ? <Spinner /> : children || ''}
     </button>
   )
 }
