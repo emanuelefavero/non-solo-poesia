@@ -27,7 +27,7 @@ export default function Component({
       onClick={onClick}
       aria-label={ariaLabel}
       disabled={pending}
-      className={`rounded bg-pink-600 px-3 py-2 text-white hover:bg-pink-700 active:scale-95 ${className} ${
+      className={`flex items-center justify-center rounded bg-pink-600 px-3 py-2 text-center text-white hover:bg-pink-700 active:scale-95 ${className} ${
         pending ? 'cursor-not-allowed opacity-50' : ''
       }`}
       ref={ref}

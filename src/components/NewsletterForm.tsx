@@ -25,7 +25,10 @@ export default function Component() {
           </sup>
         </label>
         <input type='email' name='email' placeholder='La tua email' required />
-        <SubmitFormButton ariaLabel='Iscriviti alla Newsletter'>
+        <SubmitFormButton
+          ariaLabel='Iscriviti alla Newsletter'
+          className='5xs:min-w-[70px]' // adjust the min width to fit the text
+        >
           Iscriviti
         </SubmitFormButton>
       </form>
