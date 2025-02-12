@@ -2,7 +2,7 @@ import { subscribe } from '@/app/actions/subscribe'
 import SubmitFormButton from '@/components/SubmitFormButton'
 
 export default function Component() {
-  async function subscribeEmail(formData: FormData) {
+  async function handleAction(formData: FormData) {
     'use server'
 
     await subscribe(formData)
@@ -15,7 +15,7 @@ export default function Component() {
       </h2>
 
       <form
-        action={subscribeEmail}
+        action={handleAction}
         className='flex flex-wrap items-center justify-center gap-2'
       >
         <label htmlFor='email' className='sr-only text-base'>
