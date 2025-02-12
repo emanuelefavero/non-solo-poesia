@@ -1,3 +1,4 @@
+import { validateEmail } from '@/utils/validateEmail'
 import { neon } from '@neondatabase/serverless'
 import { redirect } from 'next/navigation'
 
@@ -6,10 +7,8 @@ export async function subscribe(formData: FormData) {
   const email = formData.get('email') as string
 
   // Validate email
-  if (!email) return { message: "Un email e' richiesta" }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  if (!emailRegex.test(email)) return { message: 'Email non valida' }
+  const emailValidation = validateEmail(email)
+  if (emailValidation.type === 'error') return emailValidation
 
   try {
     const sql = neon(process.env.DATABASE_URL as string)
