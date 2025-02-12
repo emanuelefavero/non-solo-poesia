@@ -1,5 +1,5 @@
 import { subscribe } from '@/app/actions/subscribe'
-import SubmitForm from '@/components/SubmitFormButton'
+import SubmitFormButton from '@/components/SubmitFormButton'
 
 export default function Component() {
   async function subscribeEmail(formData: FormData) {
@@ -25,7 +25,9 @@ export default function Component() {
           </sup>
         </label>
         <input type='email' name='email' placeholder='La tua email' required />
-        <SubmitForm ariaLabel='Iscriviti alla Newsletter'>Iscriviti</SubmitForm>
+        <SubmitFormButton ariaLabel='Iscriviti alla Newsletter'>
+          Iscriviti
+        </SubmitFormButton>
       </form>
     </div>
   )
