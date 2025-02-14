@@ -1,7 +1,7 @@
 import Editor from '@/app/(editor)/components/Editor'
 import PostTitle from '@/components/Post/PostTitle'
 import { TITLE } from '@/data/title'
-import { getPost } from '@/lib/posts'
+import { getPost } from '@/lib/neon/posts'
 import { auth } from '@clerk/nextjs/server'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'

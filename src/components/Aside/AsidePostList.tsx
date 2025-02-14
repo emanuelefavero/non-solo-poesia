@@ -1,6 +1,6 @@
 import CloudinaryImage from '@/components/CloudinaryImage'
 import PostTitle from '@/components/Post/PostTitle'
-import { getPopularPosts } from '@/lib/posts'
+import { getPopularPosts } from '@/lib/neon/posts'
 import type { PopularPostsFilter, Post } from '@/types'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ export default async function Component({ popular_posts_filter }: Props) {
   if (!posts.length) return null
 
   return (
-    <ul className='animate-fadeInFromSkeleton mt-4 flex flex-col gap-3.5'>
+    <ul className='mt-4 flex animate-fadeInFromSkeleton flex-col gap-3.5'>
       {posts.map((post, index) => (
         <AsidePostListItem key={post.id} post={post} index={index} />
       ))}

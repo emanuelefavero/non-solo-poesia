@@ -7,7 +7,7 @@ import PostListLoader from '@/components/PostListLoader'
 import PostListSkeleton from '@/components/PostListSkeleton'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
-import { getLatestPost } from '@/lib/posts'
+import { getLatestPost } from '@/lib/neon/posts'
 import type { OrderBy as OrderByType, PopularPostsFilter } from '@/types'
 import { Suspense } from 'react'
 

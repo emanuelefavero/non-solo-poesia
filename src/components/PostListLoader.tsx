@@ -5,7 +5,7 @@ import {
   getPosts,
   getTotalPostCount,
   getTotalPostCountByCategory,
-} from '@/lib/posts'
+} from '@/lib/neon/posts'
 import type { OrderBy as OrderByType } from '@/types'
 
 type Props = {

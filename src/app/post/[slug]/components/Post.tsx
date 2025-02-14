@@ -4,7 +4,7 @@ import DeletePopover from '@/components/DeletePopover'
 import PostDescription from '@/components/Post/PostDescription'
 import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
-import { getPost } from '@/lib/posts'
+import { getPost } from '@/lib/neon/posts'
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 
@@ -17,7 +17,7 @@ export default async function Component({ slug }: { slug: string }) {
   if (!post) return <p>Post non trovato.</p>
 
   return (
-    <div className='animate-fadeInFromSkeleton flex w-full max-w-3xl flex-col gap-3'>
+    <div className='flex w-full max-w-3xl animate-fadeInFromSkeleton flex-col gap-3'>
       {/* Cover Image */}
       <div className='relative aspect-video w-full'>
         <CloudinaryImage

@@ -1,6 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
-import { savePost } from '@/lib/posts'
+import { savePost } from '@/lib/neon/posts'
 import { sendNewsletter } from '@/lib/resend'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
