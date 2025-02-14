@@ -1,1 +1,1 @@
-export const TITLE = 'Non Solo Poesie'
+export const TITLE = 'Non Solo Poesia'

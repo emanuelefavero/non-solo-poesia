@@ -9,8 +9,7 @@ const customDomainEmail = process.env.CUSTOM_DOMAIN_EMAIL as string
 
 const sql = neon(process.env.DATABASE_URL as string)
 
-// TODO buy domain and set up custom email
-// TODO Change site name to reflect domain
+// TODO buy domain and set up custom email (change custom email env variable)
 // TODO Change the URL to the bought domain
 // TODO Create email with React ot HTML in a separate file (show post title, description, cover image, category etc.)
 
