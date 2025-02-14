@@ -1,6 +1,8 @@
 import type { OrderBy, PopularPostsFilter, Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
+const sql = neon(process.env.DATABASE_URL as string)
+
 // Get posts from the database
 export async function getPosts(
   page: number,
@@ -8,8 +10,6 @@ export async function getPosts(
   currentOrderBy: OrderBy,
   category?: string,
 ) {
-  const sql = neon(process.env.DATABASE_URL as string)
-
   // Calculate the offset for the current page
   const offset = (page - 1) * postsPerPage
 
@@ -62,7 +62,6 @@ export async function getPosts(
 
 // Get the total count of posts
 export async function getTotalPostCount() {
-  const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT COUNT(*) as count FROM posts
   `
@@ -71,7 +70,6 @@ export async function getTotalPostCount() {
 
 // Get the total count of posts of a specific category
 export async function getTotalPostCountByCategory(category: string) {
-  const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT COUNT(*) as count FROM posts
     WHERE category = ${category}
@@ -81,7 +79,6 @@ export async function getTotalPostCountByCategory(category: string) {
 
 // Get a single post by slug
 export async function getPost(slug: string) {
-  const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
     WHERE slug = ${slug}
@@ -92,7 +89,6 @@ export async function getPost(slug: string) {
 
 // Get latest post
 export async function getLatestPost() {
-  const sql = neon(process.env.DATABASE_URL as string)
   const data = await sql`
     SELECT * FROM posts
     ORDER BY published_at DESC
@@ -105,8 +101,6 @@ export async function getLatestPost() {
 export async function getPopularPosts(
   popular_posts_filter?: PopularPostsFilter,
 ) {
-  const sql = neon(process.env.DATABASE_URL as string)
-
   const query =
     popular_posts_filter === 'this_month'
       ? sql`
@@ -127,8 +121,6 @@ export async function getPopularPosts(
 
 // Increment single post views
 export async function incrementPostViews(slug: string) {
-  const sql = neon(process.env.DATABASE_URL as string)
-
   await sql`
     UPDATE posts
     SET views = views + 1
@@ -137,8 +129,6 @@ export async function incrementPostViews(slug: string) {
 }
 
 export async function savePost(post: Post) {
-  const sql = neon(process.env.DATABASE_URL as string)
-
   await sql`
   INSERT INTO posts (
     id,
