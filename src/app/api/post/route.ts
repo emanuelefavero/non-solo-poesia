@@ -2,6 +2,7 @@ import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
 import { TITLE } from '@/data/title'
 import { URL } from '@/data/url'
+import { Post } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
@@ -10,6 +11,8 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const customDomainEmail = process.env.CUSTOM_DOMAIN_EMAIL as string
+
+const sql = neon(process.env.DATABASE_URL as string)
 
 async function validateRequest(req: Request) {
   // Check if the user has access to publish a post
@@ -139,17 +142,63 @@ async function validateRequest(req: Request) {
   }
 }
 
+async function savePostToDB(post: Post) {
+  await sql`
+  INSERT INTO posts (
+    id,
+    slug,
+    title,
+    description,
+    cover_image,
+    cover_image_cloudinary,
+    content,
+    author,
+    category,
+    published_at,
+    updated_at
+  ) VALUES (
+    ${post.id},
+    ${post.slug},
+    ${post.title},
+    ${post.description},
+    ${post.cover_image},
+    ${post.cover_image_cloudinary},
+    ${post.content},
+    ${post.author},
+    ${post.category},
+    ${post.published_at},
+    ${post.updated_at}
+  )
+  `
+}
+
+async function sendNewsletter(post: Post) {
+  const subscribers = await sql`SELECT email FROM subscribers`
+  if (!subscribers.length) return
+
+  // TODO buy domain and set up custom email
+  // TODO Change site name to reflect domain
+  // TODO Refactor the POST method since it has multiple async operations (see ChatGPT)
+  // TODO Create email with React ot HTML in a separate file (show post title, description, cover image, category etc.)
+  // TODO Change the URL to the bought domain
+  const emailData = {
+    subject: `${post.title} - ${TITLE}`,
+    text: `Ciao! Abbiamo appena pubblicato un nuovo post! Puoi leggerlo qui: ${URL}/post/${post.slug}`,
+    from: customDomainEmail,
+    to: subscribers.map((s) => s.email),
+  }
+
+  await resend.emails.send(emailData)
+}
+
 export async function POST(req: Request) {
   try {
     // Validate the request
     const validation = await validateRequest(req)
     if (validation.error) return validation.error
 
+    // Create post object with sanitized data
     const { sanitizedData } = validation
-
-    // Save the post to the database
-    const sql = neon(process.env.DATABASE_URL as string)
-
     const post = {
       id: randomUUID(),
       slug: sanitizedData.slug,
@@ -164,50 +213,8 @@ export async function POST(req: Request) {
       updated_at: null,
     }
 
-    await sql`
-      INSERT INTO posts (
-        id,
-        slug,
-        title,
-        description,
-        cover_image,
-        cover_image_cloudinary,
-        content,
-        author,
-        category,
-        published_at,
-        updated_at
-      ) VALUES (
-        ${post.id},
-        ${post.slug},
-        ${post.title},
-        ${post.description},
-        ${post.cover_image},
-        ${post.cover_image_cloudinary},
-        ${post.content},
-        ${post.author},
-        ${post.category},
-        ${post.published_at},
-        ${post.updated_at}
-      )
-    `
-
-    // * Send a newsletter to subscribers
-    const subscribers = await sql`SELECT email FROM subscribers`
-
-    // TODO buy domain and set up custom email
-    // TODO Change site name to reflect domain
-    // TODO Refactor the POST method since it has multiple async operations (see ChatGPT)
-    // TODO Create email with React ot HTML in a separate file (show post title, description, cover image, category etc.)
-    // TODO Change the URL to the bought domain
-    const emailData = {
-      subject: `${post.title} - ${TITLE}`,
-      text: `Ciao! Abbiamo appena pubblicato un nuovo post! Puoi leggerlo qui: ${URL}/post/${post.slug}`,
-      from: customDomainEmail,
-      to: subscribers.map((s) => s.email),
-    }
-
-    await resend.emails.send(emailData)
+    // * Save the post to the database and send the newsletter
+    await Promise.all([savePostToDB(post), sendNewsletter(post)])
 
     revalidatePath('/')
 
