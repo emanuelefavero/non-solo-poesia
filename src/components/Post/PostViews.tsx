@@ -2,12 +2,13 @@ import BsEyeIcon from '@/components/icons/BsEyeIcon'
 import { formatViews } from '@/utils/views'
 
 type Props = {
-  views: number
+  views?: number
   className?: string
   iconClassName?: string
 }
 
 export default function Component({ views, className, iconClassName }: Props) {
+  if (!views) return null
   return (
     <p
       className={`flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400 ${className}`}
