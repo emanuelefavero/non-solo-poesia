@@ -135,3 +135,35 @@ export async function incrementPostViews(slug: string) {
     WHERE slug = ${slug}
   `
 }
+
+export async function savePost(post: Post) {
+  const sql = neon(process.env.DATABASE_URL as string)
+
+  await sql`
+  INSERT INTO posts (
+    id,
+    slug,
+    title,
+    description,
+    cover_image,
+    cover_image_cloudinary,
+    content,
+    author,
+    category,
+    published_at,
+    updated_at
+  ) VALUES (
+    ${post.id},
+    ${post.slug},
+    ${post.title},
+    ${post.description},
+    ${post.cover_image},
+    ${post.cover_image_cloudinary},
+    ${post.content},
+    ${post.author},
+    ${post.category},
+    ${post.published_at},
+    ${post.updated_at}
+  )
+  `
+}
