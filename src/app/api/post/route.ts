@@ -1,16 +1,11 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
-import { TITLE } from '@/data/title'
-import { URL } from '@/data/url'
-import { Post } from '@/types'
+import { sendNewsletter } from '@/lib/resend'
+import type { Post } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { randomUUID } from 'crypto'
 import { revalidatePath } from 'next/cache'
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
-const customDomainEmail = process.env.CUSTOM_DOMAIN_EMAIL as string
 
 const sql = neon(process.env.DATABASE_URL as string)
 
@@ -172,25 +167,6 @@ async function savePost(post: Post) {
   `
 }
 
-async function sendNewsletter(post: Post) {
-  const subscribers = await sql`SELECT email FROM subscribers`
-  if (!subscribers.length) return
-
-  // TODO buy domain and set up custom email
-  // TODO Change site name to reflect domain
-  // TODO Refactor the POST method since it has multiple async operations (see ChatGPT)
-  // TODO Create email with React ot HTML in a separate file (show post title, description, cover image, category etc.)
-  // TODO Change the URL to the bought domain
-  const emailData = {
-    subject: `${post.title} - ${TITLE}`,
-    text: `Ciao! Abbiamo appena pubblicato un nuovo post! Puoi leggerlo qui: ${URL}/post/${post.slug}`,
-    from: customDomainEmail,
-    to: subscribers.map((s) => s.email),
-  }
-
-  await resend.emails.send(emailData)
-}
-
 export async function POST(req: Request) {
   try {
     // Validate the request
@@ -240,9 +216,6 @@ export async function PUT(req: Request) {
     if (validation.error) return validation.error
 
     const { sanitizedData } = validation
-
-    // Update the post in the database
-    const sql = neon(process.env.DATABASE_URL as string)
 
     await sql`
       UPDATE posts
