@@ -1,4 +1,5 @@
 import { TITLE } from '@/data/title'
+import { URL } from '@/data/url'
 import type { Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 import { Resend } from 'resend'
