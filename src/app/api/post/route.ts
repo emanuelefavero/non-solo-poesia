@@ -142,7 +142,7 @@ async function validateRequest(req: Request) {
   }
 }
 
-async function savePostToDB(post: Post) {
+async function savePost(post: Post) {
   await sql`
   INSERT INTO posts (
     id,
@@ -214,7 +214,7 @@ export async function POST(req: Request) {
     }
 
     // * Save the post to the database and send the newsletter
-    await Promise.all([savePostToDB(post), sendNewsletter(post)])
+    await Promise.all([savePost(post), sendNewsletter(post)])
 
     revalidatePath('/')
 
