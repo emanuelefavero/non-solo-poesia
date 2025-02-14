@@ -1,4 +1,6 @@
-export function formatViews(views: number): string {
+export function formatViews(views?: number): string {
+  if (!views) return '0'
+
   // NOTE: This is a temporary fix to show more views
   views *= Math.round(7.5)
 
