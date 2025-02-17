@@ -8,11 +8,11 @@ type Props = {
 
 export default function Component({ post }: Props) {
   return (
-    <div>
+    <>
       <h1>{post.title}</h1>
       {post.cover_image && <img src={post.cover_image} alt={post.title} />}
       <p>{post.description}</p>
       <a href={`${URL}/post/${post.slug}`}>Leggi il post</a>
-    </div>
+    </>
   )
 }

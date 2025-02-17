@@ -1,5 +1,5 @@
+import NewsletterEmail from '@/components/Emails/NewsletterEmail'
 import { TITLE } from '@/data/title'
-import { URL } from '@/data/url'
 import type { Post } from '@/types'
 import { neon } from '@neondatabase/serverless'
 import { Resend } from 'resend'
@@ -19,7 +19,7 @@ export async function sendNewsletter(post: Post) {
 
   const emailData = {
     subject: `${post.title} - ${TITLE}`,
-    text: `Ciao! Abbiamo appena pubblicato un nuovo post! Puoi leggerlo qui: ${URL}/post/${post.slug}`,
+    react: NewsletterEmail({ post }),
     from: customDomainEmail,
     to: subscribers.map((s) => s.email),
   }
