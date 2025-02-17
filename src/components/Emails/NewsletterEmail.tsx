@@ -7,6 +7,8 @@ type Props = {
   post: Post
 }
 
+// TODO Add custom font for the logo? Only if it is efficient
+
 export default function Component({ post }: Props) {
   const imgStyle = {
     borderRadius: '6px',
@@ -43,7 +45,8 @@ export default function Component({ post }: Props) {
       />
 
       {/* Logo */}
-      <div
+      <a
+        href={URL}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -58,8 +61,12 @@ export default function Component({ post }: Props) {
           height='24'
           style={{ display: 'block' }}
         />
-        <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{TITLE}</span>
-      </div>
+        <span
+          style={{ fontWeight: 'bold', fontStyle: 'italic', color: 'inherit' }}
+        >
+          {TITLE}
+        </span>
+      </a>
 
       {/* Blank Space */}
       <div style={{ height: '24px' }} />
