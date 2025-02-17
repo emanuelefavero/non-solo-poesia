@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { TITLE } from '@/data/title'
 import { URL } from '@/data/url'
 import type { Post } from '@/types'
 
@@ -15,6 +16,7 @@ export default function Component({ post }: Props) {
     height: 'auto',
   }
   const cloudinaryName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+  const logoUrl = `${URL}/logo.png`
 
   return (
     <>
@@ -32,6 +34,37 @@ export default function Component({ post }: Props) {
       )}
       <p>{post.description}</p>
       <a href={`${URL}/post/${post.slug}`}>Continua a leggere...</a>
+
+      {/* Line */}
+      <hr
+        style={{
+          margin: '6px 0',
+          border: 'none',
+          borderBottom: '1px solid rgba(127, 127, 127, 0.3)',
+        }}
+      />
+
+      {/* Logo */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          fontSize: '14px',
+        }}
+      >
+        <img
+          src={logoUrl}
+          alt={TITLE}
+          width='24'
+          height='24'
+          style={{ display: 'block' }}
+        />
+        <span style={{ fontWeight: 'bold', fontStyle: 'italic' }}>{TITLE}</span>
+      </div>
+
+      {/* Blank Space */}
+      <div style={{ height: '24px' }} />
     </>
   )
 }
