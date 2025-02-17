@@ -14,7 +14,7 @@ type PaginationProps = {
   currentOrderBy: OrderBy
 }
 
-// ! border border-pink-500/10 bg-pink-400/10 dark:bg-pink-600/10
+// TODO Fix pagination buttons on mobile
 
 export default function Component({
   currentPage,

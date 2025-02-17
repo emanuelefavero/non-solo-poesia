@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // TODO Add Social Media buttons to share the post
+// TODO Fix content centering on mobile (image right margin appear larger than left margin)
 
 // * Page
 export default async function Page({ params, searchParams }: Props) {
