@@ -11,7 +11,6 @@ const sql = neon(process.env.DATABASE_URL as string)
 
 // TODO buy domain and set up custom email (change custom email env variable)
 // TODO Change the URL to the bought domain
-// TODO Create email with React ot HTML in a separate file (show post title, description, cover image, category etc.)
 
 export async function sendNewsletter(post: Post) {
   const subscribers = await sql`SELECT email FROM subscribers`
