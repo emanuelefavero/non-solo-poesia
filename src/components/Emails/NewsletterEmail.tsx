@@ -31,7 +31,7 @@ export default function Component({ post }: Props) {
         <img src={post.cover_image} alt={post.title} style={imgStyle} />
       )}
       <p>{post.description}</p>
-      <a href={`${URL}/post/${post.slug}`}>Leggi il post</a>
+      <a href={`${URL}/post/${post.slug}`}>Continua a leggere...</a>
     </>
   )
 }
