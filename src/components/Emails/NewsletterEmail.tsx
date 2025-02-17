@@ -7,8 +7,6 @@ type Props = {
   post: Post
 }
 
-// TODO: Add logo and website name to the end of the email
-
 export default function Component({ post }: Props) {
   const imgStyle = {
     borderRadius: '6px',
