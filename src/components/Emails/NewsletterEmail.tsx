@@ -7,8 +7,6 @@ type Props = {
   post: Post
 }
 
-// TODO Add custom font for the logo? Only if it is efficient
-
 export default function Component({ post }: Props) {
   const imgStyle = {
     borderRadius: '6px',
