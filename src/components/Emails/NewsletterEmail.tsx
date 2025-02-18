@@ -38,7 +38,8 @@ export default function Component({ post }: Props) {
       {/* Line */}
       <hr
         style={{
-          margin: '6px 0',
+          marginTop: '48px',
+          marginBottom: '12px',
           border: 'none',
           borderBottom: '1px solid rgba(127, 127, 127, 0.3)',
         }}
