@@ -1,5 +1,7 @@
 # Non Solo Poesia
 
+<img src="public/logo.png" alt="logo" width="100">
+
 Website for **Non Solo Poesia**, a blog built with Next.js, TipTap, Clerk and Neon DB that allows the authors to create blog posts with rich text formatting.
 
 ## Website
