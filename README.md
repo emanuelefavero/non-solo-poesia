@@ -4,7 +4,7 @@ A blog application built with Next.js, TipTap, Clerk and Neon DB that allows use
 
 ## Website
 
-- [https://rich-text-blog.vercel.app/](https://rich-text-blog.vercel.app/)
+- [nonsolopoesia.it](https://www.nonsolopoesia.it/)
 
 ## Getting Started
 
