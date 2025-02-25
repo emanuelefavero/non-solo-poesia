@@ -1,4 +1,4 @@
-# Rich Text Blog
+# Non Solo Poesia
 
 A blog application built with Next.js, TipTap, Clerk and Neon DB that allows users to create blog posts with rich text formatting.
 
