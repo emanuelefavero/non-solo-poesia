@@ -9,8 +9,6 @@ const customDomainEmail = process.env.CUSTOM_DOMAIN_EMAIL as string
 
 const sql = neon(process.env.DATABASE_URL as string)
 
-// TODO set up custom email on purchased domain (change custom email env variable)
-
 export async function sendNewsletter(post: Post) {
   const subscribers = await sql`SELECT email FROM subscribers`
   if (!subscribers.length) return
