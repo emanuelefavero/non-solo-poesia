@@ -72,7 +72,7 @@ export async function validateRequest(req: Request) {
   // Sanitize the description (allow letters, numbers, spaces, punctuation and unicode characters)
   const sanitizedDescription = description
     .trim()
-    .replace(/[^\p{L}0-9\s\-.,;:!?']/gu, '')
+    .replace(/[^\p{L}0-9\s\-.,;:!?'’]/gu, '')
   const sanitizedCoverImage = coverImage.trim()
 
   if (coverImage && !/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
