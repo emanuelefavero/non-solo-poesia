@@ -1,6 +1,7 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
 import type { CategoryName, Message } from '@/types'
+import { descriptionRegex } from '@/utils/validation/regex'
 import { Editor } from '@tiptap/react'
 
 type ValidatePost = {
@@ -60,7 +61,7 @@ export function validatePost({
     }
   }
 
-  if (!/^[\p{L}0-9\s\-.,;:!?'"]+$/u.test(description)) {
+  if (descriptionRegex.test(description)) {
     return {
       type: 'error',
       text: 'La descrizione può contenere solo lettere, numeri, spazi e punteggiatura',

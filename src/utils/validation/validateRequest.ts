@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
+import { descriptionRegex } from '@/utils/validation/regex'
 import { auth } from '@clerk/nextjs/server'
 
 const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
@@ -70,13 +71,7 @@ export async function validateRequest(req: Request) {
   const slug = sanitizedTitle.toLowerCase().replace(/\s+/g, '-')
 
   // Sanitize the description (allow letters, numbers, spaces, punctuation and unicode characters)
-  const sanitizedDescription = description
-    .trim()
-    .replace(/[^\p{L}0-9\s\-.,;:!?'\u2018\u2019\u201C\u201D"]/gu, '')
-  // ? \u2018 → ‘ (Left single quotation mark)
-  // ? \u2019 → ’ (Right single quotation mark / Apostrophe)
-  // ? \u201C → “ (Left double quotation mark)
-  // ? \u201D → ” (Right double quotation mark)
+  const sanitizedDescription = description.trim().replace(descriptionRegex, '')
 
   const sanitizedCoverImage = coverImage.trim()
 
