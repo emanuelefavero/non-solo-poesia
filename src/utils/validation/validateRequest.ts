@@ -72,7 +72,12 @@ export async function validateRequest(req: Request) {
   // Sanitize the description (allow letters, numbers, spaces, punctuation and unicode characters)
   const sanitizedDescription = description
     .trim()
-    .replace(/[^\p{L}0-9\s\-.,;:!?'’]/gu, '')
+    .replace(/[^\p{L}0-9\s\-.,;:!?'\u2018\u2019\u201C\u201D"]/gu, '')
+  // ? \u2018 → ‘ (Left single quotation mark)
+  // ? \u2019 → ’ (Right single quotation mark / Apostrophe)
+  // ? \u201C → “ (Left double quotation mark)
+  // ? \u201D → ” (Right double quotation mark)
+
   const sanitizedCoverImage = coverImage.trim()
 
   if (coverImage && !/^https?:\/\/\S+\.\S+/.test(sanitizedCoverImage)) {
