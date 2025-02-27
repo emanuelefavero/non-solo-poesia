@@ -1,7 +1,8 @@
+import ContactUs from '@/components/ContactUs'
 import NewsletterForm from '@/components/NewsletterForm'
 import { TITLE } from '@/data/title'
 
-// TODO Add more content (contact us, privacy policy, etc.) and style Footer (see other websites)
+// TODO Add privacy policy link
 
 export default function Component() {
   const year = new Date().getFullYear()
@@ -10,6 +11,7 @@ export default function Component() {
     <footer className='flex w-full flex-col flex-wrap items-center justify-center gap-2 border-t border-t-pink-500/10 bg-pink-400/10 p-4 text-sm dark:bg-pink-600/10'>
       <div className='flex w-full max-w-[1157px] flex-col flex-wrap items-center justify-center gap-5'>
         <NewsletterForm />
+        <ContactUs />
 
         <div className='flex flex-col items-center justify-center gap-2'>
           <span>
