@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
+import type { CategoryName, Message } from '@/types'
 import { useEditorStore } from './editorStore'
 
 describe('editorStore', () => {
@@ -63,5 +64,10 @@ describe('editorStore', () => {
   test('setAuthor', () => {
     useEditorStore.getState().setAuthor('New author')
     expect(useEditorStore.getState().author).toBe('New author')
+  })
+
+  test('setCategory', () => {
+    useEditorStore.getState().setCategory('New category' as CategoryName)
+    expect(useEditorStore.getState().category).toBe('New category')
   })
 })
