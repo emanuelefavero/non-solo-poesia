@@ -39,7 +39,7 @@ describe('editorStore', () => {
   test('setMessage', () => {
     useEditorStore
       .getState()
-      .setMessage({ type: 'error', text: 'Error message' })
+      .setMessage({ type: 'error', text: 'Error message' } as Message)
     expect(useEditorStore.getState().message).toEqual({
       type: 'error',
       text: 'Error message',
@@ -69,5 +69,36 @@ describe('editorStore', () => {
   test('setCategory', () => {
     useEditorStore.getState().setCategory('New category' as CategoryName)
     expect(useEditorStore.getState().category).toBe('New category')
+  })
+
+  test('setCoverImage', () => {
+    useEditorStore.getState().setCoverImage('New cover image')
+    expect(useEditorStore.getState().coverImage).toBe('New cover image')
+  })
+
+  test('setCoverImageType', () => {
+    useEditorStore.getState().setCoverImageType('file')
+    expect(useEditorStore.getState().coverImageType).toBe('file')
+  })
+
+  test('setCoverImageCloudinaryPreview', () => {
+    useEditorStore.getState().setCoverImageCloudinaryPreview('New preview')
+    expect(useEditorStore.getState().coverImageCloudinaryPreview).toBe(
+      'New preview',
+    )
+  })
+
+  test('setCoverImageCloudinary', () => {
+    useEditorStore.getState().setCoverImageCloudinary('New cloudinary id')
+    expect(useEditorStore.getState().coverImageCloudinary).toBe(
+      'New cloudinary id',
+    )
+  })
+
+  test('setPrevCloudinaryPublicId', () => {
+    useEditorStore.getState().setPrevCloudinaryPublicId('New public id')
+    expect(useEditorStore.getState().prevCloudinaryPublicId).toBe(
+      'New public id',
+    )
   })
 })
