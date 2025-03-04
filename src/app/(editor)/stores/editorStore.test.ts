@@ -34,4 +34,14 @@ describe('editorStore', () => {
     useEditorStore.getState().setLoading(true)
     expect(useEditorStore.getState().loading).toBe(true)
   })
+
+  test('setMessage', () => {
+    useEditorStore
+      .getState()
+      .setMessage({ type: 'error', text: 'Error message' })
+    expect(useEditorStore.getState().message).toEqual({
+      type: 'error',
+      text: 'Error message',
+    })
+  })
 })
