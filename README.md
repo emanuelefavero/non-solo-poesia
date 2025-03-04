@@ -93,6 +93,7 @@ npm run dev
 
 ## Resources
 
+- [Setup Jest with Next.js 15](https://dev.to/peterlidee/3-how-to-setup-jest-in-a-next-15-project-eslint-for-testing-aab)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
