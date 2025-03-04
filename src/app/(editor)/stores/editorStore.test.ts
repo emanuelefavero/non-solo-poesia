@@ -24,4 +24,9 @@ describe('editorStore', () => {
     expect(state.coverImageCloudinary).toBe('')
     expect(state.prevCloudinaryPublicId).toBe('')
   })
+
+  test('setProgress', () => {
+    useEditorStore.getState().setProgress(50)
+    expect(useEditorStore.getState().progress).toBe(50)
+  })
 })
