@@ -44,4 +44,24 @@ describe('editorStore', () => {
       text: 'Error message',
     })
   })
+
+  test('setIsFocused', () => {
+    useEditorStore.getState().setIsFocused(true)
+    expect(useEditorStore.getState().isFocused).toBe(true)
+  })
+
+  test('setTitle', () => {
+    useEditorStore.getState().setTitle('New title')
+    expect(useEditorStore.getState().title).toBe('New title')
+  })
+
+  test('setDescription', () => {
+    useEditorStore.getState().setDescription('New description')
+    expect(useEditorStore.getState().description).toBe('New description')
+  })
+
+  test('setAuthor', () => {
+    useEditorStore.getState().setAuthor('New author')
+    expect(useEditorStore.getState().author).toBe('New author')
+  })
 })
