@@ -29,4 +29,9 @@ describe('editorStore', () => {
     useEditorStore.getState().setProgress(50)
     expect(useEditorStore.getState().progress).toBe(50)
   })
+
+  test('setLoading', () => {
+    useEditorStore.getState().setLoading(true)
+    expect(useEditorStore.getState().loading).toBe(true)
+  })
 })
