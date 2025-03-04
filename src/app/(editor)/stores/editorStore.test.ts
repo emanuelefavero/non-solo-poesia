@@ -101,4 +101,19 @@ describe('editorStore', () => {
       'New public id',
     )
   })
+
+  test('clearPost', () => {
+    useEditorStore.getState().clearPost()
+    const state = useEditorStore.getState()
+
+    expect(state.progress).toBe(0)
+    expect(state.loading).toBe(false)
+    expect(state.title).toBe('')
+    expect(state.description).toBe('')
+    expect(state.coverImage).toBe('')
+    expect(state.coverImageCloudinary).toBe('')
+    expect(state.coverImageCloudinaryPreview).toBeNull()
+    expect(state.author).toBe(authors[0].name)
+    expect(state.category).toBe(categories[0].name)
+  })
 })
