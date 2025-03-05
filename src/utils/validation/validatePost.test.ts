@@ -105,4 +105,9 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return success if all fields are valid', () => {
+    const result = validatePost(validPost)
+    expect(result.type).toBe('success')
+  })
 })
