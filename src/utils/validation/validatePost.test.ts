@@ -26,4 +26,10 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if title is longer than 100 characters', () => {
+    const post = { ...validPost, title: 'a'.repeat(101) }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
