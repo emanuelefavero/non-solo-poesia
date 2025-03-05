@@ -49,4 +49,47 @@ describe('validateRequest', () => {
     const result = await validateRequest(mockRequest(invalidBody))
     expect(result.error?.status).toBe(400)
   })
+
+  it('should return 400 if author is not valid', async () => {
+    ;(auth as unknown as jest.Mock).mockResolvedValue({
+      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
+    })
+
+    const invalidBody = { ...validBody, author: 'Invalid Author' }
+    const result = await validateRequest(mockRequest(invalidBody))
+    expect(result.error?.status).toBe(400)
+  })
+
+  it('should return 400 if category is not valid', async () => {
+    ;(auth as unknown as jest.Mock).mockResolvedValue({
+      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
+    })
+
+    const invalidBody = { ...validBody, category: 'Invalid Category' }
+    const result = await validateRequest(mockRequest(invalidBody))
+    expect(result.error?.status).toBe(400)
+  })
+
+  it('should return sanitized data when request is valid', async () => {
+    ;(auth as unknown as jest.Mock).mockResolvedValue({
+      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
+    })
+
+    // Define a sanitized request body
+    const sanitizedData = {
+      title: validBody.title,
+      slug: validBody.title.toLowerCase().replace(/ /g, '-'),
+      description: validBody.description,
+      coverImage: validBody.coverImage,
+      coverImageCloudinary: validBody.coverImageCloudinary,
+      content: validBody.content,
+      author: authors[0].name,
+      category: categories[0].name,
+      id: validBody.id,
+    }
+
+    // Make sure the data is sanitized
+    const result = await validateRequest(mockRequest(validBody))
+    expect(result.sanitizedData).toEqual(sanitizedData)
+  })
 })
