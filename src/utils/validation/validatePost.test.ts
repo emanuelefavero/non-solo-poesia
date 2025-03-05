@@ -75,4 +75,16 @@ describe('validatePost', () => {
     result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if author is missing', () => {
+    const post = { ...validPost, author: '' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
+
+  it('should return an error if author is not valid', () => {
+    const post = { ...validPost, author: 'Invalid Author' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
