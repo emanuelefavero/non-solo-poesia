@@ -87,4 +87,16 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if category is missing', () => {
+    const post = { ...validPost, category: '' }
+    const result = validatePost(post as any)
+    expect(result.type).toBe('error')
+  })
+
+  it('should return an error if category is not valid', () => {
+    const post = { ...validPost, category: 'Invalid Category' }
+    const result = validatePost(post as any)
+    expect(result.type).toBe('error')
+  })
 })
