@@ -99,4 +99,10 @@ describe('validatePost', () => {
     const result = validatePost(post as any)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if editor is missing', () => {
+    const post = { ...validPost, editor: null }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
