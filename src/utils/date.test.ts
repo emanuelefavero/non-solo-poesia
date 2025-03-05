@@ -1,4 +1,4 @@
-import { isAtLeastOneDayLater, isMonthDay1or8or11 } from './date'
+import { formatDate, isAtLeastOneDayLater, isMonthDay1or8or11 } from './date'
 
 describe('isAtLeastOneDayLater', () => {
   it('should return false if updated_at is undefined', () => {
@@ -37,5 +37,11 @@ describe('isMonthDay1or8or11', () => {
 
   it('should return false if the day of the month is not 1, 8 or 11', () => {
     expect(isMonthDay1or8or11(new Date('2025-01-02'))).toBe(false)
+  })
+})
+
+describe('formatDate', () => {
+  it('should format the date to italian format with Capitalized month', () => {
+    expect(formatDate(new Date('2025-01-01'))).toBe('1 Gennaio 2025')
   })
 })
