@@ -65,4 +65,14 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if htmlContent is missing', () => {
+    let post = { ...validPost, htmlContent: '' }
+    let result = validatePost(post)
+    expect(result.type).toBe('error')
+
+    post = { ...validPost, htmlContent: '<p></p>' }
+    result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
