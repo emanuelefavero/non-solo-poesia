@@ -20,4 +20,10 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if title contains characters not allowed in url', () => {
+    const post = { ...validPost, title: 'Title with special characters: {}' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
