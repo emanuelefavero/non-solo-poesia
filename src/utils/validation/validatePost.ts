@@ -2,7 +2,7 @@ import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
 import type { CategoryName, Message } from '@/types'
 import { descriptionRegex } from '@/utils/validation/regex'
-import { Editor } from '@tiptap/react'
+import type { Editor } from '@tiptap/react'
 
 type ValidatePost = {
   title: string
