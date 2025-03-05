@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
+import type { CategoryName } from '@/types'
 import type { Editor } from '@tiptap/react'
 import { validatePost } from './validatePost'
 
@@ -11,7 +12,7 @@ describe('validatePost', () => {
     coverImageCloudinary: '',
     htmlContent: 'Valid post content',
     author: authors[0].name,
-    category: categories[0].name,
+    category: categories[0].name as CategoryName,
     editor: {} as Editor,
   }
 
@@ -89,14 +90,14 @@ describe('validatePost', () => {
   })
 
   it('should return an error if category is missing', () => {
-    const post = { ...validPost, category: '' }
-    const result = validatePost(post as any)
+    const post = { ...validPost, category: '' as CategoryName }
+    const result = validatePost(post)
     expect(result.type).toBe('error')
   })
 
   it('should return an error if category is not valid', () => {
-    const post = { ...validPost, category: 'Invalid Category' }
-    const result = validatePost(post as any)
+    const post = { ...validPost, category: 'Invalid Category' as CategoryName }
+    const result = validatePost(post)
     expect(result.type).toBe('error')
   })
 
