@@ -26,22 +26,6 @@ describe('validateRequest', () => {
       json: jest.fn().mockResolvedValue(body),
     }) as unknown as Request
 
-  // Mock env variables
-  const OLD_ENV = process.env
-
-  // Reset modules before each test and set env variables
-  beforeEach(() => {
-    jest.resetModules()
-    process.env = { ...OLD_ENV }
-    process.env.NEXT_PUBLIC_ADMIN_ID = 'admin-id'
-    process.env.NEXT_PUBLIC_AUTHOR_ID = 'author-id'
-  })
-
-  // Reset env variables
-  afterAll(() => {
-    process.env = OLD_ENV
-  })
-
   it('should return 401 if user is not authenticated', async () => {
     ;(auth as unknown as jest.Mock).mockResolvedValue({ userId: null })
 
@@ -54,5 +38,15 @@ describe('validateRequest', () => {
 
     const result = await validateRequest(mockRequest(validBody))
     expect(result.error?.status).toBe(403)
+  })
+
+  it('should return 400 if request body is missing required fields', async () => {
+    ;(auth as unknown as jest.Mock).mockResolvedValue({
+      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
+    })
+
+    const invalidBody = { ...validBody, title: '' }
+    const result = await validateRequest(mockRequest(invalidBody))
+    expect(result.error?.status).toBe(400)
   })
 })
