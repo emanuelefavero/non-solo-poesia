@@ -32,4 +32,25 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if description is missing', () => {
+    const post = { ...validPost, description: '' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
+
+  it('should return an error if description is longer than 130 characters', () => {
+    const post = { ...validPost, description: 'a'.repeat(131) }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
+
+  it('should return an error if description has special characters', () => {
+    const post = {
+      ...validPost,
+      description: 'Description with special characters: {}',
+    }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
