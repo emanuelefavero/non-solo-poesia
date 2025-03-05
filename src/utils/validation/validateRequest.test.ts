@@ -8,6 +8,8 @@ jest.mock('@clerk/nextjs/server', () => ({
 }))
 
 describe('validateRequest', () => {
+  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
+
   // Define a valid request body
   const validBody = {
     title: 'Valid Title',
@@ -20,7 +22,7 @@ describe('validateRequest', () => {
     id: '123',
   }
 
-  // Define a mock request object
+  // Mock a Request object
   const mockRequest = (body: object) =>
     ({
       json: jest.fn().mockResolvedValue(body),
@@ -41,9 +43,7 @@ describe('validateRequest', () => {
   })
 
   it('should return 400 if request body is missing required fields', async () => {
-    ;(auth as unknown as jest.Mock).mockResolvedValue({
-      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
-    })
+    ;(auth as unknown as jest.Mock).mockResolvedValue({ userId: adminId })
 
     const invalidBody = { ...validBody, title: '' }
     const result = await validateRequest(mockRequest(invalidBody))
@@ -51,9 +51,7 @@ describe('validateRequest', () => {
   })
 
   it('should return 400 if author is not valid', async () => {
-    ;(auth as unknown as jest.Mock).mockResolvedValue({
-      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
-    })
+    ;(auth as unknown as jest.Mock).mockResolvedValue({ userId: adminId })
 
     const invalidBody = { ...validBody, author: 'Invalid Author' }
     const result = await validateRequest(mockRequest(invalidBody))
@@ -61,9 +59,7 @@ describe('validateRequest', () => {
   })
 
   it('should return 400 if category is not valid', async () => {
-    ;(auth as unknown as jest.Mock).mockResolvedValue({
-      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
-    })
+    ;(auth as unknown as jest.Mock).mockResolvedValue({ userId: adminId })
 
     const invalidBody = { ...validBody, category: 'Invalid Category' }
     const result = await validateRequest(mockRequest(invalidBody))
@@ -71,9 +67,7 @@ describe('validateRequest', () => {
   })
 
   it('should return sanitized data when request is valid', async () => {
-    ;(auth as unknown as jest.Mock).mockResolvedValue({
-      userId: process.env.NEXT_PUBLIC_ADMIN_ID,
-    })
+    ;(auth as unknown as jest.Mock).mockResolvedValue({ userId: adminId })
 
     // Define a sanitized request body
     const sanitizedData = {
