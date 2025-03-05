@@ -53,4 +53,16 @@ describe('validatePost', () => {
     const result = validatePost(post)
     expect(result.type).toBe('error')
   })
+
+  it('should return an error if coverImage and coverImageCloudinary are missing', () => {
+    const post = { ...validPost, coverImage: '', coverImageCloudinary: '' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
+
+  it('should return an error if coverImage url is invalid', () => {
+    const post = { ...validPost, coverImage: 'invalid-url' }
+    const result = validatePost(post)
+    expect(result.type).toBe('error')
+  })
 })
