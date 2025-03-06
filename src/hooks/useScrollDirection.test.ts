@@ -25,4 +25,20 @@ describe('useScrollDirection', () => {
 
     expect(result.current).toBe('down')
   })
+
+  it('should return "up" when scrolling up', () => {
+    const { result } = renderHook(() => useScrollDirection())
+
+    act(() => {
+      window.scrollY = 100
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    act(() => {
+      window.scrollY = 0
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    expect(result.current).toBe('up')
+  })
 })
