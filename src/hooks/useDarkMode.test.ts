@@ -39,4 +39,27 @@ describe('useDarkMode', () => {
     const { result } = renderHook(() => useDarkMode())
     expect(result.current).toBe(true)
   })
+
+  it('should update state when dark mode changes', () => {
+    let listener: ((e: MediaQueryListEvent) => void) | undefined
+    const mockMediaQuery = {
+      matches: false,
+      addEventListener: jest.fn((_, callback) => {
+        listener = callback
+      }),
+      removeEventListener: jest.fn(),
+    }
+
+    window.matchMedia = jest.fn().mockReturnValue(mockMediaQuery)
+
+    const { result } = renderHook(() => useDarkMode())
+
+    expect(result.current).toBe(false)
+
+    act(() => {
+      listener?.({ matches: true } as MediaQueryListEvent)
+    })
+
+    expect(result.current).toBe(true)
+  })
 })
