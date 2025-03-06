@@ -62,4 +62,24 @@ describe('useDarkMode', () => {
 
     expect(result.current).toBe(true)
   })
+
+  it('should clean up event listener on unmount', () => {
+    const addEventListener = jest.fn()
+    const removeEventListener = jest.fn()
+
+    window.matchMedia = jest.fn().mockReturnValue({
+      matches: false,
+      addEventListener,
+      removeEventListener,
+    })
+
+    const { unmount } = renderHook(() => useDarkMode())
+
+    expect(addEventListener).toHaveBeenCalledTimes(1)
+    expect(removeEventListener).not.toHaveBeenCalled()
+
+    unmount()
+
+    expect(removeEventListener).toHaveBeenCalledTimes(1)
+  })
 })
