@@ -33,4 +33,10 @@ describe('useDarkMode', () => {
     const { result } = renderHook(() => useDarkMode())
     expect(result.current).toBe(false)
   })
+
+  it('should return true if dark mode is enabled', () => {
+    window.matchMedia = jest.fn().mockReturnValue(mockMatchMedia(true))
+    const { result } = renderHook(() => useDarkMode())
+    expect(result.current).toBe(true)
+  })
 })
