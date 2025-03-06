@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import { useScrollDirection } from './useScrollDirection'
 
 describe('useScrollDirection', () => {
@@ -13,5 +13,16 @@ describe('useScrollDirection', () => {
   it('should return null initially', () => {
     const { result } = renderHook(() => useScrollDirection())
     expect(result.current).toBeNull()
+  })
+
+  it('should return "down" when scrolling down', () => {
+    const { result } = renderHook(() => useScrollDirection())
+
+    act(() => {
+      window.scrollY = 100
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    expect(result.current).toBe('down')
   })
 })
