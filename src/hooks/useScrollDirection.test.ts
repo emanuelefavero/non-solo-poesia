@@ -41,4 +41,20 @@ describe('useScrollDirection', () => {
 
     expect(result.current).toBe('up')
   })
+
+  it('should not update direction if scrolling in same direction', () => {
+    const { result } = renderHook(() => useScrollDirection())
+
+    act(() => {
+      window.scrollY = 100 // scroll down
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    act(() => {
+      window.scrollY = 200 // scroll down
+      window.dispatchEvent(new Event('scroll'))
+    })
+
+    expect(result.current).toBe('down')
+  })
 })
