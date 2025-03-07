@@ -1,4 +1,5 @@
 import { contactEmail } from '@/data/email'
+import { unsubscribe } from '@/lib/neon/unsubscribe'
 
 type Props = {
   searchParams: Promise<{
@@ -8,10 +9,14 @@ type Props = {
 
 export default async function Page({ searchParams }: Props) {
   const { email } = await searchParams
+  const unsubscribed = await unsubscribe(email)
+
+  // TODO redirect home if email is not found
+  // TODO Add homepage link on success condition
 
   return (
     <>
-      {email ? (
+      {unsubscribed ? (
         <>
           <h1>Iscrizione alla newsletter annullata</h1>
           <p>
@@ -27,8 +32,7 @@ export default async function Page({ searchParams }: Props) {
         <>
           <h1>Iscrizione alla newsletter non trovata</h1>
           <p>
-            Non è stato possibile trovare l{"'"}iscrizione alla newsletter con l
-            {"'"}indirizzo email fornito.
+            Non è stato possibile annullare l{"'"}iscrizione alla newsletter.
           </p>
           <p>
             Per qualsiasi domanda contattaci all{"'"}indirizzo{' '}
