@@ -20,7 +20,6 @@ type Props = {
 }
 
 // TODO Style 404 page
-// TODO Add mailing list subscription form (below post list)
 
 export default async function Home({ searchParams }: Props) {
   const { page, order_by, popular_posts_filter } = await searchParams
