@@ -16,6 +16,7 @@ export default function Component({ post, email }: Props) {
   }
   const cloudinaryName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
   const logoUrl = `${URL}/logo.png`
+  const unsubscribeUrl = `${URL}/unsubscribe?email=${encodeURIComponent(email)}`
 
   return (
     <>
@@ -72,7 +73,19 @@ export default function Component({ post, email }: Props) {
       <div style={{ height: '24px' }} />
 
       {/* Unsubscribe link */}
-      {email}
+      <p style={{ fontSize: '14px' }}>
+        Se non desideri più ricevere queste email,{' '}
+        <a
+          href={unsubscribeUrl}
+          style={{ color: 'inherit', fontWeight: 'bold' }}
+        >
+          clicca qui
+        </a>
+        .
+      </p>
+
+      {/* Blank Space */}
+      <div style={{ height: '24px' }} />
     </>
   )
 }
