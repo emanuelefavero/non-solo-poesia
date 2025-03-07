@@ -5,9 +5,10 @@ import type { Post } from '@/types'
 
 type Props = {
   post: Post
+  email: string
 }
 
-export default function Component({ post }: Props) {
+export default function Component({ post, email }: Props) {
   const imgStyle = {
     borderRadius: '6px',
     maxWidth: '100%',
@@ -69,6 +70,9 @@ export default function Component({ post }: Props) {
 
       {/* Blank Space */}
       <div style={{ height: '24px' }} />
+
+      {/* Unsubscribe link */}
+      {email}
     </>
   )
 }

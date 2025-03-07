@@ -13,12 +13,13 @@ export async function sendNewsletter(post: Post) {
   const subscribers = await sql`SELECT email FROM subscribers`
   if (!subscribers.length) return
 
-  const emailData = {
-    subject: `${post.title} - ${TITLE}`,
-    react: NewsletterEmail({ post }),
-    from: customDomainEmail,
-    to: subscribers.map((s) => s.email),
+  for (const subscriber of subscribers) {
+    const emailData = {
+      subject: `${post.title} - ${TITLE}`,
+      react: NewsletterEmail({ post, email: subscriber.email }),
+      from: customDomainEmail,
+      to: subscriber.email,
+    }
+    await resend.emails.send(emailData)
   }
-
-  await resend.emails.send(emailData)
 }
