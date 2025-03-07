@@ -1,5 +1,6 @@
 import { contactEmail } from '@/data/email'
 import { unsubscribe } from '@/lib/neon/unsubscribe'
+import Link from 'next/link'
 
 type Props = {
   searchParams: Promise<{
@@ -12,7 +13,6 @@ export default async function Page({ searchParams }: Props) {
   const unsubscribed = await unsubscribe(email)
 
   // TODO redirect home if email is not found
-  // TODO Add homepage link on success condition
 
   return (
     <>
@@ -25,8 +25,13 @@ export default async function Page({ searchParams }: Props) {
           </p>
           <p>
             Se hai cambiato idea, puoi riscriverti in qualsiasi momento in fondo
-            a questa pagina <b>↓</b>
+            al sito <b>↓</b>
           </p>
+
+          {/* Homepage link */}
+          <div className='mt-8'>
+            <Link href='/'>Torna alla home</Link>
+          </div>
         </>
       ) : (
         <>
