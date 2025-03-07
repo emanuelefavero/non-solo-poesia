@@ -1,3 +1,5 @@
+import { contactEmail } from '@/data/email'
+
 type Props = {
   searchParams: Promise<{
     email: string
@@ -30,7 +32,7 @@ export default async function Page({ searchParams }: Props) {
           </p>
           <p>
             Per qualsiasi domanda contattaci all{"'"}indirizzo{' '}
-            <a href='mailto:info@nonsolopoesia.it'>info@nonsolopoesia.it</a>
+            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </p>
         </>
       )}
