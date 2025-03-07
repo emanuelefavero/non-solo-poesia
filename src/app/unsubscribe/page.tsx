@@ -1,6 +1,7 @@
 import { contactEmail } from '@/data/email'
 import { unsubscribe } from '@/lib/neon/unsubscribe'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 type Props = {
   searchParams: Promise<{
@@ -12,7 +13,8 @@ export default async function Page({ searchParams }: Props) {
   const { email } = await searchParams
   const unsubscribed = await unsubscribe(email)
 
-  // TODO redirect home if email is not found
+  // Redirect to the homepage if the email is not provided
+  if (!email) redirect('/')
 
   return (
     <>
