@@ -1,5 +1,7 @@
 import { contactEmail } from '@/data/email'
+import { TITLE } from '@/data/title'
 import { unsubscribe } from '@/lib/neon/unsubscribe'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
@@ -7,6 +9,12 @@ type Props = {
   searchParams: Promise<{
     email: string
   }>
+}
+
+// * Metadata
+export const metadata: Metadata = {
+  title: `Annulla iscrizione - ${TITLE}`,
+  description: `Annulla l'iscrizione alla newsletter per non ricevere più i nostri aggiornamenti`,
 }
 
 export default async function Page({ searchParams }: Props) {
