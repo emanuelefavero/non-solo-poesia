@@ -37,3 +37,9 @@ test('Category page has correct title', async ({ page }) => {
   await page.goto(`/categoria/${category.slug}`)
   await expect(page).toHaveTitle(`${name} - ${TITLE}`)
 })
+
+test('Newsletter success page has correct title', async ({ page }) => {
+  // ? pass email query param to prevent redirect
+  await page.goto('/newsletter-success?email=test@example.com')
+  await expect(page).toHaveTitle(`Iscrizione completata - ${TITLE}`)
+})
