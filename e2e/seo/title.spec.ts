@@ -3,6 +3,8 @@ import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
 
+const fakeEmail = 'test@example.com'
+
 test('Homepage has correct title', async ({ page }) => {
   await page.goto('/')
   await expect(page).toHaveTitle(TITLE)
@@ -40,6 +42,12 @@ test('Category page has correct title', async ({ page }) => {
 
 test('Newsletter success page has correct title', async ({ page }) => {
   // ? pass email query param to prevent redirect
-  await page.goto('/newsletter-success?email=test@example.com')
+  await page.goto(`/newsletter-success?email=${fakeEmail}`)
   await expect(page).toHaveTitle(`Iscrizione completata - ${TITLE}`)
+})
+
+test('Unsubscribe page has correct title', async ({ page }) => {
+  // ? pass email query param to prevent redirect
+  await page.goto(`/unsubscribe?email=${fakeEmail}`)
+  await expect(page).toHaveTitle(`Annulla iscrizione - ${TITLE}`)
 })
