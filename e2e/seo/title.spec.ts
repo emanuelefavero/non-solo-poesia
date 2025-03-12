@@ -1,3 +1,4 @@
+import { categories } from '@/data/categories'
 import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
@@ -27,4 +28,12 @@ test('Post detail page has correct title when post is not found', async ({
 
   await page.goto(`/post/${postSlug}`)
   await expect(page).toHaveTitle(POST_NOT_FOUND_MESSAGE)
+})
+
+test('Category page has correct title', async ({ page }) => {
+  const category = categories[0]
+  const { name } = category
+
+  await page.goto(`/categoria/${category.slug}`)
+  await expect(page).toHaveTitle(`${name} - ${TITLE}`)
 })
