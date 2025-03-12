@@ -15,7 +15,7 @@
     "e2e:chromium": "npx playwright test --project=chromium",
     "e2e:debug": "npx playwright test --debug",
     "e2e:codegen": "npx playwright codegen",
-    "e2e:report": "npx playwright show-report"
+    "e2e:report": "npx playwright show-report e2e-report"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.0",
