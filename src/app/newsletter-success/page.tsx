@@ -1,3 +1,5 @@
+import { TITLE } from '@/data/title'
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
@@ -8,6 +10,12 @@ type Props = {
   searchParams: Promise<{
     email?: string
   }>
+}
+
+// * Metadata
+export const metadata: Metadata = {
+  title: `Iscrizione completata - ${TITLE}`,
+  description: `Grazie per esserti iscritto alla newsletter! Presto riceverai i nostri ultimi post direttamente nella tua casella di posta`,
 }
 
 export default async function Page({ searchParams }: Props) {
