@@ -1,9 +1,20 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 import GrazieAnimation from './components/GrazieAnimation'
 import UserEmail from './components/UserEmail'
 
-export default function Page() {
+type Props = {
+  searchParams: Promise<{
+    email?: string
+  }>
+}
+
+export default async function Page({ searchParams }: Props) {
+  const { email } = await searchParams
+
+  if (!email) return redirect('/')
+
   return (
     <div className='mt-20 flex flex-col items-center justify-center gap-4'>
       <h1>
