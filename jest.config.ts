@@ -13,6 +13,16 @@ const config: Config = {
   clearMocks: true,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
+  // Ignore the following directories
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/',
+    '<rootDir>/.swc/',
+    '<rootDir>/.vscode/',
+    '<rootDir>/e2e/', // Ignore E2E tests
+    '<rootDir>/node_modules/',
+    '<rootDir>/playwright-report/',
+  ],
+
   // Add path aliases for imports
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // Map @/ to ./src/
