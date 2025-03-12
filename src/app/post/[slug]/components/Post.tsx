@@ -4,6 +4,7 @@ import DeletePopover from '@/components/DeletePopover'
 import PostDescription from '@/components/Post/PostDescription'
 import PostInfo from '@/components/Post/PostInfo'
 import PostTitle from '@/components/Post/PostTitle'
+import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { getPost } from '@/lib/neon/posts'
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
@@ -14,7 +15,7 @@ export default async function Component({ slug }: { slug: string }) {
   const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
   const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
 
-  if (!post) return <p>Post non trovato.</p>
+  if (!post) return <p>{POST_NOT_FOUND_MESSAGE}.</p>
 
   return (
     <div className='flex w-full max-w-3xl animate-fadeInFromSkeleton flex-col gap-3'>

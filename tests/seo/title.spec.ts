@@ -1,3 +1,4 @@
+import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
 
@@ -25,5 +26,5 @@ test('Post detail page has correct title when post is not found', async ({
   const postSlug = 'non-existent-post'
 
   await page.goto(`/post/${postSlug}`)
-  await expect(page).toHaveTitle('Post non trovato')
+  await expect(page).toHaveTitle(POST_NOT_FOUND_MESSAGE)
 })

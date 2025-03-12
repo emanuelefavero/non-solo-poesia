@@ -3,6 +3,7 @@ import AsideContainer from '@/components/Aside/AsideContainer'
 import PopularPostsAside from '@/components/PopularPostsAside'
 import ScrollToTop from '@/components/ScrollToTop'
 import Section from '@/components/Section'
+import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/neon/posts'
 import { PopularPostsFilter } from '@/types'
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   await incrementPostViews(slug)
   const post = await getPost(slug)
 
-  if (!post) return { title: 'Post non trovato' }
+  if (!post) return { title: `${POST_NOT_FOUND_MESSAGE}` }
 
   return {
     title: `${post.title} - ${TITLE}`,

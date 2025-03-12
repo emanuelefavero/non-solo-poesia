@@ -1,5 +1,6 @@
 'use server'
 
+import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { auth } from '@clerk/nextjs/server'
 import { neon } from '@neondatabase/serverless'
 import { revalidatePath } from 'next/cache'
@@ -22,7 +23,7 @@ export async function deletePost(slug: string) {
     `
 
     if (!post || !post.length) {
-      throw new Error('Errore - Post non trovato')
+      throw new Error(`Errore - ${POST_NOT_FOUND_MESSAGE}`)
     }
 
     // * Delete the cover image from Cloudinary if it exists
