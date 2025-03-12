@@ -10,7 +10,12 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
-    "e2e": "npx playwright test"
+    "e2e": "npx playwright test",
+    "e2e:ui": "npx playwright test --ui",
+    "e2e:chromium": "npx playwright test --project=chromium",
+    "e2e:debug": "npx playwright test --debug",
+    "e2e:codegen": "npx playwright codegen",
+    "e2e:report": "npx playwright show-report"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.0",
