@@ -12,8 +12,14 @@ import { defineConfig, devices } from '@playwright/test'
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // NOTE: I have changed the default test directory from 'tests' to 'e2e' to separate Jest tests from Playwright tests
+  // BEWARE: Remember to exclude the `e2e` directory from the Jest tests in the `jest.config.js` file
   testDir: './e2e',
+
+  // NOTE: I have changed the default output directories `test-results` and `playwright-report` to `e2e-report` to use just one directory and make it closer to the `e2e` directory alphabetically
+  // BEWARE: Remember to add the `e2e-report` directory to the `.gitignore` file and update the `npm run e2e:report` script in the `package.json` file
   outputDir: './e2e-report',
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
