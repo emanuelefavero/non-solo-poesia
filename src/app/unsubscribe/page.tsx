@@ -1,4 +1,4 @@
-import { contactEmail } from '@/data/email'
+import { CONTACT_EMAIL } from '@/data/email'
 import { TITLE } from '@/data/title'
 import { unsubscribe } from '@/lib/neon/unsubscribe'
 import type { Metadata } from 'next'
@@ -51,7 +51,7 @@ export default async function Page({ searchParams }: Props) {
           </p>
           <p>
             Per qualsiasi domanda contattaci all{"'"}indirizzo{' '}
-            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           </p>
         </>
       )}

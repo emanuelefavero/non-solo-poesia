@@ -1,2 +1,2 @@
 const email = 'info@nonsolopoesia.it'
-export const contactEmail = email
+export const CONTACT_EMAIL = email

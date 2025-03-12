@@ -1,4 +1,4 @@
-import { contactEmail } from '@/data/email'
+import { CONTACT_EMAIL } from '@/data/email'
 import Link from 'next/link'
 
 export default function Component() {
@@ -8,10 +8,10 @@ export default function Component() {
 
       <div className='flex flex-wrap items-center justify-center gap-2'>
         <Link
-          href={`mailto:${contactEmail}`}
+          href={`mailto:${CONTACT_EMAIL}`}
           className='text-base text-pink-700 hover:underline dark:text-pink-400'
         >
-          {contactEmail}
+          {CONTACT_EMAIL}
         </Link>
       </div>
     </div>
