@@ -18,3 +18,12 @@ test('Post detail page has correct title', async ({ page }) => {
   await page.goto(`/post/${postSlug}`)
   await expect(page).toHaveTitle(`${postTitle} - ${TITLE}`)
 })
+
+test('Post detail page has correct title when post is not found', async ({
+  page,
+}) => {
+  const postSlug = 'non-existent-post'
+
+  await page.goto(`/post/${postSlug}`)
+  await expect(page).toHaveTitle('Post non trovato')
+})
