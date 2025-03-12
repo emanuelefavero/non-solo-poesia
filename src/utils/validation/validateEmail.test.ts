@@ -1,3 +1,4 @@
+import { TEST_EMAIL } from '@/data/email'
 import { validateEmail } from './validateEmail'
 
 describe('validateEmail', () => {
@@ -12,7 +13,7 @@ describe('validateEmail', () => {
   })
 
   it('should return success if email is valid', () => {
-    const result = validateEmail('test@example.com')
+    const result = validateEmail(TEST_EMAIL)
     expect(result.type).toBe('success')
   })
 })

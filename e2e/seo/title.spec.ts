@@ -1,9 +1,10 @@
 import { categories } from '@/data/categories'
+import { TEST_EMAIL } from '@/data/email'
 import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
 
-const fakeEmail = 'test@example.com'
+// TODO Reorder routes as they appear inside the /app directory
 
 test('Homepage has correct title', async ({ page }) => {
   await page.goto('/')
@@ -42,12 +43,12 @@ test('Category page has correct title', async ({ page }) => {
 
 test('Newsletter success page has correct title', async ({ page }) => {
   // ? pass email query param to prevent redirect
-  await page.goto(`/newsletter-success?email=${fakeEmail}`)
+  await page.goto(`/newsletter-success?email=${TEST_EMAIL}`)
   await expect(page).toHaveTitle(`Iscrizione completata - ${TITLE}`)
 })
 
 test('Unsubscribe page has correct title', async ({ page }) => {
   // ? pass email query param to prevent redirect
-  await page.goto(`/unsubscribe?email=${fakeEmail}`)
+  await page.goto(`/unsubscribe?email=${TEST_EMAIL}`)
   await expect(page).toHaveTitle(`Annulla iscrizione - ${TITLE}`)
 })
