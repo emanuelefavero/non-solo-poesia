@@ -7,3 +7,9 @@ test('Clicking on the search icon navigates to the search page', async ({
   await page.click('[aria-label="Cerca post"]')
   await expect(page).toHaveURL('/cerca')
 })
+
+test('Clicking on the logo navigates to the homepage', async ({ page }) => {
+  await page.goto('/cerca')
+  await page.click('header a[href="/"]')
+  await expect(page).toHaveURL('/')
+})
