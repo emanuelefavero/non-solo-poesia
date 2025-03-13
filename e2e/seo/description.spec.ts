@@ -55,3 +55,17 @@ test('Newsletter success page has correct description', async ({ page }) => {
     `Grazie per esserti iscritto alla newsletter! Presto riceverai i nostri ultimi post direttamente nella tua casella di posta`,
   )
 })
+
+test('Post detail page has correct description', async ({ page }) => {
+  const postSlug = 'sogni-nella-notte'
+
+  await page.goto(`/post/${postSlug}`)
+
+  const description = await page
+    .locator('meta[name="description"]')
+    .getAttribute('content')
+
+  expect(description).toBe(
+    'Una poesia che cattura la magia della notte, dove i sogni si intrecciano con i desideri',
+  )
+})
