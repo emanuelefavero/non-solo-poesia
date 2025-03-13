@@ -4,6 +4,8 @@ import { TEST_EMAIL } from '@/data/email'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
 
+const defaultDescription = `Un blog di poesie e racconti scritti da ${authors[0].name}`
+
 test('Homepage has correct description', async ({ page }) => {
   await page.goto('/')
 
@@ -11,9 +13,7 @@ test('Homepage has correct description', async ({ page }) => {
     .locator('meta[name="description"]')
     .getAttribute('content')
 
-  expect(description).toBe(
-    `Un blog di poesie e racconti scritti da ${authors[0].name}`,
-  )
+  expect(description).toBe(defaultDescription)
 })
 
 // `Un blog di poesie e racconti scritti da ${authors[0].name}`
@@ -68,4 +68,18 @@ test('Post detail page has correct description', async ({ page }) => {
   expect(description).toBe(
     'Una poesia che cattura la magia della notte, dove i sogni si intrecciano con i desideri',
   )
+})
+
+test('Post detail page has correct description when post is not found', async ({
+  page,
+}) => {
+  const postSlug = 'non-existent-post'
+
+  await page.goto(`/post/${postSlug}`)
+
+  const description = await page
+    .locator('meta[name="description"]')
+    .getAttribute('content')
+
+  expect(description).toBe(defaultDescription)
 })
