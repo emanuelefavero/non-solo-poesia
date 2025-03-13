@@ -83,3 +83,16 @@ test('Post detail page has correct description when post is not found', async ({
 
   expect(description).toBe(defaultDescription)
 })
+
+test('Unsubscribe page has correct description', async ({ page }) => {
+  // ? pass email query param to prevent redirect
+  await page.goto(`/unsubscribe?email=${TEST_EMAIL}`)
+
+  const description = await page
+    .locator('meta[name="description"]')
+    .getAttribute('content')
+
+  expect(description).toBe(
+    `Annulla l'iscrizione alla newsletter per non ricevere più i nostri aggiornamenti`,
+  )
+})
