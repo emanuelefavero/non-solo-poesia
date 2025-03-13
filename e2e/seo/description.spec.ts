@@ -2,70 +2,56 @@ import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
 import { TEST_EMAIL } from '@/data/email'
 import { TITLE } from '@/data/title'
-import { expect, test } from '@playwright/test'
+import { expect, Page, test } from '@playwright/test'
 
 const defaultDescription = `Un blog di poesie e racconti scritti da ${authors[0].name}`
 
-test('Homepage has correct description', async ({ page }) => {
-  await page.goto('/')
-
+async function checkMetaDescription(
+  page: Page,
+  url: string,
+  expectedDescription: string,
+) {
+  await page.goto(url)
   const description = await page
     .locator('meta[name="description"]')
     .getAttribute('content')
+  expect(description).toBe(expectedDescription)
+}
 
-  expect(description).toBe(defaultDescription)
+// * TESTS
+test('Homepage has correct description', async ({ page }) => {
+  await checkMetaDescription(page, '/', defaultDescription)
 })
-
-// `Un blog di poesie e racconti scritti da ${authors[0].name}`
 
 test('Category page has correct description', async ({ page }) => {
   const category = categories[0]
-  const { name } = category
-
-  await page.goto(`/categoria/${category.slug}`)
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(`Tutti i post di ${TITLE} nella categoria ${name}.`)
+  await checkMetaDescription(
+    page,
+    `/categoria/${category.slug}`,
+    `Tutti i post di ${TITLE} nella categoria ${category.name}.`,
+  )
 })
 
 test('Search page has correct description', async ({ page }) => {
-  await page.goto('/cerca')
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(
+  await checkMetaDescription(
+    page,
+    '/cerca',
     `Cerca un post nel blog ${TITLE} digitando una parola chiave del titolo`,
   )
 })
 
 test('Newsletter success page has correct description', async ({ page }) => {
-  // ? pass email query param to prevent redirect
-  await page.goto(`/newsletter-success?email=${TEST_EMAIL}`)
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(
+  await checkMetaDescription(
+    page,
+    `/newsletter-success?email=${TEST_EMAIL}`,
     `Grazie per esserti iscritto alla newsletter! Presto riceverai i nostri ultimi post direttamente nella tua casella di posta`,
   )
 })
 
 test('Post detail page has correct description', async ({ page }) => {
-  const postSlug = 'sogni-nella-notte'
-
-  await page.goto(`/post/${postSlug}`)
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(
+  await checkMetaDescription(
+    page,
+    '/post/sogni-nella-notte',
     'Una poesia che cattura la magia della notte, dove i sogni si intrecciano con i desideri',
   )
 })
@@ -73,26 +59,17 @@ test('Post detail page has correct description', async ({ page }) => {
 test('Post detail page has correct description when post is not found', async ({
   page,
 }) => {
-  const postSlug = 'non-existent-post'
-
-  await page.goto(`/post/${postSlug}`)
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(defaultDescription)
+  await checkMetaDescription(
+    page,
+    '/post/non-existent-post',
+    defaultDescription,
+  )
 })
 
 test('Unsubscribe page has correct description', async ({ page }) => {
-  // ? pass email query param to prevent redirect
-  await page.goto(`/unsubscribe?email=${TEST_EMAIL}`)
-
-  const description = await page
-    .locator('meta[name="description"]')
-    .getAttribute('content')
-
-  expect(description).toBe(
+  await checkMetaDescription(
+    page,
+    `/unsubscribe?email=${TEST_EMAIL}`,
     `Annulla l'iscrizione alla newsletter per non ricevere più i nostri aggiornamenti`,
   )
 })
