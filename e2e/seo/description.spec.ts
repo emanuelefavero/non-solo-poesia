@@ -27,3 +27,15 @@ test('Category page has correct description', async ({ page }) => {
 
   expect(description).toBe(`Tutti i post di ${TITLE} nella categoria ${name}.`)
 })
+
+test('Search page has correct description', async ({ page }) => {
+  await page.goto('/cerca')
+
+  const description = await page
+    .locator('meta[name="description"]')
+    .getAttribute('content')
+
+  expect(description).toBe(
+    `Cerca un post nel blog ${TITLE} digitando una parola chiave del titolo`,
+  )
+})
