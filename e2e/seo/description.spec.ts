@@ -1,5 +1,6 @@
 import { authors } from '@/data/authors'
 import { categories } from '@/data/categories'
+import { TEST_EMAIL } from '@/data/email'
 import { TITLE } from '@/data/title'
 import { expect, test } from '@playwright/test'
 
@@ -14,6 +15,8 @@ test('Homepage has correct description', async ({ page }) => {
     `Un blog di poesie e racconti scritti da ${authors[0].name}`,
   )
 })
+
+// `Un blog di poesie e racconti scritti da ${authors[0].name}`
 
 test('Category page has correct description', async ({ page }) => {
   const category = categories[0]
@@ -37,5 +40,18 @@ test('Search page has correct description', async ({ page }) => {
 
   expect(description).toBe(
     `Cerca un post nel blog ${TITLE} digitando una parola chiave del titolo`,
+  )
+})
+
+test('Newsletter success page has correct description', async ({ page }) => {
+  // ? pass email query param to prevent redirect
+  await page.goto(`/newsletter-success?email=${TEST_EMAIL}`)
+
+  const description = await page
+    .locator('meta[name="description"]')
+    .getAttribute('content')
+
+  expect(description).toBe(
+    `Grazie per esserti iscritto alla newsletter! Presto riceverai i nostri ultimi post direttamente nella tua casella di posta`,
   )
 })
