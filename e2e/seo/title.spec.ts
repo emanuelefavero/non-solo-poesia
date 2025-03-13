@@ -2,51 +2,56 @@ import { categories } from '@/data/categories'
 import { TEST_EMAIL } from '@/data/email'
 import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
-import { expect, test } from '@playwright/test'
+import { expect, Page, test } from '@playwright/test'
+
+async function checkTitle(page: Page, url: string, expectedTitle: string) {
+  await page.goto(url)
+  await expect(page).toHaveTitle(expectedTitle)
+}
 
 test('Homepage has correct title', async ({ page }) => {
-  await page.goto('/')
-  await expect(page).toHaveTitle(TITLE)
+  await checkTitle(page, '/', TITLE)
 })
 
 test('Category page has correct title', async ({ page }) => {
   const category = categories[0]
-  const { name } = category
-
-  await page.goto(`/categoria/${category.slug}`)
-  await expect(page).toHaveTitle(`${name} - ${TITLE}`)
+  await checkTitle(
+    page,
+    `/categoria/${category.slug}`,
+    `${category.name} - ${TITLE}`,
+  )
 })
 
 test('Search page has correct title', async ({ page }) => {
-  await page.goto('/cerca')
-  await expect(page).toHaveTitle(`Cerca - ${TITLE}`)
+  await checkTitle(page, '/cerca', `Cerca - ${TITLE}`)
 })
 
 test('Newsletter success page has correct title', async ({ page }) => {
-  // ? pass email query param to prevent redirect
-  await page.goto(`/newsletter-success?email=${TEST_EMAIL}`)
-  await expect(page).toHaveTitle(`Iscrizione completata - ${TITLE}`)
+  await checkTitle(
+    page,
+    `/newsletter-success?email=${TEST_EMAIL}`,
+    `Iscrizione completata - ${TITLE}`,
+  )
 })
 
 test('Post detail page has correct title', async ({ page }) => {
-  const postSlug = 'sogni-nella-notte'
-  const postTitle = 'Sogni nella Notte'
-
-  await page.goto(`/post/${postSlug}`)
-  await expect(page).toHaveTitle(`${postTitle} - ${TITLE}`)
+  await checkTitle(
+    page,
+    '/post/sogni-nella-notte',
+    `Sogni nella Notte - ${TITLE}`,
+  )
 })
 
 test('Post detail page has correct title when post is not found', async ({
   page,
 }) => {
-  const postSlug = 'non-existent-post'
-
-  await page.goto(`/post/${postSlug}`)
-  await expect(page).toHaveTitle(POST_NOT_FOUND_MESSAGE)
+  await checkTitle(page, '/post/non-existent-post', POST_NOT_FOUND_MESSAGE)
 })
 
 test('Unsubscribe page has correct title', async ({ page }) => {
-  // ? pass email query param to prevent redirect
-  await page.goto(`/unsubscribe?email=${TEST_EMAIL}`)
-  await expect(page).toHaveTitle(`Annulla iscrizione - ${TITLE}`)
+  await checkTitle(
+    page,
+    `/unsubscribe?email=${TEST_EMAIL}`,
+    `Annulla iscrizione - ${TITLE}`,
+  )
 })
