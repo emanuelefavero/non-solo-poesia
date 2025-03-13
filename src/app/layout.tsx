@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   },
 }
 
-// TODO Add Ad banner below the Header or Hero
 // TODO Add Social Media buttons to share the website or author social media in the Header (on the left of the search icon)
 
 export default function RootLayout({
