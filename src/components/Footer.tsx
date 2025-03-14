@@ -1,7 +1,7 @@
 import ContactUs from '@/components/ContactUs'
 import NewsletterForm from '@/components/NewsletterForm'
+import PrivacyPolicyLink from '@/components/PrivacyPolicyLink'
 import { TITLE } from '@/data/title'
-import Link from 'next/link'
 
 // TODO Add privacy policy link
 
@@ -20,12 +20,7 @@ export default function Component() {
             <span className='hidden 2xs:inline-block'>
               - Tutti i diritti riservati.
             </span>{' '}
-            <Link
-              href='/privacy-policy'
-              className='mt-2 block text-center xs:ml-1 xs:inline-block'
-            >
-              Privacy Policy
-            </Link>
+            <PrivacyPolicyLink />
           </span>
 
           <a
