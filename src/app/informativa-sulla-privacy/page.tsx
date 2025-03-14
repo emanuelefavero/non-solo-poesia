@@ -53,7 +53,7 @@ export default function Page() {
       </ul>
 
       <p>
-        L'utente può annullare l'iscrizione alla newsletter in qualsiasi momento
+        L&apos;utente può annullare l&apos;iscrizione alla newsletter in qualsiasi momento
         tramite il link presente in fondo ad ogni email ricevuta.
       </p>
 
@@ -66,7 +66,7 @@ export default function Page() {
 
       <ul className='list-inside list-disc'>
         <li>
-          <strong>Autenticazione e accesso all'account →</strong> art. 6.1.b
+          <strong>Autenticazione e accesso all&apos;account →</strong> art. 6.1.b
           GDPR
         </li>
         <li>
@@ -80,16 +80,16 @@ export default function Page() {
       <h2>Protezione dei dati</h2>
 
       <p>
-        I dati personali dell'utente sono conservati in modo sicuro e protetti
+        I dati personali dell&apos;utente sono conservati in modo sicuro e protetti
         da accessi non autorizzati.
       </p>
 
       <hr />
 
       {/* Diritti dell'utente */}
-      <h2>Diritti dell'utente</h2>
+      <h2>Diritti dell&apos;utente</h2>
 
-      <p>L'utente ha il diritto di:</p>
+      <p>L&apos;utente ha il diritto di:</p>
       <ul className='list-inside list-none'>
         <li>
           <strong>✅ Accedere ai propri dati personali.</strong>
@@ -119,7 +119,7 @@ export default function Page() {
       <hr />
 
       {/* Modifiche all'informativa */}
-      <h2>Modifiche all'informativa</h2>
+      <h2>Modifiche all&apos;informativa</h2>
 
       <p>
         Questa informativa può subire modifiche nel tempo. Le modifiche
@@ -133,7 +133,7 @@ export default function Page() {
 
       <p>
         Per qualsiasi domanda o richiesta riguardante la nostra Informativa
-        sulla Privacy, contattaci all'indirizzo{' '}
+        sulla Privacy, contattaci all&apos;indirizzo{' '}
         <Link
           href={`mailto:${CONTACT_EMAIL}`}
           className='text-base text-pink-700 hover:underline dark:text-pink-400'
