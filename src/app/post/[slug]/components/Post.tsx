@@ -12,8 +12,7 @@ import Link from 'next/link'
 export default async function Component({ slug }: { slug: string }) {
   const post = await getPost(slug)
   const { userId } = await auth()
-  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
-  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
+  const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
 
   if (!post) return <p>{POST_NOT_FOUND_MESSAGE}.</p>
 
@@ -47,7 +46,7 @@ export default async function Component({ slug }: { slug: string }) {
       <PostInfo post={post} />
 
       {/* Edit and Delete Buttons */}
-      {(userId === adminId || userId === authorId) && (
+      {userId && allowedIds.includes(userId) && (
         <div className='mt-2 flex gap-2'>
           {/* Delete popover */}
           <DeletePopover slug={post.slug} />

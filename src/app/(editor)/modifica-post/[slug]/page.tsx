@@ -28,11 +28,10 @@ export default async function Page(props: Props) {
   const params = await props.params
   const post = await getPost(params.slug)
   const { userId } = await auth()
-  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
-  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
+  const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
 
   // Redirect if the user is not an admin or author, or if the post is not found
-  if (!userId || (userId !== adminId && userId !== authorId) || !post) {
+  if (!userId || !allowedIds.includes(userId) || !post) {
     redirect('/')
   }
 

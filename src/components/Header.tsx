@@ -22,8 +22,7 @@ export default function Component() {
   const isHomepage = pathname === '/'
   const isSearchPage = pathname === '/cerca'
   const { userId } = useAuth()
-  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
-  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
+  const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
 
   return (
     <header
@@ -44,7 +43,8 @@ export default function Component() {
             </Link>
           )}
 
-          {(userId === adminId || userId === authorId) &&
+          {userId &&
+            allowedIds.includes(userId) &&
             pathname !== '/crea-nuovo-post' && (
               <Link
                 href='/crea-nuovo-post'

@@ -12,11 +12,10 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const { userId } = await auth()
-  const adminId = process.env.NEXT_PUBLIC_ADMIN_ID
-  const authorId = process.env.NEXT_PUBLIC_AUTHOR_ID
+  const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
 
   // Redirect if the user is not an admin or author
-  if (!userId || (userId !== adminId && userId !== authorId)) {
+  if (!userId || !allowedIds.includes(userId)) {
     redirect('/')
   }
 
