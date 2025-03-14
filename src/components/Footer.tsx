@@ -1,6 +1,7 @@
 import ContactUs from '@/components/ContactUs'
 import NewsletterForm from '@/components/NewsletterForm'
 import { TITLE } from '@/data/title'
+import Link from 'next/link'
 
 // TODO Add privacy policy link
 
@@ -13,12 +14,18 @@ export default function Component() {
         <NewsletterForm />
         <ContactUs />
 
-        <div className='flex flex-col items-center justify-center gap-2'>
+        <div className='flex flex-col items-center justify-center gap-2 text-center'>
           <span>
             &copy; {year} {TITLE}{' '}
             <span className='hidden 2xs:inline-block'>
               - Tutti i diritti riservati.
-            </span>
+            </span>{' '}
+            <Link
+              href='/privacy-policy'
+              className='mt-2 block text-center xs:ml-1 xs:inline-block'
+            >
+              Privacy Policy
+            </Link>
           </span>
 
           <a
