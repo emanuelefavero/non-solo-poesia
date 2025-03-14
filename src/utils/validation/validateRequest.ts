@@ -3,7 +3,7 @@ import { categories } from '@/data/categories'
 import { descriptionRegex } from '@/utils/validation/regex'
 import { auth } from '@clerk/nextjs/server'
 
-const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
+const adminIds = process.env.NEXT_PUBLIC_ADMIN_IDS?.split(',') || []
 
 export async function validateRequest(req: Request) {
   // Check if the user has access to publish a post
@@ -20,7 +20,7 @@ export async function validateRequest(req: Request) {
     }
   }
 
-  if (!allowedIds.includes(userId)) {
+  if (!adminIds.includes(userId)) {
     return {
       error: new Response(
         JSON.stringify({

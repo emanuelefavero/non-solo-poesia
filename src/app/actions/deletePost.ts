@@ -56,9 +56,9 @@ async function checkUserAccess() {
     return 'Accesso bloccato - Devi fare il login per cancellare un post'
   }
 
-  const allowedIds = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',') || []
+  const adminIds = process.env.NEXT_PUBLIC_ADMIN_IDS?.split(',') || []
 
-  if (!allowedIds.includes(userId)) {
+  if (!adminIds.includes(userId)) {
     return 'Accesso bloccato - Solo gli autori possono cancellare post'
   }
 }

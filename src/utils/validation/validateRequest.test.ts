@@ -8,7 +8,7 @@ jest.mock('@clerk/nextjs/server', () => ({
 }))
 
 describe('validateRequest', () => {
-  const adminId = process.env.NEXT_PUBLIC_ALLOWED_IDS?.split(',')[0]
+  const adminId = process.env.NEXT_PUBLIC_ADMIN_IDS?.split(',')[0]
 
   // Define a valid request body
   const validBody = {
