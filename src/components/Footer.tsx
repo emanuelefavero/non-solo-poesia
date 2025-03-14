@@ -3,8 +3,6 @@ import NewsletterForm from '@/components/NewsletterForm'
 import PrivacyPolicyLink from '@/components/PrivacyPolicyLink'
 import { TITLE } from '@/data/title'
 
-// TODO Add privacy policy link
-
 export default function Component() {
   const year = new Date().getFullYear()
 
