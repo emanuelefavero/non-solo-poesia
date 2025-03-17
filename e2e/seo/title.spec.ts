@@ -26,6 +26,14 @@ test('Search page has correct title', async ({ page }) => {
   await checkTitle(page, '/cerca', `Cerca - ${TITLE}`)
 })
 
+test('Privacy policy page has correct title', async ({ page }) => {
+  await checkTitle(
+    page,
+    '/informativa-sulla-privacy',
+    `Informativa sulla Privacy - ${TITLE}`,
+  )
+})
+
 test('Newsletter success page has correct title', async ({ page }) => {
   await checkTitle(
     page,
