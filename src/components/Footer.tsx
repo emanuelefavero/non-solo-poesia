@@ -2,6 +2,7 @@ import ContactUs from '@/components/ContactUs'
 import NewsletterForm from '@/components/NewsletterForm'
 import PrivacyPolicyLink from '@/components/PrivacyPolicyLink'
 import { TITLE } from '@/data/title'
+import { DEVELOPER_URL } from '@/data/url'
 
 export default function Component() {
   const year = new Date().getFullYear()
@@ -23,7 +24,7 @@ export default function Component() {
 
           <a
             className='text-center font-medium text-pink-700 hover:underline dark:text-pink-400'
-            href='https://emanuelefavero.com/'
+            href={DEVELOPER_URL}
             target='_blank'
             rel='noopener noreferrer'
           >
