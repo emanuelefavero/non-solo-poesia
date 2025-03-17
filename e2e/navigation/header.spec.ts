@@ -22,3 +22,11 @@ test('Clicking on a category link navigates to the category page', async ({
   await page.click(`[aria-label="Vai a ${categories[0].name}"]`)
   await expect(page).toHaveURL(`/categoria/${categories[0].slug}`)
 })
+
+test('Clicking on privacy policy link navigates to the privacy policy page', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await page.click('footer a[href="/informativa-sulla-privacy"]')
+  await expect(page).toHaveURL('/informativa-sulla-privacy')
+})
