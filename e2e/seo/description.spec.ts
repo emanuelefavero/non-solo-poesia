@@ -40,6 +40,14 @@ test('Search page has correct description', async ({ page }) => {
   )
 })
 
+test('Privacy policy page has correct description', async ({ page }) => {
+  await checkMetaDescription(
+    page,
+    '/informativa-sulla-privacy',
+    'La nostra informativa sulla privacy ti spiega come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali',
+  )
+})
+
 test('Newsletter success page has correct description', async ({ page }) => {
   await checkMetaDescription(
     page,
