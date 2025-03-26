@@ -6,9 +6,6 @@ test('Sign in with Clerk', async ({ page }) => {
   // Navigate to an unprotected page that loads Clerk
   await page.goto('/')
 
-  // Wait for the sign-in to complete
-  await clerk.loaded({ page })
-
   // Check if the header contains the email of the signed-in user
   // NOTE: The email will be displayed only for users that are signed in with email (like our test user), other sign-in methods will display the user's name
   const header = page.locator('header')
@@ -22,9 +19,6 @@ test('Sign out with Clerk', async ({ page, browserName }) => {
   )
 
   await page.goto('/')
-
-  // Wait for the sign-in to complete
-  await clerk.loaded({ page })
 
   // Sign out
   await clerk.signOut({ page })
