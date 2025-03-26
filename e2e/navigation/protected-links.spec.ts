@@ -13,3 +13,11 @@ test('Modify post link is not visible when authenticated', async ({ page }) => {
   const link = page.locator('a:has-text("Modifica")')
   await expect(link).not.toBeVisible()
 })
+
+test('Delete post button is not visible when authenticated', async ({
+  page,
+}) => {
+  await page.goto('/post/sogni-nella-notte')
+  const link = page.locator('button:has-text("Elimina")')
+  await expect(link).not.toBeVisible()
+})
