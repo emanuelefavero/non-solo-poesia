@@ -49,17 +49,31 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
       dependencies: ['global setup'],
+      testMatch: /^(?!.*auth).*$/, // Exclude authenticated tests
     },
 
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
       dependencies: ['global setup'],
+      testMatch: /^(?!.*auth).*$/, // Exclude authenticated tests
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
+      dependencies: ['global setup'],
+      testMatch: /^(?!.*auth).*$/, // Exclude authenticated tests
+    },
+
+    // Authenticated tests (all tests inside `auth` directory)
+    {
+      name: 'authenticated',
+      testMatch: /auth/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'e2e/.clerk/user.json', // path to the storage state file
+      },
       dependencies: ['global setup'],
     },
 
