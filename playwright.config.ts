@@ -67,6 +67,7 @@ export default defineConfig({
     },
 
     // Authenticated tests (all tests inside `auth` directory)
+    // TIP: All the tests inside the `auth` directory will be run with the authenticated state (thanks to the `storageState` option and the `global setup` file) so we don't need to authenticate in each test
     {
       name: 'authenticated',
       testMatch: /auth/,
