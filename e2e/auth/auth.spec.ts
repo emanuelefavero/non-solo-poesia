@@ -12,12 +12,7 @@ test('Sign in with Clerk', async ({ page }) => {
   await expect(header).toContainText(TEST_EMAIL)
 })
 
-test('Sign out with Clerk', async ({ page, browserName }) => {
-  test.skip(
-    browserName !== 'chromium',
-    'This test runs only in Chrome to prevent NS_BINDING_ABORTED error',
-  )
-
+test('Sign out with Clerk', async ({ page }) => {
   await page.goto('/')
 
   // Sign out
