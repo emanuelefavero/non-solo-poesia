@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 
-// * Authenticated tests
 test('Create new post page can be accessed when authenticated', async ({
   page,
 }) => {
