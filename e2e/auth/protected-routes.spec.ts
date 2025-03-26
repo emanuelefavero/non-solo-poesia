@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('Create new post page can be accessed when authenticated with admin user', async ({
+test('Create new post page can be accessed when authenticated', async ({
   page,
 }) => {
   // Navigate to the protected page
