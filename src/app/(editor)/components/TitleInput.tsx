@@ -8,6 +8,7 @@ export default function Component() {
   return (
     <input
       type='text'
+      name='titolo'
       placeholder='Titolo...'
       value={title}
       onChange={(e) => setTitle(e.target.value)}

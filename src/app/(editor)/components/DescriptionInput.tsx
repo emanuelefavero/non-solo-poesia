@@ -8,6 +8,7 @@ export default function Component() {
   return (
     <input
       type='text'
+      name='descrizione'
       placeholder='Descrizione...'
       value={description}
       onChange={(e) => setDescription(e.target.value)}
