@@ -91,6 +91,10 @@ npm run dev
 - Headless UI (Popover)
 - Vercel (Deployment)
 
+## Testing
+
+Create an `.env.test` file in the root of the project and add the same environment variables as in `.env.local` (or setup different env for testing), but also set `NODE_ENV=test` to ensure the application runs in test mode.
+
 ## Resources
 
 - [Setup Jest with Next.js 15](https://dev.to/peterlidee/3-how-to-setup-jest-in-a-next-15-project-eslint-for-testing-aab)
