@@ -7,6 +7,7 @@ import { POST_NOT_FOUND_MESSAGE } from '@/data/post'
 import { TITLE } from '@/data/title'
 import { getPost, incrementPostViews } from '@/lib/neon/posts'
 import { PopularPostsFilter } from '@/types'
+import { isProduction } from '@/utils/env'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Post from './components/Post'
@@ -22,7 +23,9 @@ type Props = {
 // * Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug
-  await incrementPostViews(slug)
+
+  if (isProduction) await incrementPostViews(slug)
+
   const post = await getPost(slug)
 
   if (!post) return { title: `${POST_NOT_FOUND_MESSAGE}` }
