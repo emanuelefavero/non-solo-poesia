@@ -1,4 +1,4 @@
-import type { OrderBy, PopularPostsFilter, Post } from '@/types'
+import type { OrderBy, PopularPostsFilter, Post, PostSitemap } from '@/types'
 import { neon } from '@neondatabase/serverless'
 
 const sql = neon(process.env.DATABASE_URL as string)
@@ -128,6 +128,7 @@ export async function incrementPostViews(slug: string) {
   `
 }
 
+// Save a new post to the database
 export async function savePost(post: Post) {
   await sql`
   INSERT INTO posts (
@@ -156,4 +157,16 @@ export async function savePost(post: Post) {
     ${post.updated_at}
   )
   `
+}
+
+// Sitemap generation - Get all post slugs, published_at and updated_at
+export async function getAllPostSitemapData() {
+  const data = await sql`
+    SELECT slug, published_at, updated_at
+    FROM posts
+    WHERE published_at <= NOW()
+    ORDER BY published_at DESC
+    `
+
+  return data as PostSitemap[]
 }

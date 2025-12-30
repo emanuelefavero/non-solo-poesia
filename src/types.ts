@@ -34,6 +34,8 @@ export type Post = {
   views?: number
 }
 
+export type PostSitemap = Pick<Post, 'slug' | 'published_at' | 'updated_at'>
+
 export type Message = {
   type: 'success' | 'error'
   text: string
