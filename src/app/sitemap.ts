@@ -39,6 +39,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly' as const,
       priority: 0.1,
     },
+    // Cerca
+    {
+      url: `${URL}/cerca`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.1,
+    },
   ]
 
   return [...staticUrls, ...categoryUrls, ...postUrls]
