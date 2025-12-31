@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { TITLE } from '@/data/title'
-import { URL } from '@/data/url'
 import type { Post } from '@/types'
+
+// We use PRODUCTION_URL to ensure links in emails always point to the live site
+import { PRODUCTION_URL } from '@/data/url'
 
 type Props = {
   post: Post
@@ -15,8 +17,8 @@ export default function Component({ post, email }: Props) {
     height: 'auto',
   }
   const cloudinaryName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-  const logoUrl = `${URL}/logo.png`
-  const unsubscribeUrl = `${URL}/unsubscribe?email=${encodeURIComponent(email)}`
+  const logoUrl = `${PRODUCTION_URL}/logo.png`
+  const unsubscribeUrl = `${PRODUCTION_URL}/unsubscribe?email=${encodeURIComponent(email)}`
 
   return (
     <>
@@ -33,7 +35,7 @@ export default function Component({ post, email }: Props) {
         <img src={post.cover_image} alt={post.title} style={imgStyle} />
       )}
       <p>{post.description}</p>
-      <a href={`${URL}/post/${post.slug}`}>Continua a leggere...</a>
+      <a href={`${PRODUCTION_URL}/post/${post.slug}`}>Continua a leggere...</a>
 
       {/* Line */}
       <hr
@@ -47,7 +49,7 @@ export default function Component({ post, email }: Props) {
 
       {/* Logo */}
       <a
-        href={URL}
+        href={PRODUCTION_URL}
         style={{
           display: 'flex',
           alignItems: 'center',
