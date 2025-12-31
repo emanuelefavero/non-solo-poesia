@@ -54,6 +54,9 @@ CREATE TABLE subscribers (
 - Create a `.env.local` file in the root of the project and add the following environment variables:
 
 ```bash
+# Base URL of the application
+NEXT_PUBLIC_BASE_URL= # http://localhost:3000 for local development or your production URL
+
 # Clerk configuration
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY= # Go to your Clerk console
 CLERK_SECRET_KEY= # Go to your Clerk console
