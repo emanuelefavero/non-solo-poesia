@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import ProgressBar from '@/components/ProgressBar'
+import { ROBOTS_INDEX } from '@/config/metadata'
 import { authors } from '@/data/authors'
 import { TITLE } from '@/data/title'
 import { ClerkProvider } from '@clerk/nextjs'
@@ -24,17 +25,7 @@ export const metadata: Metadata = {
   description: `Un blog di poesie e racconti scritti da ${authors[0].name}`,
 
   // Indexing settings for search engines
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  ...ROBOTS_INDEX,
 
   // Use the png logo as the icon instead of favicon.ico
   icons: {
