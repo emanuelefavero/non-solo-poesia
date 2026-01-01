@@ -23,7 +23,20 @@ export const metadata: Metadata = {
   title: TITLE,
   description: `Un blog di poesie e racconti scritti da ${authors[0].name}`,
 
-  // This will use png as the icon instead of favicon.ico:
+  // Indexing settings for search engines
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  // Use the png logo as the icon instead of favicon.ico
   icons: {
     icon: '/logo.png',
   },
