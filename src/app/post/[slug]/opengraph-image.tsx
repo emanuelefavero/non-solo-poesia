@@ -71,7 +71,9 @@ export default async function Image({ params }: { params: { slug: string } }) {
       <div
         style={{
           fontSize: 48,
-          background: backgroundImage ? `url(${backgroundImage})` : '#150209',
+          background: backgroundImage
+            ? `linear-gradient(rgba(21, 2, 9, 0.3), rgba(21, 2, 9, 0.3)), url(${backgroundImage})`
+            : '#150209',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           width: '100%',
@@ -86,20 +88,6 @@ export default async function Image({ params }: { params: { slug: string } }) {
           position: 'relative',
         }}
       >
-        {/* Overlay for text readability if background image */}
-        {backgroundImage && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              background: 'rgba(0, 0, 0, 0.5)',
-            }}
-          />
-        )}
-
         {/* Title */}
         <div
           style={{
