@@ -4,6 +4,7 @@ import ProgressBar from '@/components/ProgressBar'
 import { ROBOTS_INDEX } from '@/config/metadata'
 import { authors } from '@/data/authors'
 import { TITLE } from '@/data/title'
+import { URL as BASE_URL } from '@/data/url'
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
@@ -21,6 +22,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: TITLE,
   description: `Un blog di poesie e racconti scritti da ${authors[0].name}`,
 
