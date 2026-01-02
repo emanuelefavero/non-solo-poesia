@@ -1,4 +1,5 @@
 import { TITLE } from '@/data/title'
+import { URL } from '@/data/url'
 import { getPost } from '@/lib/neon/posts'
 import { ImageResponse } from 'next/og'
 
@@ -18,13 +19,33 @@ export default async function Image({ params }: { params: { slug: string } }) {
             width: '100%',
             height: '100%',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
-            fontWeight: 'bold',
+            textAlign: 'center',
+            padding: '40px',
           }}
         >
-          Post Not Found
+          {/* Logo and Blog Name */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              fontSize: 32,
+              fontWeight: 'bold',
+            }}
+          >
+            <img
+              src={`${URL}/logo.png`}
+              alt={TITLE}
+              width='40'
+              height='40'
+              style={{ borderRadius: '50%' }}
+            />
+            <span>{TITLE}</span>
+          </div>
         </div>
       ),
       { ...size },
@@ -100,7 +121,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           }}
         >
           <img
-            src='/logo.png'
+            src={`${URL}/logo.png`}
             alt={TITLE}
             width='40'
             height='40'
