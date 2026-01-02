@@ -93,7 +93,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         <div
           style={{
             fontSize: 64,
-            fontWeight: 'bold',
+            fontWeight: 'bolder',
             marginBottom: '20px',
             zIndex: 1,
             maxWidth: '80%',
