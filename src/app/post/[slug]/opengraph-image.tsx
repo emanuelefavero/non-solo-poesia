@@ -16,6 +16,7 @@ const logoElement = (
       zIndex: 1,
       fontSize: 32,
       fontWeight: 'bold',
+      textShadow: '2px 2px 7px rgba(0, 0, 0, 0.2)',
     }}
   >
     <img
@@ -72,7 +73,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         style={{
           fontSize: 48,
           background: backgroundImage
-            ? `linear-gradient(rgba(21, 2, 9, 0.3), rgba(21, 2, 9, 0.3)), url(${backgroundImage})`
+            ? `linear-gradient(rgba(21, 2, 9, 0.5), rgba(21, 2, 9, 0.5)), url(${backgroundImage})`
             : '#150209',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -97,6 +98,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             zIndex: 1,
             maxWidth: '80%',
             wordWrap: 'break-word',
+            textShadow: '2px 2px 7px rgba(0, 0, 0, 0.2)',
           }}
         >
           {post.title}
