@@ -1,5 +1,6 @@
 import type { OrderBy, PopularPostsFilter, Post, PostSitemap } from '@/types'
 import { neon } from '@neondatabase/serverless'
+import { cache } from 'react'
 
 const sql = neon(process.env.DATABASE_URL as string)
 
@@ -77,15 +78,15 @@ export async function getTotalPostCountByCategory(category: string) {
   return data[0]?.count || 0
 }
 
-// Get a single post by slug
-export async function getPost(slug: string) {
+// Get a single post by slug (cached)
+export const getPost = cache(async (slug: string) => {
   const data = await sql`
     SELECT * FROM posts
     WHERE slug = ${slug}
   `
   if (!data) return null
   return data[0] as Post | null
-}
+})
 
 // Get latest post
 export async function getLatestPost() {
