@@ -6,6 +6,29 @@ import { ImageResponse } from 'next/og'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
+// Shared logo and blog name element
+const logoElement = (
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      zIndex: 1,
+      fontSize: 32,
+      fontWeight: 'bold',
+    }}
+  >
+    <img
+      src={`${URL}/logo.png`}
+      alt={TITLE}
+      width='40'
+      height='40'
+      style={{ borderRadius: '50%' }}
+    />
+    <span>{TITLE}</span>
+  </div>
+)
+
 export default async function Image({ params }: { params: { slug: string } }) {
   const post = await getPost(params.slug)
 
@@ -27,25 +50,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
             padding: '40px',
           }}
         >
-          {/* Logo and Blog Name */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontSize: 32,
-              fontWeight: 'bold',
-            }}
-          >
-            <img
-              src={`${URL}/logo.png`}
-              alt={TITLE}
-              width='40'
-              height='40'
-              style={{ borderRadius: '50%' }}
-            />
-            <span>{TITLE}</span>
-          </div>
+          {logoElement}
         </div>
       ),
       { ...size },
@@ -110,25 +115,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         </div>
 
         {/* Logo and Blog Name */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            zIndex: 1,
-            fontSize: 32,
-            fontWeight: 'bold',
-          }}
-        >
-          <img
-            src={`${URL}/logo.png`}
-            alt={TITLE}
-            width='40'
-            height='40'
-            style={{ borderRadius: '50%' }}
-          />
-          <span>{TITLE}</span>
-        </div>
+        {logoElement}
       </div>
     ),
     { ...size },
