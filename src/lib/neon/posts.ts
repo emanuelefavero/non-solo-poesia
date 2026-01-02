@@ -88,15 +88,15 @@ export const getPost = cache(async (slug: string) => {
   return data[0] as Post | null
 })
 
-// Get latest post
-export async function getLatestPost() {
+// Get latest post (cached)
+export const getLatestPost = cache(async () => {
   const data = await sql`
     SELECT * FROM posts
     ORDER BY published_at DESC
     LIMIT 1
   `
   return data[0] as Post
-}
+})
 
 // Get popular posts (filter all time or this month)
 export async function getPopularPosts(

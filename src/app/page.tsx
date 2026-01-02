@@ -7,7 +7,6 @@ import PostListLoader from '@/components/PostListLoader'
 import PostListSkeleton from '@/components/PostListSkeleton'
 import Section from '@/components/Section'
 import Title from '@/components/Title'
-import { getLatestPost } from '@/lib/neon/posts'
 import type { OrderBy as OrderByType, PopularPostsFilter } from '@/types'
 import { Suspense } from 'react'
 
@@ -25,14 +24,13 @@ export default async function Home({ searchParams }: Props) {
   const { page, order_by, popular_posts_filter } = await searchParams
   const currentOrderBy = order_by || 'published_at'
   const currentPage = parseInt(page || '1', 10)
-  const latestPost = await getLatestPost()
 
   return (
     <>
       <AdBanner />
 
       {/* HERO */}
-      {latestPost && currentPage === 1 && (
+      {currentPage === 1 && (
         <Section className='flex justify-center gap-4'>
           <Suspense fallback={<HeroSkeleton className='flex-1' />}>
             <HeroLoader />
